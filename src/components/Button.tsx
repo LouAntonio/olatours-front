@@ -4,7 +4,7 @@ import type {
 	AnchorHTMLAttributes,
 } from 'react';
 
-type Variant = 'primary' | 'flag' | 'ghost' | 'outline' | 'link';
+type Variant = 'primary' | 'flag' | 'terracotta' | 'ghost' | 'outline' | 'link';
 type Size = 'sm' | 'md' | 'lg';
 
 const base =
@@ -14,6 +14,8 @@ const variants: Record<Variant, string> = {
 	primary:
 		'bg-sky text-paper-card hover:bg-sky-dark active:translate-y-px focus-visible:ring-sky',
 	flag: 'bg-flag text-paper-card hover:bg-flag-dark active:translate-y-px focus-visible:ring-flag',
+	terracotta:
+		'bg-terracotta text-paper-card hover:bg-terracotta-dark active:translate-y-px focus-visible:ring-terracotta',
 	ghost: 'bg-transparent text-ink hover:bg-ink hover:text-paper-card focus-visible:ring-ink',
 	outline:
 		'bg-transparent text-ink border-2 border-ink hover:bg-ink hover:text-paper-card focus-visible:ring-ink',

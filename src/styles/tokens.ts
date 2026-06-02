@@ -2,21 +2,43 @@ export const colors = {
 	sky: '#1479C1',
 	skyDark: '#0F5F9A',
 	skyLight: '#E8F2FB',
-	flag: '#E60012',
-	flagDark: '#B8000E',
-	flagLight: '#FDECEE',
-	ink: '#0B1320',
+
+	flag: '#B5482A',
+	flagDark: '#8E3520',
+	flagLight: '#F6E3D9',
+
+	terracotta: '#B5482A',
+	terracottaDark: '#8E3520',
+	terracottaLight: '#F6E3D9',
+
+	ochre: '#C8924A',
+	ochreDark: '#A07330',
+	ochreLight: '#F4E7D2',
+
+	moss: '#3F4A35',
+	mossDark: '#2A3324',
+	mossLight: '#DFE2D8',
+
+	navy: '#1A2B4A',
+	navyDark: '#101D35',
+	navyLight: '#DDE3EE',
+
+	ink: '#0B0F0A',
 	inkSoft: '#3D4A5C',
 	inkMute: '#7A8595',
-	paper: '#FAF7F2',
-	paperCard: '#FFFFFF',
-	line: '#E5E0D8',
-	lineSoft: '#F0EBE2',
+
+	paper: '#F4EFE6',
+	paperWarm: '#EBE3D3',
+	paperCard: '#FBF8F1',
+	line: '#D8CFBE',
+	lineSoft: '#E8E0CF',
 } as const;
 
 export const fonts = {
 	sans: '"Barlow", system-ui, -apple-system, "Segoe UI", sans-serif',
 	display: '"Barlow Condensed", "Barlow", system-ui, sans-serif',
+	serif: '"Fraunces", "Barlow", Georgia, serif',
+	mono: '"JetBrains Mono", ui-monospace, "SFMono-Regular", monospace',
 } as const;
 
 export const motion = {
