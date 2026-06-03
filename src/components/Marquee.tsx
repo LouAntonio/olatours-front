@@ -5,51 +5,65 @@ type MarqueeProps = {
 	className?: string;
 };
 
-const tones = {
-	sky: 'text-sky',
-	flag: 'text-flag',
-	ink: 'text-ink',
-	navy: 'text-navy',
-};
-
 export function Marquee({
 	items,
-	tone = 'ink',
+	tone: _tone = 'flag',
 	separator = '✦',
 	className = '',
 }: MarqueeProps) {
+	void _tone;
 	const sequence = [...items, ...items];
 
 	return (
-		<div
-			className={[
-				'overflow-hidden border-y border-gray-border py-4 sm:py-6 bg-white',
-				className,
-			]
-				.join(' ')
-				.trim()}
-		>
-			<div className="marquee-track">
-				{sequence.map((item, i) => (
-					<span
-						key={i}
-						className={[
-							'flex items-center gap-6 sm:gap-10 pr-6 sm:pr-10 shrink-0',
-							'font-display font-black uppercase',
-							'text-3xl sm:text-5xl md:text-6xl leading-none tracking-tight',
-							tones[tone],
-						].join(' ')}
-					>
-						<span>{item}</span>
-						<span
-							aria-hidden="true"
-							className="opacity-60 text-2xl sm:text-3xl"
-						>
-							{separator}
-						</span>
-					</span>
-				))}
+		<section className="relative bg-navy py-20 sm:py-24 overflow-hidden">
+			<div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+			<div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+			<div className="pointer-events-none absolute inset-0 opacity-[0.02]">
+				<div
+					className="corporate-grid h-full w-full"
+					style={{ backgroundSize: '32px 32px' }}
+				/>
 			</div>
-		</div>
+
+			<div className="pointer-events-none absolute -top-8 right-0 sm:right-8 select-none">
+				<span className="font-display font-black text-[clamp(6rem,15vw,14rem)] leading-none text-white/[0.04]">
+					ÂMBITO
+				</span>
+			</div>
+
+			<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+				<div
+					className={[
+						'overflow-hidden border-y border-white/[0.12] py-4 sm:py-6',
+						className,
+					]
+						.join(' ')
+						.trim()}
+				>
+					<div className="marquee-track">
+						{sequence.map((item, i) => (
+							<span
+								key={i}
+								className={[
+									'flex items-center gap-6 sm:gap-10 pr-6 sm:pr-10 shrink-0',
+									'font-display font-black uppercase',
+									'text-3xl sm:text-5xl md:text-6xl leading-none tracking-tight',
+									'text-white',
+								].join(' ')}
+							>
+								<span>{item}</span>
+								<span
+									aria-hidden="true"
+									className="opacity-40 text-2xl sm:text-3xl text-flag"
+								>
+									{separator}
+								</span>
+							</span>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
 	);
 }

@@ -49,9 +49,22 @@ export function Testimonials() {
 			id="testemunhos"
 			className="relative bg-gray-light py-20 sm:py-28 overflow-hidden"
 		>
-			<div className="mx-auto max-w-[1400px] px-5 sm:px-8">
+			<div className="pointer-events-none absolute -top-8 -right-8 select-none">
+				<span
+					className="font-display font-black text-[clamp(6rem,15vw,14rem)] leading-none"
+					style={{ color: 'rgba(181, 72, 42, 0.3)' }}
+				>
+					TESTEMUNHOS
+				</span>
+			</div>
+
+			<div className="pointer-events-none absolute inset-0 opacity-[0.02]">
+				<div className="corporate-grid h-full w-full" />
+			</div>
+
+			<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
 				<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
-					<div className="col-span-12 lg:col-span-4">
+					<div className="col-span-12 lg:col-span-5">
 						<span className="accent-bar-flag block mb-4" />
 						<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
 							O que <span className="text-flag">dizem</span> os
@@ -59,15 +72,17 @@ export function Testimonials() {
 						</h2>
 					</div>
 
-					<div className="col-span-12 lg:col-span-7 lg:col-start-6 lg:pt-2">
-						<p className="text-xl sm:text-2xl leading-relaxed text-ink-soft border-l-2 border-flag pl-5">
-							O feedback dos nossos clientes é importante para
-							nós, para que possamos continuar a prestar um
-							serviço especializado.
-						</p>
-						<div className="mt-6 label-caps text-ink-mute flex items-center gap-3">
-							<span className="h-px w-10 bg-gray-border" />
-							<span>FONTE · DIRECTA · AUTORIZADA</span>
+					<div className="col-span-12 lg:col-span-6 lg:col-start-7 flex items-end">
+						<div>
+							<p className="text-xl sm:text-2xl leading-relaxed text-ink-soft border-l-2 border-flag pl-5">
+								O feedback dos nossos clientes é importante para
+								nós, para que possamos continuar a prestar um
+								serviço especializado.
+							</p>
+							<div className="mt-6 label-caps text-ink-mute flex items-center gap-3">
+								<span className="h-px w-10 bg-gray-border" />
+								<span>FONTE · DIRECTA · AUTORIZADA</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -89,57 +104,71 @@ export function Testimonials() {
 }
 
 function TestimonialCard({ t }: { t: Testimonial }) {
+	const year = t.visitDate.split('·').pop()?.trim() ?? '';
+
 	return (
-		<motion.article
-			variants={item}
-			className="col-span-12 lg:col-span-6 bg-white border border-gray-border rounded-lg overflow-hidden hover:shadow-card-hover transition-shadow"
-		>
-			<div className="bg-flag px-6 sm:px-8 py-3 flex items-center justify-between gap-2">
-				<div className="flex items-center gap-3 label-caps text-white">
-					<span className="h-1.5 w-1.5 rounded-full bg-white pulse-dot" />
-					<span>CARTA DE VISITA · {t.country}</span>
-				</div>
-				<span className="label-caps text-white/70">{t.visitDate}</span>
-			</div>
+		<motion.article variants={item} className="col-span-12 lg:col-span-6">
+			<div className="relative border border-gray-border rounded-r-lg overflow-hidden transition-all duration-500 card-elevated bg-white">
+				<div className="absolute left-0 top-0 bottom-0 w-2 bg-flag" />
 
-			<div className="p-6 sm:p-8">
-				<svg
-					viewBox="0 0 80 60"
-					fill="none"
-					aria-hidden="true"
-					className="h-10 sm:h-12 w-auto mb-4 text-flag"
-				>
-					<text
-						x="0"
-						y="55"
-						fontFamily="Barlow Condensed, sans-serif"
-						fontWeight="700"
-						fontSize="80"
-						fill="currentColor"
+				<div className="pointer-events-none absolute top-1 right-4 select-none">
+					<span
+						className="font-display font-black text-[clamp(3rem,6vw,5rem)] leading-none"
+						style={{ color: 'rgba(181, 72, 42, 0.2)' }}
 					>
-						”
-					</text>
-				</svg>
-
-				<blockquote className="text-xl sm:text-2xl leading-[1.4] text-ink">
-					{t.quote}
-				</blockquote>
-
-				<div className="mt-6 pt-5 border-t border-gray-border">
-					<p className="font-display text-lg sm:text-xl font-black leading-tight text-ink">
-						{t.name}
-					</p>
-					<p className="mt-1 text-sm text-ink-soft leading-snug">
-						{t.title}
-					</p>
+						{year}
+					</span>
 				</div>
-			</div>
 
-			<div className="px-6 sm:px-8 py-3 flex items-center justify-between label-caps text-ink-mute bg-gray-light border-t border-gray-border">
-				<span>STAMP · {t.country}</span>
-				<span className="hidden sm:inline">
-					OLA TOURS CORPORATIVO · LUANDA
-				</span>
+				<div className="p-6 sm:p-8 pl-8 sm:pl-10">
+					<div className="flex items-center justify-between gap-4 mb-6">
+						<div className="flex items-center gap-2">
+							<span className="h-1.5 w-1.5 rounded-full bg-flag pulse-dot" />
+							<span className="label-caps text-flag">
+								CARTA DE VISITA · {t.country}
+							</span>
+						</div>
+						<span className="label-caps text-ink-mute shrink-0">
+							{t.visitDate}
+						</span>
+					</div>
+
+					<svg
+						viewBox="0 0 80 60"
+						fill="none"
+						aria-hidden="true"
+						className="h-8 sm:h-10 w-auto mb-3 text-flag/40"
+					>
+						<text
+							x="0"
+							y="55"
+							fontFamily="Barlow Condensed, sans-serif"
+							fontWeight="700"
+							fontSize="80"
+							fill="currentColor"
+						>
+							”
+						</text>
+					</svg>
+
+					<blockquote className="text-xl sm:text-2xl leading-[1.4] text-ink">
+						{t.quote}
+					</blockquote>
+
+					<div className="mt-6 pt-5 border-t border-gray-border">
+						<p className="font-display text-lg sm:text-xl font-black leading-tight text-ink">
+							{t.name}
+						</p>
+						<p className="mt-1 text-sm text-ink-soft leading-snug">
+							{t.title}
+						</p>
+					</div>
+				</div>
+
+				<div className="px-6 sm:px-8 py-3 flex items-center justify-between label-caps text-ink-mute bg-gray-light border-t border-gray-border">
+					<span>STAMP · {t.country}</span>
+					<span className="hidden sm:inline">OLA TOURS · LUANDA</span>
+				</div>
 			</div>
 		</motion.article>
 	);

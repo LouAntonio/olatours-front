@@ -1,6 +1,6 @@
 # Ola Tours — front
 
-Single-page marketing site (pt-AO) for Ola Tours Corporativo. React 19 + TypeScript + Vite, Tailwind v4, motion. No backend, no router, no tests, no i18n — every section is a component composed in `src/App.tsx`.
+Single-page marketing site (pt-AO) for Ola Tours. React 19 + TypeScript + Vite, Tailwind v4, motion. No backend, no router, no tests, no i18n — every section is a component composed in `src/App.tsx`.
 
 ## Commands
 

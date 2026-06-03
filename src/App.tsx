@@ -5,6 +5,7 @@ import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
 import { Sobre } from './pages/Sobre';
 import { Agenda } from './pages/Agenda';
+import { EventoDetalhe } from './pages/EventoDetalhe';
 import { Servicos } from './pages/Servicos';
 import { Produtos } from './pages/Produtos';
 import { Contacto } from './pages/Contacto';
@@ -21,6 +22,7 @@ function App() {
 					<Route path="/" element={<Home />} />
 					<Route path="/sobre" element={<Sobre />} />
 					<Route path="/agenda" element={<Agenda />} />
+					<Route path="/agenda/:id" element={<EventoDetalhe />} />
 					<Route path="/servicos" element={<Servicos />} />
 					<Route path="/produtos" element={<Produtos />} />
 					<Route path="/contacto" element={<Contacto />} />

@@ -3,7 +3,7 @@
 > **Dossiê N.º 01 / 26 · PT-AO**
 > Vamos explorar.
 
-Site institucional e de marca da **Ola Tours Corporativo** — operadora angolana de
+Site institucional e de marca da **Ola Tours** — operadora angolana de
 viagens corporativas, mobilidade executiva e facilitação de negócios em Angola
 e na África subsariana. Est. 2014, Luanda · Angola.
 

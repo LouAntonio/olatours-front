@@ -157,7 +157,10 @@ export function Sobre() {
 			{/* ===== HISTORY ===== */}
 			<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
 				<div className="pointer-events-none absolute -bottom-8 -left-8 select-none">
-					<span className="font-display font-black text-[clamp(12rem,25vw,24rem)] leading-none text-gray-border/30" style={{ color: 'rgba(181, 72, 42, 0.3)' }}>
+					<span
+						className="font-display font-black text-[clamp(12rem,25vw,24rem)] leading-none text-gray-border/30"
+						style={{ color: 'rgba(181, 72, 42, 0.3)' }}
+					>
 						2014
 					</span>
 				</div>
@@ -266,7 +269,12 @@ export function Sobre() {
 										className={`relative bg-white border border-gray-border rounded-b-lg overflow-hidden transition-all duration-500 card-elevated ${i % 2 === 1 ? 'sm:translate-y-8' : ''}`}
 									>
 										<div className="pointer-events-none absolute -top-2 right-4 select-none">
-											<span className="font-display font-black text-[clamp(4rem,8vw,7rem)] leading-none text-gray-border/30" style={{ color: `rgba(${accent.rgb}, 0.3)` }}>
+											<span
+												className="font-display font-black text-[clamp(4rem,8vw,7rem)] leading-none text-gray-border/30"
+												style={{
+													color: `rgba(${accent.rgb}, 0.3)`,
+												}}
+											>
 												{m.year}
 											</span>
 										</div>
@@ -391,9 +399,12 @@ export function Sobre() {
 			{/* ===== VALUES ===== */}
 			<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
 				<div className="pointer-events-none absolute -top-8 -right-8 select-none">
-<span className="font-display font-black text-[clamp(6rem,15vw,14rem)] leading-none" style={{ color: 'rgba(181, 72, 42, 0.3)' }}>
-	VALORES
-</span>
+					<span
+						className="font-display font-black text-[clamp(6rem,15vw,14rem)] leading-none"
+						style={{ color: 'rgba(181, 72, 42, 0.3)' }}
+					>
+						VALORES
+					</span>
 				</div>
 
 				<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
@@ -443,7 +454,12 @@ export function Sobre() {
 										/>
 
 										<div className="pointer-events-none absolute -top-2 right-4 select-none">
-											<span className="font-display font-black text-[clamp(4rem,8vw,7rem)] leading-none text-gray-border/30" style={{ color: `rgba(${accent.rgb}, 0.3)` }}>
+											<span
+												className="font-display font-black text-[clamp(4rem,8vw,7rem)] leading-none text-gray-border/30"
+												style={{
+													color: `rgba(${accent.rgb}, 0.3)`,
+												}}
+											>
 												{v.n}
 											</span>
 										</div>
@@ -456,7 +472,6 @@ export function Sobre() {
 												{v.body}
 											</p>
 										</div>
-
 									</div>
 								</motion.article>
 							);
