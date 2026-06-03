@@ -172,6 +172,19 @@ body {
 	animation: pulse-dot 1.6s ease-in-out infinite;
 }
 
+@keyframes hero-zoom {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.12);
+	}
+}
+
+.hero-zoom {
+	animation: hero-zoom 7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 @keyframes reveal-up {
 	from {
 		clip-path: inset(0 0 100% 0);

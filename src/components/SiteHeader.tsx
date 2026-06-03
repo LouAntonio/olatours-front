@@ -11,21 +11,28 @@ const SECTIONS = [
 
 export function SiteHeader() {
 	const [open, setOpen] = useState(false);
-	const [scrolled, setScrolled] = useState(false);
+	const [pastHero, setPastHero] = useState(false);
 
 	useEffect(() => {
-		const onScroll = () => setScrolled(window.scrollY > 40);
-		window.addEventListener('scroll', onScroll, { passive: true });
-		return () => window.removeEventListener('scroll', onScroll);
+		const el = document.getElementById('capa');
+		if (!el) return;
+
+		const observer = new IntersectionObserver(
+			([entry]) => setPastHero(!entry.isIntersecting),
+			{ threshold: 0 },
+		);
+
+		observer.observe(el);
+		return () => observer.disconnect();
 	}, []);
 
 	return (
 		<header
 			className={[
-				'sticky top-0 z-50 transition-shadow duration-300',
-				scrolled
+				'fixed top-0 left-0 right-0 z-50 transition-shadow duration-300',
+				pastHero
 					? 'bg-white/95 backdrop-blur-md shadow-header'
-					: 'bg-white',
+					: 'bg-transparent',
 			]
 				.join(' ')
 				.trim()}
@@ -33,18 +40,15 @@ export function SiteHeader() {
 			<div className="mx-auto max-w-[1400px] px-5 sm:px-8 flex items-center justify-between h-16 sm:h-18">
 				<a
 					href="#capa"
-					className="flex items-center gap-3"
-					aria-label="Ola Tours Corporativo"
+					className="flex items-center"
+					aria-label="Ola Tours"
 				>
-					<Logo size="sm" />
-					<span className="hidden sm:inline-flex flex-col leading-none">
-						<span className="font-display text-sm font-black tracking-wider text-ink uppercase">
-							Ola Tours
-						</span>
-						<span className="label-caps text-ink-soft mt-0.5">
-							Corporativo
-						</span>
-					</span>
+					<Logo
+						size="sm"
+						className={
+							pastHero ? '' : '[filter:brightness(0)_invert(1)]'
+						}
+					/>
 				</a>
 
 				<nav className="hidden lg:flex items-center gap-8">
@@ -52,7 +56,11 @@ export function SiteHeader() {
 						<a
 							key={s.id}
 							href={`#${s.id}`}
-							className="label-caps text-ink-soft hover:text-sky transition-colors"
+							className={`label-caps transition-colors ${
+								pastHero
+									? 'text-ink-soft hover:text-sky'
+									: 'text-white/80 hover:text-white'
+							}`}
 						>
 							{s.label}
 						</a>
@@ -62,14 +70,22 @@ export function SiteHeader() {
 				<div className="flex items-center gap-3">
 					<a
 						href="#contacto"
-						className="hidden md:inline-flex items-center gap-2 bg-sky text-white px-4 py-2 label-caps hover:bg-sky-dark transition-colors rounded-sm"
+						className={`hidden md:inline-flex items-center gap-2 px-4 py-2 label-caps transition-colors rounded-sm ${
+							pastHero
+								? 'bg-sky text-white hover:bg-sky-dark'
+								: 'border border-white/30 text-white hover:bg-white hover:text-navy'
+						}`}
 					>
 						Marcar reunião
 					</a>
 					<button
 						type="button"
 						onClick={() => setOpen(!open)}
-						className="lg:hidden h-9 w-9 inline-flex items-center justify-center border border-gray-border text-ink hover:bg-navy hover:text-white transition-colors rounded-sm"
+						className={`lg:hidden h-9 w-9 inline-flex items-center justify-center border transition-colors rounded-sm ${
+							pastHero
+								? 'border-gray-border text-ink hover:bg-navy hover:text-white'
+								: 'border-white/30 text-white hover:bg-white hover:text-navy'
+						}`}
 						aria-label="Menu"
 						aria-expanded={open}
 					>

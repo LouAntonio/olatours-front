@@ -1,16 +1,25 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { AfricaMap } from './AfricaMap';
 import { Badge } from './Badge';
-import { Button } from './Button';
 import { motion as m, stagger } from '../styles/tokens';
+
+const SLIDES = [
+	'https://images.unsplash.com/photo-1569949381669-ecf31ae8f613?w=1600&q=80',
+	'https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=1600&q=80',
+	'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1600&q=80',
+	'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80',
+	'https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=1600&q=80',
+];
 
 const coverStagger = {
 	hidden: {},
-	show: { transition: { staggerChildren: stagger.base, delayChildren: 0.1 } },
+	show: {
+		transition: { staggerChildren: stagger.base, delayChildren: 0.2 },
+	},
 };
 
 const coverItem = {
-	hidden: { opacity: 0, y: 28 },
+	hidden: { opacity: 0, y: 24 },
 	show: {
 		opacity: 1,
 		y: 0,
@@ -25,29 +34,44 @@ const features = [
 ];
 
 export function Cover() {
+	const [active, setActive] = useState(0);
+
+	useEffect(() => {
+		const timer = setInterval(() => {
+			setActive((prev) => (prev + 1) % SLIDES.length);
+		}, 6000);
+		return () => clearInterval(timer);
+	}, []);
+
 	return (
-		<section
-			id="capa"
-			className="relative overflow-hidden bg-white pt-8 sm:pt-12 pb-16 sm:pb-24"
-		>
-			<div className="pointer-events-none absolute inset-0 -z-10">
-				<div className="absolute top-0 right-0 w-[480px] h-[520px] opacity-[0.04]">
-					<AfricaMap className="text-sky" />
-				</div>
-				<div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-sky-50 opacity-40 blur-3xl" />
-				<div className="absolute -top-8 right-1/4 w-64 h-64 rounded-full bg-flag-50 opacity-30 blur-3xl" />
+		<section id="capa" className="relative h-dvh overflow-hidden bg-navy">
+			<div className="absolute inset-0">
+				{SLIDES.map((src, i) => (
+					<div
+						key={i}
+						className="absolute inset-0 transition-opacity duration-[1200ms] ease-out"
+						style={{ opacity: active === i ? 1 : 0 }}
+					>
+						<img
+							src={src}
+							alt=""
+							className={`h-full w-full object-cover ${active === i ? 'hero-zoom' : ''}`}
+							draggable={false}
+						/>
+					</div>
+				))}
+				<div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/50 to-black/70" />
 			</div>
 
-			<div className="mx-auto max-w-[1400px] px-5 sm:px-8">
+			<div className="relative z-10 mx-auto flex h-full max-w-[1400px] flex-col justify-start px-5 sm:px-8 pt-20 sm:pt-24">
 				<motion.div
 					variants={coverStagger}
 					initial="hidden"
 					animate="show"
-					className="grid grid-cols-12 gap-y-8 gap-x-6"
 				>
 					<motion.div
 						variants={coverItem}
-						className="col-span-12 flex items-center gap-3"
+						className="mb-6 flex items-center gap-3"
 					>
 						<span className="h-px w-10 sm:w-16 bg-sky" />
 						<Badge variant="sky" dot>
@@ -55,86 +79,52 @@ export function Cover() {
 						</Badge>
 					</motion.div>
 
-					<motion.div
+					<motion.h1
 						variants={coverItem}
-						className="col-span-12 lg:col-span-8"
+						className="font-display font-black uppercase leading-[0.85] tracking-tight text-[clamp(3rem,10vw,8rem)] text-white max-w-5xl"
 					>
-						<h1 className="font-display font-black uppercase leading-[0.85] tracking-tight text-[clamp(3.5rem,11vw,9.5rem)]">
-							<span className="block">Ola Tours</span>
-							<span className="block relative">
-								<span className="relative z-10 text-ink">
-									Corporat
-								</span>
-								<span className="text-flag italic font-normal tracking-normal normal-case font-sans font-light">
-									ivo.
-								</span>
+						<span className="block">Ola Tours</span>
+						<span className="block relative">
+							<span className="relative z-10">Corporat</span>
+							<span className="text-flag italic font-normal tracking-normal normal-case font-sans font-light">
+								ivo.
 							</span>
-						</h1>
+						</span>
+					</motion.h1>
 
-						<div className="mt-6 max-w-2xl">
-							<p className="text-xl sm:text-2xl leading-snug text-ink-soft">
-								<span className="text-sky font-bold text-3xl align-text-top mr-1">
-									“
-								</span>
-								Viagens corporativas, mobilidade executiva,
-								investimento e facilitação de negócios em Angola
-								e na África subsariana.
-								<span className="text-sky font-bold text-3xl align-text-top ml-1">
-									”
-								</span>
-							</p>
-						</div>
-					</motion.div>
-
-					<motion.div
-						variants={coverItem}
-						className="col-span-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-t-2 border-ink pt-6"
-					>
-						<p className="text-2xl sm:text-3xl text-ink max-w-xl">
-							Vamos{' '}
-							<span className="text-sky font-display font-black uppercase">
-								explorar
-							</span>
-							.
+					<motion.div variants={coverItem} className="mt-6">
+						<span className="block w-10 h-px bg-sky mb-5" />
+						<p className="text-base sm:text-lg leading-relaxed text-white/80 max-w-xl">
+							Viagens corporativas, mobilidade executiva,
+							investimento e facilitação de negócios em Angola e
+							na África subsariana.
 						</p>
-						<div className="flex flex-wrap items-center gap-3">
-							<Button
-								as="a"
-								href="#contacto"
-								variant="sky"
-								size="lg"
-							>
-								Marcar uma reunião
-							</Button>
-							<Button
-								as="a"
-								href="#servicos"
-								variant="outline"
-								size="lg"
-							>
-								Ver serviços
-							</Button>
-						</div>
+					</motion.div>
+
+					<motion.div variants={coverItem} className="mt-6">
+						<p className="label-caps text-sky/60">
+							Excelência em mobilidade executiva desde 2014
+						</p>
 					</motion.div>
 
 					<motion.div
 						variants={coverItem}
-						className="col-span-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 border-t border-gray-border pt-5"
+						className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 border-t border-white/20 pt-5 max-w-3xl"
 					>
 						{features.map((f) => (
 							<div
 								key={f.label}
 								className="flex items-center gap-3"
 							>
-								<span className="h-2 w-2 rounded-full bg-sky shrink-0" />
+								<span className="h-2 w-2 shrink-0 rounded-full bg-sky" />
 								<div>
-									<p className="label-caps text-ink-mute">
+									<p className="label-caps text-white/50">
 										{f.label}
 									</p>
-									<p className="font-display text-xl sm:text-2xl font-black leading-tight text-ink">
+									<p className="font-display text-xl sm:text-2xl font-black leading-tight text-white">
 										{f.value}
 									</p>
-									<p className="text-sm text-ink-mute">
+									<p className="text-sm text-white/50">
 										{f.hint}
 									</p>
 								</div>
