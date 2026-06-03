@@ -1,14 +1,15 @@
 type MarqueeProps = {
 	items: string[];
-	tone?: 'ink' | 'sky' | 'flag';
+	tone?: 'sky' | 'flag' | 'ink' | 'navy';
 	separator?: string;
 	className?: string;
 };
 
 const tones = {
-	ink: 'text-ink',
 	sky: 'text-sky',
 	flag: 'text-flag',
+	ink: 'text-ink',
+	navy: 'text-navy',
 };
 
 export function Marquee({
@@ -22,7 +23,7 @@ export function Marquee({
 	return (
 		<div
 			className={[
-				'overflow-hidden border-y border-ink/15 py-4 sm:py-6',
+				'overflow-hidden border-y border-gray-border py-4 sm:py-6 bg-white',
 				className,
 			]
 				.join(' ')

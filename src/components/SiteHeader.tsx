@@ -1,0 +1,122 @@
+import { useEffect, useState } from 'react';
+import { Logo } from './Logo';
+
+const SECTIONS = [
+	{ id: 'capa', label: 'Início' },
+	{ id: 'agenda', label: 'Agenda' },
+	{ id: 'servicos', label: 'Serviços' },
+	{ id: 'produtos', label: 'Produtos' },
+	{ id: 'contacto', label: 'Contacto' },
+];
+
+export function SiteHeader() {
+	const [open, setOpen] = useState(false);
+	const [scrolled, setScrolled] = useState(false);
+
+	useEffect(() => {
+		const onScroll = () => setScrolled(window.scrollY > 40);
+		window.addEventListener('scroll', onScroll, { passive: true });
+		return () => window.removeEventListener('scroll', onScroll);
+	}, []);
+
+	return (
+		<header
+			className={[
+				'sticky top-0 z-50 transition-shadow duration-300',
+				scrolled
+					? 'bg-white/95 backdrop-blur-md shadow-header'
+					: 'bg-white',
+			]
+				.join(' ')
+				.trim()}
+		>
+			<div className="mx-auto max-w-[1400px] px-5 sm:px-8 flex items-center justify-between h-16 sm:h-18">
+				<a
+					href="#capa"
+					className="flex items-center gap-3"
+					aria-label="Ola Tours Corporativo"
+				>
+					<Logo size="sm" />
+					<span className="hidden sm:inline-flex flex-col leading-none">
+						<span className="font-display text-sm font-black tracking-wider text-ink uppercase">
+							Ola Tours
+						</span>
+						<span className="label-caps text-ink-soft mt-0.5">
+							Corporativo
+						</span>
+					</span>
+				</a>
+
+				<nav className="hidden lg:flex items-center gap-8">
+					{SECTIONS.slice(1).map((s) => (
+						<a
+							key={s.id}
+							href={`#${s.id}`}
+							className="label-caps text-ink-soft hover:text-sky transition-colors"
+						>
+							{s.label}
+						</a>
+					))}
+				</nav>
+
+				<div className="flex items-center gap-3">
+					<a
+						href="#contacto"
+						className="hidden md:inline-flex items-center gap-2 bg-sky text-white px-4 py-2 label-caps hover:bg-sky-dark transition-colors rounded-sm"
+					>
+						Marcar reunião
+					</a>
+					<button
+						type="button"
+						onClick={() => setOpen(!open)}
+						className="lg:hidden h-9 w-9 inline-flex items-center justify-center border border-gray-border text-ink hover:bg-navy hover:text-white transition-colors rounded-sm"
+						aria-label="Menu"
+						aria-expanded={open}
+					>
+						<svg
+							viewBox="0 0 16 16"
+							fill="none"
+							className="h-4 w-4"
+							aria-hidden="true"
+						>
+							{open ? (
+								<path
+									d="M3 3l10 10M13 3L3 13"
+									stroke="currentColor"
+									strokeWidth="1.5"
+								/>
+							) : (
+								<>
+									<path
+										d="M2 5h12M2 11h12"
+										stroke="currentColor"
+										strokeWidth="1.5"
+									/>
+								</>
+							)}
+						</svg>
+					</button>
+				</div>
+			</div>
+
+			{open && (
+				<div className="lg:hidden border-t border-gray-border-soft bg-white">
+					<nav className="mx-auto max-w-[1400px] px-5 sm:px-8 py-4 flex flex-col">
+						{SECTIONS.map((s) => (
+							<a
+								key={s.id}
+								href={`#${s.id}`}
+								onClick={() => setOpen(false)}
+								className="flex items-baseline gap-3 py-3 border-b border-gray-border-soft last:border-0 text-ink hover:text-sky transition-colors"
+							>
+								<span className="font-display text-2xl font-black uppercase tracking-tight">
+									{s.label}
+								</span>
+							</a>
+						))}
+					</nav>
+				</div>
+			)}
+		</header>
+	);
+}

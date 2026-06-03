@@ -11,14 +11,6 @@ export const colors = {
 	terracottaDark: '#8E3520',
 	terracottaLight: '#F6E3D9',
 
-	ochre: '#C8924A',
-	ochreDark: '#A07330',
-	ochreLight: '#F4E7D2',
-
-	moss: '#3F4A35',
-	mossDark: '#2A3324',
-	mossLight: '#DFE2D8',
-
 	navy: '#1A2B4A',
 	navyDark: '#101D35',
 	navyLight: '#DDE3EE',
@@ -27,18 +19,15 @@ export const colors = {
 	inkSoft: '#3D4A5C',
 	inkMute: '#7A8595',
 
-	paper: '#F4EFE6',
-	paperWarm: '#EBE3D3',
-	paperCard: '#FBF8F1',
-	line: '#D8CFBE',
-	lineSoft: '#E8E0CF',
+	white: '#FFFFFF',
+	grayLight: '#F7F8FA',
+	grayBorder: '#E4E7EC',
+	grayBorderSoft: '#F0F2F5',
 } as const;
 
 export const fonts = {
 	sans: '"Barlow", system-ui, -apple-system, "Segoe UI", sans-serif',
 	display: '"Barlow Condensed", "Barlow", system-ui, sans-serif',
-	serif: '"Fraunces", "Barlow", Georgia, serif',
-	mono: '"JetBrains Mono", ui-monospace, "SFMono-Regular", monospace',
 } as const;
 
 export const motion = {

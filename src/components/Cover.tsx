@@ -1,6 +1,5 @@
 import { motion } from 'motion/react';
 import { AfricaMap } from './AfricaMap';
-import { Seal } from './Seal';
 import { Badge } from './Badge';
 import { Button } from './Button';
 import { motion as m, stagger } from '../styles/tokens';
@@ -19,16 +18,24 @@ const coverItem = {
 	},
 };
 
+const features = [
+	{ label: 'Operação', value: 'Angola + Mundo', hint: '54 países' },
+	{ label: 'Experiência', value: 'Desde 2014', hint: '10+ anos' },
+	{ label: 'Resposta', value: '24h úteis', hint: 'Proposta personalizada' },
+];
+
 export function Cover() {
 	return (
 		<section
 			id="capa"
-			className="relative overflow-hidden bg-paper pt-12 sm:pt-16 pb-20 sm:pb-28 paper-grain"
+			className="relative overflow-hidden bg-white pt-8 sm:pt-12 pb-16 sm:pb-24"
 		>
 			<div className="pointer-events-none absolute inset-0 -z-10">
-				<div className="absolute -top-20 -right-24 w-[520px] h-[520px] opacity-[0.07]">
-					<AfricaMap className="text-ink" />
+				<div className="absolute top-0 right-0 w-[480px] h-[520px] opacity-[0.04]">
+					<AfricaMap className="text-sky" />
 				</div>
+				<div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-sky-50 opacity-40 blur-3xl" />
+				<div className="absolute -top-8 right-1/4 w-64 h-64 rounded-full bg-flag-50 opacity-30 blur-3xl" />
 			</div>
 
 			<div className="mx-auto max-w-[1400px] px-5 sm:px-8">
@@ -36,51 +43,43 @@ export function Cover() {
 					variants={coverStagger}
 					initial="hidden"
 					animate="show"
-					className="grid grid-cols-12 gap-y-10 gap-x-6"
+					className="grid grid-cols-12 gap-y-8 gap-x-6"
 				>
 					<motion.div
 						variants={coverItem}
-						className="col-span-12 flex items-center justify-between gap-4"
+						className="col-span-12 flex items-center gap-3"
 					>
-						<div className="flex items-center gap-3">
-							<span className="h-px w-10 sm:w-16 bg-ink" />
-							<Badge variant="ink" dot>
-								Dossier Corporativo · Edição 2026
-							</Badge>
-						</div>
-						<span className="hidden sm:inline-flex mono-caps text-ink-soft">
-							REF · OTC / 26 / 001
-						</span>
+						<span className="h-px w-10 sm:w-16 bg-sky" />
+						<Badge variant="sky" dot>
+							Viagens Corporativas · Mobilidade Executiva
+						</Badge>
 					</motion.div>
 
 					<motion.div
 						variants={coverItem}
-						className="col-span-12 lg:col-span-9"
+						className="col-span-12 lg:col-span-8"
 					>
-						<p className="mono-caps text-terracotta mb-4">
-							[ Apresentação Institucional ]
-						</p>
 						<h1 className="font-display font-black uppercase leading-[0.85] tracking-tight text-[clamp(3.5rem,11vw,9.5rem)]">
 							<span className="block">Ola Tours</span>
 							<span className="block relative">
 								<span className="relative z-10 text-ink">
 									Corporat
 								</span>
-								<span className="text-terracotta italic font-serif font-medium tracking-normal normal-case">
+								<span className="text-flag italic font-normal tracking-normal normal-case font-sans font-light">
 									ivo.
 								</span>
 							</span>
 						</h1>
 
-						<div className="mt-8 max-w-2xl">
-							<p className="font-serif text-xl sm:text-2xl leading-snug text-ink-soft italic">
-								<span className="text-terracotta not-italic font-display font-black text-3xl sm:text-4xl align-text-top mr-1">
+						<div className="mt-6 max-w-2xl">
+							<p className="text-xl sm:text-2xl leading-snug text-ink-soft">
+								<span className="text-sky font-bold text-3xl align-text-top mr-1">
 									“
 								</span>
 								Viagens corporativas, mobilidade executiva,
 								investimento e facilitação de negócios em Angola
 								e na África subsariana.
-								<span className="text-terracotta not-italic font-display font-black text-3xl sm:text-4xl align-text-top ml-1">
+								<span className="text-sky font-bold text-3xl align-text-top ml-1">
 									”
 								</span>
 							</p>
@@ -89,56 +88,11 @@ export function Cover() {
 
 					<motion.div
 						variants={coverItem}
-						className="col-span-12 lg:col-span-3 flex lg:justify-end items-start"
+						className="col-span-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-t-2 border-ink pt-6"
 					>
-						<div className="text-terracotta">
-							<Seal
-								text="OLA TOURS · LUANDA"
-								subtext="EST. 2014"
-								number="01"
-								tone="terracotta"
-								size="md"
-							/>
-						</div>
-					</motion.div>
-
-					<motion.div
-						variants={coverItem}
-						className="col-span-12 mt-2 border-t-2 border-ink pt-6 grid grid-cols-12 gap-6"
-					>
-						<MetaField
-							className="col-span-6 sm:col-span-3"
-							label="Emitido em"
-							value="Luanda"
-							hint="AGO · 2026"
-						/>
-						<MetaField
-							className="col-span-6 sm:col-span-3"
-							label="Validade"
-							value="Indeterminada"
-							hint="ACTUALIZAÇÃO ANUAL"
-						/>
-						<MetaField
-							className="col-span-6 sm:col-span-3"
-							label="Operação"
-							value="África + Mundo"
-							hint="54 PAÍSES"
-						/>
-						<MetaField
-							className="col-span-6 sm:col-span-3"
-							label="Confidencialidade"
-							value="Total"
-							hint="NDA · GDPR"
-						/>
-					</motion.div>
-
-					<motion.div
-						variants={coverItem}
-						className="col-span-12 mt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-ink/15 pt-5"
-					>
-						<p className="font-serif text-2xl sm:text-3xl text-ink italic max-w-xl">
+						<p className="text-2xl sm:text-3xl text-ink max-w-xl">
 							Vamos{' '}
-							<span className="text-terracotta not-italic font-display font-black uppercase">
+							<span className="text-sky font-display font-black uppercase">
 								explorar
 							</span>
 							.
@@ -147,45 +101,48 @@ export function Cover() {
 							<Button
 								as="a"
 								href="#contacto"
-								variant="terracotta"
+								variant="sky"
 								size="lg"
 							>
 								Marcar uma reunião
 							</Button>
 							<Button
 								as="a"
-								href="#agenda"
+								href="#servicos"
 								variant="outline"
 								size="lg"
 							>
-								Ver agenda
+								Ver serviços
 							</Button>
 						</div>
+					</motion.div>
+
+					<motion.div
+						variants={coverItem}
+						className="col-span-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 border-t border-gray-border pt-5"
+					>
+						{features.map((f) => (
+							<div
+								key={f.label}
+								className="flex items-center gap-3"
+							>
+								<span className="h-2 w-2 rounded-full bg-sky shrink-0" />
+								<div>
+									<p className="label-caps text-ink-mute">
+										{f.label}
+									</p>
+									<p className="font-display text-xl sm:text-2xl font-black leading-tight text-ink">
+										{f.value}
+									</p>
+									<p className="text-sm text-ink-mute">
+										{f.hint}
+									</p>
+								</div>
+							</div>
+						))}
 					</motion.div>
 				</motion.div>
 			</div>
 		</section>
-	);
-}
-
-function MetaField({
-	label,
-	value,
-	hint,
-	className = '',
-}: {
-	label: string;
-	value: string;
-	hint: string;
-	className?: string;
-}) {
-	return (
-		<div className={className}>
-			<p className="mono-caps text-ink-soft mb-1.5">{label}</p>
-			<p className="font-display text-xl sm:text-2xl font-black leading-none text-ink">
-				{value}
-			</p>
-			<p className="mono-caps text-ink-mute mt-1.5">{hint}</p>
-		</div>
 	);
 }

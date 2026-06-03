@@ -70,52 +70,30 @@ export function Products() {
 	return (
 		<section
 			id="produtos"
-			className="relative bg-ink text-paper py-20 sm:py-28 overflow-hidden"
+			className="relative bg-navy text-white py-20 sm:py-28 overflow-hidden"
 		>
-			<div className="pointer-events-none absolute -left-40 top-20 w-[640px] h-[640px] opacity-[0.05]">
-				<svg viewBox="0 0 600 600" fill="none">
-					<text
-						x="50%"
-						y="50%"
-						textAnchor="middle"
-						dominantBaseline="middle"
-						fontFamily="Barlow Condensed, sans-serif"
-						fontWeight="900"
-						fontSize="160"
-						letterSpacing="-4"
-						fill="#F4EFE6"
-					>
-						PRODUTOS
-					</text>
-				</svg>
+			<div className="pointer-events-none absolute inset-0 opacity-[0.03]">
+				<div className="corporate-grid h-full w-full" />
 			</div>
 
 			<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
 				<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 					<div className="col-span-12 lg:col-span-5">
-						<div className="flex items-center gap-3 mb-6">
-							<span className="font-display text-2xl sm:text-3xl font-black text-terracotta leading-none">
-								05
-							</span>
-							<span className="h-px w-12 sm:w-20 bg-paper" />
-							<span className="eyebrow text-paper/70">
-								Produtos
-							</span>
-						</div>
+						<span className="accent-bar block mb-4" />
 						<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
-							Os nossos{' '}
-							<span className="text-terracotta">produtos</span>.
+							Os nossos <span className="text-sky">produtos</span>
+							.
 						</h2>
 					</div>
 
 					<div className="col-span-12 lg:col-span-7 lg:pt-2">
-						<p className="font-serif text-xl sm:text-2xl leading-relaxed text-paper/70 italic border-l-2 border-terracotta pl-5">
+						<p className="text-xl sm:text-2xl leading-relaxed text-white/70 border-l-2 border-sky pl-5">
 							Os nossos produtos garantem o melhor retorno sobre o
 							investimento no sector de viagens. Três formatos. Um
 							padrão.
 						</p>
-						<div className="mt-6 mono-caps text-paper/50 flex items-center gap-3">
-							<span className="h-px w-10 bg-paper/40" />
+						<div className="mt-6 label-caps text-white/50 flex items-center gap-3">
+							<span className="h-px w-10 bg-white/30" />
 							<span>ROI · PREVISIBILIDADE · ESCALA</span>
 						</div>
 					</div>
@@ -133,22 +111,17 @@ export function Products() {
 					))}
 				</motion.div>
 
-				<div className="mt-16 sm:mt-20 border-t border-paper/15 pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+				<div className="mt-16 sm:mt-20 border-t border-white/15 pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
 					<div>
 						<p className="font-display text-2xl sm:text-3xl font-black leading-tight max-w-md">
 							Pronto para o próximo{' '}
-							<span className="text-terracotta">olá</span>?
+							<span className="text-sky">olá</span>?
 						</p>
-						<p className="mt-2 text-paper/60 max-w-md">
+						<p className="mt-2 text-white/60 max-w-md">
 							Conte-nos a operação. Enviamos uma proposta em 48h.
 						</p>
 					</div>
-					<Button
-						as="a"
-						href="#contacto"
-						variant="terracotta"
-						size="lg"
-					>
+					<Button as="a" href="#contacto" variant="sky" size="lg">
 						Pedir proposta
 					</Button>
 				</div>
@@ -164,10 +137,10 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 		<motion.article
 			variants={item}
 			className={[
-				'group col-span-12 md:col-span-4 relative p-6 sm:p-8 border transition-all duration-300',
+				'group col-span-12 md:col-span-4 relative p-6 sm:p-8 border rounded-lg transition-all duration-300',
 				isFeature
-					? 'bg-terracotta text-paper border-terracotta md:col-span-4 md:row-span-1'
-					: 'bg-paper text-ink border-paper/15',
+					? 'bg-sky text-white border-sky'
+					: 'bg-white text-ink border-white/15',
 			].join(' ')}
 		>
 			<div className="flex items-start justify-between gap-3 mb-6">
@@ -175,22 +148,22 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 					<span
 						className={[
 							'font-display text-6xl sm:text-7xl font-black leading-none',
-							isFeature ? 'text-paper' : 'text-terracotta',
+							isFeature ? 'text-white/80' : 'text-sky',
 						].join(' ')}
 					>
 						{product.n}
 					</span>
 					<span
 						className={[
-							'mono-caps',
-							isFeature ? 'text-paper/70' : 'text-ink-mute',
+							'label-caps',
+							isFeature ? 'text-white/70' : 'text-ink-mute',
 						].join(' ')}
 					>
 						{product.code}
 					</span>
 				</div>
 				{isFeature && (
-					<span className="label-caps px-2 py-1 border border-paper text-paper">
+					<span className="label-caps px-2 py-1 border border-white/60 text-white/90 rounded-sm">
 						Best seller
 					</span>
 				)}
@@ -198,8 +171,8 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
 			<p
 				className={[
-					'mono-caps mb-3',
-					isFeature ? 'text-paper/70' : 'text-terracotta',
+					'label-caps mb-3',
+					isFeature ? 'text-white/70' : 'text-sky',
 				].join(' ')}
 			>
 				{product.brand}
@@ -212,7 +185,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 			<p
 				className={[
 					'mt-4 leading-relaxed',
-					isFeature ? 'text-paper/85' : 'text-ink-soft',
+					isFeature ? 'text-white/85' : 'text-ink-soft',
 				].join(' ')}
 			>
 				{product.intro}
@@ -221,14 +194,14 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 			<div
 				className={[
 					'mt-6 h-px w-full',
-					isFeature ? 'bg-paper/40' : 'bg-ink/15',
+					isFeature ? 'bg-white/40' : 'bg-gray-border',
 				].join(' ')}
 			/>
 
 			<p
 				className={[
-					'mono-caps mt-5 mb-3',
-					isFeature ? 'text-paper/70' : 'text-ink-soft',
+					'label-caps mt-5 mb-3',
+					isFeature ? 'text-white/70' : 'text-ink-mute',
 				].join(' ')}
 			>
 				O que inclui
@@ -240,13 +213,13 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 						key={f}
 						className={[
 							'flex items-start gap-3 leading-relaxed',
-							isFeature ? 'text-paper' : 'text-ink',
+							isFeature ? 'text-white' : 'text-ink',
 						].join(' ')}
 					>
 						<span
 							className={[
-								'mt-1 inline-block h-1.5 w-1.5 shrink-0',
-								isFeature ? 'bg-paper' : 'bg-terracotta',
+								'mt-2 inline-block h-1 w-2 shrink-0 rounded-sm',
+								isFeature ? 'bg-white' : 'bg-sky',
 							].join(' ')}
 						/>
 						<span className="flex-1">{f}</span>
@@ -258,18 +231,18 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 				className={[
 					'mt-7 pt-5 border-t flex items-center justify-between',
 					isFeature
-						? 'border-paper/30 text-paper/70'
-						: 'border-ink/10 text-ink-mute',
+						? 'border-white/30 text-white/70'
+						: 'border-gray-border text-ink-mute',
 				].join(' ')}
 			>
-				<span className="mono-caps">PRODUTO {product.n} / 03</span>
+				<span className="label-caps">PRODUTO {product.n} / 03</span>
 				<svg
 					viewBox="0 0 24 24"
 					fill="none"
 					aria-hidden="true"
 					className={[
 						'h-5 w-5 transition-transform group-hover:translate-x-1',
-						isFeature ? 'text-paper' : 'text-ink',
+						isFeature ? 'text-white' : 'text-sky',
 					].join(' ')}
 				>
 					<path

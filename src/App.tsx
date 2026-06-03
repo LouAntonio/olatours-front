@@ -1,6 +1,6 @@
 import { Logo } from './components/Logo';
 import { Marquee } from './components/Marquee';
-import { DossierHeader } from './components/DossierHeader';
+import { SiteHeader } from './components/SiteHeader';
 import { Cover } from './components/Cover';
 import { Agenda } from './components/Agenda';
 import { WhyUs } from './components/WhyUs';
@@ -12,24 +12,24 @@ import './App.css';
 
 function App() {
 	return (
-		<div className="min-h-screen bg-paper text-ink overflow-x-hidden">
-			<DossierHeader />
+		<div className="min-h-screen bg-white text-ink overflow-x-hidden">
+			<SiteHeader />
 			<main>
 				<Cover />
 				<Agenda />
 				<WhyUs />
 				<Marquee
 					items={[
-						'BORDERS',
-						'BUSINESS',
-						'BESPOKE',
-						'DISCRETION',
+						'ANGOLA',
+						'ÁFRICA',
+						'NEGÓCIOS',
+						'EXECUTIVO',
 						'EXCELLENCE',
-						'PUNCTUALITY',
+						'PONTUALIDADE',
+						'PRIVACIDADE',
 					]}
-					tone="ink"
+					tone="sky"
 					separator="✦"
-					className="border-y-2 border-ink bg-paper"
 				/>
 				<Services />
 				<Products />
@@ -45,17 +45,17 @@ export default App;
 
 function Footer() {
 	return (
-		<footer className="bg-ink text-paper-card border-t-2 border-paper">
+		<footer className="bg-navy text-white border-t border-white/10">
 			<div className="mx-auto max-w-[1400px] px-5 sm:px-8 py-12 sm:py-16">
 				<div className="grid grid-cols-12 gap-y-10 gap-x-6">
 					<div className="col-span-12 lg:col-span-5">
 						<Logo size="md" className="brightness-0 invert" />
-						<p className="mt-5 max-w-sm font-serif text-base sm:text-lg leading-relaxed text-paper/70 italic">
+						<p className="mt-5 max-w-sm text-base sm:text-lg leading-relaxed text-white/70">
 							Ola Tours — vamos explorar. Operadora angolana de
 							viagens corporativas, mobilidade executiva e
 							facilitação de negócios.
 						</p>
-						<div className="mt-6 flex flex-col gap-1 mono-caps text-paper/55">
+						<div className="mt-6 flex flex-col gap-1 label-caps text-white/50">
 							<span>EST. 2014 · LUANDA · ANGOLA</span>
 							<span>NIF / ALV. TURISMO Nº 0089 / 2023</span>
 						</div>
@@ -84,16 +84,15 @@ function Footer() {
 							'www.olatours.co.ao',
 							'Luanda · Angola',
 						]}
-						mono
 					/>
 				</div>
 
-				<div className="mt-12 sm:mt-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-paper/15 pt-6">
-					<p className="mono-caps text-paper/45">
+				<div className="mt-12 sm:mt-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/15 pt-6">
+					<p className="label-caps text-white/45">
 						© 2026 Ola Tours · Todos os direitos reservados
 					</p>
-					<p className="mono-caps text-paper/45">
-						DOSSIER Nº 01 / 26 · PT-AO
+					<p className="label-caps text-white/45">
+						OLA TOURS CORPORATIVO · LUANDA · MMXXVI
 					</p>
 				</div>
 			</div>
@@ -105,26 +104,19 @@ function FooterCol({
 	title,
 	items,
 	className = '',
-	mono = false,
 }: {
 	title: string;
 	items: string[];
 	className?: string;
-	mono?: boolean;
 }) {
 	return (
 		<div className={className}>
-			<p className="mono-caps text-paper/50 mb-4">{title}</p>
+			<p className="label-caps text-white/50 mb-4">{title}</p>
 			<ul className="space-y-2.5">
 				{items.map((i) => (
 					<li
 						key={i}
-						className={[
-							mono
-								? 'font-mono text-sm text-paper/80'
-								: 'text-paper/85',
-							'hover:text-terracotta transition-colors',
-						].join(' ')}
+						className="text-white/80 hover:text-sky transition-colors"
 					>
 						<a href="#contacto">{i}</a>
 					</li>

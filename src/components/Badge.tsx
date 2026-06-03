@@ -1,26 +1,13 @@
 import type { ReactNode } from 'react';
 
-type Variant =
-	| 'sky'
-	| 'flag'
-	| 'terracotta'
-	| 'ochre'
-	| 'moss'
-	| 'navy'
-	| 'ink'
-	| 'outline'
-	| 'paper';
+type Variant = 'sky' | 'flag' | 'navy' | 'outline' | 'white';
 
 const variants: Record<Variant, string> = {
-	sky: 'bg-sky text-paper-card',
-	flag: 'bg-flag text-paper-card',
-	terracotta: 'bg-terracotta text-paper-card',
-	ochre: 'bg-ochre text-ink',
-	moss: 'bg-moss text-paper-card',
-	navy: 'bg-navy text-paper-card',
-	ink: 'bg-ink text-paper-card',
-	outline: 'bg-transparent text-ink border border-ink',
-	paper: 'bg-paper-card text-ink border border-line',
+	sky: 'bg-sky text-white',
+	flag: 'bg-flag text-white',
+	navy: 'bg-navy text-white',
+	outline: 'bg-transparent text-ink border border-gray-border',
+	white: 'bg-white text-ink border border-gray-border',
 };
 
 type BadgeProps = {
@@ -32,7 +19,7 @@ type BadgeProps = {
 
 export function Badge({
 	children,
-	variant = 'ink',
+	variant = 'navy',
 	dot = false,
 	className = '',
 }: BadgeProps) {
