@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { motion } from 'motion/react';
 import { Logo } from './Logo';
+import { motion as m, stagger } from '../styles/tokens';
 
 const NAV_ITEMS = [
 	{ path: '/', label: 'Home' },
@@ -9,6 +11,51 @@ const NAV_ITEMS = [
 	{ path: '/servicos', label: 'Serviços' },
 	{ path: '/produtos', label: 'Produtos' },
 ];
+
+const drawerVariants = {
+	hidden: { x: '100%' },
+	show: {
+		x: 0,
+		transition: { duration: m.duration.slow, ease: m.ease.out },
+	},
+};
+
+const overlayVariants = {
+	hidden: { opacity: 0 },
+	show: {
+		opacity: 1,
+		transition: { duration: m.duration.base, ease: m.ease.out },
+	},
+};
+
+const navContainerVariants = {
+	hidden: {},
+	show: {
+		transition: { staggerChildren: stagger.base, delayChildren: 0.15 },
+	},
+};
+
+const navItemVariants = {
+	hidden: { opacity: 0, x: 40 },
+	show: {
+		opacity: 1,
+		x: 0,
+		transition: { duration: m.duration.base, ease: m.ease.out },
+	},
+};
+
+const ctaVariants = {
+	hidden: { opacity: 0, y: 20 },
+	show: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: m.duration.base,
+			ease: m.ease.out,
+			delay: 0.45,
+		},
+	},
+};
 
 export function SiteHeader() {
 	const [open, setOpen] = useState(false);
@@ -31,7 +78,22 @@ export function SiteHeader() {
 		return () => observer.disconnect();
 	}, [isHome]);
 
+	useEffect(() => {
+		if (open) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = '';
+		}
+		return () => {
+			document.body.style.overflow = '';
+		};
+	}, [open]);
+
 	const isGhost = isHome && !pastHero;
+
+	function close() {
+		setOpen(false);
+	}
 
 	return (
 		<header
@@ -92,16 +154,61 @@ export function SiteHeader() {
 					>
 						Contacto
 					</Link>
+
 					<button
 						type="button"
 						onClick={() => setOpen(!open)}
-						className={`lg:hidden h-9 w-9 inline-flex items-center justify-center border transition-colors rounded-sm ${
+						className={`lg:hidden relative h-11 w-11 inline-flex items-center justify-center rounded-sm transition-colors ${
 							isGhost
-								? 'border-white/30 text-white hover:bg-flag hover:text-white'
-								: 'border-gray-border text-ink hover:bg-flag hover:text-white'
+								? 'text-white hover:bg-white/10'
+								: 'text-ink hover:bg-gray-border-soft'
 						}`}
-						aria-label="Menu"
+						aria-label={open ? 'Fechar menu' : 'Abrir menu'}
 						aria-expanded={open}
+					>
+						<span
+							className={`absolute h-px w-5 transition-all duration-300 ${
+								isGhost ? 'bg-white' : 'bg-current'
+							} ${open ? 'top-1/2 rotate-45' : 'top-[15px]'}`}
+						/>
+						<span
+							className={`absolute h-px w-5 transition-all duration-300 ${
+								isGhost ? 'bg-white' : 'bg-current'
+							} ${open ? 'top-1/2 -rotate-45' : 'top-[27px]'}`}
+						/>
+					</button>
+				</div>
+			</div>
+
+			{open && (
+				<motion.div
+					variants={overlayVariants}
+					initial="hidden"
+					animate="show"
+					className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[2px] hidden md:block lg:hidden"
+					onClick={close}
+				/>
+			)}
+
+			<motion.div
+				variants={drawerVariants}
+				initial="hidden"
+				animate={open ? 'show' : 'hidden'}
+				className="fixed top-0 right-0 z-50 h-dvh w-full md:w-[420px] bg-navy flex flex-col lg:hidden overflow-y-auto"
+				role="dialog"
+				aria-modal="true"
+				aria-label="Menu de navegação"
+			>
+				<div className="flex items-center justify-between px-5 sm:px-8 h-16 sm:h-18 shrink-0">
+					<Logo
+						size="sm"
+						className="[filter:brightness(0)_invert(1)]"
+					/>
+					<button
+						type="button"
+						onClick={close}
+						className="h-11 w-11 inline-flex items-center justify-center text-white/60 hover:text-white transition-colors rounded-sm hover:bg-white/10"
+						aria-label="Fechar menu"
 					>
 						<svg
 							viewBox="0 0 16 16"
@@ -109,44 +216,69 @@ export function SiteHeader() {
 							className="h-4 w-4"
 							aria-hidden="true"
 						>
-							{open ? (
-								<path
-									d="M3 3l10 10M13 3L3 13"
-									stroke="currentColor"
-									strokeWidth="1.5"
-								/>
-							) : (
-								<>
-									<path
-										d="M2 5h12M2 11h12"
-										stroke="currentColor"
-										strokeWidth="1.5"
-									/>
-								</>
-							)}
+							<path
+								d="M3 3l10 10M13 3L3 13"
+								stroke="currentColor"
+								strokeWidth="1.5"
+							/>
 						</svg>
 					</button>
 				</div>
-			</div>
 
-			{open && (
-				<div className="lg:hidden border-t border-gray-border-soft bg-white">
-					<nav className="mx-auto max-w-[1200px] px-5 sm:px-8 py-4 flex flex-col">
-						{NAV_ITEMS.map((item) => (
+				<motion.nav
+					variants={navContainerVariants}
+					initial="hidden"
+					animate={open ? 'show' : 'hidden'}
+					className="flex-1 flex flex-col justify-center px-5 sm:px-8 gap-1"
+				>
+					{NAV_ITEMS.map((item, i) => (
+						<motion.div key={item.path} variants={navItemVariants}>
 							<Link
-								key={item.path}
 								to={item.path}
-								onClick={() => setOpen(false)}
-								className="flex items-baseline gap-3 py-3 border-b border-gray-border-soft last:border-0 text-ink hover:text-flag transition-colors"
+								onClick={close}
+								className="group flex items-baseline gap-4 py-4 border-b border-white/10 last:border-0"
 							>
-								<span className="font-display text-2xl font-black uppercase tracking-tight">
+								<span className="label-caps text-flag shrink-0 w-8 text-right tabular-nums">
+									{String(i + 1).padStart(2, '0')}
+								</span>
+								<span className="font-display text-4xl sm:text-5xl font-black uppercase leading-[0.88] tracking-tight text-white group-hover:text-flag transition-colors duration-300">
 									{item.label}
 								</span>
 							</Link>
-						))}
-					</nav>
-				</div>
-			)}
+						</motion.div>
+					))}
+				</motion.nav>
+
+				<motion.div
+					variants={ctaVariants}
+					initial="hidden"
+					animate={open ? 'show' : 'hidden'}
+					className="shrink-0 px-5 sm:px-8 pb-8 sm:pb-10 pt-6"
+				>
+					<Link
+						to="/contacto"
+						onClick={close}
+						className="inline-flex items-center justify-center gap-3 w-full px-6 py-4 bg-flag hover:bg-flag-dark text-white font-display text-lg font-bold uppercase tracking-wider transition-colors rounded-sm"
+					>
+						<svg
+							viewBox="0 0 16 16"
+							fill="none"
+							className="h-4 w-4 shrink-0"
+							aria-hidden="true"
+						>
+							<path
+								d="M2 4l6 4 6-4M2 4v8a1 1 0 001 1h10a1 1 0 001-1V4M2 4l6 4 6-4"
+								stroke="currentColor"
+								strokeWidth="1.5"
+							/>
+						</svg>
+						Fale connosco
+					</Link>
+					<p className="mt-5 text-center text-white/20 text-xs label-caps">
+						Ola Tours · Desde 2014
+					</p>
+				</motion.div>
+			</motion.div>
 		</header>
 	);
 }

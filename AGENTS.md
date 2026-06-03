@@ -1,6 +1,6 @@
 # Ola Tours — front
 
-Single-page marketing site (pt-AO) for Ola Tours. React 19 + TypeScript + Vite, Tailwind v4, motion. No backend, no router, no tests, no i18n — every section is a component composed in `src/App.tsx`.
+Site institucional multi-página (pt-AO) para a Ola Tours — operadora angolana de viagens corporativas, mobilidade executiva e facilitação de negócios. React 19 + TypeScript + Vite, Tailwind v4, motion, react-router-dom. Sem backend — dados mockados em `src/data/`.
 
 ## Commands
 
@@ -19,23 +19,26 @@ CI runs `lint → type-check → format:check → build` on push/PR to `main` an
 
 ## Project layout
 
-- `index.html` → mounts `src/main.tsx` → renders `src/App.tsx`.
-- `src/App.tsx` — composes section components in order: `DossierHeader`, `Cover`, `Agenda`, `WhyUs`, `Marquee`, `Services`, `Products`, `Testimonials`, `Contact`, plus a `Footer`.
-- `src/components/` — one PascalCase file per section (`Cover.tsx`, `Marquee.tsx`, `Button.tsx`, `Logo.tsx`, `Seal.tsx`, `AfricaMap.tsx`, etc.).
-- `src/styles/tokens.ts` — JS-side mirror of design tokens (colors, fonts, motion durations/eases, stagger). Use this for `motion/react` configs.
+- `index.html` → mounts `src/main.tsx` → `BrowserRouter` + renders `src/App.tsx`.
+- `src/App.tsx` — composes `SiteHeader`, `<Routes>` with 7 routes (Home, Sobre, Agenda, EventoDetalhe, Servicos, Produtos, Contacto), and `Footer`.
+- `src/pages/` — one PascalCase file per route (`Home.tsx`, `Sobre.tsx`, `Agenda.tsx`, `EventoDetalhe.tsx`, `Servicos.tsx`, `Produtos.tsx`, `Contacto.tsx`).
+- `src/components/` — reusable sections used across pages (`Cover.tsx`, `SiteHeader.tsx`, `Footer.tsx`, `Services.tsx`, `Products.tsx`, `WhyUs.tsx`, `Testimonials.tsx`, `Marquee.tsx`, `Button.tsx`, `Logo.tsx`, `Badge.tsx`, `AfricaMap.tsx`).
+- `src/data/` — mock data layer (`events.ts` with `fetchEventos()`, `fetchEventoById()`).
+- `src/hooks/` — `useScrollToTop.ts`, `useDocumentTitle.ts`.
+- `src/styles/tokens.ts` — JS-side mirror of design tokens (colors, fonts, motion durations/eases, stagger).
 - `src/index.css` — Tailwind v4 entry + `@theme {}` design tokens + global utility classes. **There is no `tailwind.config.js` — do not create one.**
 - `public/images/` — static assets (`olatours.png`, `icon.png`).
 - `.vercel/project.json` — Vercel project link; project name is `olatours`. Leave committed; do not rename.
 
 ## Design system
 
-Brand colors (use as Tailwind classes, e.g. `bg-paper`, `text-terracotta`): `paper`, `paper-card`, `paper-warm`, `ink`, `ink-soft`, `ink-mute`, `terracotta`/`flag`, `ochre`, `moss`, `navy`, `sky`, `line`, `line-soft`. Full hex values in `src/index.css` (`@theme` block) and `src/styles/tokens.ts`.
+Brand colors (use as Tailwind classes, e.g. `bg-navy`, `text-flag`): `sky`/`sky-dark`/`sky-50`, `flag`/`terracotta`/`flag-dark`/`flag-50`, `navy`/`navy-dark`/`navy-50`, `ink`/`ink-soft`/`ink-mute`, `white`, `gray-light`/`gray-border`/`gray-border-soft`. Full hex values in `src/index.css` (`@theme` block) and `src/styles/tokens.ts`.
 
-Fonts (loaded via Google Fonts in `index.html`): Barlow (sans default), Barlow Condensed (`font-display`), Fraunces (`font-serif`), JetBrains Mono (`font-mono`). Utility classes: `mono-caps`, `eyebrow`, `label-caps`, `drop-cap`.
+Fonts (loaded via Google Fonts in `index.html`): Barlow (sans default), Barlow Condensed (`font-display`). Utility classes: `font-display`, `eyebrow`, `label-caps`.
 
-Custom effects defined in `src/index.css`: `paper-grain`, `marquee-track`/`marquee-track-slow`, `rule`, `rule-strong`, `hairline`, `ticker`, `ticket-edge`, `perforation`, `dossier-tick`, `shadow-stamp`/`shadow-terracotta`/`shadow-ochre`/`shadow-navy`, `stamp-rotate`/`stamp-press`, `pulse-ring`/`pulse-dot`, `reveal-up`.
+Custom effects defined in `src/index.css`: `corporate-grid`, `card-elevated`, `stat-glow`, `marquee-track`/`marquee-track-slow`, `pulse-ring`/`pulse-dot`, `hero-zoom`, `reveal-up`, `count-in`, `corner-pulse`, `accent-bar`/`accent-bar-flag`, `dash-flag`, `geo-diamond`/`geo-diamond-subtle`, `rule`/`rule-strong`/`section-rule`/`section-rule-strong`/`hairline`.
 
-When adding a new visual element, prefer extending the `@theme` block + utility classes here over component-local styles. Avoid `src/App.css` (it is effectively unused).
+When adding a new visual element, prefer extending the `@theme` block + utility classes here over component-local styles. `src/App.css` is minimal (`.app-shell` flex layout only).
 
 ## TypeScript gotchas
 
@@ -47,21 +50,22 @@ When adding a new visual element, prefer extending the `@theme` block + utility 
 
 ## Animation
 
-Use the `motion` package (motion.dev), imported as `import { motion } from 'motion/react'`. Do not import from `framer-motion` (old API). Reuse the easing/duration constants from `src/styles/tokens.ts` (`m.ease.out`, `m.duration.base`, `stagger.base`, etc.) instead of hardcoding numbers.
+Use the `motion` package (motion.dev), imported as `import { motion } from 'motion/react'`. Do not import from `framer-motion` (old API). Reuse the easing/duration constants from `src/styles/tokens.ts` (`m.ease.out`, `m.duration.base`, `stagger.wide`, etc.) instead of hardcoding numbers.
 
 ## Styling conventions
 
 - Tabs for indentation, width 4 (`.editorconfig` + Prettier).
 - Single quotes, trailing commas, LF endings, print width 100.
 - No comments in source — match existing style. Do not add `//` or `/* */` blocks unless explicitly requested.
-- Components are mostly named exports (`export function Cover()`), not default exports — except `App`, which is the only default-exported top-level component.
+- Components/pages are mostly named exports (`export function Cover()`), not default exports — except `App`, which is the only default-exported top-level component.
+- `Button.tsx` uses a discriminated union pattern (`as: 'button' | 'a'`) for polymorphic rendering.
+- Use `useDocumentTitle('Page Name')` in page components to set `<title>`.
 
 ## Known issues
 
-- Prettier finds two config files: `.prettierrc` and `.prettierrc.json` with conflicting `semi` settings. Per Prettier's priority order, `.prettierrc` wins, so current code uses semicolons. Resolve by deleting the losing file before changing style.
 - `.vercel/project.json` is committed against the usual Vercel guidance. Leave as-is unless the team decides to scrub it.
 - No documented branch / PR / release convention. Follow the repo's existing commit history style if you need a model.
 
 ## Skills
 
-A repo-local `frontend-design` skill lives at `.agents/skills/frontend-design/SKILL.md`. Load it via the `skill` tool when building new UI sections so the dossier/editorial aesthetic is preserved.
+A repo-local `frontend-design` skill lives at `.agents/skills/frontend-design/SKILL.md`. Load it via the `skill` tool when building new UI sections so the corporate/institutional aesthetic is preserved.
