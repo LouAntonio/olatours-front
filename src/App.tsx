@@ -2,12 +2,10 @@ import { Logo } from './components/Logo';
 import { Marquee } from './components/Marquee';
 import { SiteHeader } from './components/SiteHeader';
 import { Cover } from './components/Cover';
-import { Agenda } from './components/Agenda';
 import { WhyUs } from './components/WhyUs';
 import { Services } from './components/Services';
 import { Products } from './components/Products';
 import { Testimonials } from './components/Testimonials';
-import { Contact } from './components/Contact';
 import './App.css';
 
 function App() {
@@ -16,7 +14,6 @@ function App() {
 			<SiteHeader />
 			<main>
 				<Cover />
-				<Agenda />
 				<WhyUs />
 				<Marquee
 					items={[
@@ -34,7 +31,6 @@ function App() {
 				<Services />
 				<Products />
 				<Testimonials />
-				<Contact />
 			</main>
 			<Footer />
 		</div>
@@ -116,9 +112,9 @@ function FooterCol({
 				{items.map((i) => (
 					<li
 						key={i}
-						className="text-white/80 hover:text-sky transition-colors"
+						className="text-white/80 hover:text-flag transition-colors"
 					>
-						<a href="#contacto">{i}</a>
+						<span>{i}</span>
 					</li>
 				))}
 			</ul>
