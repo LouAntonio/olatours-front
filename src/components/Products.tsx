@@ -121,7 +121,7 @@ export function Products() {
 							Conte-nos a operação. Enviamos uma proposta em 48h.
 						</p>
 					</div>
-					<Button as="a" href="#contacto" variant="flag" size="lg">
+					<Button as="a" href="/contacto" variant="flag" size="lg">
 						Pedir proposta
 					</Button>
 				</div>

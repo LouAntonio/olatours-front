@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Logo } from './Logo';
 
-const SECTIONS = [
-	{ id: 'capa', label: 'Início' },
-	{ id: 'agenda', label: 'Agenda' },
-	{ id: 'servicos', label: 'Serviços' },
-	{ id: 'produtos', label: 'Produtos' },
-	{ id: 'contacto', label: 'Contacto' },
+const NAV_ITEMS = [
+	{ path: '/sobre', label: 'Sobre' },
+	{ path: '/agenda', label: 'Agenda' },
+	{ path: '/servicos', label: 'Serviços' },
+	{ path: '/produtos', label: 'Produtos' },
+	{ path: '/contacto', label: 'Contacto' },
 ];
 
 export function SiteHeader() {
 	const [open, setOpen] = useState(false);
-	const [pastHero, setPastHero] = useState(false);
+	const location = useLocation();
+	const isHome = location.pathname === '/';
+	const [pastHero, setPastHero] = useState(!isHome);
 
 	useEffect(() => {
+		if (!isHome) return;
+
 		const el = document.getElementById('capa');
 		if (!el) return;
 
@@ -24,67 +29,76 @@ export function SiteHeader() {
 
 		observer.observe(el);
 		return () => observer.disconnect();
-	}, []);
+	}, [isHome]);
+
+	const isGhost = isHome && !pastHero;
 
 	return (
 		<header
 			className={[
 				'fixed top-0 left-0 right-0 z-50 transition-shadow duration-300',
-				pastHero
-					? 'bg-white/95 backdrop-blur-md shadow-header'
-					: 'bg-transparent',
+				isGhost
+					? 'bg-transparent'
+					: 'bg-white/95 backdrop-blur-md shadow-header',
 			]
 				.join(' ')
 				.trim()}
 		>
 			<div className="mx-auto max-w-[1400px] px-5 sm:px-8 flex items-center justify-between h-16 sm:h-18">
-				<a
-					href="#capa"
+				<Link
+					to="/"
 					className="flex items-center"
 					aria-label="Ola Tours"
 				>
 					<Logo
 						size="sm"
 						className={
-							pastHero ? '' : '[filter:brightness(0)_invert(1)]'
+							isGhost ? '[filter:brightness(0)_invert(1)]' : ''
 						}
 					/>
-				</a>
+				</Link>
 
 				<nav className="hidden lg:flex items-center gap-8">
-					{SECTIONS.slice(1).map((s) => (
-						<a
-							key={s.id}
-							href={`#${s.id}`}
-							className={`label-caps transition-colors ${
-								pastHero
-									? 'text-ink-soft hover:text-flag'
-									: 'text-white/80 hover:text-flag'
-							}`}
+					{NAV_ITEMS.map((item) => (
+						<NavLink
+							key={item.path}
+							to={item.path}
+							className={({ isActive }) =>
+								[
+									'label-caps transition-colors',
+									isActive
+										? 'text-flag'
+										: isGhost
+											? 'text-white/80 hover:text-flag'
+											: 'text-ink-soft hover:text-flag',
+								]
+									.join(' ')
+									.trim()
+							}
 						>
-							{s.label}
-						</a>
+							{item.label}
+						</NavLink>
 					))}
 				</nav>
 
 				<div className="flex items-center gap-3">
-					<a
-						href="#contacto"
+					<Link
+						to="/contacto"
 						className={`hidden md:inline-flex items-center gap-2 px-4 py-2 label-caps transition-colors rounded-sm ${
-							pastHero
-								? 'bg-flag text-white hover:bg-flag-dark'
-								: 'border border-flag/60 text-flag hover:bg-flag hover:text-white'
+							isGhost
+								? 'border border-flag/60 text-flag hover:bg-flag hover:text-white'
+								: 'bg-flag text-white hover:bg-flag-dark'
 						}`}
 					>
 						Marcar reunião
-					</a>
+					</Link>
 					<button
 						type="button"
 						onClick={() => setOpen(!open)}
 						className={`lg:hidden h-9 w-9 inline-flex items-center justify-center border transition-colors rounded-sm ${
-							pastHero
-								? 'border-gray-border text-ink hover:bg-flag hover:text-white'
-								: 'border-white/30 text-white hover:bg-flag hover:text-white'
+							isGhost
+								? 'border-white/30 text-white hover:bg-flag hover:text-white'
+								: 'border-gray-border text-ink hover:bg-flag hover:text-white'
 						}`}
 						aria-label="Menu"
 						aria-expanded={open}
@@ -118,17 +132,17 @@ export function SiteHeader() {
 			{open && (
 				<div className="lg:hidden border-t border-gray-border-soft bg-white">
 					<nav className="mx-auto max-w-[1400px] px-5 sm:px-8 py-4 flex flex-col">
-						{SECTIONS.map((s) => (
-							<a
-								key={s.id}
-								href={`#${s.id}`}
+						{NAV_ITEMS.map((item) => (
+							<Link
+								key={item.path}
+								to={item.path}
 								onClick={() => setOpen(false)}
 								className="flex items-baseline gap-3 py-3 border-b border-gray-border-soft last:border-0 text-ink hover:text-flag transition-colors"
 							>
 								<span className="font-display text-2xl font-black uppercase tracking-tight">
-									{s.label}
+									{item.label}
 								</span>
-							</a>
+							</Link>
 						))}
 					</nav>
 				</div>
