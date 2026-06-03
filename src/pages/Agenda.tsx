@@ -140,7 +140,7 @@ export function Agenda() {
 						<div className="col-span-12 lg:col-span-4 lg:col-start-9 flex items-end">
 							<p className="text-ink-mute text-sm sm:text-base leading-relaxed">
 								Missões oficiais, recepções de Estado e
-								facilitação de negócios — o registo da nossa
+								facilitação de negócios - o registo da nossa
 								agenda institucional.
 							</p>
 						</div>
@@ -252,7 +252,7 @@ export function Agenda() {
 					</h2>
 					<p className="mt-6 text-xl sm:text-2xl leading-relaxed text-ink-soft max-w-2xl mx-auto">
 						Conte-nos a sua visão. Organizamos a logística, o
-						protocolo e a recepção — para que a sua delegação só
+						protocolo e a recepção - para que a sua delegação só
 						precise de aparecer.
 					</p>
 					<div className="mt-10">

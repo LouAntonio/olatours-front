@@ -14,7 +14,7 @@ const pillars = [
 		n: '02',
 		key: 'Resultados',
 		title: 'Resultados garantidos',
-		body: 'Conhecemos Angola e o continente africano. Entendemos o sistema e entregamos soluções completas — sem improviso. Cada operação tem dono, plano B e relatório final.',
+		body: 'Conhecemos Angola e o continente africano. Entendemos o sistema e entregamos soluções completas - sem improviso. Cada operação tem dono, plano B e relatório final.',
 		tag: 'EXECUÇÃO NO TERRENO',
 		color: 'flag' as const,
 	},
@@ -83,7 +83,7 @@ export function WhyUs() {
 								Somos uma empresa angolana especializada em
 								viagens corporativas, logística corporativa,
 								mobilidade executiva e facilitação de negócios.
-								Operamos onde outros improvisam — e entregamos
+								Operamos onde outros improvisam - e entregamos
 								onde outros prometem.
 							</p>
 							<div className="mt-6 flex items-center gap-3">

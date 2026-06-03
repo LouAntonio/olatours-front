@@ -17,7 +17,7 @@ const services: Service[] = [
 		n: 'I',
 		key: 'negocios',
 		title: 'Turismo de Negócios',
-		intro: 'A logística discreta que faz uma visita oficial parecer simples — porque nós tratamos do que não se vê.',
+		intro: 'A logística discreta que faz uma visita oficial parecer simples - porque nós tratamos do que não se vê.',
 		points: [
 			'Transporte executivo dedicado',
 			'Gestão de logística para delegações',
@@ -45,7 +45,7 @@ const services: Service[] = [
 		n: 'III',
 		key: 'frota',
 		title: 'Transporte & Frota',
-		intro: 'Operação mensal, traslados de aeroporto e suporte em conferências — para equipas que precisam de pontualidade todos os dias.',
+		intro: 'Operação mensal, traslados de aeroporto e suporte em conferências - para equipas que precisam de pontualidade todos os dias.',
 		points: [
 			'Transporte mensal para funcionários',
 			'Traslados executivos aeroporto ↔ hotel',
@@ -300,7 +300,7 @@ export function Services() {
 						<span className="text-flag">Zero atalhos</span>.
 					</h2>
 					<p className="mt-6 text-xl sm:text-2xl leading-relaxed text-ink-soft max-w-2xl mx-auto">
-						Pontualidade, privacidade e excelência — o padrão que
+						Pontualidade, privacidade e excelência - o padrão que
 						aplicamos em cada serviço, todos os dias.
 					</p>
 					<div className="mt-10">

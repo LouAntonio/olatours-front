@@ -44,7 +44,7 @@ const eventos: Evento[] = [
 		countryName: 'África do Sul',
 		accent: 'sky',
 		details: [
-			{ label: 'Local', value: 'Durban — África do Sul' },
+			{ label: 'Local', value: 'Durban - África do Sul' },
 			{ label: 'Segmento', value: 'Marketing Turístico' },
 			{
 				label: 'Participantes',
@@ -94,7 +94,7 @@ const eventos: Evento[] = [
 		countryName: 'Reino Unido',
 		accent: 'sky',
 		details: [
-			{ label: 'Local', value: 'ExCeL London — Reino Unido' },
+			{ label: 'Local', value: 'ExCeL London - Reino Unido' },
 			{ label: 'Segmento', value: 'Viagens Corporativas' },
 			{ label: 'Foco', value: 'Tecnologia e fornecedores globais' },
 			{
@@ -119,7 +119,7 @@ const eventos: Evento[] = [
 		countryName: 'Estados Unidos',
 		accent: 'navy',
 		details: [
-			{ label: 'Local', value: 'Las Vegas — Nevada, EUA' },
+			{ label: 'Local', value: 'Las Vegas - Nevada, EUA' },
 			{ label: 'Sector', value: 'Agronegócio e Tecnologia Agrícola' },
 			{ label: 'Foco', value: 'Networking e parcerias estratégicas' },
 			{ label: 'Público', value: 'Fornecedores e investidores globais' },
@@ -133,7 +133,7 @@ const eventos: Evento[] = [
 		description:
 			'61ª edição da feira multissetorial que promove trocas comerciais e integração da economia de Moçambique no mundo.',
 		fullDescription:
-			'A FACIM — Feira Internacional de Maputo — é o maior evento multissetorial de Moçambique, realizado anualmente em Ricatla, Marracuene. A sua 61ª edição promove trocas comerciais, exposição de produtos e serviços, e integração da economia moçambicana no mercado global, abrangendo agricultura, indústria, tecnologia e turismo.\n\nPara a Ola Tours, a FACIM é uma plataforma de proximidade com o mercado da África Austral e uma oportunidade para apresentar soluções de mobilidade executiva e facilitação de negócios a empresas moçambicanas e internacionais presentes na feira.',
+			'A FACIM - Feira Internacional de Maputo - é o maior evento multissetorial de Moçambique, realizado anualmente em Ricatla, Marracuene. A sua 61ª edição promove trocas comerciais, exposição de produtos e serviços, e integração da economia moçambicana no mercado global, abrangendo agricultura, indústria, tecnologia e turismo.\n\nPara a Ola Tours, a FACIM é uma plataforma de proximidade com o mercado da África Austral e uma oportunidade para apresentar soluções de mobilidade executiva e facilitação de negócios a empresas moçambicanas e internacionais presentes na feira.',
 		date: 'AGO · 2026',
 		dateLong: '31 de Agosto a 6 de Setembro de 2026',
 		type: 'Feira Multissetorial',
@@ -141,7 +141,7 @@ const eventos: Evento[] = [
 		countryName: 'Moçambique',
 		accent: 'flag',
 		details: [
-			{ label: 'Local', value: 'Ricatla, Marracuene — Moçambique' },
+			{ label: 'Local', value: 'Ricatla, Marracuene - Moçambique' },
 			{ label: 'Edição', value: '61ª' },
 			{
 				label: 'Sectores',
@@ -169,7 +169,7 @@ const eventos: Evento[] = [
 		countryName: 'Tailândia',
 		accent: 'sky',
 		details: [
-			{ label: 'Local', value: 'Bangkok — Tailândia' },
+			{ label: 'Local', value: 'Bangkok - Tailândia' },
 			{ label: 'Segmento', value: 'MICE e Viagens Corporativas' },
 			{
 				label: 'Foco',
@@ -213,7 +213,7 @@ const eventos: Evento[] = [
 		title: 'Ola Cabo Ledo + Show da Praça do Amor',
 		subtitle: 'Praia e música ao vivo',
 		description:
-			'Cabo Ledo com o show especial da Praça do Amor — dois dias de praia e animação.',
+			'Cabo Ledo com o show especial da Praça do Amor - dois dias de praia e animação.',
 		date: '14 e 15 de Fev · 2026',
 		dateLong: '14 e 15 de Fevereiro de 2026',
 		type: 'Lazer',
@@ -227,7 +227,7 @@ const eventos: Evento[] = [
 		title: 'Especial Safari, Rio e Cavalo',
 		subtitle: 'Aventura ao ar livre',
 		description:
-			'Safari, rio e cavalo — uma experiência completa de contacto com a natureza.',
+			'Safari, rio e cavalo - uma experiência completa de contacto com a natureza.',
 		date: '14 a 17 de Fev · 2026',
 		dateLong: '14 a 17 de Fevereiro de 2026',
 		type: 'Experiência',
@@ -381,7 +381,7 @@ const eventos: Evento[] = [
 		dateLong: '30 de Dezembro de 2026 a 3 de Janeiro de 2027',
 		type: 'Viagem Internacional',
 		country: 'ARE',
-		countryName: 'Dubai — Emirados Árabes Unidos',
+		countryName: 'Dubai - Emirados Árabes Unidos',
 		accent: 'flag',
 		featured: true,
 	},

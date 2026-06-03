@@ -18,7 +18,7 @@ export function Footer() {
 					<div className="col-span-12 lg:col-span-5">
 						<Logo size="md" className="brightness-0 invert" />
 						<p className="mt-5 max-w-sm text-base sm:text-lg leading-relaxed text-white/70">
-							Ola Tours — vamos explorar. Operadora angolana de
+							Ola Tours - vamos explorar. Operadora angolana de
 							viagens corporativas, mobilidade executiva e
 							facilitação de negócios.
 						</p>

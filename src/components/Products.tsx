@@ -34,7 +34,7 @@ const products: Product[] = [
 		code: 'OLA · ME',
 		brand: 'Ola Missões Empresariais',
 		title: 'Delegações que chegam prontas.',
-		intro: 'Uma missão empresarial em Angola começa muito antes do avião. Trata-se de logística, agenda e acesso — tudo alinhado.',
+		intro: 'Uma missão empresarial em Angola começa muito antes do avião. Trata-se de logística, agenda e acesso - tudo alinhado.',
 		features: [
 			'Organização de delegações empresariais',
 			'Agendamento de reuniões estratégicas',

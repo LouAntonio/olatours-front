@@ -18,7 +18,7 @@ const milestones = [
 	{
 		year: '2024',
 		title: 'Operação Internacional',
-		body: 'Recepção de altas delegações — incluindo a Presidente da Tanzânia e o Vice-Presidente do Banco Mundial para África.',
+		body: 'Recepção de altas delegações - incluindo a Presidente da Tanzânia e o Vice-Presidente do Banco Mundial para África.',
 		accent: 'navy' as const,
 	},
 	{
@@ -111,7 +111,7 @@ export function Sobre() {
 								Somos uma empresa angolana especializada em
 								viagens corporativas, logística executiva e
 								facilitação de negócios. Operamos onde outros
-								improvisam — e entregamos onde outros prometem.
+								improvisam - e entregamos onde outros prometem.
 							</p>
 
 							<div className="mt-10 flex flex-wrap gap-8 sm:gap-12">
@@ -194,7 +194,7 @@ export function Sobre() {
 								Ola Tours nasceu em 2014, em Luanda, da
 								convicção de que o turismo corporativo em Angola
 								merecia um padrão mais elevado. Não se tratava
-								apenas de transporte — tratava-se de confiança,
+								apenas de transporte - tratava-se de confiança,
 								pontualidade e um conhecimento profundo do
 								terreno.
 							</motion.p>
@@ -244,7 +244,7 @@ export function Sobre() {
 						</div>
 						<div className="col-span-12 lg:col-span-4 lg:col-start-9 flex items-end">
 							<p className="text-ink-mute text-sm sm:text-base leading-relaxed">
-								Da fundação à confiança institucional — uma
+								Da fundação à confiança institucional - uma
 								década de crescimento consistente.
 							</p>
 						</div>

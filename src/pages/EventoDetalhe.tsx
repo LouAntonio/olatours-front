@@ -292,7 +292,7 @@ export function EventoDetalhe() {
 							<div className="col-span-12 lg:col-span-6 lg:col-start-7 flex items-end">
 								<p className="text-xl sm:text-2xl leading-relaxed text-ink-soft border-l-2 border-flag pl-5">
 									{evento.details.length} parâmetros
-									registados para este evento — do protocolo à
+									registados para este evento - do protocolo à
 									operação.
 								</p>
 							</div>

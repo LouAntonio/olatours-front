@@ -531,7 +531,7 @@ export function Contacto() {
 							allowFullScreen
 							loading="lazy"
 							referrerPolicy="no-referrer-when-downgrade"
-							title="Olatours — Luanda"
+							title="Olatours - Luanda"
 							className="w-full h-72 sm:h-96 align-bottom"
 						/>
 					</motion.div>
