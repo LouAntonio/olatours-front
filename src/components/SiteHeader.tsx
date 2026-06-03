@@ -7,7 +7,6 @@ const NAV_ITEMS = [
 	{ path: '/agenda', label: 'Agenda' },
 	{ path: '/servicos', label: 'Serviços' },
 	{ path: '/produtos', label: 'Produtos' },
-	{ path: '/contacto', label: 'Contacto' },
 ];
 
 export function SiteHeader() {
@@ -90,7 +89,7 @@ export function SiteHeader() {
 								: 'bg-flag text-white hover:bg-flag-dark'
 						}`}
 					>
-						Marcar reunião
+						Contacto
 					</Link>
 					<button
 						type="button"
