@@ -391,9 +391,9 @@ export function Sobre() {
 			{/* ===== VALUES ===== */}
 			<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
 				<div className="pointer-events-none absolute -top-8 -right-8 select-none">
-					<span className="font-display font-black text-[clamp(6rem,15vw,14rem)] leading-none text-gray-border/30">
-						VALORES
-					</span>
+<span className="font-display font-black text-[clamp(6rem,15vw,14rem)] leading-none" style={{ color: 'rgba(181, 72, 42, 0.3)' }}>
+	VALORES
+</span>
 				</div>
 
 				<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">

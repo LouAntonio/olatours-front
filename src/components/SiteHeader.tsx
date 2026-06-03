@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Logo } from './Logo';
 
 const NAV_ITEMS = [
+	{ path: '/', label: 'Home' },
 	{ path: '/sobre', label: 'Sobre' },
 	{ path: '/agenda', label: 'Agenda' },
 	{ path: '/servicos', label: 'Serviços' },
