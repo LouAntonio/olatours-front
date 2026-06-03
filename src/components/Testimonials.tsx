@@ -121,13 +121,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 				</div>
 
 				<div className="p-6 sm:p-8 pl-8 sm:pl-10">
-					<div className="flex items-center justify-between gap-4 mb-6">
-						<div className="flex items-center gap-2">
-							<span className="h-1.5 w-1.5 rounded-full bg-flag pulse-dot" />
-							<span className="label-caps text-flag">
-								CARTA DE VISITA · {t.country}
-							</span>
-						</div>
+					<div className="flex items-center justify-end gap-4 mb-6">
 						<span className="label-caps text-ink-mute shrink-0">
 							{t.visitDate}
 						</span>
@@ -163,11 +157,6 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 							{t.title}
 						</p>
 					</div>
-				</div>
-
-				<div className="px-6 sm:px-8 py-3 flex items-center justify-between label-caps text-ink-mute bg-gray-light border-t border-gray-border">
-					<span>STAMP · {t.country}</span>
-					<span className="hidden sm:inline">OLA TOURS · LUANDA</span>
 				</div>
 			</div>
 		</motion.article>
