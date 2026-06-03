@@ -92,7 +92,7 @@ export function Sobre() {
 
 				<div className="pointer-events-none absolute top-0 right-0 w-48 h-48 sm:w-80 sm:h-80 border-r border-t border-white/[0.04] rounded-tr-[100px] corner-pulse" />
 
-				<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<div className="grid grid-cols-12 gap-6">
 						<div className="col-span-12 lg:col-span-8">
 							<div className="flex items-center gap-3 mb-6">
@@ -165,7 +165,7 @@ export function Sobre() {
 					</span>
 				</div>
 
-				<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<motion.div
 						initial="hidden"
 						whileInView="show"
@@ -233,7 +233,7 @@ export function Sobre() {
 					<div className="corporate-grid h-full w-full" />
 				</div>
 
-				<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 						<div className="col-span-12 lg:col-span-6">
 							<span className="accent-bar-flag block mb-4" />
@@ -330,7 +330,7 @@ export function Sobre() {
 					/>
 				</div>
 
-				<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<motion.div
 						initial="hidden"
 						whileInView="show"
@@ -407,7 +407,7 @@ export function Sobre() {
 					</span>
 				</div>
 
-				<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 						<div className="col-span-12 lg:col-span-5">
 							<span className="accent-bar-flag block mb-4" />

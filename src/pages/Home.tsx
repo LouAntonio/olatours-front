@@ -154,7 +154,7 @@ export function Home() {
 					</span>
 				</div>
 
-				<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<motion.div
 						initial="hidden"
 						whileInView="show"
@@ -222,7 +222,7 @@ export function Home() {
 					<div className="corporate-grid h-full w-full" />
 				</div>
 
-				<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 						<div className="col-span-12 lg:col-span-6">
 							<span className="accent-bar-flag block mb-4" />
@@ -356,7 +356,7 @@ export function Home() {
 					<div className="corporate-grid h-full w-full" />
 				</div>
 
-				<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 						<div className="col-span-12 lg:col-span-6">
 							<span className="accent-bar-flag block mb-4" />

@@ -44,7 +44,7 @@ export function SiteHeader() {
 				.join(' ')
 				.trim()}
 		>
-			<div className="mx-auto max-w-[1400px] px-5 sm:px-8 flex items-center justify-between h-16 sm:h-18">
+			<div className="mx-auto max-w-[1200px] px-5 sm:px-8 flex items-center justify-between h-16 sm:h-18">
 				<Link
 					to="/"
 					className="flex items-center"
@@ -131,7 +131,7 @@ export function SiteHeader() {
 
 			{open && (
 				<div className="lg:hidden border-t border-gray-border-soft bg-white">
-					<nav className="mx-auto max-w-[1400px] px-5 sm:px-8 py-4 flex flex-col">
+					<nav className="mx-auto max-w-[1200px] px-5 sm:px-8 py-4 flex flex-col">
 						{NAV_ITEMS.map((item) => (
 							<Link
 								key={item.path}

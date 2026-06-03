@@ -35,7 +35,7 @@ const gradientMap: Record<string, string> = {
 function SkeletonHero() {
 	return (
 		<section className="bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 animate-pulse">
-			<div className="mx-auto max-w-[1400px] px-5 sm:px-8 w-full">
+			<div className="mx-auto max-w-[1200px] px-5 sm:px-8 w-full">
 				<div className="h-3 w-40 bg-white/10 rounded mb-8" />
 				<div className="h-16 w-3/4 bg-white/10 rounded mb-4" />
 				<div className="h-6 w-1/2 bg-white/10 rounded mb-8" />
@@ -65,7 +65,7 @@ export function EventoDetalhe() {
 	if (evento === null) {
 		return (
 			<section className="bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16">
-				<div className="mx-auto max-w-[1400px] px-5 sm:px-8 text-center">
+				<div className="mx-auto max-w-[1200px] px-5 sm:px-8 text-center">
 					<h1 className="font-display font-black uppercase text-6xl text-white">
 						Evento não encontrado
 					</h1>
@@ -119,7 +119,7 @@ export function EventoDetalhe() {
 
 				<div className="pointer-events-none absolute top-0 right-0 w-48 h-48 sm:w-80 sm:h-80 border-r border-t border-white/[0.04] rounded-tr-[100px] corner-pulse" />
 
-				<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 w-full">
+				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8 w-full">
 					<div className="mb-8">
 						<Link
 							to="/agenda"
@@ -212,7 +212,7 @@ export function EventoDetalhe() {
 						</span>
 					</div>
 
-					<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+					<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 						<motion.div
 							initial="hidden"
 							whileInView="show"
@@ -280,7 +280,7 @@ export function EventoDetalhe() {
 						<div className="corporate-grid h-full w-full" />
 					</div>
 
-					<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+					<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 						<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 							<div className="col-span-12 lg:col-span-5">
 								<span className="accent-bar-flag block mb-4" />
@@ -353,7 +353,7 @@ export function EventoDetalhe() {
 						</span>
 					</div>
 
-					<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+					<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 						<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 							<div className="col-span-12 lg:col-span-6">
 								<span className="accent-bar-flag block mb-4" />

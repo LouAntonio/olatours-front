@@ -63,7 +63,7 @@ export function Cover() {
 				<div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/50 to-black/70" />
 			</div>
 
-			<div className="relative z-10 mx-auto flex h-full max-w-[1400px] flex-col justify-center items-center px-5 sm:px-8 pb-48 sm:pb-36">
+			<div className="relative z-10 mx-auto flex h-full max-w-[1200px] flex-col justify-center items-center px-5 sm:px-8 pb-48 sm:pb-36">
 				<motion.div
 					variants={coverStagger}
 					initial="hidden"
@@ -75,8 +75,12 @@ export function Cover() {
 						className="mb-8 sm:mb-10 flex items-center justify-center gap-4"
 					>
 						<span className="h-px w-8 bg-white/20" />
-						<Badge variant="flag" dot>
-							VIAGENS CORPORATIVAS · MOBILIDADE EXECUTIVA
+						<Badge variant="flag">
+							VIAGENS CORPORATIVAS
+							<Badge variant="flag" dot>
+								{' '}
+							</Badge>
+							MOBILIDADE EXECUTIVA
 						</Badge>
 						<span className="h-px w-8 bg-white/20" />
 					</motion.div>
@@ -120,7 +124,7 @@ export function Cover() {
 				}}
 				className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-black/60 to-transparent pt-12 sm:pt-16"
 			>
-				<div className="mx-auto max-w-[1400px] px-5 sm:px-8 pb-5 sm:pb-6">
+				<div className="mx-auto max-w-[1200px] px-5 sm:px-8 pb-5 sm:pb-6">
 					<div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 border-t border-white/10 pt-5">
 						{features.map((f) => (
 							<div

@@ -32,7 +32,7 @@ export function Marquee({
 				</span>
 			</div>
 
-			<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+			<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 				<div
 					className={[
 						'overflow-hidden border-y border-white/[0.12] py-4 sm:py-6',

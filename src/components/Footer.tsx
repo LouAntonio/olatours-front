@@ -13,7 +13,7 @@ const navItems = [
 export function Footer() {
 	return (
 		<footer className="bg-navy text-white border-t border-white/10">
-			<div className="mx-auto max-w-[1400px] px-5 sm:px-8 py-12 sm:py-16">
+			<div className="mx-auto max-w-[1200px] px-5 sm:px-8 py-12 sm:py-16">
 				<div className="grid grid-cols-12 gap-y-10 gap-x-6">
 					<div className="col-span-12 lg:col-span-5">
 						<Logo size="md" className="brightness-0 invert" />
