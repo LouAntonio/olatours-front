@@ -10,6 +10,7 @@ const NAV_ITEMS = [
 	{ path: '/agenda', label: 'Agenda' },
 	{ path: '/servicos', label: 'Serviços' },
 	{ path: '/produtos', label: 'Produtos' },
+	{ path: '/carreiras', label: 'Carreiras' },
 ];
 
 const drawerVariants = {

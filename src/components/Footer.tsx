@@ -8,6 +8,7 @@ const navItems = [
 	{ path: '/servicos', label: 'Serviços' },
 	{ path: '/produtos', label: 'Produtos' },
 	{ path: '/contacto', label: 'Contacto' },
+	{ path: '/carreiras', label: 'Carreiras' },
 ];
 
 export function Footer() {
