@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { useScrollToTop } from './hooks/useScrollToTop';
 import { SiteHeader } from './components/SiteHeader';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
@@ -10,6 +11,8 @@ import { Contacto } from './pages/Contacto';
 import './App.css';
 
 function App() {
+	useScrollToTop();
+
 	return (
 		<div className="app-shell">
 			<SiteHeader />

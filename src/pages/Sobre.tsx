@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { motion } from 'motion/react';
 import { motion as m, stagger } from '../styles/tokens';
 
@@ -70,6 +71,8 @@ const accentMap: Record<string, { css: string; rgb: string }> = {
 };
 
 export function Sobre() {
+	useDocumentTitle('Sobre');
+
 	return (
 		<>
 			{/* ===== HERO ===== */}

@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { motion } from 'motion/react';
 import { motion as m, stagger } from '../styles/tokens';
 
@@ -92,6 +93,8 @@ const item = {
 };
 
 export function Contacto() {
+	useDocumentTitle('Contacto');
+
 	return (
 		<>
 			<section className="relative bg-navy pt-32 sm:pt-40 pb-20 sm:pb-28 overflow-hidden">

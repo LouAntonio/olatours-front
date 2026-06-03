@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { motion } from 'motion/react';
 import { Button } from '../components/Button';
 import { motion as m, stagger } from '../styles/tokens';
@@ -47,6 +48,8 @@ const item = {
 };
 
 export function Agenda() {
+	useDocumentTitle('Agenda');
+
 	return (
 		<>
 			<section className="relative bg-navy pt-32 sm:pt-40 pb-20 sm:pb-28 overflow-hidden">
