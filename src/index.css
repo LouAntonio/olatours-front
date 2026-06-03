@@ -230,3 +230,116 @@ body {
 	border-radius: 1px;
 	display: inline-block;
 }
+
+.geo-diamond {
+	width: 12px;
+	height: 12px;
+	background: var(--color-flag);
+	transform: rotate(45deg);
+	border-radius: 2px;
+}
+
+.geo-diamond-subtle {
+	width: 8px;
+	height: 8px;
+	background: var(--color-flag);
+	opacity: 0.3;
+	transform: rotate(45deg);
+	border-radius: 1px;
+}
+
+.section-rule {
+	height: 1px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		var(--color-gray-border),
+		transparent
+	);
+	width: 100%;
+}
+
+.section-rule-strong {
+	height: 2px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		var(--color-flag),
+		transparent
+	);
+	width: 80px;
+	border-radius: 1px;
+}
+
+.card-elevated {
+	box-shadow:
+		0 1px 3px rgba(11, 15, 10, 0.06),
+		0 12px 32px -8px rgba(11, 15, 10, 0.18);
+	transition:
+		box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+		transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-elevated:hover {
+	box-shadow:
+		0 2px 8px rgba(11, 15, 10, 0.08),
+		0 24px 48px -12px rgba(11, 15, 10, 0.24);
+	transform: translateY(-2px);
+}
+
+.stat-glow {
+	position: relative;
+}
+
+.stat-glow::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	background: radial-gradient(
+		50% 50% at 50% 0%,
+		var(--color-flag) 0%,
+		transparent 70%
+	);
+	opacity: 0.06;
+	pointer-events: none;
+}
+
+@keyframes count-in {
+	from {
+		opacity: 0;
+		transform: translateY(8px) scale(0.96);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+.count-in {
+	animation: count-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes watermark-float {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-8px);
+	}
+}
+
+@keyframes corner-pulse {
+	0%,
+	100% {
+		opacity: 0.4;
+	}
+	50% {
+		opacity: 0.1;
+	}
+}
+
+.corner-pulse {
+	animation: corner-pulse 4s ease-in-out infinite;
+}
