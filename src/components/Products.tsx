@@ -2,6 +2,8 @@ import { motion } from 'motion/react';
 import { Button } from './Button';
 import { motion as m, stagger } from '../styles/tokens';
 
+type Tone = 'flag' | 'navy' | 'sky';
+
 type Product = {
 	n: '01' | '02' | '03';
 	code: string;
@@ -9,6 +11,7 @@ type Product = {
 	title: string;
 	intro: string;
 	features: string[];
+	tone: Tone;
 };
 
 const products: Product[] = [
@@ -24,6 +27,7 @@ const products: Product[] = [
 			'Motoristas profissionais que falam inglês',
 			'Relatórios de serviço mensais',
 		],
+		tone: 'flag',
 	},
 	{
 		n: '02',
@@ -37,6 +41,7 @@ const products: Product[] = [
 			'Visitas a projectos e Zonas Económicas Especiais',
 			'Logística completa: hotel, transporte e protocolo',
 		],
+		tone: 'navy',
 	},
 	{
 		n: '03',
@@ -49,6 +54,7 @@ const products: Product[] = [
 			'Trabalho em campo',
 			'Protocolo e recepção',
 		],
+		tone: 'sky',
 	},
 ];
 
@@ -66,192 +72,262 @@ const item = {
 	},
 };
 
+const accentMap: Record<Tone, { css: string; rgb: string }> = {
+	flag: { css: 'var(--color-flag)', rgb: '181, 72, 42' },
+	navy: { css: 'var(--color-navy)', rgb: '26, 43, 74' },
+	sky: { css: 'var(--color-sky)', rgb: '20, 121, 193' },
+};
+
 export function Products() {
 	return (
-		<section
-			id="produtos"
-			className="relative bg-navy text-white py-20 sm:py-28 overflow-hidden"
-		>
-			<div className="pointer-events-none absolute inset-0 opacity-[0.03]">
-				<div className="corporate-grid h-full w-full" />
-			</div>
+		<>
+			{/* ===== HERO ===== */}
+			<section className="relative bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden">
+				<div className="pointer-events-none absolute inset-0 opacity-[0.03]">
+					<div
+						className="corporate-grid h-full w-full"
+						style={{ backgroundSize: '64px 64px' }}
+					/>
+				</div>
 
-			<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
-				<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
-					<div className="col-span-12 lg:col-span-5">
-						<span className="accent-bar-flag block mb-4" />
-						<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
-							Os nossos{' '}
-							<span className="text-flag">produtos</span>.
-						</h2>
-					</div>
+				<div className="pointer-events-none absolute -top-8 right-0 sm:right-8 select-none">
+					<span className="font-display font-black text-[clamp(8rem,20vw,18rem)] leading-none text-white/[0.04]">
+						PRODUTOS
+					</span>
+				</div>
 
-					<div className="col-span-12 lg:col-span-7 lg:pt-2">
-						<p className="text-xl sm:text-2xl leading-relaxed text-white/70 border-l-2 border-flag pl-5">
-							Os nossos produtos garantem o melhor retorno sobre o
-							investimento no sector de viagens. Três formatos. Um
-							padrão.
-						</p>
-						<div className="mt-6 label-caps text-white/50 flex items-center gap-3">
-							<span className="dash-flag" />
-							<span>ROI · PREVISIBILIDADE · ESCALA</span>
+				<div className="pointer-events-none absolute top-0 right-0 w-48 h-48 sm:w-80 sm:h-80 border-r border-t border-white/[0.04] rounded-tr-[100px] corner-pulse" />
+
+				<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+					<div className="grid grid-cols-12 gap-6">
+						<div className="col-span-12 lg:col-span-8">
+							<div className="flex items-center gap-3 mb-6">
+								<span className="h-px w-8 bg-flag/40" />
+								<span className="label-caps text-flag tracking-[0.18em]">
+									PRODUTOS · MOBILIDADE · MISSÕES · EVENTOS
+								</span>
+							</div>
+
+							<h1 className="font-display font-black uppercase leading-[0.82] tracking-tight text-[clamp(3.5rem,10vw,8rem)] text-white">
+								Os nossos{' '}
+								<span className="text-flag">produtos</span>.
+							</h1>
+
+							<p className="mt-6 text-lg sm:text-xl leading-relaxed text-white/70 max-w-2xl">
+								Os nossos produtos garantem o melhor retorno
+								sobre o investimento no sector de viagens. Três
+								formatos. Um padrão.
+							</p>
+						</div>
+
+						<div className="col-span-12 lg:col-span-4 flex flex-col justify-end items-start sm:items-end pt-8 lg:pt-0">
+							<div className="relative">
+								<div className="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-flag/40" />
+								<div className="border-l-2 border-flag pl-5">
+									<p className="text-white/50 label-caps mb-2">
+										FOCO
+									</p>
+									<div className="flex flex-wrap gap-2">
+										{[
+											'ROI',
+											'PREVISIBILIDADE',
+											'ESCALA',
+										].map((p) => (
+											<span
+												key={p}
+												className="label-caps px-2.5 py-1 border border-white/20 text-white/80 rounded-sm hover:border-flag hover:text-flag transition-colors"
+											>
+												{p}
+											</span>
+										))}
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
+			</section>
 
-				<motion.div
-					initial="hidden"
-					whileInView="show"
-					viewport={{ once: true, margin: '-80px' }}
-					variants={container}
-					className="grid grid-cols-12 gap-6 sm:gap-8"
-				>
-					{products.map((p, idx) => (
-						<ProductCard key={p.n} product={p} index={idx} />
-					))}
-				</motion.div>
+			{/* ===== PRODUCTS GRID ===== */}
+			<section className="relative bg-gray-light py-20 sm:py-28 overflow-hidden">
+				<div className="pointer-events-none absolute inset-0 opacity-[0.02]">
+					<div className="corporate-grid h-full w-full" />
+				</div>
 
-				<div className="mt-16 sm:mt-20 border-t border-white/15 pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-					<div>
-						<p className="font-display text-2xl sm:text-3xl font-black leading-tight max-w-md">
-							Pronto para o próximo{' '}
-							<span className="text-flag">olá</span>?
-						</p>
-						<p className="mt-2 text-white/60 max-w-md">
-							Conte-nos a operação. Enviamos uma proposta em 48h.
-						</p>
+				<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
+						<div className="col-span-12 lg:col-span-6">
+							<span className="accent-bar-flag block mb-4" />
+							<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
+								Três formatos.{' '}
+								<span className="text-flag">Um padrão</span>.
+							</h2>
+						</div>
+						<div className="col-span-12 lg:col-span-4 lg:col-start-9 flex items-end">
+							<p className="text-ink-mute text-sm sm:text-base leading-relaxed">
+								Cada produto é desenhado para garantir o melhor
+								retorno sobre o investimento no sector de
+								viagens.
+							</p>
+						</div>
 					</div>
-					<Button as="a" href="/contacto" variant="flag" size="lg">
-						Pedir proposta
-					</Button>
+
+					<motion.div
+						initial="hidden"
+						whileInView="show"
+						viewport={{ once: true, margin: '-100px' }}
+						variants={container}
+						className="grid grid-cols-12 gap-5 sm:gap-6"
+					>
+						{products.map((p, i) => {
+							const accent = accentMap[p.tone];
+							return (
+								<motion.article
+									key={p.n}
+									variants={item}
+									className="col-span-12 sm:col-span-6 lg:col-span-4 relative group"
+								>
+									<div
+										className={`relative bg-white border border-gray-border rounded-b-lg overflow-hidden transition-all duration-500 card-elevated ${i % 2 === 1 ? 'lg:translate-y-8' : ''}`}
+									>
+										<div className="pointer-events-none absolute top-2 right-4 select-none">
+											<span
+												className="font-display font-black text-[clamp(3rem,5vw,4rem)] leading-none"
+												style={{
+													color: `rgba(${accent.rgb}, 0.15)`,
+												}}
+											>
+												{p.n}
+											</span>
+										</div>
+
+										<div
+											className="h-1.5 w-full"
+											style={{ background: accent.css }}
+										/>
+
+										<div className="p-6 sm:p-8">
+											<div className="flex items-center gap-3 mb-3">
+												<span
+													className="h-1.5 w-1.5 rounded-full"
+													style={{
+														background: accent.css,
+													}}
+												/>
+												<span
+													className="label-caps"
+													style={{
+														color: accent.css,
+													}}
+												>
+													{p.code}
+												</span>
+												{i === 0 && (
+													<span className="label-caps px-2 py-0.5 border border-flag/40 text-flag rounded-sm ml-auto">
+														Best seller
+													</span>
+												)}
+											</div>
+
+											<p
+												className="label-caps mb-3"
+												style={{ color: accent.css }}
+											>
+												{p.brand}
+											</p>
+
+											<h3 className="font-display text-2xl sm:text-3xl font-black uppercase leading-tight tracking-tight text-ink">
+												{p.title}
+											</h3>
+
+											<p className="mt-3 text-ink-soft leading-relaxed">
+												{p.intro}
+											</p>
+
+											<div className="rule my-5" />
+
+											<p className="label-caps text-ink-mute mb-3">
+												O que inclui
+											</p>
+
+											<ul className="space-y-3">
+												{p.features.map((f) => (
+													<li
+														key={f}
+														className="flex items-start gap-3 text-ink leading-relaxed"
+													>
+														<span
+															className="mt-2 inline-block h-1 w-2 shrink-0 rounded-sm"
+															style={{
+																background:
+																	accent.css,
+															}}
+														/>
+														<span className="flex-1">
+															{f}
+														</span>
+													</li>
+												))}
+											</ul>
+
+											<div className="mt-6 pt-5 border-t border-gray-border flex items-center justify-between">
+												<span className="label-caps text-ink-mute">
+													PRODUTO {p.n} / 03
+												</span>
+												<svg
+													viewBox="0 0 24 24"
+													fill="none"
+													aria-hidden="true"
+													className="h-5 w-5 text-ink-mute group-hover:text-flag group-hover:translate-x-1 transition-all"
+												>
+													<path
+														d="M5 12h14M13 6l6 6-6 6"
+														stroke="currentColor"
+														strokeWidth="1.5"
+													/>
+												</svg>
+											</div>
+										</div>
+									</div>
+								</motion.article>
+							);
+						})}
+					</motion.div>
 				</div>
-			</div>
-		</section>
-	);
-}
+			</section>
 
-function ProductCard({ product, index }: { product: Product; index: number }) {
-	const isFeature = index === 0;
+			{/* ===== CTA ===== */}
+			<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
+				<div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-border to-transparent" />
+				<div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-border to-transparent" />
 
-	return (
-		<motion.article
-			variants={item}
-			className={[
-				'group col-span-12 md:col-span-4 relative p-6 sm:p-8 border rounded-lg transition-all duration-300',
-				isFeature
-					? 'bg-sky text-white border-sky'
-					: 'bg-white text-ink border-white/15',
-			].join(' ')}
-		>
-			<div className="flex items-start justify-between gap-3 mb-6">
-				<div className="flex items-baseline gap-3">
-					<span
-						className={[
-							'font-display text-6xl sm:text-7xl font-black leading-none',
-							isFeature ? 'text-white/80' : 'text-flag',
-						].join(' ')}
-					>
-						{product.n}
-					</span>
-					<span
-						className={[
-							'label-caps',
-							isFeature ? 'text-white/70' : 'text-ink-mute',
-						].join(' ')}
-					>
-						{product.code}
+				<div className="pointer-events-none absolute -top-8 -right-8 select-none">
+					<span className="font-display font-black text-[clamp(6rem,15vw,14rem)] leading-none text-flag/[0.12]">
+						PRODUTOS
 					</span>
 				</div>
-				{isFeature && (
-					<span className="label-caps px-2 py-1 border border-white/60 text-white/90 rounded-sm">
-						Best seller
-					</span>
-				)}
-			</div>
 
-			<p
-				className={[
-					'label-caps mb-3',
-					isFeature ? 'text-white/70' : 'text-flag',
-				].join(' ')}
-			>
-				{product.brand}
-			</p>
-
-			<h3 className="font-display text-2xl sm:text-3xl font-black leading-[1.05] tracking-tight">
-				{product.title}
-			</h3>
-
-			<p
-				className={[
-					'mt-4 leading-relaxed',
-					isFeature ? 'text-white/85' : 'text-ink-soft',
-				].join(' ')}
-			>
-				{product.intro}
-			</p>
-
-			<div
-				className={[
-					'mt-6 h-px w-full',
-					isFeature ? 'bg-white/40' : 'bg-gray-border',
-				].join(' ')}
-			/>
-
-			<p
-				className={[
-					'label-caps mt-5 mb-3',
-					isFeature ? 'text-white/70' : 'text-ink-mute',
-				].join(' ')}
-			>
-				O que inclui
-			</p>
-
-			<ul className="space-y-2.5">
-				{product.features.map((f) => (
-					<li
-						key={f}
-						className={[
-							'flex items-start gap-3 leading-relaxed',
-							isFeature ? 'text-white' : 'text-ink',
-						].join(' ')}
-					>
-						<span
-							className={[
-								'mt-2 inline-block h-1 w-2 shrink-0 rounded-sm',
-								isFeature ? 'bg-white' : 'bg-flag',
-							].join(' ')}
-						/>
-						<span className="flex-1">{f}</span>
-					</li>
-				))}
-			</ul>
-
-			<div
-				className={[
-					'mt-7 pt-5 border-t flex items-center justify-between',
-					isFeature
-						? 'border-white/30 text-white/70'
-						: 'border-gray-border text-ink-mute',
-				].join(' ')}
-			>
-				<span className="label-caps">PRODUTO {product.n} / 03</span>
-				<svg
-					viewBox="0 0 24 24"
-					fill="none"
-					aria-hidden="true"
-					className={[
-						'h-5 w-5 transition-transform group-hover:translate-x-1',
-						isFeature ? 'text-white' : 'text-flag',
-					].join(' ')}
-				>
-					<path
-						d="M5 12h14M13 6l6 6-6 6"
-						stroke="currentColor"
-						strokeWidth="1.5"
-					/>
-				</svg>
-			</div>
-		</motion.article>
+				<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 text-center">
+					<span className="accent-bar-flag block mx-auto mb-4" />
+					<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
+						Pronto para o próximo{' '}
+						<span className="text-flag">olá</span>?
+					</h2>
+					<p className="mt-6 text-xl sm:text-2xl leading-relaxed text-ink-soft max-w-2xl mx-auto">
+						Conte-nos a operação. Enviamos uma proposta em 48h.
+					</p>
+					<div className="mt-10">
+						<Button
+							as="a"
+							href="/contacto"
+							variant="flag"
+							size="lg"
+						>
+							Pedir proposta
+						</Button>
+					</div>
+				</div>
+			</section>
+		</>
 	);
 }
