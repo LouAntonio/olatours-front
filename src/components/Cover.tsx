@@ -63,7 +63,7 @@ export function Cover() {
 				<div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/50 to-black/70" />
 			</div>
 
-			<div className="relative z-10 mx-auto flex h-full max-w-[1400px] flex-col justify-start px-5 sm:px-8 pt-20 sm:pt-24">
+			<div className="relative z-10 mx-auto flex h-full max-w-[1400px] flex-col justify-center items-center px-5 sm:px-8 pb-48 sm:pb-36">
 				<motion.div
 					variants={coverStagger}
 					initial="hidden"
@@ -71,68 +71,95 @@ export function Cover() {
 				>
 					<motion.div
 						variants={coverItem}
-						className="mb-6 flex items-center gap-3"
+						className="mb-8 flex items-center justify-center gap-4"
 					>
-						<span className="h-px w-10 sm:w-16 bg-sky" />
+						<span className="h-px w-8 bg-white/20" />
 						<Badge variant="sky" dot>
 							Viagens Corporativas · Mobilidade Executiva
 						</Badge>
+						<span className="h-px w-8 bg-white/20" />
 					</motion.div>
-
-					<motion.h1
+					<motion.div
 						variants={coverItem}
-						className="font-display font-black uppercase leading-[0.85] tracking-tight text-[clamp(3rem,10vw,8rem)] text-white max-w-5xl"
+						className="mt-6 sm:mt-8 text-center"
 					>
-						<span className="block">Ola Tours</span>
-						<span className="block relative">
-							<span className="relative z-10">Corporat</span>
-							<span className="text-flag italic font-normal tracking-normal normal-case font-sans font-light">
-								ivo.
-							</span>
-						</span>
-					</motion.h1>
-
-					<motion.div variants={coverItem} className="mt-6">
-						<span className="block w-10 h-px bg-sky mb-5" />
-						<p className="text-base sm:text-lg leading-relaxed text-white/80 max-w-xl">
+						<p className="text-base sm:text-lg leading-relaxed text-white/70 max-w-2xl mx-auto">
 							Viagens corporativas, mobilidade executiva,
-							investimento e facilitação de negócios em Angola e
-							na África subsariana.
-						</p>
-					</motion.div>
-
-					<motion.div variants={coverItem} className="mt-6">
-						<p className="label-caps text-sky/60">
-							Excelência em mobilidade executiva desde 2014
+							investimento e facilitação de negócios em{' '}
+							<span className="text-flag font-medium">
+								Angola
+							</span>{' '}
+							e na{' '}
+							<span className="text-flag font-medium">
+								África subsariana
+							</span>
+							.
 						</p>
 					</motion.div>
 
 					<motion.div
 						variants={coverItem}
-						className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 border-t border-white/20 pt-5 max-w-3xl"
+						className="mt-5 text-center"
 					>
+						<p className="label-caps text-sky/50 tracking-[0.18em]">
+							Excelência em mobilidade executiva desde{' '}
+							<span className="text-flag font-semibold">
+								2014
+							</span>
+						</p>
+					</motion.div>
+				</motion.div>
+			</div>
+
+			<motion.div
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{
+					duration: m.duration.slow,
+					ease: m.ease.out,
+					delay: 0.8,
+				}}
+				className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-black/60 to-transparent pt-12 sm:pt-16"
+			>
+				<div className="mx-auto max-w-[1400px] px-5 sm:px-8 pb-5 sm:pb-6">
+					<div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 border-t border-white/10 pt-5">
 						{features.map((f) => (
 							<div
 								key={f.label}
-								className="flex items-center gap-3"
+								className="flex items-center justify-center sm:px-6 sm:border-r sm:border-white/10 last:border-r-0 w-full sm:w-auto"
 							>
-								<span className="h-2 w-2 shrink-0 rounded-full bg-sky" />
-								<div>
-									<p className="label-caps text-white/50">
+								<div className="text-center">
+									<p className="label-caps text-white/40">
 										{f.label}
 									</p>
 									<p className="font-display text-xl sm:text-2xl font-black leading-tight text-white">
-										{f.value}
+										{f.value === 'Angola + Mundo' ? (
+											<>
+												<span className="text-flag">
+													Angola
+												</span>{' '}
+												+ Mundo
+											</>
+										) : f.value === 'Desde 2014' ? (
+											<>
+												Desde{' '}
+												<span className="text-flag">
+													2014
+												</span>
+											</>
+										) : (
+											f.value
+										)}
 									</p>
-									<p className="text-sm text-white/50">
+									<p className="text-xs text-white/40 mt-0.5">
 										{f.hint}
 									</p>
 								</div>
 							</div>
 						))}
-					</motion.div>
-				</motion.div>
-			</div>
+					</div>
+				</div>
+			</motion.div>
 		</section>
 	);
 }
