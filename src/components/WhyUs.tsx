@@ -72,9 +72,10 @@ export function WhyUs() {
 			<div className="mx-auto max-w-[1400px] px-5 sm:px-8">
 				<div className="grid grid-cols-12 gap-6 mb-12 sm:mb-16">
 					<div className="col-span-12 lg:col-span-4">
-						<span className="accent-bar block mb-4" />
+						<span className="accent-bar-flag block mb-4" />
 						<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
-							Porquê a <span className="text-sky">Ola Tours</span>
+							Porquê a{' '}
+							<span className="text-flag">Ola Tours</span>
 						</h2>
 					</div>
 

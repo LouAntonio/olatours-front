@@ -25,7 +25,7 @@ function App() {
 						'PONTUALIDADE',
 						'PRIVACIDADE',
 					]}
-					tone="sky"
+					tone="flag"
 					separator="✦"
 				/>
 				<Services />

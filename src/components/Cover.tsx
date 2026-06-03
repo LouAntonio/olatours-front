@@ -68,22 +68,24 @@ export function Cover() {
 					variants={coverStagger}
 					initial="hidden"
 					animate="show"
+					className="flex flex-col items-center"
 				>
 					<motion.div
 						variants={coverItem}
-						className="mb-8 flex items-center justify-center gap-4"
+						className="mb-8 sm:mb-10 flex items-center justify-center gap-4"
 					>
 						<span className="h-px w-8 bg-white/20" />
-						<Badge variant="sky" dot>
-							Viagens Corporativas · Mobilidade Executiva
+						<Badge variant="flag" dot>
+							VIAGENS CORPORATIVAS · MOBILIDADE EXECUTIVA
 						</Badge>
 						<span className="h-px w-8 bg-white/20" />
 					</motion.div>
+
 					<motion.div
 						variants={coverItem}
 						className="mt-6 sm:mt-8 text-center"
 					>
-						<p className="text-base sm:text-lg leading-relaxed text-white/70 max-w-2xl mx-auto">
+						<p className="text-base sm:text-lg leading-relaxed text-white/60 max-w-lg mx-auto">
 							Viagens corporativas, mobilidade executiva,
 							investimento e facilitação de negócios em{' '}
 							<span className="text-flag font-medium">
@@ -101,11 +103,8 @@ export function Cover() {
 						variants={coverItem}
 						className="mt-5 text-center"
 					>
-						<p className="label-caps text-sky/50 tracking-[0.18em]">
-							Excelência em mobilidade executiva desde{' '}
-							<span className="text-flag font-semibold">
-								2014
-							</span>
+						<p className="label-caps text-flag/50 tracking-[0.18em]">
+							DESDE 2014 · OPERAÇÃO EM 54 PAÍSES
 						</p>
 					</motion.div>
 				</motion.div>

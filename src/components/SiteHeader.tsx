@@ -58,8 +58,8 @@ export function SiteHeader() {
 							href={`#${s.id}`}
 							className={`label-caps transition-colors ${
 								pastHero
-									? 'text-ink-soft hover:text-sky'
-									: 'text-white/80 hover:text-white'
+									? 'text-ink-soft hover:text-flag'
+									: 'text-white/80 hover:text-flag'
 							}`}
 						>
 							{s.label}
@@ -72,8 +72,8 @@ export function SiteHeader() {
 						href="#contacto"
 						className={`hidden md:inline-flex items-center gap-2 px-4 py-2 label-caps transition-colors rounded-sm ${
 							pastHero
-								? 'bg-sky text-white hover:bg-sky-dark'
-								: 'border border-white/30 text-white hover:bg-white hover:text-navy'
+								? 'bg-flag text-white hover:bg-flag-dark'
+								: 'border border-flag/60 text-flag hover:bg-flag hover:text-white'
 						}`}
 					>
 						Marcar reunião
@@ -83,8 +83,8 @@ export function SiteHeader() {
 						onClick={() => setOpen(!open)}
 						className={`lg:hidden h-9 w-9 inline-flex items-center justify-center border transition-colors rounded-sm ${
 							pastHero
-								? 'border-gray-border text-ink hover:bg-navy hover:text-white'
-								: 'border-white/30 text-white hover:bg-white hover:text-navy'
+								? 'border-gray-border text-ink hover:bg-flag hover:text-white'
+								: 'border-white/30 text-white hover:bg-flag hover:text-white'
 						}`}
 						aria-label="Menu"
 						aria-expanded={open}
@@ -123,7 +123,7 @@ export function SiteHeader() {
 								key={s.id}
 								href={`#${s.id}`}
 								onClick={() => setOpen(false)}
-								className="flex items-baseline gap-3 py-3 border-b border-gray-border-soft last:border-0 text-ink hover:text-sky transition-colors"
+								className="flex items-baseline gap-3 py-3 border-b border-gray-border-soft last:border-0 text-ink hover:text-flag transition-colors"
 							>
 								<span className="font-display text-2xl font-black uppercase tracking-tight">
 									{s.label}

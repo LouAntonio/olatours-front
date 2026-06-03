@@ -24,7 +24,7 @@ const services: Service[] = [
 			'Recepção e protocolo em aeroporto',
 		],
 		tag: 'EXECUTIVO',
-		tone: 'sky',
+		tone: 'flag',
 	},
 	{
 		n: 'II',
@@ -103,14 +103,14 @@ export function Services() {
 			<div className="mx-auto max-w-[1400px] px-5 sm:px-8">
 				<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 					<div className="col-span-12 lg:col-span-5">
-						<span className="accent-bar block mb-4" />
+						<span className="accent-bar-flag block mb-4" />
 						<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
-							O que <span className="text-sky">fazemos</span>.
+							O que <span className="text-flag">fazemos</span>.
 						</h2>
 					</div>
 
 					<div className="col-span-12 lg:col-span-7 lg:pt-2">
-						<p className="text-xl sm:text-2xl leading-relaxed text-ink-soft border-l-2 border-sky pl-5">
+						<p className="text-xl sm:text-2xl leading-relaxed text-ink-soft border-l-2 border-flag pl-5">
 							Em todos os serviços que prestamos, prezamos pela
 							pontualidade, privacidade e excelência. Três
 							práticas. Zero atalhos.
@@ -123,7 +123,7 @@ export function Services() {
 								(p, i) => (
 									<span
 										key={p}
-										className="label-caps px-2.5 py-1 border border-gray-border text-ink rounded-sm"
+										className="label-caps px-2.5 py-1 border border-gray-border text-ink rounded-sm hover:border-flag hover:text-flag transition-colors"
 									>
 										0{i + 1} {p}
 									</span>
@@ -219,7 +219,7 @@ function ServiceCard({ service }: { service: Service }) {
 						viewBox="0 0 24 24"
 						fill="none"
 						aria-hidden="true"
-						className="h-5 w-5 text-ink-mute group-hover:text-sky group-hover:translate-x-1 transition-all"
+						className="h-5 w-5 text-ink-mute group-hover:text-flag group-hover:translate-x-1 transition-all"
 					>
 						<path
 							d="M5 12h14M13 6l6 6-6 6"

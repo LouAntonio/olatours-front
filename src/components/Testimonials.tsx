@@ -52,15 +52,15 @@ export function Testimonials() {
 			<div className="mx-auto max-w-[1400px] px-5 sm:px-8">
 				<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 					<div className="col-span-12 lg:col-span-4">
-						<span className="accent-bar block mb-4" />
+						<span className="accent-bar-flag block mb-4" />
 						<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
-							O que <span className="text-sky">dizem</span> os
+							O que <span className="text-flag">dizem</span> os
 							nossos clientes.
 						</h2>
 					</div>
 
 					<div className="col-span-12 lg:col-span-7 lg:col-start-6 lg:pt-2">
-						<p className="text-xl sm:text-2xl leading-relaxed text-ink-soft border-l-2 border-sky pl-5">
+						<p className="text-xl sm:text-2xl leading-relaxed text-ink-soft border-l-2 border-flag pl-5">
 							O feedback dos nossos clientes é importante para
 							nós, para que possamos continuar a prestar um
 							serviço especializado.
@@ -94,7 +94,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 			variants={item}
 			className="col-span-12 lg:col-span-6 bg-white border border-gray-border rounded-lg overflow-hidden hover:shadow-card-hover transition-shadow"
 		>
-			<div className="bg-sky px-6 sm:px-8 py-3 flex items-center justify-between gap-2">
+			<div className="bg-flag px-6 sm:px-8 py-3 flex items-center justify-between gap-2">
 				<div className="flex items-center gap-3 label-caps text-white">
 					<span className="h-1.5 w-1.5 rounded-full bg-white pulse-dot" />
 					<span>CARTA DE VISITA · {t.country}</span>
@@ -107,7 +107,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 					viewBox="0 0 80 60"
 					fill="none"
 					aria-hidden="true"
-					className="h-10 sm:h-12 w-auto mb-4 text-sky"
+					className="h-10 sm:h-12 w-auto mb-4 text-flag"
 				>
 					<text
 						x="0"

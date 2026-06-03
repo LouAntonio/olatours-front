@@ -79,21 +79,21 @@ export function Products() {
 			<div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
 				<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 					<div className="col-span-12 lg:col-span-5">
-						<span className="accent-bar block mb-4" />
+						<span className="accent-bar-flag block mb-4" />
 						<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
-							Os nossos <span className="text-sky">produtos</span>
-							.
+							Os nossos{' '}
+							<span className="text-flag">produtos</span>.
 						</h2>
 					</div>
 
 					<div className="col-span-12 lg:col-span-7 lg:pt-2">
-						<p className="text-xl sm:text-2xl leading-relaxed text-white/70 border-l-2 border-sky pl-5">
+						<p className="text-xl sm:text-2xl leading-relaxed text-white/70 border-l-2 border-flag pl-5">
 							Os nossos produtos garantem o melhor retorno sobre o
 							investimento no sector de viagens. Três formatos. Um
 							padrão.
 						</p>
 						<div className="mt-6 label-caps text-white/50 flex items-center gap-3">
-							<span className="h-px w-10 bg-white/30" />
+							<span className="dash-flag" />
 							<span>ROI · PREVISIBILIDADE · ESCALA</span>
 						</div>
 					</div>
@@ -115,13 +115,13 @@ export function Products() {
 					<div>
 						<p className="font-display text-2xl sm:text-3xl font-black leading-tight max-w-md">
 							Pronto para o próximo{' '}
-							<span className="text-sky">olá</span>?
+							<span className="text-flag">olá</span>?
 						</p>
 						<p className="mt-2 text-white/60 max-w-md">
 							Conte-nos a operação. Enviamos uma proposta em 48h.
 						</p>
 					</div>
-					<Button as="a" href="#contacto" variant="sky" size="lg">
+					<Button as="a" href="#contacto" variant="flag" size="lg">
 						Pedir proposta
 					</Button>
 				</div>
@@ -148,7 +148,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 					<span
 						className={[
 							'font-display text-6xl sm:text-7xl font-black leading-none',
-							isFeature ? 'text-white/80' : 'text-sky',
+							isFeature ? 'text-white/80' : 'text-flag',
 						].join(' ')}
 					>
 						{product.n}
@@ -172,7 +172,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 			<p
 				className={[
 					'label-caps mb-3',
-					isFeature ? 'text-white/70' : 'text-sky',
+					isFeature ? 'text-white/70' : 'text-flag',
 				].join(' ')}
 			>
 				{product.brand}
@@ -219,7 +219,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 						<span
 							className={[
 								'mt-2 inline-block h-1 w-2 shrink-0 rounded-sm',
-								isFeature ? 'bg-white' : 'bg-sky',
+								isFeature ? 'bg-white' : 'bg-flag',
 							].join(' ')}
 						/>
 						<span className="flex-1">{f}</span>
@@ -242,7 +242,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 					aria-hidden="true"
 					className={[
 						'h-5 w-5 transition-transform group-hover:translate-x-1',
-						isFeature ? 'text-white' : 'text-sky',
+						isFeature ? 'text-white' : 'text-flag',
 					].join(' ')}
 				>
 					<path

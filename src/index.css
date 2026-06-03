@@ -215,3 +215,18 @@ body {
 	background: var(--color-sky);
 	border-radius: 2px;
 }
+
+.accent-bar-flag {
+	width: 48px;
+	height: 3px;
+	background: var(--color-flag);
+	border-radius: 2px;
+}
+
+.dash-flag {
+	width: 24px;
+	height: 2px;
+	background: var(--color-flag);
+	border-radius: 1px;
+	display: inline-block;
+}
