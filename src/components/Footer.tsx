@@ -4,9 +4,6 @@ import { Logo } from './Logo';
 
 const navItems = [
 	{ path: '/sobre', label: 'Sobre' },
-	{ path: '/agenda', label: 'Agenda' },
-	{ path: '/servicos', label: 'Serviços' },
-	{ path: '/produtos', label: 'Produtos' },
 	{ path: '/contacto', label: 'Contacto' },
 	{ path: '/carreiras', label: 'Carreiras' },
 ];
