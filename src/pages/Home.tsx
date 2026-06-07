@@ -19,7 +19,6 @@ type Service = {
 
 type Product = {
 	n: '01' | '02' | '03';
-	code: string;
 	brand: string;
 	title: string;
 	intro: string;
@@ -75,7 +74,6 @@ const services: Service[] = [
 const products: Product[] = [
 	{
 		n: '01',
-		code: 'OLA · MC',
 		brand: 'Ola Mobilidade Corporativa',
 		title: 'Transporte executivo sob contrato.',
 		intro: 'Para equipas e executivos que precisam de pontualidade diária, motoristas de confiança e relatórios mensais.',
@@ -89,7 +87,6 @@ const products: Product[] = [
 	},
 	{
 		n: '02',
-		code: 'OLA · ME',
 		brand: 'Ola Missões Empresariais',
 		title: 'Delegações que chegam prontas.',
 		intro: 'Uma missão empresarial em Angola começa muito antes do avião. Trata-se de logística, agenda e acesso — tudo alinhado.',
@@ -103,7 +100,6 @@ const products: Product[] = [
 	},
 	{
 		n: '03',
-		code: 'OLA · ED',
 		brand: 'Ola Eventos e Delegações',
 		title: 'Eventos onde o detalhe é o produto.',
 		intro: 'Conferências, cimeiras, recepções oficiais. Operamos o evento no terreno enquanto os nossos clientes aparecem no momento certo.',
@@ -340,7 +336,7 @@ export function Home() {
 						variants={container}
 						className="grid grid-cols-12 gap-5 sm:gap-6"
 					>
-						{products.map((p, i) => {
+						{products.map((p) => {
 							const accent = accentMap[p.tone];
 							return (
 								<motion.article
@@ -350,22 +346,6 @@ export function Home() {
 								>
 									<div className="relative bg-white border border-gray-border/60 rounded-lg overflow-hidden transition-all duration-500 card-elevated">
 										<div className="p-6 sm:p-8">
-											<div className="flex items-center gap-3 mb-3">
-												<span
-													className="label-caps"
-													style={{
-														color: accent.css,
-													}}
-												>
-													{p.code}
-												</span>
-												{i === 0 && (
-													<span className="label-caps px-2 py-0.5 border border-flag/40 text-flag rounded-sm ml-auto">
-														Best seller
-													</span>
-												)}
-											</div>
-
 											<p
 												className="label-caps mb-3"
 												style={{ color: accent.css }}

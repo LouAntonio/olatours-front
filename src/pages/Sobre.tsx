@@ -81,7 +81,7 @@ export function Sobre() {
 
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<div className="grid grid-cols-12 gap-6">
-						<div className="col-span-12 lg:col-span-8">
+						<div className="col-span-12">
 							<div className="flex items-center gap-3 mb-6">
 								<span className="h-px w-8 bg-flag/40" />
 								<span className="label-caps text-flag tracking-[0.18em]">
@@ -119,22 +119,6 @@ export function Sobre() {
 										</p>
 									</div>
 								))}
-							</div>
-						</div>
-
-						<div className="col-span-12 lg:col-span-4 flex flex-col justify-end items-start sm:items-end pt-8 lg:pt-0">
-							<div className="relative">
-								<div className="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-flag/40" />
-								<div className="border-l-2 border-flag pl-5">
-									<p className="text-white/50 label-caps mb-1">
-										SEDE
-									</p>
-									<p className="font-display text-3xl sm:text-4xl font-black text-white leading-tight">
-										Luanda{' '}
-										<span className="text-flag">·</span>{' '}
-										Angola
-									</p>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -224,53 +208,70 @@ export function Sobre() {
 						</div>
 					</div>
 
-					<motion.div
-						initial="hidden"
-						whileInView="show"
-						viewport={{ once: true, margin: '-100px' }}
-						variants={container}
-						className="grid grid-cols-12 gap-5 sm:gap-6"
-					>
-						{milestones.map((m, i) => {
-							const accent = accentMap[m.accent];
-							return (
-								<motion.article
-									key={m.year}
-									variants={item}
-									className="col-span-12 sm:col-span-6 relative group"
-								>
-									<div
-										className={`relative bg-white border border-gray-border/60 rounded-lg overflow-hidden transition-all duration-500 card-elevated ${i % 2 === 1 ? 'sm:translate-y-8' : ''}`}
+					<div className="relative">
+						{/* Central vertical line */}
+						<div className="absolute left-[19px] sm:left-1/2 top-0 bottom-0 w-px bg-gray-border sm:-translate-x-px" />
+
+						<motion.div
+							initial="hidden"
+							whileInView="show"
+							viewport={{ once: true, margin: '-100px' }}
+							variants={container}
+						>
+							{milestones.map((m, i) => {
+								const accent = accentMap[m.accent];
+								const isLeft = i % 2 === 0;
+								return (
+									<motion.div
+										key={m.year}
+										variants={item}
+										className="relative pb-16 last:pb-0"
 									>
-										<div className="p-6 sm:p-8">
-											<div className="flex items-center gap-3 mb-4">
-												<span
-													className="h-px w-8"
+										{/* Dot on the line */}
+										<div className="absolute left-[11px] sm:left-1/2 w-[17px] h-[17px] -translate-x-1/2 top-1 z-10">
+											<div
+												className="w-full h-full rounded-full border-[3px] bg-white"
+												style={{
+													borderColor: accent.css,
+												}}
+											>
+												<div
+													className="w-[7px] h-[7px] rounded-full mx-auto mt-[1px]"
 													style={{
-														background: `color-mix(in srgb, ${accent.css} 40%, transparent)`,
+														background: accent.css,
 													}}
 												/>
-												<span
-													className="label-caps"
-													style={{
-														color: accent.css,
-													}}
-												>
-													{m.year}
-												</span>
 											</div>
-											<h3 className="font-display text-2xl sm:text-3xl font-black uppercase leading-tight tracking-tight text-ink">
+										</div>
+
+										{/* Content */}
+										<div
+											className={`pl-14 sm:pl-0 sm:w-[calc(50%-40px)] ${
+												isLeft
+													? 'sm:mr-auto sm:pr-12 sm:text-right'
+													: 'sm:ml-auto sm:pl-12'
+											}`}
+										>
+											<span
+												className="font-display text-5xl sm:text-6xl font-black leading-[0.85] block"
+												style={{
+													color: `color-mix(in srgb, ${accent.css} 18%, transparent)`,
+												}}
+											>
+												{m.year}
+											</span>
+											<h3 className="font-display text-xl sm:text-2xl font-black uppercase leading-tight tracking-tight text-ink -mt-1">
 												{m.title}
 											</h3>
-											<p className="mt-4 text-ink-soft leading-relaxed text-base sm:text-lg">
+											<p className="mt-3 text-ink-soft leading-relaxed text-sm sm:text-base">
 												{m.body}
 											</p>
 										</div>
-									</div>
-								</motion.article>
-							);
-						})}
-					</motion.div>
+									</motion.div>
+								);
+							})}
+						</motion.div>
+					</div>
 				</div>
 			</section>
 
