@@ -158,8 +158,14 @@ export function Agenda() {
 												{hasPhoto ? (
 													<>
 														<img
-															src={event.photos![0].src}
-															alt={event.photos![0].alt}
+															src={
+																event.photos![0]
+																	.src
+															}
+															alt={
+																event.photos![0]
+																	.alt
+															}
 															className="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
 														/>
 														<div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/70 to-navy/20" />
@@ -176,10 +182,9 @@ export function Agenda() {
 												{/* Content overlay */}
 												<div className="relative p-6 sm:p-8 flex flex-col justify-end min-h-[340px] sm:min-h-[380px]">
 													<div className="mb-auto">
-														<span
-															className="label-caps inline-block px-2.5 py-1 rounded-sm bg-white/10 backdrop-blur-sm text-white border border-white/20"
-														>
-															{event.type} · {event.country}
+														<span className="label-caps inline-block px-2.5 py-1 rounded-sm bg-white/10 backdrop-blur-sm text-white border border-white/20">
+															{event.type} ·{' '}
+															{event.country}
 														</span>
 													</div>
 
@@ -199,9 +204,20 @@ export function Agenda() {
 														</p>
 
 														<div className="mt-4 flex items-center gap-2 text-white/40 group-hover:text-white/70 transition-colors">
-															<span className="label-caps text-xs">Saber mais</span>
-															<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform">
-																<path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.5" />
+															<span className="label-caps text-xs">
+																Saber mais
+															</span>
+															<svg
+																viewBox="0 0 24 24"
+																fill="none"
+																aria-hidden="true"
+																className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform"
+															>
+																<path
+																	d="M5 12h14M13 6l6 6-6 6"
+																	stroke="currentColor"
+																	strokeWidth="1.5"
+																/>
 															</svg>
 														</div>
 													</div>

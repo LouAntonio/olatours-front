@@ -191,26 +191,48 @@ export function Sobre() {
 
 			{/* ===== MILESTONES ===== */}
 			<section className="relative bg-cream-50 py-20 sm:py-28 overflow-hidden">
+				{/* Background decorative diamonds */}
+				<div className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.025] select-none">
+					<div className="absolute top-[12%] left-[3%] w-24 h-24 rotate-45 rounded-xl border-2 border-navy" />
+					<div className="absolute top-[45%] right-[6%] w-40 h-40 rotate-45 rounded-2xl border-2 border-flag" />
+					<div className="absolute bottom-[15%] left-[20%] w-16 h-16 rotate-45 rounded-lg border-2 border-sky" />
+					<div className="absolute top-[70%] right-[30%] w-12 h-12 rotate-45 rounded-md border-2 border-navy" />
+				</div>
+
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
-					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
+					<motion.div
+						initial="hidden"
+						whileInView="show"
+						viewport={{ once: true, margin: '-80px' }}
+						variants={container}
+						className="grid grid-cols-12 gap-6 mb-14 sm:mb-20"
+					>
 						<div className="col-span-12 lg:col-span-6">
-							<span className="accent-bar-flag block mb-4" />
-							<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
-								Marcos{' '}
-								<span className="text-flag">importantes</span>.
-							</h2>
+							<motion.div variants={item}>
+								<span className="accent-bar-flag block mb-4" />
+								<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
+									Marcos{' '}
+									<span className="text-flag">
+										importantes
+									</span>
+									.
+								</h2>
+							</motion.div>
 						</div>
 						<div className="col-span-12 lg:col-span-4 lg:col-start-9 flex items-end">
-							<p className="text-ink-mute text-sm sm:text-base leading-relaxed">
+							<motion.p
+								variants={item}
+								className="text-ink-mute text-sm sm:text-base leading-relaxed"
+							>
 								Da fundação à confiança institucional — uma
 								década de crescimento consistente.
-							</p>
+							</motion.p>
 						</div>
-					</div>
+					</motion.div>
 
 					<div className="relative">
-						{/* Central vertical line */}
-						<div className="absolute left-[19px] sm:left-1/2 top-0 bottom-0 w-px bg-gray-border sm:-translate-x-px" />
+						{/* Desktop central connector line (gradient, subtle) */}
+						<div className="hidden lg:block absolute left-1/2 top-[1.75rem] bottom-8 w-px -translate-x-px bg-gradient-to-b from-gray-border via-gray-border to-transparent" />
 
 						<motion.div
 							initial="hidden"
@@ -225,47 +247,82 @@ export function Sobre() {
 									<motion.div
 										key={m.year}
 										variants={item}
-										className="relative pb-16 last:pb-0"
+										className="relative pb-16 sm:pb-24 last:pb-0 group"
 									>
-										{/* Dot on the line */}
-										<div className="absolute left-[11px] sm:left-1/2 w-[17px] h-[17px] -translate-x-1/2 top-1 z-10">
+										<div className="grid grid-cols-12 gap-4 sm:gap-6">
+											{/* Diamond connector (desktop only) */}
 											<div
-												className="w-full h-full rounded-full border-[3px] bg-white"
+												className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center justify-center z-10"
 												style={{
-													borderColor: accent.css,
+													top: 'calc(1.5rem + 4px)',
 												}}
 											>
 												<div
-													className="w-[7px] h-[7px] rounded-full mx-auto mt-[1px]"
+													className="w-[22px] h-[22px] rotate-45 rounded-sm border-[3px] bg-white transition-all duration-700 ease-out hover:rotate-[135deg] hover:scale-110 cursor-default"
 													style={{
-														background: accent.css,
+														borderColor: accent.css,
 													}}
-												/>
+												>
+													<div
+														className="absolute inset-[5px] rounded-sm transition-colors duration-500"
+														style={{
+															background:
+																accent.css,
+														}}
+													/>
+												</div>
 											</div>
-										</div>
 
-										{/* Content */}
-										<div
-											className={`pl-14 sm:pl-0 sm:w-[calc(50%-40px)] ${
-												isLeft
-													? 'sm:mr-auto sm:pr-12 sm:text-right'
-													: 'sm:ml-auto sm:pl-12'
-											}`}
-										>
-											<span
-												className="font-display text-5xl sm:text-6xl font-black leading-[0.85] block"
-												style={{
-													color: `color-mix(in srgb, ${accent.css} 18%, transparent)`,
-												}}
+											{/* Year — massive typographic element */}
+											<div
+												className={`col-span-12 lg:col-span-5 ${isLeft ? '' : 'lg:col-start-8'}`}
 											>
-												{m.year}
-											</span>
-											<h3 className="font-display text-xl sm:text-2xl font-black uppercase leading-tight tracking-tight text-ink -mt-1">
-												{m.title}
-											</h3>
-											<p className="mt-3 text-ink-soft leading-relaxed text-sm sm:text-base">
-												{m.body}
-											</p>
+												<div
+													className={`flex flex-col ${isLeft ? 'lg:items-end' : ''}`}
+												>
+													<span
+														className="font-display font-black leading-[0.78] tracking-tight text-[clamp(3.5rem,12vw,7rem)] block select-none transition-opacity duration-500 group-hover:opacity-40"
+														style={{
+															color: `color-mix(in srgb, ${accent.css} 15%, transparent)`,
+														}}
+													>
+														{m.year}
+													</span>
+													{/* Mobile accent bar (hidden desktop) */}
+													<div
+														className="lg:hidden w-10 h-1 rounded-full -mt-1 mb-3"
+														style={{
+															background:
+																accent.css,
+														}}
+													/>
+												</div>
+											</div>
+
+											{/* Center spacer (desktop only) */}
+											<div className="hidden lg:block col-span-2" />
+
+											{/* Content card */}
+											<div
+												className={`col-span-12 lg:col-span-5 ${isLeft ? 'lg:col-start-8' : ''}`}
+											>
+												<div className="relative bg-white border border-gray-border/40 rounded-xl p-6 sm:p-8 shadow-sm transition-all duration-500 hover:shadow-lg hover:-translate-y-0.5 cursor-default">
+													{/* Top accent bar */}
+													<div
+														className="absolute top-0 left-6 right-6 h-0.5 rounded-full transition-all duration-500 group-hover:left-3 group-hover:right-3"
+														style={{
+															background:
+																accent.css,
+														}}
+													/>
+													<h3 className="font-display text-xl sm:text-2xl font-black uppercase leading-tight tracking-tight text-ink pt-1">
+														{m.title}
+													</h3>
+													<p className="mt-3 text-ink-soft leading-relaxed text-sm sm:text-base">
+														{m.body}
+													</p>
+												</div>
+											</div>
 										</div>
 									</motion.div>
 								);
