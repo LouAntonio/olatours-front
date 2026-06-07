@@ -13,15 +13,15 @@ const navItems = [
 
 export function Footer() {
 	return (
-		<footer className="bg-navy text-white border-t border-white/10">
-			<div className="mx-auto max-w-[1200px] px-5 sm:px-8 py-12 sm:py-16">
-				<div className="grid grid-cols-12 gap-y-10 gap-x-6">
-					<div className="col-span-12 lg:col-span-5">
+		<footer className="bg-navy text-white">
+			<div className="mx-auto max-w-[1200px] px-5 sm:px-8 py-16 sm:py-20">
+				<div className="grid grid-cols-12 gap-y-12 gap-x-8">
+					<div className="col-span-12 lg:col-span-4">
 						<Logo size="md" className="brightness-0 invert" />
-						<p className="mt-5 max-w-sm text-base sm:text-lg leading-relaxed text-white/70">
-							Ola Tours - vamos explorar. Operadora angolana de
-							viagens corporativas, mobilidade executiva e
-							facilitação de negócios.
+						<p className="mt-6 max-w-sm text-base leading-relaxed text-white/60">
+							Operadora angolana de viagens corporativas,
+							mobilidade executiva e facilitação de negócios.
+							Desde 2014.
 						</p>
 					</div>
 
@@ -33,7 +33,7 @@ export function Footer() {
 							<li key={item.path}>
 								<Link
 									to={item.path}
-									className="text-white/80 hover:text-flag transition-colors"
+									className="text-white/60 hover:text-flag transition-colors text-sm"
 								>
 									{item.label}
 								</Link>
@@ -48,7 +48,7 @@ export function Footer() {
 						<li>
 							<a
 								href="mailto:info@olatours.co.ao"
-								className="text-white/80 hover:text-flag transition-colors"
+								className="text-white/60 hover:text-flag transition-colors text-sm"
 							>
 								info@olatours.co.ao
 							</a>
@@ -56,13 +56,13 @@ export function Footer() {
 						<li>
 							<a
 								href="tel:+244940818664"
-								className="text-white/80 hover:text-flag transition-colors"
+								className="text-white/60 hover:text-flag transition-colors text-sm"
 							>
 								+244 940 818 664
 							</a>
 						</li>
 						<li>
-							<span className="text-white/70 text-sm leading-relaxed block">
+							<span className="text-white/40 text-sm leading-relaxed block">
 								Travessa Neves F.B.P.F Machado 19
 								<br />
 								Bairro Ingombotas, Luanda
@@ -75,12 +75,12 @@ export function Footer() {
 						title="Redes"
 					>
 						<li>
-							<div className="flex items-center gap-3">
+							<div className="flex items-center gap-4">
 								<a
 									href="https://instagram.com/olatoursao"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="text-white/60 hover:text-flag transition-colors"
+									className="text-white/40 hover:text-flag transition-colors"
 									aria-label="Instagram"
 								>
 									<svg
@@ -99,7 +99,7 @@ export function Footer() {
 									href="https://tiktok.com/@kelvinsjohn"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="text-white/60 hover:text-flag transition-colors"
+									className="text-white/40 hover:text-flag transition-colors"
 									aria-label="TikTok"
 								>
 									<svg
@@ -119,17 +119,17 @@ export function Footer() {
 					</FooterCol>
 				</div>
 
-				<div className="mt-12 sm:mt-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/15 pt-6">
-					<p className="label-caps text-white/45">
+				<div className="mt-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/10 pt-8">
+					<p className="label-caps text-white/35">
 						© 2026 Ola Tours · Todos os direitos reservados
 					</p>
-					<p className="label-caps text-white/45">
+					<p className="label-caps text-white/35">
 						Desenvolvido por{' '}
 						<a
 							href="https://mediaguideagency.vercel.app"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="text-flag hover:text-flag/80 transition-colors underline underline-offset-2"
+							className="text-flag/70 hover:text-flag transition-colors"
 						>
 							Media Guide Agency
 						</a>

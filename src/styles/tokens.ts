@@ -20,6 +20,9 @@ export const colors = {
 	inkMute: '#7A8595',
 
 	white: '#FFFFFF',
+	cream: '#F9F6F0',
+	cream50: '#FBF9F5',
+	sand: '#E8E0D4',
 	grayLight: '#F7F8FA',
 	grayBorder: '#E4E7EC',
 	grayBorderSoft: '#F0F2F5',
@@ -28,6 +31,7 @@ export const colors = {
 export const fonts = {
 	sans: '"Barlow", system-ui, -apple-system, "Segoe UI", sans-serif',
 	display: '"Barlow Condensed", "Barlow", system-ui, sans-serif',
+	editorial: '"EB Garamond", "Georgia", "Times New Roman", serif',
 } as const;
 
 export const motion = {

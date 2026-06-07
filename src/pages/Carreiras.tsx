@@ -142,10 +142,10 @@ export function Carreiras() {
 									Candidatar-se
 								</a>
 								<a
-									href="mailto:rh@olatours.co.ao"
+									href="mailto:carreiras@olatours.co.ao"
 									className="inline-flex items-center gap-2 px-6 py-3 border border-white/30 hover:border-flag/60 text-white/80 hover:text-flag font-display text-base font-bold uppercase tracking-wider transition-colors rounded-sm"
 								>
-									rh@olatours.co.ao
+									carreiras@olatours.co.ao
 								</a>
 							</div>
 						</div>
@@ -321,16 +321,16 @@ export function Carreiras() {
 									<p className="text-ink-mute text-sm mt-6">
 										Para anexar o CV, envie para{' '}
 										<a
-											href="mailto:rh@olatours.co.ao"
+											href="mailto:carreiras@olatours.co.ao"
 											className="text-flag hover:text-flag-dark underline underline-offset-2 transition-colors"
 										>
-											rh@olatours.co.ao
+											carreiras@olatours.co.ao
 										</a>
 									</p>
 								</div>
 							) : (
 								<form
-									action="mailto:rh@olatours.co.ao"
+									action="mailto:carreiras@olatours.co.ao"
 									method="POST"
 									encType="text/plain"
 									onSubmit={handleSubmit}
@@ -526,7 +526,7 @@ export function Carreiras() {
 										Prefere enviar por email?
 									</p>
 									<a
-										href="mailto:rh@olatours.co.ao?subject=Candidatura%20Espont%C3%A2nea%20-%20Ola%20Tours"
+										href="mailto:carreiras@olatours.co.ao?subject=Candidatura%20Espont%C3%A2nea%20-%20Ola%20Tours"
 										className="inline-flex items-center gap-2 text-flag hover:text-flag-dark font-display text-lg font-bold transition-colors"
 									>
 										<svg
@@ -541,7 +541,7 @@ export function Carreiras() {
 												strokeWidth="1.5"
 											/>
 										</svg>
-										rh@olatours.co.ao
+										carreiras@olatours.co.ao
 									</a>
 									<p className="text-xs text-ink-mute/70 mt-1">
 										Inclua o seu CV em anexo e responderemos

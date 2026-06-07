@@ -30,13 +30,9 @@ const accentMap: Record<string, { css: string; rgb: string }> = {
 function SkeletonCard() {
 	return (
 		<div className="col-span-12 sm:col-span-6 animate-pulse">
-			<div className="bg-white border border-gray-border rounded-b-lg overflow-hidden">
-				<div className="h-1.5 w-full bg-gray-border" />
+			<div className="bg-white border border-gray-border/60 rounded-lg overflow-hidden">
 				<div className="p-6 sm:p-8">
-					<div className="flex items-center gap-3 mb-4">
-						<div className="h-1.5 w-1.5 rounded-full bg-gray-border" />
-						<div className="h-3 w-32 bg-gray-border rounded" />
-					</div>
+					<div className="h-3 w-32 bg-gray-border rounded mb-4" />
 					<div className="h-7 w-3/4 bg-gray-border rounded mb-3" />
 					<div className="h-5 w-full bg-gray-border/60 rounded mb-2" />
 					<div className="h-5 w-5/6 bg-gray-border/60 rounded mb-2" />
@@ -63,20 +59,7 @@ export function Agenda() {
 	return (
 		<>
 			{/* ===== HERO ===== */}
-			<section className="relative bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden">
-				<div className="pointer-events-none absolute inset-0 opacity-[0.03]">
-					<div
-						className="corporate-grid h-full w-full"
-						style={{ backgroundSize: '64px 64px' }}
-					/>
-				</div>
-
-				<div className="pointer-events-none absolute -top-8 right-0 sm:right-8 select-none">
-					<span className="font-display font-black text-[clamp(8rem,20vw,18rem)] leading-none text-white/[0.04]">
-						AGENDA
-					</span>
-				</div>
-
+			<section className="relative bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden grain">
 				<div className="pointer-events-none absolute top-0 right-0 w-48 h-48 sm:w-80 sm:h-80 border-r border-t border-white/[0.04] rounded-tr-[100px] corner-pulse" />
 
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
@@ -123,11 +106,7 @@ export function Agenda() {
 			</section>
 
 			{/* ===== EVENTS ===== */}
-			<section className="relative bg-gray-light py-20 sm:py-28 overflow-hidden">
-				<div className="pointer-events-none absolute inset-0 opacity-[0.02]">
-					<div className="corporate-grid h-full w-full" />
-				</div>
-
+			<section className="relative bg-cream-50 py-20 sm:py-28 overflow-hidden">
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 						<div className="col-span-12 lg:col-span-6">
@@ -140,7 +119,7 @@ export function Agenda() {
 						<div className="col-span-12 lg:col-span-4 lg:col-start-9 flex items-end">
 							<p className="text-ink-mute text-sm sm:text-base leading-relaxed">
 								Missões oficiais, recepções de Estado e
-								facilitação de negócios - o registo da nossa
+								facilitação de negócios — o registo da nossa
 								agenda institucional.
 							</p>
 						</div>
@@ -173,35 +152,10 @@ export function Agenda() {
 											className="block"
 										>
 											<div
-												className={`relative bg-white border border-gray-border rounded-b-lg overflow-hidden transition-all duration-500 card-elevated ${i % 2 === 1 ? 'sm:translate-y-8' : ''}`}
+												className={`relative bg-white border border-gray-border/60 rounded-lg overflow-hidden transition-all duration-500 card-elevated ${i % 2 === 1 ? 'sm:translate-y-8' : ''}`}
 											>
-												<div className="pointer-events-none absolute top-2 right-4 select-none">
-													<span
-														className="font-display font-black text-[clamp(2.5rem,5vw,1rem)] leading-none"
-														style={{
-															color: `rgba(${accent.rgb}, 0.25)`,
-														}}
-													>
-														{event.date}
-													</span>
-												</div>
-
-												<div
-													className="h-1.5 w-full"
-													style={{
-														background: accent.css,
-													}}
-												/>
-
 												<div className="p-6 sm:p-8">
 													<div className="flex items-center gap-3 mb-4">
-														<span
-															className="h-1.5 w-1.5 rounded-full"
-															style={{
-																background:
-																	accent.css,
-															}}
-														/>
 														<span
 															className="label-caps"
 															style={{
@@ -216,9 +170,11 @@ export function Agenda() {
 													<h3 className="font-display text-2xl sm:text-3xl font-black uppercase leading-tight tracking-tight text-ink">
 														{event.title}
 													</h3>
+
 													<p className="mt-2 text-ink-soft text-lg">
 														{event.subtitle}
 													</p>
+
 													<p className="mt-4 text-ink-mute leading-relaxed text-base sm:text-lg">
 														{event.description}
 													</p>
@@ -235,15 +191,6 @@ export function Agenda() {
 
 			{/* ===== CTA ===== */}
 			<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
-				<div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-border to-transparent" />
-				<div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-border to-transparent" />
-
-				<div className="pointer-events-none absolute -top-8 -right-8 select-none">
-					<span className="font-display font-black text-[clamp(6rem,15vw,14rem)] leading-none text-flag/[0.12]">
-						EVENTOS
-					</span>
-				</div>
-
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8 text-center">
 					<span className="accent-bar-flag block mx-auto mb-4" />
 					<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
@@ -252,7 +199,7 @@ export function Agenda() {
 					</h2>
 					<p className="mt-6 text-xl sm:text-2xl leading-relaxed text-ink-soft max-w-2xl mx-auto">
 						Conte-nos a sua visão. Organizamos a logística, o
-						protocolo e a recepção - para que a sua delegação só
+						protocolo e a recepção — para que a sua delegação só
 						precise de aparecer.
 					</p>
 					<div className="mt-10">

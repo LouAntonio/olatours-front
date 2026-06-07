@@ -34,7 +34,7 @@ const products: Product[] = [
 		code: 'OLA · ME',
 		brand: 'Ola Missões Empresariais',
 		title: 'Delegações que chegam prontas.',
-		intro: 'Uma missão empresarial em Angola começa muito antes do avião. Trata-se de logística, agenda e acesso - tudo alinhado.',
+		intro: 'Uma missão empresarial em Angola começa muito antes do avião. Trata-se de logística, agenda e acesso — tudo alinhado.',
 		features: [
 			'Organização de delegações empresariais',
 			'Agendamento de reuniões estratégicas',
@@ -81,21 +81,7 @@ const accentMap: Record<Tone, { css: string; rgb: string }> = {
 export function Products() {
 	return (
 		<>
-			{/* ===== HERO ===== */}
-			<section className="relative bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden">
-				<div className="pointer-events-none absolute inset-0 opacity-[0.03]">
-					<div
-						className="corporate-grid h-full w-full"
-						style={{ backgroundSize: '64px 64px' }}
-					/>
-				</div>
-
-				<div className="pointer-events-none absolute -top-8 right-0 sm:right-8 select-none">
-					<span className="font-display font-black text-[clamp(8rem,20vw,18rem)] leading-none text-white/[0.04]">
-						PRODUTOS
-					</span>
-				</div>
-
+			<section className="relative bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden grain">
 				<div className="pointer-events-none absolute top-0 right-0 w-48 h-48 sm:w-80 sm:h-80 border-r border-t border-white/[0.04] rounded-tr-[100px] corner-pulse" />
 
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
@@ -148,12 +134,7 @@ export function Products() {
 				</div>
 			</section>
 
-			{/* ===== PRODUCTS GRID ===== */}
-			<section className="relative bg-gray-light py-20 sm:py-28 overflow-hidden">
-				<div className="pointer-events-none absolute inset-0 opacity-[0.02]">
-					<div className="corporate-grid h-full w-full" />
-				</div>
-
+			<section className="relative bg-cream-50 py-20 sm:py-28 overflow-hidden">
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 						<div className="col-span-12 lg:col-span-6">
@@ -187,33 +168,9 @@ export function Products() {
 									variants={item}
 									className="col-span-12 sm:col-span-6 lg:col-span-4 relative group"
 								>
-									<div
-										className={`relative bg-white border border-gray-border rounded-b-lg overflow-hidden transition-all duration-500 card-elevated ${i % 2 === 1 ? 'lg:translate-y-8' : ''}`}
-									>
-										<div className="pointer-events-none absolute top-2 right-4 select-none">
-											<span
-												className="font-display font-black text-[clamp(3rem,5vw,4rem)] leading-none"
-												style={{
-													color: `rgba(${accent.rgb}, 0.15)`,
-												}}
-											>
-												{p.n}
-											</span>
-										</div>
-
-										<div
-											className="h-1.5 w-full"
-											style={{ background: accent.css }}
-										/>
-
+									<div className="relative bg-white border border-gray-border/60 rounded-lg overflow-hidden transition-all duration-500 card-elevated">
 										<div className="p-6 sm:p-8">
 											<div className="flex items-center gap-3 mb-3">
-												<span
-													className="h-1.5 w-1.5 rounded-full"
-													style={{
-														background: accent.css,
-													}}
-												/>
 												<span
 													className="label-caps"
 													style={{
@@ -270,7 +227,7 @@ export function Products() {
 												))}
 											</ul>
 
-											<div className="mt-6 pt-5 border-t border-gray-border flex items-center justify-between">
+											<div className="mt-6 pt-5 border-t border-gray-border/50 flex items-center justify-between">
 												<span className="label-caps text-ink-mute">
 													PRODUTO {p.n} / 03
 												</span>
@@ -296,16 +253,8 @@ export function Products() {
 				</div>
 			</section>
 
-			{/* ===== CTA ===== */}
 			<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
 				<div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-border to-transparent" />
-				<div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-border to-transparent" />
-
-				<div className="pointer-events-none absolute -top-8 -right-8 select-none">
-					<span className="font-display font-black text-[clamp(6rem,15vw,14rem)] leading-none text-flag/[0.12]">
-						PRODUTOS
-					</span>
-				</div>
 
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8 text-center">
 					<span className="accent-bar-flag block mx-auto mb-4" />

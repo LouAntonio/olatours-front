@@ -15,22 +15,9 @@ export function Marquee({
 	const sequence = [...items, ...items];
 
 	return (
-		<section className="relative bg-navy py-20 sm:py-24 overflow-hidden">
+		<section className="relative bg-navy py-20 sm:py-24 overflow-hidden grain">
 			<div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 			<div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-			<div className="pointer-events-none absolute inset-0 opacity-[0.02]">
-				<div
-					className="corporate-grid h-full w-full"
-					style={{ backgroundSize: '32px 32px' }}
-				/>
-			</div>
-
-			<div className="pointer-events-none absolute -top-8 right-0 sm:right-8 select-none">
-				<span className="font-display font-black text-[clamp(6rem,15vw,14rem)] leading-none text-white/[0.04]">
-					ÂMBITO
-				</span>
-			</div>
 
 			<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 				<div

@@ -8,7 +8,7 @@ type Variant = 'sky' | 'flag' | 'terracotta' | 'ghost' | 'outline' | 'link';
 type Size = 'sm' | 'md' | 'lg';
 
 const base =
-	'inline-flex items-center justify-center gap-2 font-semibold uppercase tracking-[0.12em] transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed group';
+	'inline-flex items-center justify-center gap-2 font-semibold uppercase tracking-[0.12em] transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed group';
 
 const variants: Record<Variant, string> = {
 	sky: 'bg-sky text-white hover:bg-sky-dark active:translate-y-px focus-visible:ring-sky',
@@ -17,7 +17,7 @@ const variants: Record<Variant, string> = {
 		'bg-terracotta text-white hover:bg-terracotta-dark active:translate-y-px focus-visible:ring-terracotta',
 	ghost: 'bg-transparent text-ink hover:bg-navy hover:text-white focus-visible:ring-navy',
 	outline:
-		'bg-transparent text-ink border-2 border-ink hover:bg-navy hover:text-white hover:border-navy focus-visible:ring-navy',
+		'bg-transparent text-ink border border-ink/30 hover:border-flag hover:text-flag focus-visible:ring-navy',
 	link: 'bg-transparent text-sky hover:text-flag underline-offset-4 hover:underline px-0 py-0 h-auto focus-visible:ring-sky rounded-none',
 };
 
