@@ -52,6 +52,13 @@ const eventos: Evento[] = [
 			},
 			{ label: 'Objectivo', value: 'Acesso ao mercado global' },
 		],
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
+				alt: 'Durban International Convention Centre',
+				caption: 'Durban — África do Sul',
+			},
+		],
 		featured: true,
 	},
 	{
@@ -76,6 +83,13 @@ const eventos: Evento[] = [
 			{ label: 'Cidades-sede', value: '16 cidades' },
 			{ label: 'Países', value: 'Canadá · EUA · México' },
 			{ label: 'Segmento', value: 'Turismo desportivo e corporativo' },
+		],
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80',
+				alt: 'Estádio de futebol',
+				caption: 'Mundial 2026 — Canadá · EUA · México',
+			},
 		],
 		featured: true,
 	},
@@ -102,6 +116,13 @@ const eventos: Evento[] = [
 				value: 'Gestores de viagens e industry leaders',
 			},
 		],
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80',
+				alt: 'ExCeL London',
+				caption: 'ExCeL London — Reino Unido',
+			},
+		],
 		featured: true,
 	},
 	{
@@ -123,6 +144,13 @@ const eventos: Evento[] = [
 			{ label: 'Sector', value: 'Agronegócio e Tecnologia Agrícola' },
 			{ label: 'Foco', value: 'Networking e parcerias estratégicas' },
 			{ label: 'Público', value: 'Fornecedores e investidores globais' },
+		],
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80',
+				alt: 'Agricultura e tecnologia',
+				caption: 'Las Vegas — Nevada, EUA',
+			},
 		],
 		featured: true,
 	},
@@ -150,6 +178,13 @@ const eventos: Evento[] = [
 			{
 				label: 'Objectivo',
 				value: 'Trocas comerciais e integração global',
+			},
+		],
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800&q=80',
+				alt: 'Feira multissetorial em Maputo',
+				caption: 'Ricatla, Marracuene — Moçambique',
 			},
 		],
 		featured: true,
@@ -180,6 +215,13 @@ const eventos: Evento[] = [
 				value: 'Compradores e fornecedores da Ásia-Pacífico',
 			},
 		],
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800&q=80',
+				alt: 'Bangkok — Tailândia',
+				caption: 'Bangkok — Tailândia',
+			},
+		],
 		featured: true,
 	},
 	{
@@ -193,6 +235,13 @@ const eventos: Evento[] = [
 		country: 'ANG',
 		countryName: 'Angola',
 		accent: 'flag',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80',
+				alt: 'Safari africano',
+				caption: 'Experiência de safari',
+			},
+		],
 		featured: false,
 	},
 	{
@@ -206,6 +255,13 @@ const eventos: Evento[] = [
 		country: 'ANG',
 		countryName: 'Angola',
 		accent: 'sky',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+				alt: 'Praia de Cabo Ledo',
+				caption: 'Cabo Ledo — Angola',
+			},
+		],
 		featured: false,
 	},
 	{
@@ -220,6 +276,13 @@ const eventos: Evento[] = [
 		country: 'ANG',
 		countryName: 'Angola',
 		accent: 'flag',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+				alt: 'Praia e música ao vivo',
+				caption: 'Cabo Ledo — Angola',
+			},
+		],
 		featured: false,
 	},
 	{
@@ -234,6 +297,13 @@ const eventos: Evento[] = [
 		country: 'ANG',
 		countryName: 'Angola',
 		accent: 'navy',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
+				alt: 'Natureza e aventura',
+				caption: 'Angola',
+			},
+		],
 		featured: false,
 	},
 	{
@@ -247,6 +317,13 @@ const eventos: Evento[] = [
 		country: 'ANG',
 		countryName: 'Angola',
 		accent: 'sky',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+				alt: 'Praia de Cabo Ledo',
+				caption: 'Cabo Ledo — Angola',
+			},
+		],
 		featured: false,
 	},
 	{
@@ -261,6 +338,13 @@ const eventos: Evento[] = [
 		country: 'ANG',
 		countryName: 'Angola',
 		accent: 'navy',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&q=80',
+				alt: 'Quedas de Calandula',
+				caption: 'Malanje — Angola',
+			},
+		],
 		featured: false,
 	},
 	{
@@ -274,6 +358,13 @@ const eventos: Evento[] = [
 		country: 'ANG',
 		countryName: 'Angola',
 		accent: 'sky',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+				alt: 'Praia de Cabo Ledo',
+				caption: 'Cabo Ledo — Angola',
+			},
+		],
 		featured: false,
 	},
 	{
@@ -288,6 +379,13 @@ const eventos: Evento[] = [
 		country: 'ANG',
 		countryName: 'Angola',
 		accent: 'flag',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80',
+				alt: 'Deserto do Namibe',
+				caption: 'Namibe — Angola',
+			},
+		],
 		featured: false,
 	},
 	{
@@ -301,6 +399,13 @@ const eventos: Evento[] = [
 		country: 'ANG',
 		countryName: 'Angola',
 		accent: 'sky',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+				alt: 'Praia de Cabo Ledo',
+				caption: 'Cabo Ledo — Angola',
+			},
+		],
 		featured: false,
 	},
 	{
@@ -315,6 +420,13 @@ const eventos: Evento[] = [
 		country: 'ANG',
 		countryName: 'Angola',
 		accent: 'navy',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80',
+				alt: 'Serra da Leba',
+				caption: 'Lubango — Angola',
+			},
+		],
 		featured: false,
 	},
 	{
@@ -329,6 +441,13 @@ const eventos: Evento[] = [
 		country: 'ANG',
 		countryName: 'Angola',
 		accent: 'flag',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=800&q=80',
+				alt: 'Costa de Benguela',
+				caption: 'Benguela — Angola',
+			},
+		],
 		featured: false,
 	},
 	{
@@ -342,6 +461,13 @@ const eventos: Evento[] = [
 		country: 'ANG',
 		countryName: 'Angola',
 		accent: 'sky',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+				alt: 'Praia de Cabo Ledo',
+				caption: 'Cabo Ledo — Angola',
+			},
+		],
 		featured: false,
 	},
 	{
@@ -356,6 +482,13 @@ const eventos: Evento[] = [
 		country: 'ANG',
 		countryName: 'Angola',
 		accent: 'navy',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&q=80',
+				alt: 'Quedas de Calandula',
+				caption: 'Malanje — Angola',
+			},
+		],
 		featured: false,
 	},
 	{
@@ -369,6 +502,13 @@ const eventos: Evento[] = [
 		country: 'ANG',
 		countryName: 'Angola',
 		accent: 'flag',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80',
+				alt: 'Safari africano',
+				caption: 'Experiência de safari',
+			},
+		],
 		featured: false,
 	},
 	{
@@ -383,6 +523,13 @@ const eventos: Evento[] = [
 		country: 'ARE',
 		countryName: 'Dubai - Emirados Árabes Unidos',
 		accent: 'flag',
+		photos: [
+			{
+				src: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80',
+				alt: 'Dubai skyline',
+				caption: 'Dubai — Emirados Árabes Unidos',
+			},
+		],
 		featured: true,
 	},
 ];

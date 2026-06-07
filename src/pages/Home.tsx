@@ -19,7 +19,6 @@ type Service = {
 
 type Product = {
 	n: '01' | '02' | '03';
-	code: string;
 	brand: string;
 	title: string;
 	intro: string;
@@ -75,7 +74,6 @@ const services: Service[] = [
 const products: Product[] = [
 	{
 		n: '01',
-		code: 'OLA · MC',
 		brand: 'Ola Mobilidade Corporativa',
 		title: 'Transporte executivo sob contrato.',
 		intro: 'Para equipas e executivos que precisam de pontualidade diária, motoristas de confiança e relatórios mensais.',
@@ -89,7 +87,6 @@ const products: Product[] = [
 	},
 	{
 		n: '02',
-		code: 'OLA · ME',
 		brand: 'Ola Missões Empresariais',
 		title: 'Delegações que chegam prontas.',
 		intro: 'Uma missão empresarial em Angola começa muito antes do avião. Trata-se de logística, agenda e acesso — tudo alinhado.',
@@ -103,7 +100,6 @@ const products: Product[] = [
 	},
 	{
 		n: '03',
-		code: 'OLA · ED',
 		brand: 'Ola Eventos e Delegações',
 		title: 'Eventos onde o detalhe é o produto.',
 		intro: 'Conferências, cimeiras, recepções oficiais. Operamos o evento no terreno enquanto os nossos clientes aparecem no momento certo.',
@@ -145,15 +141,6 @@ export function Home() {
 
 			{/* ===== A NOSSA HISTÓRIA ===== */}
 			<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
-				<div className="pointer-events-none absolute -bottom-8 -left-8 select-none">
-					<span
-						className="font-display font-black text-[clamp(12rem,25vw,24rem)] leading-none opacity-[0.12]"
-						style={{ color: 'rgba(181, 72, 42, 0.3)' }}
-					>
-						2014
-					</span>
-				</div>
-
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<motion.div
 						initial="hidden"
@@ -177,7 +164,7 @@ export function Home() {
 								variants={item}
 								className="text-xl sm:text-2xl leading-relaxed text-ink-soft"
 							>
-								<span className="float-left text-5xl sm:text-7xl font-display font-black leading-none text-flag mr-3 mt-1">
+								<span className="float-left text-5xl sm:text-7xl font-editorial font-bold leading-none text-flag mr-3 mt-1">
 									A
 								</span>{' '}
 								Ola Tours nasceu em 2014, em Luanda, da
@@ -217,11 +204,7 @@ export function Home() {
 			</section>
 
 			{/* ===== SERVIÇOS ESPECIALIZADOS ===== */}
-			<section className="relative bg-gray-light py-20 sm:py-28 overflow-hidden">
-				<div className="pointer-events-none absolute inset-0 opacity-[0.02]">
-					<div className="corporate-grid h-full w-full" />
-				</div>
-
+			<section className="relative bg-cream-50 py-20 sm:py-28 overflow-hidden">
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 						<div className="col-span-12 lg:col-span-6">
@@ -250,7 +233,7 @@ export function Home() {
 						variants={container}
 						className="grid grid-cols-12 gap-5 sm:gap-6"
 					>
-						{services.map((s, i) => {
+						{services.map((s) => {
 							const accent = accentMap[s.tone];
 							return (
 								<motion.article
@@ -258,33 +241,9 @@ export function Home() {
 									variants={item}
 									className="col-span-12 sm:col-span-6 lg:col-span-4 relative group"
 								>
-									<div
-										className={`relative bg-white border border-gray-border rounded-b-lg overflow-hidden transition-all duration-500 card-elevated ${i % 2 === 1 ? 'lg:translate-y-8' : ''}`}
-									>
-										<div className="pointer-events-none absolute top-2 right-4 select-none">
-											<span
-												className="font-display font-black text-[clamp(3rem,5vw,4rem)] leading-none"
-												style={{
-													color: `rgba(${accent.rgb}, 0.15)`,
-												}}
-											>
-												{s.n}
-											</span>
-										</div>
-
-										<div
-											className="h-1.5 w-full"
-											style={{ background: accent.css }}
-										/>
-
+									<div className="relative bg-white border border-gray-border/60 rounded-lg overflow-hidden transition-all duration-500 card-elevated">
 										<div className="p-6 sm:p-8">
 											<div className="flex items-center gap-3 mb-4">
-												<span
-													className="h-1.5 w-1.5 rounded-full"
-													style={{
-														background: accent.css,
-													}}
-												/>
 												<span
 													className="label-caps"
 													style={{
@@ -324,7 +283,7 @@ export function Home() {
 												))}
 											</ul>
 
-											<div className="mt-6 pt-5 border-t border-gray-border flex items-center justify-between">
+											<div className="mt-6 pt-5 border-t border-gray-border/50 flex items-center justify-between">
 												<span className="label-caps text-ink-mute">
 													{s.tag}
 												</span>
@@ -351,11 +310,7 @@ export function Home() {
 			</section>
 
 			{/* ===== OS 3 PRODUTOS ===== */}
-			<section className="relative bg-gray-light py-20 sm:py-28 overflow-hidden">
-				<div className="pointer-events-none absolute inset-0 opacity-[0.02]">
-					<div className="corporate-grid h-full w-full" />
-				</div>
-
+			<section className="relative bg-cream-50 py-20 sm:py-28 overflow-hidden">
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 						<div className="col-span-12 lg:col-span-6">
@@ -381,7 +336,7 @@ export function Home() {
 						variants={container}
 						className="grid grid-cols-12 gap-5 sm:gap-6"
 					>
-						{products.map((p, i) => {
+						{products.map((p) => {
 							const accent = accentMap[p.tone];
 							return (
 								<motion.article
@@ -389,48 +344,8 @@ export function Home() {
 									variants={item}
 									className="col-span-12 sm:col-span-6 lg:col-span-4 relative group"
 								>
-									<div
-										className={`relative bg-white border border-gray-border rounded-b-lg overflow-hidden transition-all duration-500 card-elevated ${i % 2 === 1 ? 'lg:translate-y-8' : ''}`}
-									>
-										<div className="pointer-events-none absolute top-2 right-4 select-none">
-											<span
-												className="font-display font-black text-[clamp(3rem,5vw,4rem)] leading-none"
-												style={{
-													color: `rgba(${accent.rgb}, 0.15)`,
-												}}
-											>
-												{p.n}
-											</span>
-										</div>
-
-										<div
-											className="h-1.5 w-full"
-											style={{ background: accent.css }}
-										/>
-
+									<div className="relative bg-white border border-gray-border/60 rounded-lg overflow-hidden transition-all duration-500 card-elevated">
 										<div className="p-6 sm:p-8">
-											<div className="flex items-center gap-3 mb-3">
-												<span
-													className="h-1.5 w-1.5 rounded-full"
-													style={{
-														background: accent.css,
-													}}
-												/>
-												<span
-													className="label-caps"
-													style={{
-														color: accent.css,
-													}}
-												>
-													{p.code}
-												</span>
-												{i === 0 && (
-													<span className="label-caps px-2 py-0.5 border border-flag/40 text-flag rounded-sm ml-auto">
-														Best seller
-													</span>
-												)}
-											</div>
-
 											<p
 												className="label-caps mb-3"
 												style={{ color: accent.css }}
@@ -472,7 +387,7 @@ export function Home() {
 												))}
 											</ul>
 
-											<div className="mt-6 pt-5 border-t border-gray-border flex items-center justify-between">
+											<div className="mt-6 pt-5 border-t border-gray-border/50 flex items-center justify-between">
 												<span className="label-caps text-ink-mute">
 													PRODUTO {p.n} / 03
 												</span>

@@ -98,24 +98,11 @@ export function EventoDetalhe() {
 				) : (
 					<div
 						className="absolute inset-0"
-						style={{
-							background: gradientMap[evento.accent],
-						}}
+						style={{ background: gradientMap[evento.accent] }}
 					/>
 				)}
 				<div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/50 to-navy/95" />
-				<div className="absolute inset-0 opacity-[0.03]">
-					<div
-						className="corporate-grid h-full w-full"
-						style={{ backgroundSize: '64px 64px' }}
-					/>
-				</div>
-
-				<div className="pointer-events-none absolute -top-8 right-0 sm:right-8 select-none">
-					<span className="font-display font-black text-[clamp(8rem,20vw,18rem)] leading-none text-white/[0.04]">
-						{evento.country}
-					</span>
-				</div>
+				<div className="absolute inset-0 opacity-[0.03] grain" />
 
 				<div className="pointer-events-none absolute top-0 right-0 w-48 h-48 sm:w-80 sm:h-80 border-r border-t border-white/[0.04] rounded-tr-[100px] corner-pulse" />
 
@@ -182,15 +169,32 @@ export function EventoDetalhe() {
 							<div className="relative">
 								<div className="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-flag/40" />
 								<div className="border-l-2 border-flag pl-5">
-									<p className="text-white/50 label-caps mb-1">
+									<p className="text-white/50 label-caps mb-2">
 										EVENTO
 									</p>
-									<p className="font-display text-3xl sm:text-4xl font-black text-white leading-tight">
-										Nº{' '}
-										<span className="text-flag">
-											{String(evento.id).padStart(2, '0')}
-										</span>
-									</p>
+									<div className="flex flex-wrap gap-2">
+										{[
+											{
+												label: evento.type,
+												css: accent.css,
+											},
+											{
+												label: evento.countryName,
+												css: 'var(--color-white)',
+											},
+											{
+												label: evento.date,
+												css: 'var(--color-white)',
+											},
+										].map((p) => (
+											<span
+												key={p.label}
+												className="label-caps px-2.5 py-1 border border-white/20 text-white/80 rounded-sm hover:border-flag hover:text-flag transition-colors"
+											>
+												{p.label}
+											</span>
+										))}
+									</div>
 								</div>
 							</div>
 						</div>
@@ -201,17 +205,6 @@ export function EventoDetalhe() {
 			{/* ===== DESCRIPTION ===== */}
 			{evento.fullDescription && (
 				<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
-					<div className="pointer-events-none absolute -bottom-8 -left-8 select-none">
-						<span
-							className="font-display font-black text-[clamp(12rem,25vw,24rem)] leading-none"
-							style={{
-								color: `rgba(${accent.rgb}, 0.15)`,
-							}}
-						>
-							{String(evento.id).padStart(2, '0')}
-						</span>
-					</div>
-
 					<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 						<motion.div
 							initial="hidden"
@@ -247,7 +240,7 @@ export function EventoDetalhe() {
 											}
 										>
 											{i === 0 && (
-												<span className="float-left text-5xl sm:text-7xl font-display font-black leading-none text-flag mr-3 mt-1">
+												<span className="float-left text-5xl sm:text-7xl font-editorial font-bold leading-none text-flag mr-3 mt-1">
 													{paragraph.charAt(0)}
 												</span>
 											)}
@@ -275,11 +268,7 @@ export function EventoDetalhe() {
 
 			{/* ===== DETAILS ===== */}
 			{evento.details && evento.details.length > 0 && (
-				<section className="relative bg-gray-light py-20 sm:py-28 overflow-hidden">
-					<div className="pointer-events-none absolute inset-0 opacity-[0.02]">
-						<div className="corporate-grid h-full w-full" />
-					</div>
-
+				<section className="relative bg-cream-50 py-20 sm:py-28 overflow-hidden">
 					<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 						<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 							<div className="col-span-12 lg:col-span-5">
@@ -292,7 +281,7 @@ export function EventoDetalhe() {
 							<div className="col-span-12 lg:col-span-6 lg:col-start-7 flex items-end">
 								<p className="text-xl sm:text-2xl leading-relaxed text-ink-soft border-l-2 border-flag pl-5">
 									{evento.details.length} parâmetros
-									registados para este evento - do protocolo à
+									registados para este evento — do protocolo à
 									operação.
 								</p>
 							</div>
@@ -311,24 +300,11 @@ export function EventoDetalhe() {
 									variants={item}
 									className="col-span-12 sm:col-span-6 lg:col-span-4"
 								>
-									<div
-										className="relative border border-gray-border rounded-r-lg overflow-hidden transition-all duration-500 card-elevated h-full"
-										style={{
-											background: `color-mix(in srgb, ${accent.css} 5%, white)`,
-										}}
-									>
-										<div
-											className="absolute left-0 top-0 bottom-0 w-2"
-											style={{
-												background: accent.css,
-											}}
-										/>
-										<div className="p-5 sm:p-6 pl-7 sm:pl-8">
+									<div className="relative border border-gray-border/60 rounded-lg overflow-hidden transition-all duration-500 card-elevated bg-white">
+										<div className="p-5 sm:p-6">
 											<p
 												className="label-caps mb-1.5"
-												style={{
-													color: accent.css,
-												}}
+												style={{ color: accent.css }}
 											>
 												{d.label}
 											</p>
@@ -347,12 +323,6 @@ export function EventoDetalhe() {
 			{/* ===== GALLERY ===== */}
 			{evento.photos && evento.photos.length > 1 && (
 				<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
-					<div className="pointer-events-none absolute -top-8 -right-8 select-none">
-						<span className="font-display font-black text-[clamp(6rem,15vw,14rem)] leading-none text-flag/[0.1]">
-							GALERIA
-						</span>
-					</div>
-
 					<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 						<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 							<div className="col-span-12 lg:col-span-6">

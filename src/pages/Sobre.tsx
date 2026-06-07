@@ -18,7 +18,7 @@ const milestones = [
 	{
 		year: '2024',
 		title: 'Operação Internacional',
-		body: 'Recepção de altas delegações - incluindo a Presidente da Tanzânia e o Vice-Presidente do Banco Mundial para África.',
+		body: 'Recepção de altas delegações — incluindo a Presidente da Tanzânia e o Vice-Presidente do Banco Mundial para África.',
 		accent: 'navy' as const,
 	},
 	{
@@ -76,20 +76,7 @@ export function Sobre() {
 	return (
 		<>
 			{/* ===== HERO ===== */}
-			<section className="relative bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden">
-				<div className="pointer-events-none absolute inset-0 opacity-[0.03]">
-					<div
-						className="corporate-grid h-full w-full"
-						style={{ backgroundSize: '64px 64px' }}
-					/>
-				</div>
-
-				<div className="pointer-events-none absolute -top-8 right-0 sm:right-8 select-none">
-					<span className="font-display font-black text-[clamp(8rem,20vw,18rem)] leading-none text-white/[0.04]">
-						SOBRE
-					</span>
-				</div>
-
+			<section className="relative bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden grain">
 				<div className="pointer-events-none absolute top-0 right-0 w-48 h-48 sm:w-80 sm:h-80 border-r border-t border-white/[0.04] rounded-tr-[100px] corner-pulse" />
 
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
@@ -111,42 +98,31 @@ export function Sobre() {
 								Somos uma empresa angolana especializada em
 								viagens corporativas, logística executiva e
 								facilitação de negócios. Operamos onde outros
-								improvisam - e entregamos onde outros prometem.
+								improvisam — e entregamos onde outros prometem.
 							</p>
-
-							<div className="mt-10 flex flex-wrap gap-8 sm:gap-12">
-								{[
-									{
-										value: '10+',
-										label: 'Anos de experiência',
-									},
-									{ value: '54', label: 'Países' },
-									{ value: '1000+', label: 'Clientes' },
-								].map((s) => (
-									<div key={s.label}>
-										<p className="font-display text-4xl sm:text-5xl font-black leading-none text-white">
-											{s.value}
-										</p>
-										<p className="label-caps text-white/60 mt-1.5">
-											{s.label}
-										</p>
-									</div>
-								))}
-							</div>
 						</div>
 
 						<div className="col-span-12 lg:col-span-4 flex flex-col justify-end items-start sm:items-end pt-8 lg:pt-0">
 							<div className="relative">
 								<div className="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-flag/40" />
 								<div className="border-l-2 border-flag pl-5">
-									<p className="text-white/50 label-caps mb-1">
-										SEDE
+									<p className="text-white/50 label-caps mb-2">
+										PRESENÇA
 									</p>
-									<p className="font-display text-3xl sm:text-4xl font-black text-white leading-tight">
-										Luanda{' '}
-										<span className="text-flag">·</span>{' '}
-										Angola
-									</p>
+									<div className="flex flex-wrap gap-2">
+										{[
+											'10+ ANOS',
+											'54 PAÍSES',
+											'1000+ CLIENTES',
+										].map((p) => (
+											<span
+												key={p}
+												className="label-caps px-2.5 py-1 border border-white/20 text-white/80 rounded-sm hover:border-flag hover:text-flag transition-colors"
+											>
+												{p}
+											</span>
+										))}
+									</div>
 								</div>
 							</div>
 						</div>
@@ -156,15 +132,6 @@ export function Sobre() {
 
 			{/* ===== HISTORY ===== */}
 			<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
-				<div className="pointer-events-none absolute -bottom-8 -left-8 select-none">
-					<span
-						className="font-display font-black text-[clamp(12rem,25vw,24rem)] leading-none text-gray-border/30"
-						style={{ color: 'rgba(181, 72, 42, 0.3)' }}
-					>
-						2014
-					</span>
-				</div>
-
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<motion.div
 						initial="hidden"
@@ -188,13 +155,13 @@ export function Sobre() {
 								variants={item}
 								className="text-xl sm:text-2xl leading-relaxed text-ink-soft"
 							>
-								<span className="float-left text-5xl sm:text-7xl font-display font-black leading-none text-flag mr-3 mt-1">
+								<span className="float-left text-5xl sm:text-7xl font-editorial font-bold leading-none text-flag mr-3 mt-1">
 									A
 								</span>{' '}
 								Ola Tours nasceu em 2014, em Luanda, da
 								convicção de que o turismo corporativo em Angola
 								merecia um padrão mais elevado. Não se tratava
-								apenas de transporte - tratava-se de confiança,
+								apenas de transporte — tratava-se de confiança,
 								pontualidade e um conhecimento profundo do
 								terreno.
 							</motion.p>
@@ -228,107 +195,152 @@ export function Sobre() {
 			</section>
 
 			{/* ===== MILESTONES ===== */}
-			<section className="relative bg-gray-light py-20 sm:py-28 overflow-hidden">
-				<div className="pointer-events-none absolute inset-0 opacity-[0.02]">
-					<div className="corporate-grid h-full w-full" />
+			<section className="relative bg-cream-50 py-20 sm:py-28 overflow-hidden">
+				{/* Background decorative diamonds */}
+				<div className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.025] select-none">
+					<div className="absolute top-[12%] left-[3%] w-24 h-24 rotate-45 rounded-xl border-2 border-navy" />
+					<div className="absolute top-[45%] right-[6%] w-40 h-40 rotate-45 rounded-2xl border-2 border-flag" />
+					<div className="absolute bottom-[15%] left-[20%] w-16 h-16 rotate-45 rounded-lg border-2 border-sky" />
+					<div className="absolute top-[70%] right-[30%] w-12 h-12 rotate-45 rounded-md border-2 border-navy" />
 				</div>
 
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
-					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
-						<div className="col-span-12 lg:col-span-6">
-							<span className="accent-bar-flag block mb-4" />
-							<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
-								Marcos{' '}
-								<span className="text-flag">importantes</span>.
-							</h2>
-						</div>
-						<div className="col-span-12 lg:col-span-4 lg:col-start-9 flex items-end">
-							<p className="text-ink-mute text-sm sm:text-base leading-relaxed">
-								Da fundação à confiança institucional - uma
-								década de crescimento consistente.
-							</p>
-						</div>
-					</div>
-
 					<motion.div
 						initial="hidden"
 						whileInView="show"
-						viewport={{ once: true, margin: '-100px' }}
+						viewport={{ once: true, margin: '-80px' }}
 						variants={container}
-						className="grid grid-cols-12 gap-5 sm:gap-6"
+						className="grid grid-cols-12 gap-6 mb-14 sm:mb-20"
 					>
-						{milestones.map((m, i) => {
-							const accent = accentMap[m.accent];
-							return (
-								<motion.article
-									key={m.year}
-									variants={item}
-									className="col-span-12 sm:col-span-6 relative group"
-								>
-									<div
-										className={`relative bg-white border border-gray-border rounded-b-lg overflow-hidden transition-all duration-500 card-elevated ${i % 2 === 1 ? 'sm:translate-y-8' : ''}`}
+						<div className="col-span-12 lg:col-span-6">
+							<motion.div variants={item}>
+								<span className="accent-bar-flag block mb-4" />
+								<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
+									Marcos{' '}
+									<span className="text-flag">
+										importantes
+									</span>
+									.
+								</h2>
+							</motion.div>
+						</div>
+						<div className="col-span-12 lg:col-span-4 lg:col-start-9 flex items-end">
+							<motion.p
+								variants={item}
+								className="text-ink-mute text-sm sm:text-base leading-relaxed"
+							>
+								Da fundação à confiança institucional — uma
+								década de crescimento consistente.
+							</motion.p>
+						</div>
+					</motion.div>
+
+					<div className="relative">
+						{/* Desktop central connector line (gradient, subtle) */}
+						<div className="hidden lg:block absolute left-1/2 top-[1.75rem] bottom-8 w-px -translate-x-px bg-gradient-to-b from-gray-border via-gray-border to-transparent" />
+
+						<motion.div
+							initial="hidden"
+							whileInView="show"
+							viewport={{ once: true, margin: '-100px' }}
+							variants={container}
+						>
+							{milestones.map((m, i) => {
+								const accent = accentMap[m.accent];
+								const isLeft = i % 2 === 0;
+								return (
+									<motion.div
+										key={m.year}
+										variants={item}
+										className="relative pb-16 sm:pb-24 last:pb-0 group"
 									>
-										<div className="pointer-events-none absolute -top-2 right-4 select-none">
-											<span
-												className="font-display font-black text-[clamp(4rem,8vw,7rem)] leading-none text-gray-border/30"
+										<div className="grid grid-cols-12 gap-4 sm:gap-6">
+											{/* Diamond connector (desktop only) */}
+											<div
+												className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center justify-center z-10"
 												style={{
-													color: `rgba(${accent.rgb}, 0.3)`,
+													top: 'calc(1.5rem + 4px)',
 												}}
 											>
-												{m.year}
-											</span>
-										</div>
-
-										<div
-											className="h-1.5 w-full"
-											style={{
-												background: accent.css,
-											}}
-										/>
-
-										<div className="p-6 sm:p-8">
-											<div className="flex items-center gap-3 mb-4">
-												<span
-													className="w-8 h-px"
+												<div
+													className="w-[22px] h-[22px] rotate-45 rounded-sm border-[3px] bg-white transition-all duration-700 ease-out hover:rotate-[135deg] hover:scale-110 cursor-default"
 													style={{
-														background: `color-mix(in srgb, ${accent.css} 40%, transparent)`,
-													}}
-												/>
-												<span
-													className="label-caps"
-													style={{
-														color: accent.css,
+														borderColor: accent.css,
 													}}
 												>
-													{m.year}
-												</span>
+													<div
+														className="absolute inset-[5px] rounded-sm transition-colors duration-500"
+														style={{
+															background:
+																accent.css,
+														}}
+													/>
+												</div>
 											</div>
-											<h3 className="font-display text-2xl sm:text-3xl font-black uppercase leading-tight tracking-tight text-ink">
-												{m.title}
-											</h3>
-											<p className="mt-4 text-ink-soft leading-relaxed text-base sm:text-lg">
-												{m.body}
-											</p>
+
+											{/* Year — massive typographic element */}
+											<div
+												className={`col-span-12 lg:col-span-5 ${isLeft ? '' : 'lg:col-start-8'}`}
+											>
+												<div
+													className={`flex flex-col ${isLeft ? 'lg:items-end' : ''}`}
+												>
+													<span
+														className="font-display font-black leading-[0.78] tracking-tight text-[clamp(3.5rem,12vw,7rem)] block select-none transition-opacity duration-500 group-hover:opacity-40"
+														style={{
+															color: `color-mix(in srgb, ${accent.css} 15%, transparent)`,
+														}}
+													>
+														{m.year}
+													</span>
+													{/* Mobile accent bar (hidden desktop) */}
+													<div
+														className="lg:hidden w-10 h-1 rounded-full -mt-1 mb-3"
+														style={{
+															background:
+																accent.css,
+														}}
+													/>
+												</div>
+											</div>
+
+											{/* Center spacer (desktop only) */}
+											<div className="hidden lg:block col-span-2" />
+
+											{/* Content card */}
+											<div
+												className={`col-span-12 lg:col-span-5 ${isLeft ? 'lg:col-start-8' : ''}`}
+											>
+												<div className="relative bg-white border border-gray-border/40 rounded-xl p-6 sm:p-8 shadow-sm transition-all duration-500 hover:shadow-lg hover:-translate-y-0.5 cursor-default">
+													{/* Top accent bar */}
+													<div
+														className="absolute top-0 left-6 right-6 h-0.5 rounded-full transition-all duration-500 group-hover:left-3 group-hover:right-3"
+														style={{
+															background:
+																accent.css,
+														}}
+													/>
+													<h3 className="font-display text-xl sm:text-2xl font-black uppercase leading-tight tracking-tight text-ink pt-1">
+														{m.title}
+													</h3>
+													<p className="mt-3 text-ink-soft leading-relaxed text-sm sm:text-base">
+														{m.body}
+													</p>
+												</div>
+											</div>
 										</div>
-									</div>
-								</motion.article>
-							);
-						})}
-					</motion.div>
+									</motion.div>
+								);
+							})}
+						</motion.div>
+					</div>
 				</div>
 			</section>
 
 			{/* ===== STATS ===== */}
-			<section className="relative bg-navy py-20 sm:py-24 overflow-hidden">
+			<section className="relative bg-navy py-20 sm:py-24 overflow-hidden grain">
 				<div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 				<div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-				<div className="pointer-events-none absolute inset-0 opacity-[0.02]">
-					<div
-						className="corporate-grid h-full w-full"
-						style={{ backgroundSize: '32px 32px' }}
-					/>
-				</div>
 
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<motion.div
@@ -398,15 +410,6 @@ export function Sobre() {
 
 			{/* ===== VALUES ===== */}
 			<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
-				<div className="pointer-events-none absolute -top-8 -right-8 select-none">
-					<span
-						className="font-display font-black text-[clamp(6rem,15vw,14rem)] leading-none"
-						style={{ color: 'rgba(181, 72, 42, 0.3)' }}
-					>
-						VALORES
-					</span>
-				</div>
-
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 						<div className="col-span-12 lg:col-span-5">
@@ -440,31 +443,18 @@ export function Sobre() {
 									variants={item}
 									className={`col-span-12 md:col-span-4 ${i === 1 ? 'md:translate-y-8' : ''}`}
 								>
-									<div
-										className="relative border border-gray-border rounded-r-lg overflow-hidden transition-all duration-500 card-elevated"
-										style={{
-											background: `color-mix(in srgb, ${accent.css} 6%, white)`,
-										}}
-									>
-										<div
-											className="absolute left-0 top-0 bottom-0 w-2"
-											style={{
-												background: accent.css,
-											}}
-										/>
-
-										<div className="pointer-events-none absolute -top-2 right-4 select-none">
-											<span
-												className="font-display font-black text-[clamp(4rem,8vw,7rem)] leading-none text-gray-border/30"
-												style={{
-													color: `rgba(${accent.rgb}, 0.3)`,
-												}}
-											>
-												{v.n}
-											</span>
-										</div>
-
-										<div className="p-6 sm:p-8 pl-8 sm:pl-10">
+									<div className="relative border border-gray-border/60 rounded-lg overflow-hidden transition-all duration-500 card-elevated bg-white">
+										<div className="p-6 sm:p-8">
+											<div className="flex items-center gap-3 mb-4">
+												<span
+													className="label-caps"
+													style={{
+														color: accent.css,
+													}}
+												>
+													0{v.n}
+												</span>
+											</div>
 											<h3 className="font-display text-2xl sm:text-3xl font-black uppercase leading-tight tracking-tight text-ink">
 												{v.title}
 											</h3>

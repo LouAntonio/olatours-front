@@ -94,20 +94,7 @@ export function Contacto() {
 	return (
 		<>
 			{/* ===== HERO ===== */}
-			<section className="relative bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden">
-				<div className="pointer-events-none absolute inset-0 opacity-[0.03]">
-					<div
-						className="corporate-grid h-full w-full"
-						style={{ backgroundSize: '64px 64px' }}
-					/>
-				</div>
-
-				<div className="pointer-events-none absolute -top-8 right-0 sm:right-8 select-none">
-					<span className="font-display font-black text-[clamp(8rem,20vw,18rem)] leading-none text-white/[0.04]">
-						CONTACTO
-					</span>
-				</div>
-
+			<section className="relative bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden grain">
 				<div className="pointer-events-none absolute top-0 right-0 w-48 h-48 sm:w-80 sm:h-80 border-r border-t border-white/[0.04] rounded-tr-[100px] corner-pulse" />
 
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
@@ -131,16 +118,37 @@ export function Contacto() {
 								discreta e eficiente.
 							</p>
 						</div>
+
+						<div className="col-span-12 lg:col-span-4 flex flex-col justify-end items-start sm:items-end pt-8 lg:pt-0">
+							<div className="relative">
+								<div className="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-flag/40" />
+								<div className="border-l-2 border-flag pl-5">
+									<p className="text-white/50 label-caps mb-2">
+										CONTACTOS
+									</p>
+									<div className="flex flex-wrap gap-2">
+										{[
+											'EMAIL',
+											'TELEFONE',
+											'REDES SOCIAIS',
+										].map((p) => (
+											<span
+												key={p}
+												className="label-caps px-2.5 py-1 border border-white/20 text-white/80 rounded-sm hover:border-flag hover:text-flag transition-colors"
+											>
+												{p}
+											</span>
+										))}
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
 
 			{/* ===== CONTACT GRID + FORM ===== */}
-			<section className="relative bg-gray-light py-20 sm:py-28 overflow-hidden">
-				<div className="pointer-events-none absolute inset-0 opacity-[0.02]">
-					<div className="corporate-grid h-full w-full" />
-				</div>
-
+			<section className="relative bg-cream-50 py-20 sm:py-28 overflow-hidden">
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 						<div className="col-span-12 lg:col-span-6">
@@ -174,15 +182,8 @@ export function Contacto() {
 										<motion.div
 											key={c.key}
 											variants={item}
-											className="relative bg-white border border-gray-border rounded-b-lg overflow-hidden transition-all duration-500 card-elevated"
+											className="relative bg-white border border-gray-border/60 rounded-lg overflow-hidden transition-all duration-500 card-elevated"
 										>
-											<div
-												className="h-1.5 w-full"
-												style={{
-													background: accent.css,
-												}}
-											/>
-
 											<div className="p-5 sm:p-6">
 												{c.key === 'redes' ? (
 													<>
@@ -221,7 +222,7 @@ export function Contacto() {
 																		}
 																		target="_blank"
 																		rel="noopener noreferrer"
-																		className="flex items-center justify-between px-3.5 py-2.5 border border-gray-border rounded-sm hover:border-flag/40 hover:bg-flag/[0.02] transition-all group/link"
+																		className="flex items-center justify-between px-3.5 py-2.5 border border-gray-border/60 rounded-sm hover:border-flag/40 hover:bg-flag/[0.02] transition-all group/link"
 																	>
 																		<div>
 																			<p className="label-caps text-ink-mute text-[10px]">
@@ -262,7 +263,6 @@ export function Contacto() {
 																color: accent.css,
 															}}
 														>
-															{/* Pin */}
 															{c.key ===
 																'morada' && (
 																<svg
@@ -277,7 +277,6 @@ export function Contacto() {
 																	/>
 																</svg>
 															)}
-															{/* Envelope */}
 															{c.key ===
 																'email' && (
 																<svg
@@ -292,7 +291,6 @@ export function Contacto() {
 																	/>
 																</svg>
 															)}
-															{/* Phone */}
 															{c.key ===
 																'telefone' && (
 																<svg
@@ -348,10 +346,8 @@ export function Contacto() {
 								whileInView="show"
 								viewport={{ once: true, margin: '-80px' }}
 								variants={item}
-								className="bg-white border border-gray-border rounded-b-lg overflow-hidden card-elevated"
+								className="bg-white border border-gray-border/60 rounded-lg overflow-hidden card-elevated"
 							>
-								<div className="h-1.5 w-full bg-flag" />
-
 								<div className="p-6 sm:p-8">
 									<p className="label-caps text-ink-mute mb-1">
 										FORMULÁRIO
@@ -520,9 +516,8 @@ export function Contacto() {
 						whileInView="show"
 						viewport={{ once: true, margin: '-100px' }}
 						variants={item}
-						className="mt-5 sm:mt-6 bg-white border border-gray-border rounded-b-lg overflow-hidden card-elevated"
+						className="mt-5 sm:mt-6 bg-white border border-gray-border/60 rounded-lg overflow-hidden card-elevated"
 					>
-						<div className="h-1.5 w-full bg-flag" />
 						<iframe
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.6917203068256!2d13.2321762!3d-8.815004400000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1a51f3b9ac28ac0b%3A0xc9c28295fdc7e888!2sOlatours!5e0!3m2!1spt-PT!2sao!4v1780525942521!5m2!1spt-PT!2sao"
 							width="100%"

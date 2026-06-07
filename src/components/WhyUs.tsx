@@ -14,7 +14,7 @@ const pillars = [
 		n: '02',
 		key: 'Resultados',
 		title: 'Resultados garantidos',
-		body: 'Conhecemos Angola e o continente africano. Entendemos o sistema e entregamos soluções completas - sem improviso. Cada operação tem dono, plano B e relatório final.',
+		body: 'Conhecemos Angola e o continente africano. Entendemos o sistema e entregamos soluções completas — sem improviso. Cada operação tem dono, plano B e relatório final.',
 		tag: 'EXECUÇÃO NO TERRENO',
 		color: 'flag' as const,
 	},
@@ -52,21 +52,8 @@ export function WhyUs() {
 	return (
 		<section
 			id="porque-nos"
-			className="relative bg-gray-light py-20 sm:py-28 overflow-hidden"
+			className="relative bg-cream py-20 sm:py-28 overflow-hidden"
 		>
-			<div className="pointer-events-none absolute -top-8 -right-8 select-none">
-				<span
-					className="font-display font-black text-[clamp(6rem,15vw,14rem)] leading-none"
-					style={{ color: 'rgba(181, 72, 42, 0.3)' }}
-				>
-					PORQUÊ
-				</span>
-			</div>
-
-			<div className="pointer-events-none absolute inset-0 opacity-[0.02]">
-				<div className="corporate-grid h-full w-full" />
-			</div>
-
 			<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 				<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
 					<div className="col-span-12 lg:col-span-5">
@@ -83,7 +70,7 @@ export function WhyUs() {
 								Somos uma empresa angolana especializada em
 								viagens corporativas, logística corporativa,
 								mobilidade executiva e facilitação de negócios.
-								Operamos onde outros improvisam - e entregamos
+								Operamos onde outros improvisam — e entregamos
 								onde outros prometem.
 							</p>
 							<div className="mt-6 flex items-center gap-3">
@@ -111,36 +98,9 @@ export function WhyUs() {
 								variants={item}
 								className={`col-span-12 md:col-span-4 ${i === 1 ? 'md:translate-y-8' : ''}`}
 							>
-								<div
-									className="relative border border-gray-border rounded-r-lg overflow-hidden transition-all duration-500 card-elevated"
-									style={{
-										background: `color-mix(in srgb, ${accent.css} 6%, white)`,
-									}}
-								>
-									<div
-										className="absolute left-0 top-0 bottom-0 w-2"
-										style={{ background: accent.css }}
-									/>
-
-									<div className="pointer-events-none absolute -top-2 right-4 select-none">
-										<span
-											className="font-display font-black text-[clamp(4rem,8vw,7rem)] leading-none"
-											style={{
-												color: `rgba(${accent.rgb}, 0.3)`,
-											}}
-										>
-											{p.n}
-										</span>
-									</div>
-
-									<div className="p-6 sm:p-8 pl-8 sm:pl-10">
+								<div className="relative border border-gray-border/60 rounded-lg overflow-hidden transition-all duration-500 card-elevated bg-white">
+									<div className="p-6 sm:p-8">
 										<div className="flex items-center gap-3 mb-4">
-											<span
-												className="h-px flex-1"
-												style={{
-													background: `color-mix(in srgb, ${accent.css} 40%, transparent)`,
-												}}
-											/>
 											<span
 												className="label-caps"
 												style={{ color: accent.css }}
@@ -154,6 +114,14 @@ export function WhyUs() {
 										<p className="mt-4 text-ink-soft leading-relaxed text-base sm:text-lg">
 											{p.body}
 										</p>
+										<div className="mt-6 pt-5 border-t border-gray-border/50">
+											<span
+												className="label-caps"
+												style={{ color: accent.css }}
+											>
+												0{p.n}
+											</span>
+										</div>
 									</div>
 								</div>
 							</motion.article>

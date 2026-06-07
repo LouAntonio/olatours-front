@@ -3,9 +3,9 @@ import type { ReactNode } from 'react';
 type Variant = 'sky' | 'flag' | 'navy' | 'outline' | 'white';
 
 const variants: Record<Variant, string> = {
-	sky: 'bg-sky text-white',
+	sky: 'bg-sky/10 text-sky border border-sky/20',
 	flag: 'bg-flag text-white',
-	navy: 'bg-navy text-white',
+	navy: 'bg-navy/10 text-navy border border-navy/20',
 	outline: 'bg-transparent text-ink border border-gray-border',
 	white: 'bg-white text-ink border border-gray-border',
 };
