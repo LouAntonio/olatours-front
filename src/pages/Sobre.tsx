@@ -81,7 +81,7 @@ export function Sobre() {
 
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<div className="grid grid-cols-12 gap-6">
-						<div className="col-span-12">
+						<div className="col-span-12 lg:col-span-8">
 							<div className="flex items-center gap-3 mb-6">
 								<span className="h-px w-8 bg-flag/40" />
 								<span className="label-caps text-flag tracking-[0.18em]">
@@ -100,25 +100,30 @@ export function Sobre() {
 								facilitação de negócios. Operamos onde outros
 								improvisam — e entregamos onde outros prometem.
 							</p>
+						</div>
 
-							<div className="mt-10 flex flex-wrap gap-8 sm:gap-12">
-								{[
-									{
-										value: '10+',
-										label: 'Anos de experiência',
-									},
-									{ value: '54', label: 'Países' },
-									{ value: '1000+', label: 'Clientes' },
-								].map((s) => (
-									<div key={s.label}>
-										<p className="font-display text-4xl sm:text-5xl font-black leading-none text-white">
-											{s.value}
-										</p>
-										<p className="label-caps text-white/60 mt-1.5">
-											{s.label}
-										</p>
+						<div className="col-span-12 lg:col-span-4 flex flex-col justify-end items-start sm:items-end pt-8 lg:pt-0">
+							<div className="relative">
+								<div className="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-flag/40" />
+								<div className="border-l-2 border-flag pl-5">
+									<p className="text-white/50 label-caps mb-2">
+										PRESENÇA
+									</p>
+									<div className="flex flex-wrap gap-2">
+										{[
+											'10+ ANOS',
+											'54 PAÍSES',
+											'1000+ CLIENTES',
+										].map((p) => (
+											<span
+												key={p}
+												className="label-caps px-2.5 py-1 border border-white/20 text-white/80 rounded-sm hover:border-flag hover:text-flag transition-colors"
+											>
+												{p}
+											</span>
+										))}
 									</div>
-								))}
+								</div>
 							</div>
 						</div>
 					</div>

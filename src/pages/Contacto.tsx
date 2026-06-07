@@ -118,6 +118,31 @@ export function Contacto() {
 								discreta e eficiente.
 							</p>
 						</div>
+
+						<div className="col-span-12 lg:col-span-4 flex flex-col justify-end items-start sm:items-end pt-8 lg:pt-0">
+							<div className="relative">
+								<div className="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-flag/40" />
+								<div className="border-l-2 border-flag pl-5">
+									<p className="text-white/50 label-caps mb-2">
+										CONTACTOS
+									</p>
+									<div className="flex flex-wrap gap-2">
+										{[
+											'EMAIL',
+											'TELEFONE',
+											'REDES SOCIAIS',
+										].map((p) => (
+											<span
+												key={p}
+												className="label-caps px-2.5 py-1 border border-white/20 text-white/80 rounded-sm hover:border-flag hover:text-flag transition-colors"
+											>
+												{p}
+											</span>
+										))}
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>

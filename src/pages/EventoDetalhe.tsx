@@ -169,15 +169,32 @@ export function EventoDetalhe() {
 							<div className="relative">
 								<div className="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-flag/40" />
 								<div className="border-l-2 border-flag pl-5">
-									<p className="text-white/50 label-caps mb-1">
+									<p className="text-white/50 label-caps mb-2">
 										EVENTO
 									</p>
-									<p className="font-display text-3xl sm:text-4xl font-black text-white leading-tight">
-										Nº{' '}
-										<span className="text-flag">
-											{String(evento.id).padStart(2, '0')}
-										</span>
-									</p>
+									<div className="flex flex-wrap gap-2">
+										{[
+											{
+												label: evento.type,
+												css: accent.css,
+											},
+											{
+												label: evento.countryName,
+												css: 'var(--color-white)',
+											},
+											{
+												label: evento.date,
+												css: 'var(--color-white)',
+											},
+										].map((p) => (
+											<span
+												key={p.label}
+												className="label-caps px-2.5 py-1 border border-white/20 text-white/80 rounded-sm hover:border-flag hover:text-flag transition-colors"
+											>
+												{p.label}
+											</span>
+										))}
+									</div>
 								</div>
 							</div>
 						</div>

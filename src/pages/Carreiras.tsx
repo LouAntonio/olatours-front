@@ -97,20 +97,7 @@ export function Carreiras() {
 
 	return (
 		<>
-			<section className="relative bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden">
-				<div className="pointer-events-none absolute inset-0 opacity-[0.03]">
-					<div
-						className="corporate-grid h-full w-full"
-						style={{ backgroundSize: '64px 64px' }}
-					/>
-				</div>
-
-				<div className="pointer-events-none absolute -top-8 right-0 sm:right-8 select-none">
-					<span className="font-display font-black text-[clamp(8rem,20vw,18rem)] leading-none text-white/[0.04]">
-						CARREIRAS
-					</span>
-				</div>
-
+			<section className="relative bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden grain">
 				<div className="pointer-events-none absolute top-0 right-0 w-48 h-48 sm:w-80 sm:h-80 border-r border-t border-white/[0.04] rounded-tr-[100px] corner-pulse" />
 
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
@@ -147,6 +134,32 @@ export function Carreiras() {
 								>
 									carreiras@olatours.co.ao
 								</a>
+							</div>
+						</div>
+
+						<div className="col-span-12 lg:col-span-4 flex flex-col justify-end items-start sm:items-end pt-8 lg:pt-0">
+							<div className="relative">
+								<div className="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-flag/40" />
+								<div className="border-l-2 border-flag pl-5">
+									<p className="text-white/50 label-caps mb-2">
+										VALORES
+									</p>
+									<div className="flex flex-wrap gap-2">
+										{[
+											'CRESCIMENTO',
+											'IMPACTO',
+											'ESTABILIDADE',
+											'CULTURA',
+										].map((p) => (
+											<span
+												key={p}
+												className="label-caps px-2.5 py-1 border border-white/20 text-white/80 rounded-sm hover:border-flag hover:text-flag transition-colors"
+											>
+												{p}
+											</span>
+										))}
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
