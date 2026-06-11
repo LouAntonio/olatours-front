@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'motion/react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { motion as m, stagger } from '../styles/tokens';
 
 type GalleryItem = {
@@ -97,87 +97,239 @@ function shuffle<T>(arr: T[]): T[] {
 
 export function Gallery() {
 	const [items] = useState(() => shuffle(IMAGES));
+	const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+	const current = selectedIndex !== null ? items[selectedIndex] : null;
+	const total = items.length;
+
+	useEffect(() => {
+		if (selectedIndex === null) return;
+
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') {
+				setSelectedIndex(null);
+				return;
+			}
+			if (e.key === 'ArrowLeft') {
+				setSelectedIndex((prev) =>
+					prev !== null ? (prev - 1 + total) % total : null,
+				);
+				return;
+			}
+			if (e.key === 'ArrowRight') {
+				setSelectedIndex((prev) =>
+					prev !== null ? (prev + 1) % total : null,
+				);
+			}
+		};
+
+		document.addEventListener('keydown', handleKeyDown);
+		return () => document.removeEventListener('keydown', handleKeyDown);
+	}, [selectedIndex, total]);
+
+	useEffect(() => {
+		if (selectedIndex !== null) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = '';
+		}
+		return () => {
+			document.body.style.overflow = '';
+		};
+	}, [selectedIndex]);
 
 	return (
-		<section className="relative bg-cream-50 py-20 sm:py-28 overflow-hidden">
-			<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
-				<motion.div
-					initial="hidden"
-					whileInView="show"
-					viewport={{ once: true, margin: '-80px' }}
-					variants={{
-						hidden: {},
-						show: {
-							transition: { staggerChildren: stagger.wide },
-						},
-					}}
-				>
+		<>
+			<section className="relative bg-cream-50 py-20 sm:py-28 overflow-hidden">
+				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<motion.div
+						initial="hidden"
+						whileInView="show"
+						viewport={{ once: true, margin: '-80px' }}
 						variants={{
-							hidden: { opacity: 0, y: 20 },
+							hidden: {},
 							show: {
-								opacity: 1,
-								y: 0,
-								transition: {
-									duration: m.duration.base,
-									ease: m.ease.out,
-								},
+								transition: { staggerChildren: stagger.wide },
 							},
 						}}
-						className="flex items-center gap-4 mb-8 sm:mb-10"
 					>
-						<span className="h-px w-8 bg-sky/60" />
-						<span className="label-caps text-ink-mute tracking-[0.15em]">
-							GALERIA
+						<motion.div
+							variants={{
+								hidden: { opacity: 0, y: 20 },
+								show: {
+									opacity: 1,
+									y: 0,
+									transition: {
+										duration: m.duration.base,
+										ease: m.ease.out,
+									},
+								},
+							}}
+							className="flex items-center gap-4 mb-8 sm:mb-10"
+						>
+							<span className="h-px w-8 bg-sky/60" />
+							<span className="label-caps text-ink-mute tracking-[0.15em]">
+								GALERIA
+							</span>
+							<span className="h-px flex-1 bg-gray-border" />
+						</motion.div>
+
+						<motion.h2
+							variants={{
+								hidden: { opacity: 0, y: 20 },
+								show: {
+									opacity: 1,
+									y: 0,
+									transition: {
+										duration: m.duration.base,
+										ease: m.ease.out,
+										delay: 0.1,
+									},
+								},
+							}}
+							className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2rem,5vw,3.5rem)] text-ink max-w-2xl mb-12 sm:mb-16"
+						>
+							Momentos que{' '}
+							<span className="text-flag">definem</span> a nossa
+							jornada.
+						</motion.h2>
+					</motion.div>
+				</div>
+
+				<div className="gallery-grid mx-auto max-w-[1200px] px-5 sm:px-8">
+					{items.map((img, i) => (
+						<motion.div
+							key={`${img.src}-${i}`}
+							initial={{ opacity: 0, y: 24 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true, margin: '-50px' }}
+							transition={{
+								duration: m.duration.slow,
+								ease: m.ease.out,
+								delay: i * 0.04,
+							}}
+							onClick={() => setSelectedIndex(i)}
+							className="gallery-item group relative overflow-hidden rounded-lg cursor-pointer"
+						>
+							<img
+								src={img.src}
+								alt={img.alt}
+								loading="lazy"
+								className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+							/>
+							<div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors duration-500 pointer-events-none" />
+						</motion.div>
+					))}
+				</div>
+			</section>
+
+			<AnimatePresence>
+				{selectedIndex !== null && current && (
+					<motion.div
+						key="lightbox"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						transition={{ duration: m.duration.base, ease: m.ease.out }}
+						onClick={() => setSelectedIndex(null)}
+						className="fixed inset-0 z-50 flex items-center justify-center lightbox-overlay"
+					>
+						<button
+							onClick={() => setSelectedIndex(null)}
+							className="fixed top-4 right-4 sm:top-6 sm:right-6 lightbox-btn z-10"
+							aria-label="Fechar"
+						>
+							<svg
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth="1.5"
+								className="h-5 w-5"
+							>
+								<path d="M6 6l12 12M18 6l-12 12" />
+							</svg>
+						</button>
+
+						<button
+							onClick={(e) => {
+								e.stopPropagation();
+								setSelectedIndex((prev) =>
+									prev !== null
+										? (prev - 1 + total) % total
+										: null,
+								);
+							}}
+							className="fixed left-4 sm:left-6 top-1/2 -translate-y-1/2 lightbox-btn z-10"
+							aria-label="Anterior"
+						>
+							<svg
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth="1.5"
+								className="h-5 w-5"
+							>
+								<path d="M15 6l-6 6 6 6" />
+							</svg>
+						</button>
+
+						<AnimatePresence mode="wait">
+							<motion.img
+								key={selectedIndex}
+								src={current.src.replace(
+									'w=600&q=75',
+									'w=1200&q=80',
+								)}
+								alt={current.alt}
+								initial={{ opacity: 0, scale: 0.93 }}
+								animate={{ opacity: 1, scale: 1 }}
+								exit={{ opacity: 0, scale: 0.93 }}
+								transition={{
+									duration: m.duration.slow,
+									ease: m.ease.out,
+								}}
+								onClick={(e) => e.stopPropagation()}
+								className="max-h-[85vh] max-w-[90vw] w-auto h-auto object-contain rounded-lg shadow-2xl select-none"
+								draggable={false}
+							/>
+						</AnimatePresence>
+
+						<button
+							onClick={(e) => {
+								e.stopPropagation();
+								setSelectedIndex((prev) =>
+									prev !== null
+										? (prev + 1) % total
+										: null,
+								);
+							}}
+							className="fixed right-4 sm:right-6 top-1/2 -translate-y-1/2 lightbox-btn z-10"
+							aria-label="Seguinte"
+						>
+							<svg
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth="1.5"
+								className="h-5 w-5"
+							>
+								<path d="M9 6l6 6-6 6" />
+							</svg>
+						</button>
+
+						<span className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 label-caps text-white/40 tracking-wider z-10">
+							{String(selectedIndex + 1).padStart(2, '0')} /{' '}
+							{String(total).padStart(2, '0')}
 						</span>
-						<span className="h-px flex-1 bg-gray-border" />
-					</motion.div>
 
-					<motion.h2
-						variants={{
-							hidden: { opacity: 0, y: 20 },
-							show: {
-								opacity: 1,
-								y: 0,
-								transition: {
-									duration: m.duration.base,
-									ease: m.ease.out,
-									delay: 0.1,
-								},
-							},
-						}}
-						className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2rem,5vw,3.5rem)] text-ink max-w-2xl mb-12 sm:mb-16"
-					>
-						Momentos que <span className="text-flag">definem</span>{' '}
-						a nossa jornada.
-					</motion.h2>
-				</motion.div>
-			</div>
-
-			<div className="gallery-grid mx-auto max-w-[1200px] px-5 sm:px-8">
-				{items.map((img, i) => (
-					<motion.div
-						key={`${img.src}-${i}`}
-						initial={{ opacity: 0, y: 24 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true, margin: '-50px' }}
-						transition={{
-							duration: m.duration.slow,
-							ease: m.ease.out,
-							delay: i * 0.04,
-						}}
-						className="gallery-item group relative overflow-hidden rounded-lg"
-					>
-						<img
-							src={img.src}
-							alt={img.alt}
-							loading="lazy"
-							className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-						/>
-						<div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors duration-500 pointer-events-none" />
+						{current.alt && (
+							<span className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 text-white/50 text-sm max-w-xs leading-relaxed z-10 hidden sm:block">
+								{current.alt}
+							</span>
+						)}
 					</motion.div>
-				))}
-			</div>
-		</section>
+				)}
+			</AnimatePresence>
+		</>
 	);
 }
