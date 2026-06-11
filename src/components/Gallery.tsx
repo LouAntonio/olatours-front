@@ -95,7 +95,7 @@ function shuffle<T>(arr: T[]): T[] {
 	return a;
 }
 
-	export function Gallery() {
+export function Gallery() {
 	const [items] = useState(() => shuffle(IMAGES));
 	const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
@@ -209,7 +209,7 @@ function shuffle<T>(arr: T[]): T[] {
 								delay: i * 0.04,
 							}}
 							onClick={() => setSelectedIndex(i)}
-							className="gallery-item group relative overflow-hidden rounded-lg cursor-pointer"
+							className="gallery-item group relative overflow-hidden rounded-lg cursor-zoom-in"
 						>
 							<img
 								src={img.src}
@@ -230,7 +230,10 @@ function shuffle<T>(arr: T[]): T[] {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
-						transition={{ duration: m.duration.base, ease: m.ease.out }}
+						transition={{
+							duration: m.duration.base,
+							ease: m.ease.out,
+						}}
 						onClick={() => setSelectedIndex(null)}
 						className="fixed inset-0 z-50 flex items-center justify-center bg-ink/95 lightbox-overlay"
 					>
@@ -302,9 +305,7 @@ function shuffle<T>(arr: T[]): T[] {
 							onClick={(e) => {
 								e.stopPropagation();
 								setSelectedIndex((prev) =>
-									prev !== null
-										? (prev + 1) % total
-										: null,
+									prev !== null ? (prev + 1) % total : null,
 								);
 							}}
 							className="fixed right-4 sm:right-6 top-1/2 -translate-y-1/2 lightbox-btn z-10"
