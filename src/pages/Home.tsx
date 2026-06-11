@@ -4,6 +4,7 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { Cover } from '../components/Cover';
 import { Testimonials } from '../components/Testimonials';
 import { PartnersSlider } from '../components/PartnersSlider';
+import { Gallery } from '../components/Gallery';
 import { Button } from '../components/Button';
 
 type Tone = 'flag' | 'navy' | 'sky';
@@ -249,6 +250,7 @@ export function Home() {
 
 			<Testimonials />
 			<PartnersSlider />
+			<Gallery />
 		</>
 	);
 }
