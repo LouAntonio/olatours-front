@@ -95,7 +95,7 @@ function shuffle<T>(arr: T[]): T[] {
 	return a;
 }
 
-export function Gallery() {
+	export function Gallery() {
 	const [items] = useState(() => shuffle(IMAGES));
 	const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
@@ -232,7 +232,7 @@ export function Gallery() {
 						exit={{ opacity: 0 }}
 						transition={{ duration: m.duration.base, ease: m.ease.out }}
 						onClick={() => setSelectedIndex(null)}
-						className="fixed inset-0 z-50 flex items-center justify-center lightbox-overlay"
+						className="fixed inset-0 z-50 flex items-center justify-center bg-ink/95 lightbox-overlay"
 					>
 						<button
 							onClick={() => setSelectedIndex(null)}
@@ -274,13 +274,8 @@ export function Gallery() {
 						</button>
 
 						<AnimatePresence mode="wait">
-							<motion.img
+							<motion.div
 								key={selectedIndex}
-								src={current.src.replace(
-									'w=600&q=75',
-									'w=1200&q=80',
-								)}
-								alt={current.alt}
 								initial={{ opacity: 0, scale: 0.93 }}
 								animate={{ opacity: 1, scale: 1 }}
 								exit={{ opacity: 0, scale: 0.93 }}
@@ -289,9 +284,18 @@ export function Gallery() {
 									ease: m.ease.out,
 								}}
 								onClick={(e) => e.stopPropagation()}
-								className="max-h-[85vh] max-w-[90vw] w-auto h-auto object-contain rounded-lg shadow-2xl select-none"
-								draggable={false}
-							/>
+								className="max-h-[85vh] max-w-[90vw] w-auto h-auto"
+							>
+								<img
+									src={current.src.replace(
+										'w=600&q=75',
+										'w=1200&q=80',
+									)}
+									alt={current.alt}
+									className="relative w-auto h-auto max-h-[85vh] max-w-[90vw] object-contain rounded-lg shadow-2xl select-none"
+									draggable={false}
+								/>
+							</motion.div>
 						</AnimatePresence>
 
 						<button
