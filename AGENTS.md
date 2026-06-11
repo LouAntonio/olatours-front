@@ -20,9 +20,9 @@ CI runs `lint → type-check → format:check → build` on push/PR to `main` an
 ## Project layout
 
 - `index.html` → mounts `src/main.tsx` → `BrowserRouter` + renders `src/App.tsx`.
-- `src/App.tsx` — composes `SiteHeader`, `<Routes>` with 7 routes (Home, Sobre, Agenda, EventoDetalhe, Servicos, Produtos, Contacto), and `Footer`.
-- `src/pages/` — one PascalCase file per route (`Home.tsx`, `Sobre.tsx`, `Agenda.tsx`, `EventoDetalhe.tsx`, `Servicos.tsx`, `Produtos.tsx`, `Contacto.tsx`).
-- `src/components/` — reusable sections used across pages (`Cover.tsx`, `SiteHeader.tsx`, `Footer.tsx`, `Services.tsx`, `Products.tsx`, `WhyUs.tsx`, `Testimonials.tsx`, `Marquee.tsx`, `Button.tsx`, `Logo.tsx`, `Badge.tsx`, `AfricaMap.tsx`).
+- `src/App.tsx` — composes `SiteHeader`, `<Routes>` with 8 routes (Home, Sobre, Agenda, EventoDetalhe, Servicos, Produtos, Contacto, Carreiras), and `Footer`.
+- `src/pages/` — one PascalCase file per route (`Home.tsx`, `Sobre.tsx`, `Agenda.tsx`, `EventoDetalhe.tsx`, `Servicos.tsx`, `Produtos.tsx`, `Contacto.tsx`, `Carreiras.tsx`).
+- `src/components/` — reusable sections used across pages (`Cover.tsx`, `SiteHeader.tsx`, `Footer.tsx`, `Services.tsx`, `Products.tsx`, `WhyUs.tsx`, `Testimonials.tsx`, `Marquee.tsx`, `Button.tsx`, `Logo.tsx`, `Badge.tsx`, `AfricaMap.tsx`, `Gallery.tsx`, `PartnersSlider.tsx`).
 - `src/data/` — mock data layer (`events.ts` with `fetchEventos()`, `fetchEventoById()`).
 - `src/hooks/` — `useScrollToTop.ts`, `useDocumentTitle.ts`.
 - `src/styles/tokens.ts` — JS-side mirror of design tokens (colors, fonts, motion durations/eases, stagger).
@@ -32,11 +32,11 @@ CI runs `lint → type-check → format:check → build` on push/PR to `main` an
 
 ## Design system
 
-Brand colors (use as Tailwind classes, e.g. `bg-navy`, `text-flag`): `sky`/`sky-dark`/`sky-50`, `flag`/`terracotta`/`flag-dark`/`flag-50`, `navy`/`navy-dark`/`navy-50`, `ink`/`ink-soft`/`ink-mute`, `white`, `gray-light`/`gray-border`/`gray-border-soft`. Full hex values in `src/index.css` (`@theme` block) and `src/styles/tokens.ts`.
+Brand colors (use as Tailwind classes, e.g. `bg-navy`, `text-flag`): `sky`/`sky-dark`/`sky-50`, `flag`/`terracotta`/`flag-dark`/`flag-50`, `navy`/`navy-dark`/`navy-50`, `ink`/`ink-soft`/`ink-mute`, `white`, `cream`/`cream-50`, `sand`/`sand-50`, `gray-light`/`gray-border`/`gray-border-soft`. Full hex values in `src/index.css` (`@theme` block) and `src/styles/tokens.ts`.
 
-Fonts (loaded via Google Fonts in `index.html`): Barlow (sans default), Barlow Condensed (`font-display`). Utility classes: `font-display`, `eyebrow`, `label-caps`.
+Fonts (loaded via Google Fonts in `index.html`): Barlow (sans default), Barlow Condensed (`font-display`), EB Garamond (`font-editorial`). Utility classes: `font-display`, `font-editorial`, `eyebrow`, `label-caps`.
 
-Custom effects defined in `src/index.css`: `corporate-grid`, `card-elevated`, `stat-glow`, `marquee-track`/`marquee-track-slow`, `pulse-ring`/`pulse-dot`, `hero-zoom`, `reveal-up`, `count-in`, `corner-pulse`, `accent-bar`/`accent-bar-flag`, `dash-flag`, `geo-diamond`/`geo-diamond-subtle`, `rule`/`rule-strong`/`section-rule`/`section-rule-strong`/`hairline`.
+Custom effects defined in `src/index.css`: `corporate-grid`, `card-elevated`, `stat-glow`, `marquee-track`/`marquee-track-slow`, `marquee-container`, `pulse-ring`/`pulse-dot`, `hero-zoom`, `reveal-up`, `count-in`, `corner-pulse`, `accent-bar`/`accent-bar-flag`, `dash-flag`, `geo-diamond`/`geo-diamond-subtle`, `rule`/`rule-strong`/`section-rule`/`section-rule-strong`/`hairline`, `grain`, `partner-logo`, `lightbox-overlay`, `lightbox-btn`, `gallery-grid`, `gallery-item`.
 
 When adding a new visual element, prefer extending the `@theme` block + utility classes here over component-local styles. `src/App.css` is minimal (`.app-shell` flex layout only).
 

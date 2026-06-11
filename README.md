@@ -11,15 +11,16 @@ Site multi-página da **Ola Tours** — operadora angolana de viagens corporativ
 
 Aplicação _front-end_ que serve a presença pública da Ola Tours. Concebida com uma estética corporativa institucional — tipografia condensada, grelhas editoriais, blocos de cor fortes e animações de _scroll_ — distribuída em 7 páginas:
 
-| Rota          | Página        | Descrição                                                   |
-| ------------- | ------------- | ----------------------------------------------------------- |
-| `/`           | Home          | Capa, história, serviços, produtos, porquê nós, testemunhos |
-| `/sobre`      | Sobre         | História, marcos, estatísticas, valores                     |
-| `/agenda`     | Agenda        | Lista de eventos (mock API)                                 |
-| `/agenda/:id` | EventoDetalhe | Detalhe do evento com galeria                               |
-| `/servicos`   | Serviços      | Turismo de Negócios, Investimento, Frota                    |
-| `/produtos`   | Produtos      | Mobilidade Corporativa, Missões, Eventos                    |
-| `/contacto`   | Contacto      | Formulário, contactos, mapa Google                          |
+| Rota          | Página        | Descrição                                                              |
+| ------------- | ------------- | ---------------------------------------------------------------------- |
+| `/`           | Home          | Capa, história, serviços, testemunhos, parceiros, galeria              |
+| `/sobre`      | Sobre         | História, marcos, estatísticas, valores                                |
+| `/agenda`     | Agenda        | Lista de eventos (mock API)                                            |
+| `/agenda/:id` | EventoDetalhe | Detalhe do evento com galeria                                          |
+| `/servicos`   | Serviços      | Turismo de Negócios, Investimento, Frota                               |
+| `/produtos`   | Produtos      | Mobilidade Corporativa, Missões, Eventos                               |
+| `/contacto`   | Contacto      | Formulário, contactos, redes sociais, mapa Google                      |
+| `/carreiras`  | Carreiras     | Recrutamento, valores, áreas de interesse, candidatura espontânea       |
 
 A aplicação é estática: não tem _backend_ real — os dados de eventos são mockados em `src/data/events.ts` com delays simulados. Sem testes automatizados, sem i18n.
 
@@ -63,21 +64,24 @@ A versão publicada está em **<https://olatours.co.ao>**.
 │   ├── styles/
 │   │   └── tokens.ts          · espelho JS dos tokens de design
 │   ├── pages/
-│   │   ├── Home.tsx           · página inicial (Cover + serviços + produtos + WhyUs + Testimonials)
+│   │   ├── Home.tsx           · página inicial (Cover + história + serviços + parceiros + galeria + testemunhos)
 │   │   ├── Sobre.tsx          · sobre a empresa
 │   │   ├── Agenda.tsx         · listagem de eventos
 │   │   ├── EventoDetalhe.tsx  · detalhe de evento individual
 │   │   ├── Servicos.tsx       · wrapper do componente Services
 │   │   ├── Produtos.tsx       · wrapper do componente Products
-│   │   └── Contacto.tsx       · formulário + contactos + mapa
+│   │   ├── Contacto.tsx       · formulário + contactos + redes sociais + mapa
+│   │   └── Carreiras.tsx      · recrutamento + candidatura espontânea
 │   ├── components/
 │   │   ├── AfricaMap.tsx      · SVG decorativo do continente africano
 │   │   ├── Badge.tsx          · etiqueta com variantes de cor
 │   │   ├── Button.tsx         · botão polimórfico (button / a)
 │   │   ├── Cover.tsx          · hero com slideshow + overlay
 │   │   ├── Footer.tsx         · rodapé institucional completo
+│   │   ├── Gallery.tsx        · grelha de imagens com lightbox
 │   │   ├── Logo.tsx           · wordmark com variantes de tamanho
 │   │   ├── Marquee.tsx        · faixa animada de palavras
+│   │   ├── PartnersSlider.tsx · slider de parceiros institucionais
 │   │   ├── Products.tsx       · grelha de 3 produtos
 │   │   ├── Services.tsx       · grelha de 3 serviços
 │   │   ├── SiteHeader.tsx     · header fixo com navegação
@@ -114,15 +118,16 @@ Ao adicionar um elemento visual novo, **estender primeiro o `@theme` em `src/ind
 
 ## Páginas principais
 
-| Página (Rota)          | Componentes utilizados                                                    |
-| ---------------------- | ------------------------------------------------------------------------- |
-| Home (`/`)             | `Cover`, secção história, `Services`, `Products`, `WhyUs`, `Testimonials` |
-| Sobre (`/sobre`)       | Hero, história, marcos, estatísticas, valores                             |
-| Agenda (`/agenda`)     | Hero, grelha de eventos (fetch), CTA                                      |
-| Evento (`/agenda/:id`) | Hero dinâmico, descrição, ficha técnica, galeria                          |
-| Serviços (`/servicos`) | `Services` (wrapper)                                                      |
-| Produtos (`/produtos`) | `Products` (wrapper)                                                      |
-| Contacto (`/contacto`) | Hero, cards de contacto, formulário, mapa Google                          |
+| Página (Rota)          | Componentes utilizados                                                                   |
+| ---------------------- | --------------------------------------------------------------------------------------- |
+| Home (`/`)             | `Cover`, secção história, `Testimonials`, `PartnersSlider`, `Gallery`                    |
+| Sobre (`/sobre`)       | Hero, história, marcos, estatísticas, valores                                           |
+| Agenda (`/agenda`)     | Hero, grelha de eventos (fetch), CTA                                                    |
+| Evento (`/agenda/:id`) | Hero dinâmico, descrição, ficha técnica, galeria                                        |
+| Serviços (`/servicos`) | `Services` (wrapper)                                                                    |
+| Produtos (`/produtos`) | `Products` (wrapper)                                                                    |
+| Contacto (`/contacto`) | Hero, cards de contacto, formulário, redes sociais, mapa Google                         |
+| Carreiras (`/carreiras`)| Hero, valores, áreas de interesse, formulário de candidatura                           |
 
 ---
 
@@ -154,7 +159,7 @@ npm run preview    # servir dist/ localmente
 | `npm run preview`      | Serve `dist/` localmente.                       |
 | `npm run type-check`   | `tsc -b --noEmit`.                              |
 | `npm run lint`         | ESLint sobre o projecto.                        |
-| `npm run lint:check`   | Igual a `lint` (alias explícito para CI).       |
+| `npm run lint:check`   | Alias de `lint` (para CI).                      |
 | `npm run lint:fix`     | ESLint com `--fix`.                             |
 | `npm run format`       | Prettier `--write` em todo o projecto.          |
 | `npm run format:check` | Prettier `--check` (usado no CI).               |
@@ -198,6 +203,8 @@ O _deploy_ é gerido pela **Vercel** com rewrites SPA (`vercel.json` redireccion
 
 - **Email:** `info@olatours.co.ao`
 - **Telefone:** `+244 940 818 664`
+- **Instagram:** `@olatoursao`
+- **TikTok:** `@kelvinsjohn`
 - **Web:** `www.olatours.co.ao`
 - **Localização:** Luanda · Angola
 
