@@ -27,12 +27,6 @@ const coverItem = {
 	},
 };
 
-const features = [
-	{ label: 'Operação', value: 'Angola + Mundo', hint: '54 países' },
-	{ label: 'Experiência', value: 'Desde 2014', hint: '10+ anos' },
-	{ label: 'Resposta', value: '24h úteis', hint: 'Proposta personalizada' },
-];
-
 export function Cover() {
 	const [active, setActive] = useState(0);
 
@@ -63,7 +57,7 @@ export function Cover() {
 				<div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/50 to-black/70" />
 			</div>
 
-			<div className="relative z-10 mx-auto flex h-full max-w-[1200px] flex-col justify-center items-center px-5 sm:px-8 pb-48 sm:pb-36">
+			<div className="relative z-10 mx-auto flex h-full max-w-[1200px] flex-col justify-center items-center px-5 sm:px-8 pb-0">
 				<motion.div
 					variants={coverStagger}
 					initial="hidden"
@@ -113,56 +107,6 @@ export function Cover() {
 					</motion.div>
 				</motion.div>
 			</div>
-
-			<motion.div
-				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{
-					duration: m.duration.slow,
-					ease: m.ease.out,
-					delay: 0.8,
-				}}
-				className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-black/60 to-transparent pt-12 sm:pt-16"
-			>
-				<div className="mx-auto max-w-[1200px] px-5 sm:px-8 pb-5 sm:pb-6">
-					<div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 border-t border-white/10 pt-5">
-						{features.map((f) => (
-							<div
-								key={f.label}
-								className="flex items-center justify-center sm:px-6 sm:border-r sm:border-white/10 last:border-r-0 w-full sm:w-auto"
-							>
-								<div className="text-center">
-									<p className="label-caps text-white/40">
-										{f.label}
-									</p>
-									<p className="font-display text-xl sm:text-2xl font-black leading-tight text-white">
-										{f.value === 'Angola + Mundo' ? (
-											<>
-												<span className="text-flag">
-													Angola
-												</span>{' '}
-												+ Mundo
-											</>
-										) : f.value === 'Desde 2014' ? (
-											<>
-												Desde{' '}
-												<span className="text-flag">
-													2014
-												</span>
-											</>
-										) : (
-											f.value
-										)}
-									</p>
-									<p className="text-xs text-white/40 mt-0.5">
-										{f.hint}
-									</p>
-								</div>
-							</div>
-						))}
-					</div>
-				</div>
-			</motion.div>
 		</section>
 	);
 }

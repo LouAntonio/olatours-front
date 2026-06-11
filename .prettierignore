@@ -12,3 +12,8 @@ pnpm-lock.yaml
 .vscode
 .idea
 .DS_Store
+.agents
+.github
+.prettierrc
+AGENTS.md
+README.md

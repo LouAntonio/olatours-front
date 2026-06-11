@@ -2,8 +2,9 @@ import { motion } from 'motion/react';
 import { motion as m, stagger } from '../styles/tokens';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { Cover } from '../components/Cover';
-import { WhyUs } from '../components/WhyUs';
 import { Testimonials } from '../components/Testimonials';
+import { PartnersSlider } from '../components/PartnersSlider';
+import { Button } from '../components/Button';
 
 type Tone = 'flag' | 'navy' | 'sky';
 
@@ -14,15 +15,6 @@ type Service = {
 	intro: string;
 	points: string[];
 	tag: string;
-	tone: Tone;
-};
-
-type Product = {
-	n: '01' | '02' | '03';
-	brand: string;
-	title: string;
-	intro: string;
-	features: string[];
 	tone: Tone;
 };
 
@@ -68,47 +60,6 @@ const services: Service[] = [
 		],
 		tag: 'OPERACIONAL',
 		tone: 'flag',
-	},
-];
-
-const products: Product[] = [
-	{
-		n: '01',
-		brand: 'Ola Mobilidade Corporativa',
-		title: 'Transporte executivo sob contrato.',
-		intro: 'Para equipas e executivos que precisam de pontualidade diária, motoristas de confiança e relatórios mensais.',
-		features: [
-			'Transporte Executivo',
-			'Transfers Aeroporto ↔ Hotel',
-			'Motoristas profissionais que falam inglês',
-			'Relatórios de serviço mensais',
-		],
-		tone: 'flag',
-	},
-	{
-		n: '02',
-		brand: 'Ola Missões Empresariais',
-		title: 'Delegações que chegam prontas.',
-		intro: 'Uma missão empresarial em Angola começa muito antes do avião. Trata-se de logística, agenda e acesso — tudo alinhado.',
-		features: [
-			'Organização de delegações empresariais',
-			'Agendamento de reuniões estratégicas',
-			'Visitas a projectos e Zonas Económicas Especiais',
-			'Logística completa: hotel, transporte e protocolo',
-		],
-		tone: 'navy',
-	},
-	{
-		n: '03',
-		brand: 'Ola Eventos e Delegações',
-		title: 'Eventos onde o detalhe é o produto.',
-		intro: 'Conferências, cimeiras, recepções oficiais. Operamos o evento no terreno enquanto os nossos clientes aparecem no momento certo.',
-		features: [
-			'Logística completa de eventos',
-			'Trabalho em campo',
-			'Protocolo e recepção',
-		],
-		tone: 'sky',
 	},
 ];
 
@@ -175,28 +126,15 @@ export function Home() {
 								terreno.
 							</motion.p>
 
-							<motion.p
-								variants={item}
-								className="mt-6 text-xl sm:text-2xl leading-relaxed text-ink-soft"
-							>
-								Hoje, operamos em 54 países, recebemos Chefes de
-								Estado e delegações do Banco Mundial, e somos
-								reconhecidos institucionalmente como uma
-								referência no sector. Mas o nosso foco continua
-								o mesmo: fazer com que cada viagem seja uma
-								extensão natural da estratégia de quem a
-								contrata.
-							</motion.p>
-
-							<motion.div
-								variants={item}
-								className="mt-10 flex items-center gap-4"
-							>
-								<span className="h-px flex-1 bg-gray-border" />
-								<span className="label-caps text-ink-mute shrink-0">
-									OLA TOURS · DESDE 2014
-								</span>
-								<span className="h-px flex-1 bg-gray-border" />
+							<motion.div variants={item} className="mt-8">
+								<Button
+									as="a"
+									href="/sobre"
+									variant="outline"
+									size="lg"
+								>
+									Saber mais
+								</Button>
 							</motion.div>
 						</div>
 					</motion.div>
@@ -309,112 +247,8 @@ export function Home() {
 				</div>
 			</section>
 
-			{/* ===== OS 3 PRODUTOS ===== */}
-			<section className="relative bg-cream-50 py-20 sm:py-28 overflow-hidden">
-				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
-					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
-						<div className="col-span-12 lg:col-span-6">
-							<span className="accent-bar-flag block mb-4" />
-							<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
-								Três formatos.{' '}
-								<span className="text-flag">Um padrão</span>.
-							</h2>
-						</div>
-						<div className="col-span-12 lg:col-span-4 lg:col-start-9 flex items-end">
-							<p className="text-ink-mute text-sm sm:text-base leading-relaxed">
-								Cada produto é desenhado para garantir o melhor
-								retorno sobre o investimento no sector de
-								viagens.
-							</p>
-						</div>
-					</div>
-
-					<motion.div
-						initial="hidden"
-						whileInView="show"
-						viewport={{ once: true, margin: '-100px' }}
-						variants={container}
-						className="grid grid-cols-12 gap-5 sm:gap-6"
-					>
-						{products.map((p) => {
-							const accent = accentMap[p.tone];
-							return (
-								<motion.article
-									key={p.n}
-									variants={item}
-									className="col-span-12 sm:col-span-6 lg:col-span-4 relative group"
-								>
-									<div className="relative bg-white border border-gray-border/60 rounded-lg overflow-hidden transition-all duration-500 card-elevated">
-										<div className="p-6 sm:p-8">
-											<p
-												className="label-caps mb-3"
-												style={{ color: accent.css }}
-											>
-												{p.brand}
-											</p>
-
-											<h3 className="font-display text-2xl sm:text-3xl font-black uppercase leading-tight tracking-tight text-ink">
-												{p.title}
-											</h3>
-
-											<p className="mt-3 text-ink-soft leading-relaxed">
-												{p.intro}
-											</p>
-
-											<div className="rule my-5" />
-
-											<p className="label-caps text-ink-mute mb-3">
-												O que inclui
-											</p>
-
-											<ul className="space-y-3">
-												{p.features.map((f) => (
-													<li
-														key={f}
-														className="flex items-start gap-3 text-ink leading-relaxed"
-													>
-														<span
-															className="mt-2 inline-block h-1 w-2 shrink-0 rounded-sm"
-															style={{
-																background:
-																	accent.css,
-															}}
-														/>
-														<span className="flex-1">
-															{f}
-														</span>
-													</li>
-												))}
-											</ul>
-
-											<div className="mt-6 pt-5 border-t border-gray-border/50 flex items-center justify-between">
-												<span className="label-caps text-ink-mute">
-													PRODUTO {p.n} / 03
-												</span>
-												<svg
-													viewBox="0 0 24 24"
-													fill="none"
-													aria-hidden="true"
-													className="h-5 w-5 text-ink-mute group-hover:text-flag group-hover:translate-x-1 transition-all"
-												>
-													<path
-														d="M5 12h14M13 6l6 6-6 6"
-														stroke="currentColor"
-														strokeWidth="1.5"
-													/>
-												</svg>
-											</div>
-										</div>
-									</div>
-								</motion.article>
-							);
-						})}
-					</motion.div>
-				</div>
-			</section>
-
-			<WhyUs />
 			<Testimonials />
+			<PartnersSlider />
 		</>
 	);
 }

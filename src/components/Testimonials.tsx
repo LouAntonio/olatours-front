@@ -47,13 +47,13 @@ export function Testimonials() {
 	return (
 		<section
 			id="testemunhos"
-			className="relative bg-cream py-20 sm:py-28 overflow-hidden"
+			className="relative bg-cream py-14 sm:py-20 overflow-hidden"
 		>
 			<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
-				<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
+				<div className="grid grid-cols-12 gap-6 mb-8 sm:mb-12">
 					<div className="col-span-12 lg:col-span-5">
-						<span className="accent-bar-flag block mb-4" />
-						<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
+						<span className="accent-bar-flag block mb-3" />
+						<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2rem,5vw,3.5rem)]">
 							O que <span className="text-flag">dizem</span> os
 							nossos clientes.
 						</h2>
@@ -61,13 +61,13 @@ export function Testimonials() {
 
 					<div className="col-span-12 lg:col-span-6 lg:col-start-7 flex items-end">
 						<div>
-							<p className="text-xl sm:text-2xl leading-relaxed text-ink-soft border-l-2 border-flag pl-5">
+							<p className="text-base sm:text-lg leading-relaxed text-ink-soft border-l-2 border-flag pl-4">
 								O feedback dos nossos clientes é importante para
 								nós, para que possamos continuar a prestar um
 								serviço especializado.
 							</p>
-							<div className="mt-6 label-caps text-ink-mute flex items-center gap-3">
-								<span className="h-px w-10 bg-gray-border" />
+							<div className="mt-4 label-caps text-ink-mute flex items-center gap-3">
+								<span className="h-px w-8 bg-gray-border" />
 								<span>FONTE · DIRECTA · AUTORIZADA</span>
 							</div>
 						</div>
@@ -94,9 +94,9 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 	return (
 		<motion.article variants={item} className="col-span-12 lg:col-span-6">
 			<div className="relative border border-gray-border/60 rounded-lg overflow-hidden transition-all duration-500 card-elevated bg-white">
-				<div className="p-6 sm:p-8">
-					<div className="flex items-center justify-between mb-6">
-						<span className="font-editorial text-5xl sm:text-6xl leading-none text-flag/30 font-bold italic">
+				<div className="p-5 sm:p-6">
+					<div className="flex items-center justify-between mb-4">
+						<span className="font-editorial text-4xl sm:text-5xl leading-none text-flag/30 font-bold italic">
 							&ldquo;
 						</span>
 						<span className="label-caps text-ink-mute shrink-0">
@@ -104,15 +104,15 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 						</span>
 					</div>
 
-					<blockquote className="text-xl sm:text-2xl leading-[1.4] text-ink font-editorial">
+					<blockquote className="text-base sm:text-lg leading-[1.4] text-ink font-editorial">
 						{t.quote}
 					</blockquote>
 
-					<div className="mt-6 pt-5 border-t border-gray-border/50">
-						<p className="font-display text-lg sm:text-xl font-black leading-tight text-ink">
+					<div className="mt-4 pt-4 border-t border-gray-border/50">
+						<p className="font-display text-base sm:text-lg font-black leading-tight text-ink">
 							{t.name}
 						</p>
-						<p className="mt-1 text-sm text-ink-soft leading-snug">
+						<p className="mt-0.5 text-sm text-ink-soft leading-snug">
 							{t.title}
 						</p>
 					</div>
