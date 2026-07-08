@@ -84,11 +84,34 @@ export function Contacto() {
 	useDocumentTitle('Contacto');
 
 	const [submitted, setSubmitted] = useState(false);
+	const [sending, setSending] = useState(false);
 	const formId = useId();
 
-	function handleSubmit(e: FormEvent) {
+	async function handleSubmit(e: FormEvent) {
 		e.preventDefault();
-		setSubmitted(true);
+		const form = e.target as HTMLFormElement;
+		const data = new FormData(form);
+		setSending(true);
+		try {
+			const res = await fetch('/api/contact', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					name: data.get('nome'),
+					email: data.get('email'),
+					phone: data.get('telefone'),
+					subject: data.get('assunto'),
+					message: data.get('mensagem'),
+				}),
+			});
+			const json = await res.json();
+			if (!json.success) throw new Error(json.message);
+			setSubmitted(true);
+		} catch (err) {
+			alert(err instanceof Error ? err.message : 'Erro ao enviar mensagem');
+		} finally {
+			setSending(false);
+		}
 	}
 
 	return (
@@ -386,9 +409,6 @@ export function Contacto() {
 										</div>
 									) : (
 										<form
-											action="mailto:info@olatours.co.ao"
-											method="POST"
-											encType="text/plain"
 											onSubmit={handleSubmit}
 											className="space-y-5"
 										>
@@ -499,9 +519,10 @@ export function Contacto() {
 												as="button"
 												variant="flag"
 												size="lg"
+												disabled={sending}
 												className="w-full sm:w-auto"
 											>
-												Enviar mensagem
+												{sending ? 'A enviar...' : 'Enviar mensagem'}
 											</Button>
 										</form>
 									)}

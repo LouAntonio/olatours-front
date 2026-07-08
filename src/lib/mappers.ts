@@ -1,7 +1,7 @@
 import type { ApiEvent, Accent, EventType } from '../types/api';
 import type { Evento, EventPhoto, EventDetail, EventDocument } from '../data/events';
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL ?? '';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL ?? 'https://api.olatours.co.ao';
 
 export function uploadUrl(path: string): string {
 	if (!path) return '';
