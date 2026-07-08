@@ -50,7 +50,7 @@ const item = {
 	},
 };
 
-export function MercadoDaComida() {
+export function MercadoDaComidaLanding() {
 	useDocumentTitle('Mercado da Comida');
 
 	const [submitted, setSubmitted] = useState(false);

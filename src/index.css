@@ -24,6 +24,8 @@
 	--color-white: #ffffff;
 	--color-cream: #f9f6f0;
 	--color-cream-50: #fbfaf7;
+	--color-sun: #f5c300;
+	--color-sun-50: #fff1ad;
 	--color-sand: #e8e0d4;
 	--color-sand-50: #f3efe8;
 	--color-gray-light: #f7f8fa;
@@ -31,7 +33,7 @@
 	--color-gray-border-soft: #f0f2f5;
 
 	--font-sans: 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif;
-	--font-display: 'Barlow Condensed', 'Barlow', system-ui, sans-serif;
+	--font-display: 'Bebas Neue', 'Barlow Condensed', 'Barlow', system-ui, sans-serif;
 	--font-editorial: 'EB Garamond', 'Georgia', 'Times New Roman', serif;
 
 	--text-display-xl: clamp(4rem, 12vw, 10rem);

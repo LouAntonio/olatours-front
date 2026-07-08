@@ -12,7 +12,7 @@ import { Servicos } from './pages/Servicos';
 import { Produtos } from './pages/Produtos';
 import { Contacto } from './pages/Contacto';
 import { Carreiras } from './pages/Carreiras';
-import { MercadoDaComida } from './pages/MercadoDaComida';
+import { MercadoDaComidaLanding as MercadoDaComida } from './pages/MercadoDaComidaLanding.tsx';
 import { NotFound } from './pages/NotFound';
 import { AdminLogin } from './pages/admin/AdminLogin';
 import { AdminLayout } from './pages/admin/AdminLayout';
@@ -35,6 +35,7 @@ function App() {
 		<div className="app-shell">
 			<Routes>
 				<Route path="/ot/login" element={<AdminLogin />} />
+				<Route path="/mercado-da-comida" element={<MercadoDaComida />} />
 				<Route path="/ot" element={<AdminLayout />}>
 					<Route index element={<AdminDashboard />} />
 					<Route path="eventos" element={<AdminEvents />} />
@@ -78,10 +79,6 @@ function App() {
 									<Route
 										path="/carreiras"
 										element={<Carreiras />}
-									/>
-									<Route
-										path="/mercado-da-comida"
-										element={<MercadoDaComida />}
 									/>
 									<Route path="*" element={<NotFound />} />
 								</Routes>
