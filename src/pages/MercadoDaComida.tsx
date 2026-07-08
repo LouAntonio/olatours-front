@@ -48,12 +48,31 @@ export function MercadoDaComida() {
 
 	async function handleSubmit(e: FormEvent) {
 		e.preventDefault();
+		const form = e.target as HTMLFormElement;
+		const data = new FormData(form);
 		setSending(true);
 		try {
-			await new Promise((r) => setTimeout(r, 1200));
+			const res = await fetch('/api/mercado-da-comida', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					ponto_recolha: data.get('ponto_recolha'),
+					dias: data.getAll('dias'),
+					nome_completo: data.get('nome_completo'),
+					bi: data.get('bi'),
+					data_nascimento: data.get('data_nascimento'),
+					telefone: data.get('telefone'),
+					email: data.get('email'),
+					municipio: data.get('municipio'),
+					contacto_emergencia: data.get('contacto_emergencia'),
+					observacoes: data.get('observacoes'),
+				}),
+			});
+			const json = await res.json();
+			if (!json.success) throw new Error(json.message);
 			setSubmitted(true);
-		} catch {
-			alert('Erro ao enviar inscrição. Tente novamente.');
+		} catch (err) {
+			alert(err instanceof Error ? err.message : 'Erro ao enviar inscrição. Tente novamente.');
 		} finally {
 			setSending(false);
 		}
