@@ -23,12 +23,6 @@ const terms = [
 	'O passageiro deve apresentar-se no ponto de recolha com 15 minutos de antecedência.',
 ] as const;
 
-const heroStats = [
-	{ label: 'ida e volta', value: '3.000 Kz / dia' },
-	{ label: 'disponível', value: 'Quinta a Domingo' },
-	{ label: 'serviço', value: 'para visitantes do evento' },
-] as const;
-
 const benefits = [
 	'Transporte dedicado para o Mercado da Comida',
 	'Reserva simples com pagamento a bordo ou por transferência',
@@ -118,43 +112,16 @@ export function MercadoDaComidaLanding() {
 								</p>
 							</div>
 
-							<div className="mt-8 flex flex-wrap gap-3">
-								{heroStats.map((stat) => (
-									<div
-										key={stat.label}
-										className="rounded-[18px] border border-[#4a2611]/20 bg-[#fef1a9]/70 px-4 py-3 shadow-[0_10px_30px_-16px_rgba(74,38,17,0.35)] backdrop-blur-sm"
-									>
-										<p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
-											{stat.label}
-										</p>
-										<p className="mt-1 font-display text-lg font-black uppercase leading-none text-[#4a2611]">
-											{stat.value}
-										</p>
-									</div>
-								))}
-							</div>
-
-							<div className="mt-8 flex flex-wrap gap-3">
-								<Button as="a" href="#inscricao" variant="flag" size="lg">
-									Garantir cartão
-								</Button>
-								<Button as="a" href="#detalhes" variant="outline" size="lg" className="border-[#4a2611]/25 text-[#4a2611] hover:border-[#4a2611] hover:bg-[#fff6ce]">
-									Ver detalhes
-								</Button>
-							</div>
 						</motion.div>
 
 						<motion.div variants={item} className="lg:col-span-5 lg:pt-8">
-							<div className="relative mx-auto flex w-full max-w-[560px] flex-col items-center lg:items-end">
-								<div className="absolute -top-2 right-3 rounded-full border border-[#4a2611]/20 bg-white/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#5d3014] backdrop-blur">
-									Transporte oficial
-								</div>
+							<div className="relative mx-auto flex w-full max-w-[680px] flex-col items-center lg:items-end">
+								<img src="/mercadodacomida/logo.png" alt="OlaTours" className="mb-8 h-44 w-auto object-contain" />
 								<img
 									src="/mercadodacomida/Autocarro.png"
 									alt="Autocarro OlaTours"
-									className="w-full max-w-[540px] drop-shadow-[0_28px_40px_rgba(74,38,17,0.22)]"
+									className="w-full max-w-[660px] drop-shadow-[0_28px_40px_rgba(74,38,17,0.22)]"
 								/>
-								<img src="/mercadodacomida/logo.png" alt="OlaTours" className="mt-4 h-24 w-auto object-contain self-start" />
 							</div>
 						</motion.div>
 					</motion.div>
@@ -187,7 +154,7 @@ export function MercadoDaComidaLanding() {
 
 			<section id="inscricao" className="relative bg-[#fff1ad] py-16 sm:py-20">
 				<div className="relative mx-auto max-w-[1280px] px-5 sm:px-8">
-					<div className="mx-auto max-w-3xl text-center">
+					<div className="mx-auto max-w-3xl">
 						<p className="font-display text-[clamp(2.2rem,5vw,4.6rem)] font-black uppercase leading-[0.88] tracking-[-0.04em] text-[#4a2611]">
 							Formulário de inscrição.
 						</p>
@@ -195,13 +162,13 @@ export function MercadoDaComidaLanding() {
 							Preencha os dados para reservar o seu cartão de transporte. Se escolher pagamento por transferência, anexe o comprovativo em PDF.
 						</p>
 
-						<div className="mt-10 mx-auto">
+						<div className="mt-10">
 							{submitted ? (
 								<motion.div
 									initial={{ opacity: 0, y: 20 }}
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ duration: m.duration.slow, ease: m.ease.out }}
-									className="flex min-h-[320px] flex-col justify-center rounded-[32px] border border-[#4a2611]/15 bg-white/70 p-8 text-center shadow-[0_22px_50px_-30px_rgba(74,38,17,0.42)] backdrop-blur-sm"
+									className="flex min-h-[320px] flex-col justify-center rounded-[32px] border border-[#4a2611]/15 bg-white/70 p-8 shadow-[0_22px_50px_-30px_rgba(74,38,17,0.42)] backdrop-blur-sm"
 								>
 									<div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#b5482a]/10 text-[#b5482a]">
 										<svg viewBox="0 0 24 24" fill="none" className="h-8 w-8" aria-hidden="true">
@@ -224,18 +191,7 @@ export function MercadoDaComidaLanding() {
 									onSubmit={handleSubmit}
 									className="rounded-[32px] border border-[#4a2611]/15 bg-white/70 p-5 shadow-[0_22px_50px_-30px_rgba(74,38,17,0.42)] backdrop-blur-sm sm:p-8"
 								>
-									<motion.div variants={item} className="mb-6 flex flex-wrap gap-3">
-										{['IDA E VOLTA', '3.000 KZ / DIA', 'QUINTA-DOMINGO'].map((tag) => (
-											<span
-												key={tag}
-												className="rounded-full border border-[#4a2611]/18 bg-[#fff4c8] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#4a2611]"
-											>
-												{tag}
-											</span>
-										))}
-									</motion.div>
-
-									<motion.fieldset variants={item} className="space-y-4">
+								<motion.fieldset variants={item} className="space-y-4">
 										<legend className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
 											Ponto de recolha
 										</legend>
