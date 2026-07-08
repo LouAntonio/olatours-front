@@ -44,6 +44,7 @@ export function MercadoDaComida() {
 	const [submitted, setSubmitted] = useState(false);
 	const [sending, setSending] = useState(false);
 	const [acceptedTerms, setAcceptedTerms] = useState(false);
+	const [receiptFile, setReceiptFile] = useState<File | null>(null);
 	const formId = useId();
 
 	async function handleSubmit(e: FormEvent) {
@@ -54,19 +55,7 @@ export function MercadoDaComida() {
 		try {
 			const res = await fetch('/api/mercado-da-comida', {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					ponto_recolha: data.get('ponto_recolha'),
-					dias: data.getAll('dias'),
-					nome_completo: data.get('nome_completo'),
-					bi: data.get('bi'),
-					data_nascimento: data.get('data_nascimento'),
-					telefone: data.get('telefone'),
-					email: data.get('email'),
-					municipio: data.get('municipio'),
-					contacto_emergencia: data.get('contacto_emergencia'),
-					observacoes: data.get('observacoes'),
-				}),
+				body: data,
 			});
 			const json = await res.json();
 			if (!json.success) throw new Error(json.message);
@@ -117,7 +106,7 @@ export function MercadoDaComida() {
 							<div className="mt-8 flex flex-wrap gap-3">
 								{[
 									'IDA E VOLTA',
-									'3.500 KZ',
+									'3.500 KZ / DIA',
 									'QUINTA–DOMINGO',
 								].map((tag) => (
 									<span
@@ -187,7 +176,7 @@ export function MercadoDaComida() {
 							{
 								label: 'Valor do cartão',
 								value: '3.500 Kz',
-								hint: 'ida e volta, por pessoa',
+								hint: 'por dia, ida e volta / pessoa',
 								icon: (
 									<svg
 										viewBox="0 0 24 24"
@@ -613,6 +602,44 @@ export function MercadoDaComida() {
 									</span>
 								</label>
 							</motion.fieldset>
+
+							{/* COMPROVATIVO */}
+							<motion.div
+								variants={item}
+								className="border border-gray-border/60 rounded-lg p-6 sm:p-8 mb-6"
+							>
+								<p className="font-display text-xl sm:text-2xl font-black text-flag uppercase leading-tight mb-5">
+									Comprovativo de pagamento
+								</p>
+								<p className="label-caps text-ink-mute mb-4">
+									Faça o upload do comprovativo de pagamento (opcional). Formatos: PDF. Máx: 5 MB.
+								</p>
+								<label className="flex items-center gap-3 px-4 py-3 border border-gray-border/60 rounded-sm cursor-pointer hover:border-flag/40 hover:bg-flag/[0.02] transition-all group">
+									<input
+										type="file"
+										name="comprovativo"
+										accept=".pdf"
+										onChange={(e) =>
+											setReceiptFile(e.target.files?.[0] ?? null)
+										}
+										className="hidden"
+									/>
+									<svg
+										viewBox="0 0 24 24"
+										fill="none"
+										className="h-5 w-5 text-flag shrink-0"
+										aria-hidden="true"
+									>
+										<path
+											d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v5h5v11H6z"
+											fill="currentColor"
+										/>
+									</svg>
+									<span className="text-sm sm:text-base text-ink font-medium group-hover:text-flag transition-colors">
+										{receiptFile ? receiptFile.name : 'Selecionar ficheiro'}
+									</span>
+								</label>
+							</motion.div>
 
 							{/* SUBMIT */}
 							<motion.div
