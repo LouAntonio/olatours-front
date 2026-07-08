@@ -51,7 +51,7 @@ export interface ApiEvent {
 	coverImage: string | null;
 	gallery: string[] | null;
 	details: { label: string; value: string }[] | null;
-	documents: { label: string; url: string }[] | null;
+	documents: { url: string; name: string; size: number }[] | null;
 	metaTitle: string | null;
 	metaDescription: string | null;
 	ogImage: string | null;

@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { useEventBySlug, createEvent, updateEvent, uploadCover, uploadGalleryImage, deleteGalleryImage } from '../../hooks/useEvents.ts';
+import { useEventBySlug, createEvent, updateEvent, uploadCover, uploadGalleryImage, deleteGalleryImage, uploadDocument, deleteDocument } from '../../hooks/useEvents.ts';
 import type { EventType, EventStatus } from '../../types/api.ts';
+import type { EventDocument } from '../../data/events.ts';
 
 const EVENT_TYPES: { value: EventType; label: string }[] = [
 	{ value: 'FEIRA_TURISMO', label: 'Feira de Turismo' },
@@ -41,7 +42,7 @@ interface FormState {
 	countryName: string;
 	city: string;
 	venue: string;
-	coverImage: string;
+	details: { label: string; value: string }[];
 }
 
 const EMPTY_FORM: FormState = {
@@ -61,7 +62,7 @@ const EMPTY_FORM: FormState = {
 	countryName: '',
 	city: '',
 	venue: '',
-	coverImage: '',
+	details: [],
 };
 
 export function AdminEventForm() {
@@ -79,8 +80,10 @@ export function AdminEventForm() {
 
 	const [uploadingCover, setUploadingCover] = useState(false);
 	const [uploadingGallery, setUploadingGallery] = useState(false);
+	const [uploadingDoc, setUploadingDoc] = useState(false);
 	const [coverUrl, setCoverUrl] = useState<string | null>(null);
 	const [galleryUrls, setGalleryUrls] = useState<string[]>([]);
+	const [documents, setDocuments] = useState<EventDocument[]>([]);
 
 	if (isEditing && existingEvent && loadedSlug !== slug) {
 		setLoadedSlug(slug ?? null);
@@ -88,6 +91,7 @@ export function AdminEventForm() {
 		const gallery = existingEvent.photos?.slice(1).map((p) => p.src) ?? [];
 		setCoverUrl(cover);
 		setGalleryUrls(gallery);
+		setDocuments(existingEvent.documents ?? []);
 		setForm({
 			title: existingEvent.title,
 			slug: existingEvent.slug,
@@ -105,7 +109,7 @@ export function AdminEventForm() {
 			countryName: existingEvent.countryName,
 			city: '',
 			venue: '',
-			coverImage: cover ?? '',
+			details: existingEvent.details ?? [],
 		});
 	}
 
@@ -135,7 +139,7 @@ export function AdminEventForm() {
 				countryName: form.countryName,
 				city: form.city || undefined,
 				venue: form.venue || undefined,
-				coverImage: form.coverImage || undefined,
+				details: form.details.length > 0 ? form.details : undefined,
 			};
 
 			if (isEditing) {
@@ -164,7 +168,6 @@ export function AdminEventForm() {
 			const result = await uploadCover(existingEvent.id, file);
 			const mappedUrl = result.url.startsWith('http') ? result.url : `/uploads/${result.url.replace(/\\/g, '/')}`;
 			setCoverUrl(mappedUrl);
-			setForm((prev) => ({ ...prev, coverImage: result.url }));
 			queryClient.invalidateQueries({ queryKey: ['event'] });
 		} catch {
 			alert('Erro ao enviar imagem');
@@ -197,6 +200,33 @@ export function AdminEventForm() {
 			queryClient.invalidateQueries({ queryKey: ['event'] });
 		} catch {
 			alert('Erro ao remover imagem');
+		}
+	}
+
+	async function handleDocumentUpload(e: React.ChangeEvent<HTMLInputElement>) {
+		const file = e.target.files?.[0];
+		if (!file || !isEditing || !existingEvent) return;
+		setUploadingDoc(true);
+		try {
+			const result = await uploadDocument(existingEvent.id, file);
+			const mappedUrl = result.url.startsWith('http') ? result.url : `/uploads/${result.url.replace(/\\/g, '/')}`;
+			setDocuments((prev) => [...prev, { url: mappedUrl, name: result.name, size: result.size }]);
+			queryClient.invalidateQueries({ queryKey: ['event'] });
+		} catch {
+			alert('Erro ao enviar documento');
+		} finally {
+			setUploadingDoc(false);
+		}
+	}
+
+	async function handleDocumentDelete(index: number) {
+		if (!isEditing || !existingEvent) return;
+		try {
+			await deleteDocument(existingEvent.id, index);
+			setDocuments((prev) => prev.filter((_, i) => i !== index));
+			queryClient.invalidateQueries({ queryKey: ['event'] });
+		} catch {
+			alert('Erro ao remover documento');
 		}
 	}
 
@@ -343,6 +373,48 @@ export function AdminEventForm() {
 				</div>
 
 				<div className="bg-white border border-gray-border/60 rounded-lg p-5 space-y-4">
+					<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">Detalhes</h2>
+					{form.details.map((d, i) => (
+						<div key={i} className="flex items-start gap-2">
+							<div className="flex-1">
+								<input
+									value={d.label}
+									onChange={(e) => {
+										const next = [...form.details];
+										next[i] = { ...next[i], label: e.target.value };
+										setForm((prev) => ({ ...prev, details: next }));
+									}}
+									className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
+									placeholder="Rótulo (ex: Idioma)" />
+							</div>
+							<div className="flex-1">
+								<input
+									value={d.value}
+									onChange={(e) => {
+										const next = [...form.details];
+										next[i] = { ...next[i], value: e.target.value };
+										setForm((prev) => ({ ...prev, details: next }));
+									}}
+									className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
+									placeholder="Valor (ex: Português)" />
+							</div>
+							<button type="button" onClick={() => {
+								setForm((prev) => ({ ...prev, details: prev.details.filter((_, j) => j !== i) }));
+							}}
+								className="mt-0.5 w-7 h-7 bg-red-100 hover:bg-red-200 text-red-600 rounded-full flex items-center justify-center text-sm shrink-0 transition-colors">
+								&times;
+							</button>
+						</div>
+					))}
+					<button type="button" onClick={() => {
+						setForm((prev) => ({ ...prev, details: [...prev.details, { label: '', value: '' }] }));
+					}}
+						className="text-xs label-caps text-flag hover:text-flag-dark transition-colors">
+						+ Adicionar detalhe
+					</button>
+				</div>
+
+				<div className="bg-white border border-gray-border/60 rounded-lg p-5 space-y-4">
 					<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">Imagem de Capa</h2>
 					{coverUrl && (
 						<div className="relative aspect-video rounded overflow-hidden bg-gray-border/30">
@@ -385,6 +457,36 @@ export function AdminEventForm() {
 							<input type="file" accept="image/*" onChange={handleGalleryUpload} disabled={uploadingGallery}
 								className="w-full text-sm text-ink file:mr-3 file:py-1.5 file:px-3 file:rounded-sm file:border-0 file:bg-flag file:text-white file:text-xs file:label-caps file:cursor-pointer hover:file:bg-flag-dark transition-colors" />
 							{uploadingGallery && <p className="text-xs text-ink-mute mt-1">A enviar...</p>}
+						</div>
+					</div>
+				)}
+
+				{isEditing && (
+					<div className="bg-white border border-gray-border/60 rounded-lg p-5 space-y-4">
+						<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">Documentos</h2>
+
+						{documents.length > 0 && (
+							<ul className="space-y-2">
+								{documents.map((doc, i) => (
+									<li key={i} className="flex items-center justify-between bg-gray-border-soft rounded-sm px-3 py-2 text-sm">
+										<a href={doc.url} target="_blank" rel="noopener noreferrer"
+											className="text-flag hover:text-flag-dark underline truncate">
+											{doc.name}
+										</a>
+										<button type="button" onClick={() => handleDocumentDelete(i)}
+											className="ml-2 w-6 h-6 bg-red-100 hover:bg-red-200 text-red-600 rounded-full flex items-center justify-center text-xs shrink-0 transition-colors">
+											&times;
+										</button>
+									</li>
+								))}
+							</ul>
+						)}
+
+						<div>
+							<label className="label-caps text-ink-mute text-xs block mb-1">Adicionar documento</label>
+							<input type="file" onChange={handleDocumentUpload} disabled={uploadingDoc}
+								className="w-full text-sm text-ink file:mr-3 file:py-1.5 file:px-3 file:rounded-sm file:border-0 file:bg-flag file:text-white file:text-xs file:label-caps file:cursor-pointer hover:file:bg-flag-dark transition-colors" />
+							{uploadingDoc && <p className="text-xs text-ink-mute mt-1">A enviar...</p>}
 						</div>
 					</div>
 				)}

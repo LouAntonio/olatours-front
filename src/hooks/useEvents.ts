@@ -100,3 +100,17 @@ export async function deleteGalleryImage(id: string, index: number) {
 	const { data } = await api.delete<ApiResponse<null>>(`/upload/events/${id}/gallery/${index}`);
 	return data;
 }
+
+export async function uploadDocument(id: string, file: File) {
+	const formData = new FormData();
+	formData.append('file', file);
+	const { data } = await api.post<ApiResponse<{ url: string; name: string; size: number }>>(`/upload/events/${id}/document`, formData, {
+		headers: { 'Content-Type': 'multipart/form-data' },
+	});
+	return data.data;
+}
+
+export async function deleteDocument(id: string, index: number) {
+	const { data } = await api.delete<ApiResponse<null>>(`/upload/events/${id}/document/${index}`);
+	return data;
+}

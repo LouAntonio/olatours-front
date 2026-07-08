@@ -11,6 +11,12 @@ export interface EventDetail {
 	value: string;
 }
 
+export interface EventDocument {
+	url: string;
+	name: string;
+	size: number;
+}
+
 export interface Evento {
 	id: string;
 	slug: string;
@@ -26,5 +32,6 @@ export interface Evento {
 	accent: Accent;
 	photos?: EventPhoto[];
 	details?: EventDetail[];
+	documents?: EventDocument[];
 	featured: boolean;
 }

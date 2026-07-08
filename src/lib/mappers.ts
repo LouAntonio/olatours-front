@@ -1,5 +1,5 @@
 import type { ApiEvent, Accent, EventType } from '../types/api';
-import type { Evento, EventPhoto, EventDetail } from '../data/events';
+import type { Evento, EventPhoto, EventDetail, EventDocument } from '../data/events';
 
 const PROXY_PREFIX = '/uploads';
 
@@ -56,6 +56,11 @@ function mapPhotos(event: ApiEvent): EventPhoto[] | undefined {
 	return photos.length > 0 ? photos : undefined;
 }
 
+function mapDocuments(event: ApiEvent): EventDocument[] | undefined {
+	if (!event.documents || !Array.isArray(event.documents)) return undefined;
+	return event.documents.map((d) => ({ url: d.url, name: d.name, size: d.size }));
+}
+
 function mapDetails(event: ApiEvent): EventDetail[] | undefined {
 	if (!event.details || !Array.isArray(event.details)) return undefined;
 	return event.details.map((d) => ({ label: d.label, value: d.value }));
@@ -77,6 +82,7 @@ export function mapApiEventToEvento(event: ApiEvent): Evento {
 		accent: typeAccentMap[event.type] ?? 'navy',
 		photos: mapPhotos(event),
 		details: mapDetails(event),
+		documents: mapDocuments(event),
 		featured: event.featured,
 	};
 }
