@@ -25,7 +25,7 @@ const terms = [
 
 const benefits = [
 	'Transporte dedicado para o Mercado da Comida',
-	'Reserva simples com pagamento a bordo ou por transferência',
+	'Reserva simples com pagamento por transferência',
 	'Pontos de recolha em zonas estratégicas de Luanda',
 	'Confirmação rápida para garantir o seu lugar',
 ] as const;
@@ -52,9 +52,6 @@ export function MercadoDaComidaLanding() {
 	const [acceptedTerms, setAcceptedTerms] = useState(false);
 	const [receiptFile, setReceiptFile] = useState<File | null>(null);
 	const [selectedDays, setSelectedDays] = useState<string[]>([]);
-	const [paymentMethod, setPaymentMethod] = useState<
-		'onboarding' | 'paid' | null
-	>(null);
 	const formId = useId();
 
 	const totalValue = selectedDays.length * 3000;
@@ -96,10 +93,10 @@ export function MercadoDaComidaLanding() {
 						initial="hidden"
 						animate="show"
 						variants={container}
-						className="grid items-start gap-6 lg:grid-cols-12 lg:gap-8"
+						className="flex flex-col items-center text-center"
 					>
-						<motion.div variants={item} className="lg:col-span-7">
-							<div className="flex items-center gap-3">
+						<motion.div variants={item}>
+							<div className="flex items-center justify-center gap-3">
 								<span className="rounded-full border border-[#4a2611]/20 bg-[#fff0a8] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#4a2611]">
 									11ª edição
 								</span>
@@ -108,14 +105,14 @@ export function MercadoDaComidaLanding() {
 								</span>
 							</div>
 
-							<div className="mt-6 max-w-3xl">
+							<div className="mt-6">
 								<p className="font-display text-[clamp(4rem,13vw,8rem)] font-black uppercase leading-[0.82] tracking-[-0.04em] text-[#4a2611]">
 									Mercado da{' '}
 									<span className="text-[#d04a21]">
 										Comida
 									</span>
 								</p>
-								<p className="mt-5 max-w-2xl text-[1.05rem] leading-relaxed text-[#5d3014] sm:text-[1.15rem]">
+								<p className="mx-auto mt-5 max-w-2xl text-[1.05rem] leading-relaxed text-[#5d3014] sm:text-[1.15rem]">
 									A OlaTours disponibiliza transporte dedicado
 									para os visitantes do evento. Garanta o seu
 									cartão e viaje com conforto, segurança e um
@@ -125,20 +122,17 @@ export function MercadoDaComidaLanding() {
 							</div>
 						</motion.div>
 
-						<motion.div
-							variants={item}
-							className="lg:col-span-5 lg:pt-8"
-						>
-							<div className="relative mx-auto flex w-full max-w-[680px] flex-col items-center lg:items-end">
-								<img
-									src="/mercadodacomida/logo.png"
-									alt="OlaTours"
-									className="mb-8 h-44 w-auto object-contain"
-								/>
+						<motion.div variants={item} className="mt-8 lg:mt-12">
+							<div className="relative mx-auto flex w-full max-w-[680px] flex-col items-center">
 								<img
 									src="/mercadodacomida/Autocarro.png"
 									alt="Autocarro OlaTours"
 									className="w-full max-w-[660px] drop-shadow-[0_28px_40px_rgba(74,38,17,0.22)]"
+								/>
+								<img
+									src="/mercadodacomida/logo.png"
+									alt="OlaTours"
+									className="mt-8 h-44 w-auto object-contain"
 								/>
 							</div>
 						</motion.div>
@@ -180,9 +174,9 @@ export function MercadoDaComidaLanding() {
 							Formulário de inscrição.
 						</p>
 						<p className="mt-4 text-base leading-relaxed text-[#5d3014] sm:text-lg">
-							Preencha os dados para reservar o seu cartão de
-							transporte. Se escolher pagamento por transferência,
-							anexe o comprovativo em PDF.
+							Preencha os dados e efectue o pagamento por
+							transferência bancária para garantir o seu cartão
+							de transporte. Anexe o comprovativo em PDF.
 						</p>
 
 						<div className="mt-10">
@@ -328,21 +322,20 @@ export function MercadoDaComidaLanding() {
 											Dados do inscrito
 										</legend>
 										<div className="grid gap-5">
-											<label className="grid gap-1.5">
-												<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
-													Nome completo
-												</span>
-												<input
-													id={`${formId}-nome`}
-													name="nome_completo"
-													type="text"
-													required
-													placeholder="O seu nome completo"
-													className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
-												/>
-											</label>
-
 											<div className="grid gap-5 sm:grid-cols-2">
+												<label className="grid gap-1.5">
+													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+														Nome completo
+													</span>
+													<input
+														id={`${formId}-nome`}
+														name="nome_completo"
+														type="text"
+														required
+														placeholder="O seu nome completo"
+														className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+													/>
+												</label>
 												<label className="grid gap-1.5">
 													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
 														Nº do Bilhete de
@@ -357,20 +350,7 @@ export function MercadoDaComidaLanding() {
 														className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
 													/>
 												</label>
-												<label className="grid gap-1.5">
-													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
-														Data de nascimento
-													</span>
-													<input
-														id={`${formId}-nascimento`}
-														name="data_nascimento"
-														type="date"
-														required
-														className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
-													/>
-												</label>
 											</div>
-
 											<div className="grid gap-5 sm:grid-cols-2">
 												<label className="grid gap-1.5">
 													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
@@ -382,35 +362,6 @@ export function MercadoDaComidaLanding() {
 														type="tel"
 														required
 														placeholder="+244 900 000 000"
-														className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
-													/>
-												</label>
-												<label className="grid gap-1.5">
-													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
-														E-mail
-													</span>
-													<input
-														id={`${formId}-email`}
-														name="email"
-														type="email"
-														required
-														placeholder="seu@email.com"
-														className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
-													/>
-												</label>
-											</div>
-
-											<div className="grid gap-5 sm:grid-cols-2">
-												<label className="grid gap-1.5">
-													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
-														Município de residência
-													</span>
-													<input
-														id={`${formId}-municipio`}
-														name="municipio"
-														type="text"
-														required
-														placeholder="Ex: Luanda"
 														className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
 													/>
 												</label>
@@ -450,139 +401,74 @@ export function MercadoDaComidaLanding() {
 
 										<div className="rounded-[28px] border border-[#4a2611]/12 bg-white/80 p-5">
 											<p className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
-												Método de pagamento
+												Dados para transferência
 											</p>
-											<div className="mt-4 grid gap-3">
-												<label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]">
-													<input
-														type="radio"
-														name="metodo_pagamento"
-														value="onboarding"
-														required
-														checked={
-															paymentMethod ===
-															'onboarding'
-														}
-														onChange={() =>
-															setPaymentMethod(
-																'onboarding',
-															)
-														}
-														className="mt-0.5 h-4 w-4 shrink-0 appearance-none rounded-full border-2 border-[#a68a5e] checked:border-[#b5482a] checked:bg-[#b5482a] checked:shadow-[inset_0_0_0_2px_white]"
-													/>
-													<div>
-														<span className="text-sm font-medium text-[#4a2611]">
-															Pagamento a bordo
-														</span>
-														<p className="mt-1 text-xs leading-relaxed text-[#7b4a26]">
-															Pague no embarque,
-															em dinheiro ou
-															multicaixa.
-														</p>
-													</div>
-												</label>
-
-												<label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]">
-													<input
-														type="radio"
-														name="metodo_pagamento"
-														value="paid"
-														required
-														checked={
-															paymentMethod ===
-															'paid'
-														}
-														onChange={() =>
-															setPaymentMethod(
-																'paid',
-															)
-														}
-														className="mt-0.5 h-4 w-4 shrink-0 appearance-none rounded-full border-2 border-[#a68a5e] checked:border-[#b5482a] checked:bg-[#b5482a] checked:shadow-[inset_0_0_0_2px_white]"
-													/>
-													<div>
-														<span className="text-sm font-medium text-[#4a2611]">
-															Já efetuei o
-															pagamento
-														</span>
-														<p className="mt-1 text-xs leading-relaxed text-[#7b4a26]">
-															Transferência
-															bancária — anexe o
-															comprovativo em PDF.
-														</p>
-													</div>
-												</label>
-											</div>
-
-											{paymentMethod === 'paid' && (
-												<div className="mt-4 space-y-4 rounded-[24px] border border-[#4a2611]/12 bg-[#fff8d8] p-4">
-													{selectedDays.length >
-														0 && (
-														<p className="font-display text-lg font-black uppercase tracking-tight text-[#b5482a]">
-															Total a pagar:{' '}
-															{totalValue.toLocaleString(
-																'pt-PT',
-															)}{' '}
-															Kz
-														</p>
-													)}
-													<div>
-														<p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
-															Dados para
-															transferência
-														</p>
-														<p className="mt-2 text-sm font-semibold text-[#4a2611]">
-															OLA TOURS PREST
-															SERVICO COMER GERAL
-															LDA
-														</p>
-														<p className="mt-1 text-sm text-[#5d3014]">
-															Conta:{' '}
-															<span className="font-mono font-semibold text-[#4a2611]">
-																17145600210001
-															</span>
-														</p>
-														<p className="text-sm text-[#5d3014]">
-															IBAN:{' '}
-															<span className="font-mono font-semibold text-[#4a2611]">
-																AO06004000007145600210189
-															</span>
-														</p>
-													</div>
-													<label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fffef0]">
-														<input
-															type="file"
-															name="comprovativo"
-															accept=".pdf"
-															onChange={(e) =>
-																setReceiptFile(
-																	e.target
-																		.files?.[0] ??
-																		null,
-																)
-															}
-															className="hidden"
-														/>
-														<span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#b5482a]/10 text-[#b5482a]">
-															<svg
-																viewBox="0 0 24 24"
-																fill="none"
-																className="h-5 w-5"
-																aria-hidden="true"
-															>
-																<path
-																	d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v5h5v11H6z"
-																	fill="currentColor"
-																/>
-															</svg>
-														</span>
-														<span className="text-sm font-medium text-[#4a2611]">
-															{receiptFile
-																? receiptFile.name
-																: 'Selecionar comprovativo'}
-														</span>
-													</label>
-												</div>
+											{selectedDays.length > 0 && (
+												<p className="mt-3 font-display text-lg font-black uppercase tracking-tight text-[#b5482a]">
+													Total a pagar:{' '}
+													{totalValue.toLocaleString(
+														'pt-PT',
+													)}{' '}
+													Kz
+												</p>
 											)}
+											<div className="mt-4 rounded-[24px] border border-[#4a2611]/12 bg-[#fff8d8] p-4">
+												<p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+													Beneficiário
+												</p>
+												<p className="mt-1 text-sm font-semibold text-[#4a2611]">
+													OLA TOURS PREST SERVICO
+													COMER GERAL LDA
+												</p>
+												<p className="mt-3 text-sm text-[#5d3014]">
+													Conta:{' '}
+													<span className="font-mono font-semibold text-[#4a2611]">
+														17145600210001
+													</span>
+												</p>
+												<p className="text-sm text-[#5d3014]">
+													IBAN:{' '}
+													<span className="font-mono font-semibold text-[#4a2611]">
+														AO06004000007145600210189
+													</span>
+												</p>
+											</div>
+											<label className="mt-4 flex cursor-pointer items-center gap-3 rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fffef0]">
+												<input
+													type="file"
+													name="comprovativo"
+													accept=".pdf"
+													required
+													onChange={(e) =>
+														setReceiptFile(
+															e.target.files?.[0] ??
+																null,
+														)
+													}
+													className="hidden"
+												/>
+												<span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#b5482a]/10 text-[#b5482a]">
+													<svg
+														viewBox="0 0 24 24"
+														fill="none"
+														className="h-5 w-5"
+														aria-hidden="true"
+													>
+														<path
+															d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v5h5v11H6z"
+															fill="currentColor"
+														/>
+													</svg>
+												</span>
+												<span className="text-sm font-medium text-[#4a2611]">
+													{receiptFile
+														? receiptFile.name
+														: 'Selecionar comprovativo (PDF)'}
+												</span>
+											</label>
+											<p className="mt-2 text-xs leading-relaxed text-[#7b4a26]">
+												Apenas PDF, máximo 5 MB.
+											</p>
 										</div>
 
 										<div className="rounded-[28px] border border-[#4a2611]/12 bg-white/80 p-5">
