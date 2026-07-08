@@ -88,7 +88,7 @@ export function MercadoDaComidaLanding() {
 				<div className="pointer-events-none absolute bottom-0 right-[-5rem] h-72 w-72 rounded-full bg-[#ff5a1f]/18 blur-3xl" />
 				<div className="pointer-events-none absolute top-0 right-0 h-full w-24 bg-[linear-gradient(180deg,rgba(88,33,12,0.12),rgba(88,33,12,0))] opacity-40" />
 
-				<div className="relative mx-auto flex min-h-dvh max-w-[1280px] flex-col justify-between px-5 pb-10 pt-5 sm:px-8 sm:pb-12 sm:pt-8">
+				<div className="relative mx-auto flex h-dvh max-w-[1280px] flex-col items-center justify-center px-5 pb-10 pt-5 sm:px-8 sm:pb-12 sm:pt-8">
 					<motion.div
 						initial="hidden"
 						animate="show"
@@ -123,46 +123,48 @@ export function MercadoDaComidaLanding() {
 						</motion.div>
 
 						<motion.div variants={item} className="mt-8 lg:mt-12">
-							<div className="relative mx-auto flex w-full max-w-[680px] flex-col items-center">
+							<div className="relative mx-auto flex w-full max-w-[960px] flex-col items-center gap-6 lg:flex-row lg:items-center lg:justify-center">
 								<img
 									src="/mercadodacomida/Autocarro.png"
 									alt="Autocarro OlaTours"
-									className="w-full max-w-[660px] drop-shadow-[0_28px_40px_rgba(74,38,17,0.22)]"
+									className="w-full max-w-[600px] drop-shadow-[0_28px_40px_rgba(74,38,17,0.22)]"
 								/>
 								<img
 									src="/mercadodacomida/logo.png"
 									alt="OlaTours"
-									className="mt-8 h-44 w-auto object-contain"
+									className="h-36 w-auto object-contain lg:h-48"
 								/>
 							</div>
 						</motion.div>
 					</motion.div>
-
-					<motion.div
-						id="detalhes"
-						initial="hidden"
-						whileInView="show"
-						viewport={{ once: true, margin: '-80px' }}
-						variants={container}
-						className="mt-14 grid gap-4 lg:grid-cols-4"
-					>
-						{benefits.map((benefit, index) => (
-							<motion.div
-								key={benefit}
-								variants={item}
-								className="rounded-[24px] border border-[#4a2611]/15 bg-[rgba(255,248,209,0.85)] px-5 py-5 shadow-[0_14px_30px_-24px_rgba(74,38,17,0.42)] backdrop-blur-sm"
-							>
-								<p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a4a22]">
-									0{index + 1}
-								</p>
-								<p className="mt-2 text-base font-medium leading-relaxed text-[#4a2611]">
-									{benefit}
-								</p>
-							</motion.div>
-						))}
-					</motion.div>
 				</div>
 			</section>
+
+			<motion.div
+				id="detalhes"
+				initial="hidden"
+				whileInView="show"
+				viewport={{ once: true, margin: '-80px' }}
+				variants={container}
+				className="mx-auto max-w-[1280px] px-5 pb-14 pt-10 sm:px-8 sm:pb-16 sm:pt-14"
+			>
+				<div className="grid gap-4 lg:grid-cols-4">
+					{benefits.map((benefit, index) => (
+						<motion.div
+							key={benefit}
+							variants={item}
+							className="rounded-[24px] border border-[#4a2611]/15 bg-[rgba(255,248,209,0.85)] px-5 py-5 shadow-[0_14px_30px_-24px_rgba(74,38,17,0.42)] backdrop-blur-sm"
+						>
+							<p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a4a22]">
+								0{index + 1}
+							</p>
+							<p className="mt-2 text-base font-medium leading-relaxed text-[#4a2611]">
+								{benefit}
+							</p>
+						</motion.div>
+					))}
+				</div>
+			</motion.div>
 
 			<section
 				id="inscricao"
