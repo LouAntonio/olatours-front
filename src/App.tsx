@@ -35,7 +35,10 @@ function App() {
 		<div className="app-shell">
 			<Routes>
 				<Route path="/ot/login" element={<AdminLogin />} />
-				<Route path="/mercado-da-comida" element={<MercadoDaComida />} />
+				<Route
+					path="/mercado-da-comida"
+					element={<MercadoDaComida />}
+				/>
 				<Route path="/ot" element={<AdminLayout />}>
 					<Route index element={<AdminDashboard />} />
 					<Route path="eventos" element={<AdminEvents />} />

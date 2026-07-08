@@ -17,16 +17,23 @@ async function fetchEvent(id: string): Promise<Evento | null> {
 }
 
 async function fetchEventBySlug(slug: string): Promise<Evento | null> {
-	const { data } = await api.get<ApiResponse<ApiEvent>>(`/events/slug/${slug}`);
+	const { data } = await api.get<ApiResponse<ApiEvent>>(
+		`/events/slug/${slug}`,
+	);
 	return data.success ? mapApiEventToEvento(data.data) : null;
 }
 
-async function fetchAdminEvents(page = 1, limit = 100): Promise<{ events: Evento[]; total: number }> {
-	const { data } = await api.get<ApiResponse<ApiEvent[]> & { pagination: { total: number } }>(
-		'/events',
-		{ params: { page, limit, all: 'true' } },
-	);
-	return { events: mapApiEventsToEventos(data.data), total: data.pagination.total };
+async function fetchAdminEvents(
+	page = 1,
+	limit = 100,
+): Promise<{ events: Evento[]; total: number }> {
+	const { data } = await api.get<
+		ApiResponse<ApiEvent[]> & { pagination: { total: number } }
+	>('/events', { params: { page, limit, all: 'true' } });
+	return {
+		events: mapApiEventsToEventos(data.data),
+		total: data.pagination.total,
+	};
 }
 
 export function useEvents(page?: number, limit?: number) {
@@ -69,7 +76,10 @@ export async function createEvent(input: Record<string, unknown>) {
 }
 
 export async function updateEvent(id: string, input: Record<string, unknown>) {
-	const { data } = await api.put<ApiResponse<ApiEvent>>(`/events/${id}`, input);
+	const { data } = await api.put<ApiResponse<ApiEvent>>(
+		`/events/${id}`,
+		input,
+	);
 	return data.data;
 }
 
@@ -81,36 +91,50 @@ export async function deleteEvent(id: string) {
 export async function uploadCover(id: string, file: File) {
 	const formData = new FormData();
 	formData.append('file', file);
-	const { data } = await api.post<ApiResponse<{ url: string }>>(`/upload/events/${id}/cover`, formData, {
-		headers: { 'Content-Type': 'multipart/form-data' },
-	});
+	const { data } = await api.post<ApiResponse<{ url: string }>>(
+		`/upload/events/${id}/cover`,
+		formData,
+		{
+			headers: { 'Content-Type': 'multipart/form-data' },
+		},
+	);
 	return data.data;
 }
 
 export async function uploadGalleryImage(id: string, file: File) {
 	const formData = new FormData();
 	formData.append('file', file);
-	const { data } = await api.post<ApiResponse<{ url: string }>>(`/upload/events/${id}/gallery`, formData, {
-		headers: { 'Content-Type': 'multipart/form-data' },
-	});
+	const { data } = await api.post<ApiResponse<{ url: string }>>(
+		`/upload/events/${id}/gallery`,
+		formData,
+		{
+			headers: { 'Content-Type': 'multipart/form-data' },
+		},
+	);
 	return data.data;
 }
 
 export async function deleteGalleryImage(id: string, index: number) {
-	const { data } = await api.delete<ApiResponse<null>>(`/upload/events/${id}/gallery/${index}`);
+	const { data } = await api.delete<ApiResponse<null>>(
+		`/upload/events/${id}/gallery/${index}`,
+	);
 	return data;
 }
 
 export async function uploadDocument(id: string, file: File) {
 	const formData = new FormData();
 	formData.append('file', file);
-	const { data } = await api.post<ApiResponse<{ url: string; name: string; size: number }>>(`/upload/events/${id}/document`, formData, {
+	const { data } = await api.post<
+		ApiResponse<{ url: string; name: string; size: number }>
+	>(`/upload/events/${id}/document`, formData, {
 		headers: { 'Content-Type': 'multipart/form-data' },
 	});
 	return data.data;
 }
 
 export async function deleteDocument(id: string, index: number) {
-	const { data } = await api.delete<ApiResponse<null>>(`/upload/events/${id}/document/${index}`);
+	const { data } = await api.delete<ApiResponse<null>>(
+		`/upload/events/${id}/document/${index}`,
+	);
 	return data;
 }

@@ -33,7 +33,8 @@
 	--color-gray-border-soft: #f0f2f5;
 
 	--font-sans: 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif;
-	--font-display: 'Bebas Neue', 'Barlow Condensed', 'Barlow', system-ui, sans-serif;
+	--font-display:
+		'Bebas Neue', 'Barlow Condensed', 'Barlow', system-ui, sans-serif;
 	--font-editorial: 'EB Garamond', 'Georgia', 'Times New Roman', serif;
 
 	--text-display-xl: clamp(4rem, 12vw, 10rem);

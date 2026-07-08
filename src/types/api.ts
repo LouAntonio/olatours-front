@@ -106,4 +106,4 @@ export interface CreateEventInput {
 	metaDescription?: string;
 }
 
-export type UpdateEventInput = Partial<CreateEventInput>
+export type UpdateEventInput = Partial<CreateEventInput>;

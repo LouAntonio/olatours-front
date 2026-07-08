@@ -4,11 +4,15 @@ import { useUsers } from '../../hooks/useUsers.ts';
 
 export function AdminDashboard() {
 	const user = useAuthStore((s) => s.user);
-	const { data: eventsData, isLoading: loadingEvents } = useAdminEvents(1, 100);
+	const { data: eventsData, isLoading: loadingEvents } = useAdminEvents(
+		1,
+		100,
+	);
 	const { data: users } = useUsers();
 
 	const total = eventsData?.total ?? 0;
-	const published = eventsData?.events.filter((e) => e.featured !== undefined).length ?? 0;
+	const published =
+		eventsData?.events.filter((e) => e.featured !== undefined).length ?? 0;
 	const adminCount = users?.length ?? 1;
 
 	return (
@@ -25,7 +29,10 @@ export function AdminDashboard() {
 			{loadingEvents ? (
 				<div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
 					{[1, 2, 3].map((i) => (
-						<div key={i} className="bg-white border border-gray-border/60 rounded-lg p-6 animate-pulse">
+						<div
+							key={i}
+							className="bg-white border border-gray-border/60 rounded-lg p-6 animate-pulse"
+						>
 							<div className="h-3 w-20 bg-gray-border/60 rounded mb-3" />
 							<div className="h-8 w-16 bg-gray-border/60 rounded" />
 						</div>
@@ -34,16 +41,28 @@ export function AdminDashboard() {
 			) : (
 				<div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
 					<div className="bg-white border border-gray-border/60 rounded-lg p-6 card-elevated">
-						<p className="label-caps text-ink-mute text-xs mb-1">Total de Eventos</p>
-						<p className="font-display text-4xl font-black text-navy">{total}</p>
+						<p className="label-caps text-ink-mute text-xs mb-1">
+							Total de Eventos
+						</p>
+						<p className="font-display text-4xl font-black text-navy">
+							{total}
+						</p>
 					</div>
 					<div className="bg-white border border-gray-border/60 rounded-lg p-6 card-elevated">
-						<p className="label-caps text-ink-mute text-xs mb-1">Publicados</p>
-						<p className="font-display text-4xl font-black text-flag">{published}</p>
+						<p className="label-caps text-ink-mute text-xs mb-1">
+							Publicados
+						</p>
+						<p className="font-display text-4xl font-black text-flag">
+							{published}
+						</p>
 					</div>
 					<div className="bg-white border border-gray-border/60 rounded-lg p-6 card-elevated">
-						<p className="label-caps text-ink-mute text-xs mb-1">Administradores</p>
-						<p className="font-display text-4xl font-black text-sky">{adminCount}</p>
+						<p className="label-caps text-ink-mute text-xs mb-1">
+							Administradores
+						</p>
+						<p className="font-display text-4xl font-black text-sky">
+							{adminCount}
+						</p>
 					</div>
 				</div>
 			)}
@@ -55,7 +74,10 @@ export function AdminDashboard() {
 				{loadingEvents ? (
 					<div className="space-y-3">
 						{[1, 2, 3].map((i) => (
-							<div key={i} className="bg-white border border-gray-border/60 rounded-lg p-4 animate-pulse">
+							<div
+								key={i}
+								className="bg-white border border-gray-border/60 rounded-lg p-4 animate-pulse"
+							>
 								<div className="h-4 w-3/4 bg-gray-border/60 rounded" />
 							</div>
 						))}
@@ -63,12 +85,17 @@ export function AdminDashboard() {
 				) : eventsData && eventsData.events.length > 0 ? (
 					<div className="space-y-2">
 						{eventsData.events.slice(0, 5).map((event) => (
-							<div key={event.id}
+							<div
+								key={event.id}
 								className="bg-white border border-gray-border/60 rounded-lg px-4 py-3 flex items-center justify-between"
 							>
 								<div className="min-w-0 flex-1">
-									<p className="text-sm font-semibold text-ink truncate">{event.title}</p>
-									<p className="text-xs text-ink-mute">{event.date} · {event.type}</p>
+									<p className="text-sm font-semibold text-ink truncate">
+										{event.title}
+									</p>
+									<p className="text-xs text-ink-mute">
+										{event.date} · {event.type}
+									</p>
 								</div>
 								<span className="label-caps text-[10px] text-ink-mute shrink-0 ml-3">
 									{event.countryName}
@@ -77,7 +104,9 @@ export function AdminDashboard() {
 						))}
 					</div>
 				) : (
-					<p className="text-ink-mute text-sm">Nenhum evento encontrado.</p>
+					<p className="text-ink-mute text-sm">
+						Nenhum evento encontrado.
+					</p>
 				)}
 			</div>
 		</div>

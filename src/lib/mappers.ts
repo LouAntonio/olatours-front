@@ -1,7 +1,13 @@
 import type { ApiEvent, Accent, EventType } from '../types/api';
-import type { Evento, EventPhoto, EventDetail, EventDocument } from '../data/events';
+import type {
+	Evento,
+	EventPhoto,
+	EventDetail,
+	EventDocument,
+} from '../data/events';
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL ?? 'https://api.olatours.co.ao';
+const BACKEND_URL =
+	import.meta.env.VITE_BACKEND_URL ?? 'https://api.olatours.co.ao';
 
 export function uploadUrl(path: string): string {
 	if (!path) return '';
@@ -52,8 +58,14 @@ function mapPhotos(event: ApiEvent): EventPhoto[] | undefined {
 
 	if (event.gallery && Array.isArray(event.gallery)) {
 		for (const item of event.gallery) {
-			const src = typeof item === 'string' ? mapCoverUrl(item) : mapCoverUrl((item as { url: string }).url);
-			const alt = typeof item === 'string' ? event.title : (item as { alt?: string }).alt ?? event.title;
+			const src =
+				typeof item === 'string'
+					? mapCoverUrl(item)
+					: mapCoverUrl((item as { url: string }).url);
+			const alt =
+				typeof item === 'string'
+					? event.title
+					: ((item as { alt?: string }).alt ?? event.title);
 			photos.push({ src, alt });
 		}
 	}
@@ -63,7 +75,11 @@ function mapPhotos(event: ApiEvent): EventPhoto[] | undefined {
 
 function mapDocuments(event: ApiEvent): EventDocument[] | undefined {
 	if (!event.documents || !Array.isArray(event.documents)) return undefined;
-	return event.documents.map((d) => ({ url: uploadUrl(d.url), name: d.name, size: d.size }));
+	return event.documents.map((d) => ({
+		url: uploadUrl(d.url),
+		name: d.name,
+		size: d.size,
+	}));
 }
 
 function mapDetails(event: ApiEvent): EventDetail[] | undefined {

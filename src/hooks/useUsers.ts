@@ -15,7 +15,10 @@ async function fetchUsers(): Promise<ApiUser[]> {
 }
 
 async function createUser(input: UserFormData): Promise<ApiUser> {
-	const { data } = await api.post<ApiResponse<ApiUser>>('/auth/register', input);
+	const { data } = await api.post<ApiResponse<ApiUser>>(
+		'/auth/register',
+		input,
+	);
 	return data.data;
 }
 
@@ -23,12 +26,19 @@ async function removeUser(id: string): Promise<void> {
 	await api.delete(`/auth/users/${id}`);
 }
 
-async function updateProfile(input: { name: string; surname: string; email: string }): Promise<ApiUser> {
+async function updateProfile(input: {
+	name: string;
+	surname: string;
+	email: string;
+}): Promise<ApiUser> {
 	const { data } = await api.put<ApiResponse<ApiUser>>('/auth/me', input);
 	return data.data;
 }
 
-async function changePassword(input: { currentPassword: string; newPassword: string }): Promise<void> {
+async function changePassword(input: {
+	currentPassword: string;
+	newPassword: string;
+}): Promise<void> {
 	await api.put('/auth/password', input);
 }
 

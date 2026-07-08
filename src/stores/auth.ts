@@ -19,14 +19,25 @@ function loadFromStorage() {
 	try {
 		const raw = localStorage.getItem(STORAGE_KEY);
 		if (!raw) return null;
-		return JSON.parse(raw) as { user: ApiUser; accessToken: string; refreshToken: string };
+		return JSON.parse(raw) as {
+			user: ApiUser;
+			accessToken: string;
+			refreshToken: string;
+		};
 	} catch {
 		return null;
 	}
 }
 
-function saveToStorage(user: ApiUser, accessToken: string, refreshToken: string) {
-	localStorage.setItem(STORAGE_KEY, JSON.stringify({ user, accessToken, refreshToken }));
+function saveToStorage(
+	user: ApiUser,
+	accessToken: string,
+	refreshToken: string,
+) {
+	localStorage.setItem(
+		STORAGE_KEY,
+		JSON.stringify({ user, accessToken, refreshToken }),
+	);
 }
 
 function clearStorage() {
@@ -62,7 +73,12 @@ export const useAuthStore = create<AuthState>((set) => ({
 
 	logout: () => {
 		clearStorage();
-		set({ user: null, accessToken: null, refreshToken: null, isAuthenticated: false });
+		set({
+			user: null,
+			accessToken: null,
+			refreshToken: null,
+			isAuthenticated: false,
+		});
 	},
 
 	setAccessToken: (token) => {

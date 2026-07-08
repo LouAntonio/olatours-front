@@ -52,7 +52,9 @@ export function MercadoDaComidaLanding() {
 	const [acceptedTerms, setAcceptedTerms] = useState(false);
 	const [receiptFile, setReceiptFile] = useState<File | null>(null);
 	const [selectedDays, setSelectedDays] = useState<string[]>([]);
-	const [paymentMethod, setPaymentMethod] = useState<'onboarding' | 'paid' | null>(null);
+	const [paymentMethod, setPaymentMethod] = useState<
+		'onboarding' | 'paid' | null
+	>(null);
 	const formId = useId();
 
 	const totalValue = selectedDays.length * 3000;
@@ -71,7 +73,11 @@ export function MercadoDaComidaLanding() {
 			if (!json.success) throw new Error(json.message);
 			setSubmitted(true);
 		} catch (err) {
-			alert(err instanceof Error ? err.message : 'Erro ao enviar inscrição. Tente novamente.');
+			alert(
+				err instanceof Error
+					? err.message
+					: 'Erro ao enviar inscrição. Tente novamente.',
+			);
 		} finally {
 			setSending(false);
 		}
@@ -105,18 +111,30 @@ export function MercadoDaComidaLanding() {
 							<div className="mt-6 max-w-3xl">
 								<p className="font-display text-[clamp(4rem,13vw,8rem)] font-black uppercase leading-[0.82] tracking-[-0.04em] text-[#4a2611]">
 									Mercado da{' '}
-									<span className="text-[#d04a21]">Comida</span>
+									<span className="text-[#d04a21]">
+										Comida
+									</span>
 								</p>
 								<p className="mt-5 max-w-2xl text-[1.05rem] leading-relaxed text-[#5d3014] sm:text-[1.15rem]">
-									A OlaTours disponibiliza transporte dedicado para os visitantes do evento. Garanta o seu cartão e viaje com conforto, segurança e um serviço preparado para a experiência do Mercado da Comida.
+									A OlaTours disponibiliza transporte dedicado
+									para os visitantes do evento. Garanta o seu
+									cartão e viaje com conforto, segurança e um
+									serviço preparado para a experiência do
+									Mercado da Comida.
 								</p>
 							</div>
-
 						</motion.div>
 
-						<motion.div variants={item} className="lg:col-span-5 lg:pt-8">
+						<motion.div
+							variants={item}
+							className="lg:col-span-5 lg:pt-8"
+						>
 							<div className="relative mx-auto flex w-full max-w-[680px] flex-col items-center lg:items-end">
-								<img src="/mercadodacomida/logo.png" alt="OlaTours" className="mb-8 h-44 w-auto object-contain" />
+								<img
+									src="/mercadodacomida/logo.png"
+									alt="OlaTours"
+									className="mb-8 h-44 w-auto object-contain"
+								/>
 								<img
 									src="/mercadodacomida/Autocarro.png"
 									alt="Autocarro OlaTours"
@@ -152,14 +170,19 @@ export function MercadoDaComidaLanding() {
 				</div>
 			</section>
 
-			<section id="inscricao" className="relative bg-[#fff1ad] py-16 sm:py-20">
+			<section
+				id="inscricao"
+				className="relative bg-[#fff1ad] py-16 sm:py-20"
+			>
 				<div className="relative mx-auto max-w-[1280px] px-5 sm:px-8">
 					<div className="mx-auto max-w-3xl">
 						<p className="font-display text-[clamp(2.2rem,5vw,4.6rem)] font-black uppercase leading-[0.88] tracking-[-0.04em] text-[#4a2611]">
 							Formulário de inscrição.
 						</p>
 						<p className="mt-4 text-base leading-relaxed text-[#5d3014] sm:text-lg">
-							Preencha os dados para reservar o seu cartão de transporte. Se escolher pagamento por transferência, anexe o comprovativo em PDF.
+							Preencha os dados para reservar o seu cartão de
+							transporte. Se escolher pagamento por transferência,
+							anexe o comprovativo em PDF.
 						</p>
 
 						<div className="mt-10">
@@ -167,19 +190,35 @@ export function MercadoDaComidaLanding() {
 								<motion.div
 									initial={{ opacity: 0, y: 20 }}
 									animate={{ opacity: 1, y: 0 }}
-									transition={{ duration: m.duration.slow, ease: m.ease.out }}
+									transition={{
+										duration: m.duration.slow,
+										ease: m.ease.out,
+									}}
 									className="flex min-h-[320px] flex-col justify-center rounded-[32px] border border-[#4a2611]/15 bg-white/70 p-8 shadow-[0_22px_50px_-30px_rgba(74,38,17,0.42)] backdrop-blur-sm"
 								>
 									<div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#b5482a]/10 text-[#b5482a]">
-										<svg viewBox="0 0 24 24" fill="none" className="h-8 w-8" aria-hidden="true">
-											<path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+										<svg
+											viewBox="0 0 24 24"
+											fill="none"
+											className="h-8 w-8"
+											aria-hidden="true"
+										>
+											<path
+												d="M5 13l4 4L19 7"
+												stroke="currentColor"
+												strokeWidth="2.5"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											/>
 										</svg>
 									</div>
 									<h2 className="mt-6 font-display text-4xl font-black uppercase leading-tight text-[#4a2611] sm:text-5xl">
 										Inscrição recebida.
 									</h2>
 									<p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-[#5d3014] sm:text-lg">
-										Receberá a confirmação e os horários de recolha após validação do pagamento. Obrigado por escolher a OlaTours.
+										Receberá a confirmação e os horários de
+										recolha após validação do pagamento.
+										Obrigado por escolher a OlaTours.
 									</p>
 								</motion.div>
 							) : (
@@ -191,13 +230,19 @@ export function MercadoDaComidaLanding() {
 									onSubmit={handleSubmit}
 									className="rounded-[32px] border border-[#4a2611]/15 bg-white/70 p-5 shadow-[0_22px_50px_-30px_rgba(74,38,17,0.42)] backdrop-blur-sm sm:p-8"
 								>
-								<motion.fieldset variants={item} className="space-y-4">
+									<motion.fieldset
+										variants={item}
+										className="space-y-4"
+									>
 										<legend className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
 											Ponto de recolha
 										</legend>
 										<div className="grid gap-3 sm:grid-cols-2">
 											{pickupPoints.map((point) => (
-												<label key={point} className="flex cursor-pointer items-center gap-3 rounded-2xl border border-[#4a2611]/12 bg-white/80 px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]">
+												<label
+													key={point}
+													className="flex cursor-pointer items-center gap-3 rounded-2xl border border-[#4a2611]/12 bg-white/80 px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]"
+												>
 													<input
 														type="radio"
 														name="ponto_recolha"
@@ -205,163 +250,399 @@ export function MercadoDaComidaLanding() {
 														required
 														className="h-4 w-4 shrink-0 appearance-none rounded-full border-2 border-[#a68a5e] checked:border-[#b5482a] checked:bg-[#b5482a] checked:shadow-[inset_0_0_0_2px_white]"
 													/>
-													<span className="text-sm font-medium text-[#4a2611]">{point}</span>
+													<span className="text-sm font-medium text-[#4a2611]">
+														{point}
+													</span>
 												</label>
 											))}
 										</div>
 									</motion.fieldset>
 
-									<motion.fieldset variants={item} className="mt-7 space-y-4">
+									<motion.fieldset
+										variants={item}
+										className="mt-7 space-y-4"
+									>
 										<legend className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
 											Dia(s) pretendido(s)
 										</legend>
 										<div className="grid gap-3 sm:grid-cols-2">
 											{weekDays.map((day) => (
-												<label key={day} className="flex cursor-pointer items-center gap-3 rounded-2xl border border-[#4a2611]/12 bg-white/80 px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]">
+												<label
+													key={day}
+													className="flex cursor-pointer items-center gap-3 rounded-2xl border border-[#4a2611]/12 bg-white/80 px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]"
+												>
 													<input
 														type="checkbox"
 														name="dias"
 														value={day}
-														checked={selectedDays.includes(day)}
+														checked={selectedDays.includes(
+															day,
+														)}
 														onChange={(e) => {
-															if (e.target.checked) {
-																setSelectedDays((prev) => [...prev, day]);
+															if (
+																e.target.checked
+															) {
+																setSelectedDays(
+																	(prev) => [
+																		...prev,
+																		day,
+																	],
+																);
 															} else {
-																setSelectedDays((prev) => prev.filter((currentDay) => currentDay !== day));
+																setSelectedDays(
+																	(prev) =>
+																		prev.filter(
+																			(
+																				currentDay,
+																			) =>
+																				currentDay !==
+																				day,
+																		),
+																);
 															}
 														}}
 														className="h-4 w-4 shrink-0 appearance-none rounded-sm border-2 border-[#a68a5e] checked:border-[#b5482a] checked:bg-[#b5482a]"
 													/>
-													<span className="text-sm font-medium text-[#4a2611]">{day}</span>
+													<span className="text-sm font-medium text-[#4a2611]">
+														{day}
+													</span>
 												</label>
 											))}
 										</div>
 										{selectedDays.length > 0 && (
 											<p className="text-right font-display text-lg font-black uppercase tracking-tight text-[#b5482a]">
-												Total: {totalValue.toLocaleString('pt-PT')} Kz
+												Total:{' '}
+												{totalValue.toLocaleString(
+													'pt-PT',
+												)}{' '}
+												Kz
 											</p>
 										)}
 									</motion.fieldset>
 
-									<motion.fieldset variants={item} className="mt-7 space-y-4">
+									<motion.fieldset
+										variants={item}
+										className="mt-7 space-y-4"
+									>
 										<legend className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
 											Dados do inscrito
 										</legend>
 										<div className="grid gap-5">
 											<label className="grid gap-1.5">
-												<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">Nome completo</span>
-												<input id={`${formId}-nome`} name="nome_completo" type="text" required placeholder="O seu nome completo" className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20" />
+												<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+													Nome completo
+												</span>
+												<input
+													id={`${formId}-nome`}
+													name="nome_completo"
+													type="text"
+													required
+													placeholder="O seu nome completo"
+													className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+												/>
 											</label>
 
 											<div className="grid gap-5 sm:grid-cols-2">
 												<label className="grid gap-1.5">
-													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">Nº do Bilhete de Identidade</span>
-													<input id={`${formId}-bi`} name="bi" type="text" required placeholder="000000000 LA000" className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20" />
+													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+														Nº do Bilhete de
+														Identidade
+													</span>
+													<input
+														id={`${formId}-bi`}
+														name="bi"
+														type="text"
+														required
+														placeholder="000000000 LA000"
+														className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+													/>
 												</label>
 												<label className="grid gap-1.5">
-													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">Data de nascimento</span>
-													<input id={`${formId}-nascimento`} name="data_nascimento" type="date" required className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20" />
+													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+														Data de nascimento
+													</span>
+													<input
+														id={`${formId}-nascimento`}
+														name="data_nascimento"
+														type="date"
+														required
+														className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+													/>
 												</label>
 											</div>
 
 											<div className="grid gap-5 sm:grid-cols-2">
 												<label className="grid gap-1.5">
-													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">Telefone / WhatsApp</span>
-													<input id={`${formId}-telefone`} name="telefone" type="tel" required placeholder="+244 900 000 000" className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20" />
+													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+														Telefone / WhatsApp
+													</span>
+													<input
+														id={`${formId}-telefone`}
+														name="telefone"
+														type="tel"
+														required
+														placeholder="+244 900 000 000"
+														className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+													/>
 												</label>
 												<label className="grid gap-1.5">
-													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">E-mail</span>
-													<input id={`${formId}-email`} name="email" type="email" required placeholder="seu@email.com" className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20" />
+													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+														E-mail
+													</span>
+													<input
+														id={`${formId}-email`}
+														name="email"
+														type="email"
+														required
+														placeholder="seu@email.com"
+														className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+													/>
 												</label>
 											</div>
 
 											<div className="grid gap-5 sm:grid-cols-2">
 												<label className="grid gap-1.5">
-													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">Município de residência</span>
-													<input id={`${formId}-municipio`} name="municipio" type="text" required placeholder="Ex: Luanda" className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20" />
+													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+														Município de residência
+													</span>
+													<input
+														id={`${formId}-municipio`}
+														name="municipio"
+														type="text"
+														required
+														placeholder="Ex: Luanda"
+														className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+													/>
 												</label>
 												<label className="grid gap-1.5">
-													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">Contacto de emergência</span>
-													<input id={`${formId}-emergencia`} name="contacto_emergencia" type="tel" required placeholder="+244 900 000 000" className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20" />
+													<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+														Contacto de emergência
+													</span>
+													<input
+														id={`${formId}-emergencia`}
+														name="contacto_emergencia"
+														type="tel"
+														required
+														placeholder="+244 900 000 000"
+														className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+													/>
 												</label>
 											</div>
 										</div>
 									</motion.fieldset>
 
-									<motion.div variants={item} className="mt-7 grid gap-5">
+									<motion.div
+										variants={item}
+										className="mt-7 grid gap-5"
+									>
 										<div className="rounded-[28px] border border-[#4a2611]/12 bg-white/80 p-5">
-											<p className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">Observações</p>
-											<textarea id={`${formId}-observacoes`} name="observacoes" rows={4} placeholder="Alguma informação adicional que queira partilhar..." className="mt-4 w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20" />
+											<p className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
+												Observações
+											</p>
+											<textarea
+												id={`${formId}-observacoes`}
+												name="observacoes"
+												rows={4}
+												placeholder="Alguma informação adicional que queira partilhar..."
+												className="mt-4 w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+											/>
 										</div>
 
 										<div className="rounded-[28px] border border-[#4a2611]/12 bg-white/80 p-5">
-											<p className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">Método de pagamento</p>
+											<p className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
+												Método de pagamento
+											</p>
 											<div className="mt-4 grid gap-3">
 												<label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]">
-													<input type="radio" name="metodo_pagamento" value="onboarding" required checked={paymentMethod === 'onboarding'} onChange={() => setPaymentMethod('onboarding')} className="mt-0.5 h-4 w-4 shrink-0 appearance-none rounded-full border-2 border-[#a68a5e] checked:border-[#b5482a] checked:bg-[#b5482a] checked:shadow-[inset_0_0_0_2px_white]" />
+													<input
+														type="radio"
+														name="metodo_pagamento"
+														value="onboarding"
+														required
+														checked={
+															paymentMethod ===
+															'onboarding'
+														}
+														onChange={() =>
+															setPaymentMethod(
+																'onboarding',
+															)
+														}
+														className="mt-0.5 h-4 w-4 shrink-0 appearance-none rounded-full border-2 border-[#a68a5e] checked:border-[#b5482a] checked:bg-[#b5482a] checked:shadow-[inset_0_0_0_2px_white]"
+													/>
 													<div>
-														<span className="text-sm font-medium text-[#4a2611]">Pagamento a bordo</span>
-														<p className="mt-1 text-xs leading-relaxed text-[#7b4a26]">Pague no embarque, em dinheiro ou multicaixa.</p>
+														<span className="text-sm font-medium text-[#4a2611]">
+															Pagamento a bordo
+														</span>
+														<p className="mt-1 text-xs leading-relaxed text-[#7b4a26]">
+															Pague no embarque,
+															em dinheiro ou
+															multicaixa.
+														</p>
 													</div>
 												</label>
 
 												<label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]">
-													<input type="radio" name="metodo_pagamento" value="paid" required checked={paymentMethod === 'paid'} onChange={() => setPaymentMethod('paid')} className="mt-0.5 h-4 w-4 shrink-0 appearance-none rounded-full border-2 border-[#a68a5e] checked:border-[#b5482a] checked:bg-[#b5482a] checked:shadow-[inset_0_0_0_2px_white]" />
+													<input
+														type="radio"
+														name="metodo_pagamento"
+														value="paid"
+														required
+														checked={
+															paymentMethod ===
+															'paid'
+														}
+														onChange={() =>
+															setPaymentMethod(
+																'paid',
+															)
+														}
+														className="mt-0.5 h-4 w-4 shrink-0 appearance-none rounded-full border-2 border-[#a68a5e] checked:border-[#b5482a] checked:bg-[#b5482a] checked:shadow-[inset_0_0_0_2px_white]"
+													/>
 													<div>
-														<span className="text-sm font-medium text-[#4a2611]">Já efetuei o pagamento</span>
-														<p className="mt-1 text-xs leading-relaxed text-[#7b4a26]">Transferência bancária — anexe o comprovativo em PDF.</p>
+														<span className="text-sm font-medium text-[#4a2611]">
+															Já efetuei o
+															pagamento
+														</span>
+														<p className="mt-1 text-xs leading-relaxed text-[#7b4a26]">
+															Transferência
+															bancária — anexe o
+															comprovativo em PDF.
+														</p>
 													</div>
 												</label>
 											</div>
 
 											{paymentMethod === 'paid' && (
 												<div className="mt-4 space-y-4 rounded-[24px] border border-[#4a2611]/12 bg-[#fff8d8] p-4">
-													{selectedDays.length > 0 && (
+													{selectedDays.length >
+														0 && (
 														<p className="font-display text-lg font-black uppercase tracking-tight text-[#b5482a]">
-															Total a pagar: {totalValue.toLocaleString('pt-PT')} Kz
+															Total a pagar:{' '}
+															{totalValue.toLocaleString(
+																'pt-PT',
+															)}{' '}
+															Kz
 														</p>
 													)}
 													<div>
-														<p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">Dados para transferência</p>
-														<p className="mt-2 text-sm font-semibold text-[#4a2611]">OLA TOURS PREST SERVICO COMER GERAL LDA</p>
-														<p className="mt-1 text-sm text-[#5d3014]">Conta: <span className="font-mono font-semibold text-[#4a2611]">17145600210001</span></p>
-														<p className="text-sm text-[#5d3014]">IBAN: <span className="font-mono font-semibold text-[#4a2611]">AO06004000007145600210189</span></p>
+														<p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+															Dados para
+															transferência
+														</p>
+														<p className="mt-2 text-sm font-semibold text-[#4a2611]">
+															OLA TOURS PREST
+															SERVICO COMER GERAL
+															LDA
+														</p>
+														<p className="mt-1 text-sm text-[#5d3014]">
+															Conta:{' '}
+															<span className="font-mono font-semibold text-[#4a2611]">
+																17145600210001
+															</span>
+														</p>
+														<p className="text-sm text-[#5d3014]">
+															IBAN:{' '}
+															<span className="font-mono font-semibold text-[#4a2611]">
+																AO06004000007145600210189
+															</span>
+														</p>
 													</div>
 													<label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fffef0]">
-														<input type="file" name="comprovativo" accept=".pdf" onChange={(e) => setReceiptFile(e.target.files?.[0] ?? null)} className="hidden" />
+														<input
+															type="file"
+															name="comprovativo"
+															accept=".pdf"
+															onChange={(e) =>
+																setReceiptFile(
+																	e.target
+																		.files?.[0] ??
+																		null,
+																)
+															}
+															className="hidden"
+														/>
 														<span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#b5482a]/10 text-[#b5482a]">
-															<svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-																<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v5h5v11H6z" fill="currentColor" />
+															<svg
+																viewBox="0 0 24 24"
+																fill="none"
+																className="h-5 w-5"
+																aria-hidden="true"
+															>
+																<path
+																	d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v5h5v11H6z"
+																	fill="currentColor"
+																/>
 															</svg>
 														</span>
-														<span className="text-sm font-medium text-[#4a2611]">{receiptFile ? receiptFile.name : 'Selecionar comprovativo'}</span>
+														<span className="text-sm font-medium text-[#4a2611]">
+															{receiptFile
+																? receiptFile.name
+																: 'Selecionar comprovativo'}
+														</span>
 													</label>
 												</div>
 											)}
 										</div>
 
 										<div className="rounded-[28px] border border-[#4a2611]/12 bg-white/80 p-5">
-											<p className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">Termos e condições</p>
+											<p className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
+												Termos e condições
+											</p>
 											<div className="mt-4 space-y-3">
 												{terms.map((term, index) => (
-													<div key={term} className="flex items-start gap-3 rounded-2xl border border-[#4a2611]/10 bg-[#fffaf0] px-4 py-3">
-														<span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#b5482a]/10 text-[10px] font-bold text-[#b5482a]">{index + 1}</span>
-														<p className="text-sm leading-relaxed text-[#5d3014]">{term}</p>
+													<div
+														key={term}
+														className="flex items-start gap-3 rounded-2xl border border-[#4a2611]/10 bg-[#fffaf0] px-4 py-3"
+													>
+														<span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#b5482a]/10 text-[10px] font-bold text-[#b5482a]">
+															{index + 1}
+														</span>
+														<p className="text-sm leading-relaxed text-[#5d3014]">
+															{term}
+														</p>
 													</div>
 												))}
 											</div>
 											<label className="mt-5 flex cursor-pointer items-start gap-3 rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]">
-												<input type="checkbox" required checked={acceptedTerms} onChange={(e) => setAcceptedTerms(e.target.checked)} className="mt-0.5 h-5 w-5 shrink-0 appearance-none rounded-sm border-2 border-[#a68a5e] checked:border-[#b5482a] checked:bg-[#b5482a]" />
-												<span className="text-sm leading-relaxed text-[#4a2611]">Declaro que li e aceito os termos e condições acima descritos.</span>
+												<input
+													type="checkbox"
+													required
+													checked={acceptedTerms}
+													onChange={(e) =>
+														setAcceptedTerms(
+															e.target.checked,
+														)
+													}
+													className="mt-0.5 h-5 w-5 shrink-0 appearance-none rounded-sm border-2 border-[#a68a5e] checked:border-[#b5482a] checked:bg-[#b5482a]"
+												/>
+												<span className="text-sm leading-relaxed text-[#4a2611]">
+													Declaro que li e aceito os
+													termos e condições acima
+													descritos.
+												</span>
 											</label>
 										</div>
 
 										<div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
-											<Button as="button" variant="flag" size="lg" disabled={sending || !acceptedTerms} className="w-full sm:w-auto" type="submit">
-												{sending ? 'A enviar...' : 'Garantir cartão de transporte'}
+											<Button
+												as="button"
+												variant="flag"
+												size="lg"
+												disabled={
+													sending || !acceptedTerms
+												}
+												className="w-full sm:w-auto"
+												type="submit"
+											>
+												{sending
+													? 'A enviar...'
+													: 'Garantir cartão de transporte'}
 											</Button>
 											<p className="max-w-sm text-xs leading-relaxed text-[#7b4a26]">
-												Os seus dados serão utilizados apenas para o processamento desta inscrição.
+												Os seus dados serão utilizados
+												apenas para o processamento
+												desta inscrição.
 											</p>
 										</div>
 									</motion.div>

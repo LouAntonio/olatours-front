@@ -35,7 +35,9 @@ api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 api.interceptors.response.use(
 	(response) => response,
 	async (error: AxiosError) => {
-		const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
+		const originalRequest = error.config as InternalAxiosRequestConfig & {
+			_retry?: boolean;
+		};
 
 		if (error.response?.status === 401 && !originalRequest._retry) {
 			const refreshToken = useAuthStore.getState().refreshToken;
@@ -58,7 +60,9 @@ api.interceptors.response.use(
 			isRefreshing = true;
 
 			try {
-				const { data } = await axios.post('/api/auth/refresh', { refreshToken });
+				const { data } = await axios.post('/api/auth/refresh', {
+					refreshToken,
+				});
 				const newToken = data.data.accessToken;
 				useAuthStore.getState().setAccessToken(newToken);
 				processQueue(null, newToken);

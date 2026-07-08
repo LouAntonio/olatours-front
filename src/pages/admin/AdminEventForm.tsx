@@ -1,7 +1,16 @@
 import { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { useEventBySlug, createEvent, updateEvent, uploadCover, uploadGalleryImage, deleteGalleryImage, uploadDocument, deleteDocument } from '../../hooks/useEvents.ts';
+import {
+	useEventBySlug,
+	createEvent,
+	updateEvent,
+	uploadCover,
+	uploadGalleryImage,
+	deleteGalleryImage,
+	uploadDocument,
+	deleteDocument,
+} from '../../hooks/useEvents.ts';
 import { uploadUrl } from '../../lib/mappers.ts';
 import type { EventType, EventStatus } from '../../types/api.ts';
 import type { EventDocument } from '../../data/events.ts';
@@ -72,7 +81,9 @@ export function AdminEventForm() {
 	const queryClient = useQueryClient();
 	const isEditing = !!slug;
 
-	const { data: existingEvent, isLoading: loadingEvent } = useEventBySlug(slug ?? '');
+	const { data: existingEvent, isLoading: loadingEvent } = useEventBySlug(
+		slug ?? '',
+	);
 	const [saving, setSaving] = useState(false);
 	const [error, setError] = useState('');
 
@@ -125,7 +136,9 @@ export function AdminEventForm() {
 		try {
 			const payload = {
 				title: form.title,
-				slug: form.slug || form.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+				slug:
+					form.slug ||
+					form.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
 				subtitle: form.subtitle || undefined,
 				description: form.description,
 				fullDescription: form.fullDescription || undefined,
@@ -147,14 +160,17 @@ export function AdminEventForm() {
 				await updateEvent(existingEvent!.id, payload);
 			} else {
 				const created = await createEvent(payload);
-				navigate(`/ot/eventos/${created.slug}/editar`, { replace: true });
+				navigate(`/ot/eventos/${created.slug}/editar`, {
+					replace: true,
+				});
 				return;
 			}
 
 			queryClient.invalidateQueries({ queryKey: ['events'] });
 			navigate('/ot/eventos');
 		} catch (err: unknown) {
-			const msg = err instanceof Error ? err.message : 'Erro ao guardar evento';
+			const msg =
+				err instanceof Error ? err.message : 'Erro ao guardar evento';
 			setError(msg);
 		} finally {
 			setSaving(false);
@@ -202,13 +218,22 @@ export function AdminEventForm() {
 		}
 	}
 
-	async function handleDocumentUpload(e: React.ChangeEvent<HTMLInputElement>) {
+	async function handleDocumentUpload(
+		e: React.ChangeEvent<HTMLInputElement>,
+	) {
 		const file = e.target.files?.[0];
 		if (!file || !isEditing || !existingEvent) return;
 		setUploadingDoc(true);
 		try {
 			const result = await uploadDocument(existingEvent.id, file);
-			setDocuments((prev) => [...prev, { url: uploadUrl(result.url), name: result.name, size: result.size }]);
+			setDocuments((prev) => [
+				...prev,
+				{
+					url: uploadUrl(result.url),
+					name: result.name,
+					size: result.size,
+				},
+			]);
 			queryClient.invalidateQueries({ queryKey: ['event'] });
 		} catch {
 			alert('Erro ao enviar documento');
@@ -254,124 +279,258 @@ export function AdminEventForm() {
 				<div className="bg-white border border-gray-border/60 rounded-lg p-5 space-y-4">
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 						<div className="sm:col-span-2">
-							<label className="label-caps text-ink-mute text-xs block mb-1">Título *</label>
-							<input required value={form.title} onChange={(e) => update('title', e.target.value)}
-								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors" />
-						</div>
-						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">Slug</label>
-							<input value={form.slug} onChange={(e) => update('slug', e.target.value)}
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Título *
+							</label>
+							<input
+								required
+								value={form.title}
+								onChange={(e) =>
+									update('title', e.target.value)
+								}
 								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
-								placeholder="deixar vazio para auto-gerar" />
+							/>
 						</div>
 						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">Subtítulo</label>
-							<input value={form.subtitle} onChange={(e) => update('subtitle', e.target.value)}
-								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors" />
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Slug
+							</label>
+							<input
+								value={form.slug}
+								onChange={(e) => update('slug', e.target.value)}
+								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
+								placeholder="deixar vazio para auto-gerar"
+							/>
+						</div>
+						<div>
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Subtítulo
+							</label>
+							<input
+								value={form.subtitle}
+								onChange={(e) =>
+									update('subtitle', e.target.value)
+								}
+								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
+							/>
 						</div>
 					</div>
 
 					<div>
-						<label className="label-caps text-ink-mute text-xs block mb-1">Descrição Curta *</label>
-						<textarea required rows={2} value={form.description} onChange={(e) => update('description', e.target.value)}
-							className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors resize-none" />
+						<label className="label-caps text-ink-mute text-xs block mb-1">
+							Descrição Curta *
+						</label>
+						<textarea
+							required
+							rows={2}
+							value={form.description}
+							onChange={(e) =>
+								update('description', e.target.value)
+							}
+							className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors resize-none"
+						/>
 					</div>
 
 					<div>
-						<label className="label-caps text-ink-mute text-xs block mb-1">Descrição Completa</label>
-						<textarea rows={4} value={form.fullDescription} onChange={(e) => update('fullDescription', e.target.value)}
-							className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors resize-y" />
+						<label className="label-caps text-ink-mute text-xs block mb-1">
+							Descrição Completa
+						</label>
+						<textarea
+							rows={4}
+							value={form.fullDescription}
+							onChange={(e) =>
+								update('fullDescription', e.target.value)
+							}
+							className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors resize-y"
+						/>
 					</div>
 				</div>
 
 				<div className="bg-white border border-gray-border/60 rounded-lg p-5 space-y-4">
-					<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">Datas</h2>
+					<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">
+						Datas
+					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">Data Início</label>
-							<input type="date" value={form.startDate} onChange={(e) => update('startDate', e.target.value)}
-								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors" />
-						</div>
-						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">Data Fim</label>
-							<input type="date" value={form.endDate} onChange={(e) => update('endDate', e.target.value)}
-								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors" />
-						</div>
-						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">Display Date *</label>
-							<input required value={form.displayDate} onChange={(e) => update('displayDate', e.target.value)}
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Data Início
+							</label>
+							<input
+								type="date"
+								value={form.startDate}
+								onChange={(e) =>
+									update('startDate', e.target.value)
+								}
 								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
-								placeholder="ex: MAI · 2026" />
+							/>
 						</div>
 						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">Display Date Long *</label>
-							<input required value={form.displayDateLong} onChange={(e) => update('displayDateLong', e.target.value)}
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Data Fim
+							</label>
+							<input
+								type="date"
+								value={form.endDate}
+								onChange={(e) =>
+									update('endDate', e.target.value)
+								}
 								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
-								placeholder="ex: 11 a 14 de Maio de 2026" />
+							/>
+						</div>
+						<div>
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Display Date *
+							</label>
+							<input
+								required
+								value={form.displayDate}
+								onChange={(e) =>
+									update('displayDate', e.target.value)
+								}
+								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
+								placeholder="ex: MAI · 2026"
+							/>
+						</div>
+						<div>
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Display Date Long *
+							</label>
+							<input
+								required
+								value={form.displayDateLong}
+								onChange={(e) =>
+									update('displayDateLong', e.target.value)
+								}
+								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
+								placeholder="ex: 11 a 14 de Maio de 2026"
+							/>
 						</div>
 					</div>
 				</div>
 
 				<div className="bg-white border border-gray-border/60 rounded-lg p-5 space-y-4">
-					<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">Classificação</h2>
+					<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">
+						Classificação
+					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">Tipo *</label>
-							<select required value={form.type} onChange={(e) => update('type', e.target.value)}
-								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors">
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Tipo *
+							</label>
+							<select
+								required
+								value={form.type}
+								onChange={(e) => update('type', e.target.value)}
+								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
+							>
 								{EVENT_TYPES.map((t) => (
-									<option key={t.value} value={t.value}>{t.label}</option>
+									<option key={t.value} value={t.value}>
+										{t.label}
+									</option>
 								))}
 							</select>
 						</div>
 						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">Estado</label>
-							<select value={form.status} onChange={(e) => update('status', e.target.value)}
-								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors">
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Estado
+							</label>
+							<select
+								value={form.status}
+								onChange={(e) =>
+									update('status', e.target.value)
+								}
+								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
+							>
 								{STATUS_OPTIONS.map((s) => (
-									<option key={s.value} value={s.value}>{s.label}</option>
+									<option key={s.value} value={s.value}>
+										{s.label}
+									</option>
 								))}
 							</select>
 						</div>
 					</div>
 
 					<label className="flex items-center gap-3 cursor-pointer">
-						<input type="checkbox" checked={form.featured} onChange={(e) => update('featured', e.target.checked)}
-							className="w-4 h-4 rounded border-gray-border/60 text-flag focus:ring-flag" />
-						<span className="text-sm text-ink">Evento em destaque (featured)</span>
+						<input
+							type="checkbox"
+							checked={form.featured}
+							onChange={(e) =>
+								update('featured', e.target.checked)
+							}
+							className="w-4 h-4 rounded border-gray-border/60 text-flag focus:ring-flag"
+						/>
+						<span className="text-sm text-ink">
+							Evento em destaque (featured)
+						</span>
 					</label>
 				</div>
 
 				<div className="bg-white border border-gray-border/60 rounded-lg p-5 space-y-4">
-					<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">Localização</h2>
+					<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">
+						Localização
+					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">País (ISO) *</label>
-							<input required maxLength={3} value={form.country} onChange={(e) => update('country', e.target.value.toUpperCase())}
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								País (ISO) *
+							</label>
+							<input
+								required
+								maxLength={3}
+								value={form.country}
+								onChange={(e) =>
+									update(
+										'country',
+										e.target.value.toUpperCase(),
+									)
+								}
 								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
-								placeholder="ex: ANG" />
+								placeholder="ex: ANG"
+							/>
 						</div>
 						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">Nome do País *</label>
-							<input required value={form.countryName} onChange={(e) => update('countryName', e.target.value)}
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Nome do País *
+							</label>
+							<input
+								required
+								value={form.countryName}
+								onChange={(e) =>
+									update('countryName', e.target.value)
+								}
 								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
-								placeholder="ex: Angola" />
+								placeholder="ex: Angola"
+							/>
 						</div>
 						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">Cidade</label>
-							<input value={form.city} onChange={(e) => update('city', e.target.value)}
-								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors" />
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Cidade
+							</label>
+							<input
+								value={form.city}
+								onChange={(e) => update('city', e.target.value)}
+								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
+							/>
 						</div>
 						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">Local/Venue</label>
-							<input value={form.venue} onChange={(e) => update('venue', e.target.value)}
-								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors" />
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Local/Venue
+							</label>
+							<input
+								value={form.venue}
+								onChange={(e) =>
+									update('venue', e.target.value)
+								}
+								className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
+							/>
 						</div>
 					</div>
 				</div>
 
 				<div className="bg-white border border-gray-border/60 rounded-lg p-5 space-y-4">
-					<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">Detalhes</h2>
+					<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">
+						Detalhes
+					</h2>
 					{form.details.map((d, i) => (
 						<div key={i} className="flex items-start gap-2">
 							<div className="flex-1">
@@ -379,70 +538,135 @@ export function AdminEventForm() {
 									value={d.label}
 									onChange={(e) => {
 										const next = [...form.details];
-										next[i] = { ...next[i], label: e.target.value };
-										setForm((prev) => ({ ...prev, details: next }));
+										next[i] = {
+											...next[i],
+											label: e.target.value,
+										};
+										setForm((prev) => ({
+											...prev,
+											details: next,
+										}));
 									}}
 									className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
-									placeholder="Rótulo (ex: Idioma)" />
+									placeholder="Rótulo (ex: Idioma)"
+								/>
 							</div>
 							<div className="flex-1">
 								<input
 									value={d.value}
 									onChange={(e) => {
 										const next = [...form.details];
-										next[i] = { ...next[i], value: e.target.value };
-										setForm((prev) => ({ ...prev, details: next }));
+										next[i] = {
+											...next[i],
+											value: e.target.value,
+										};
+										setForm((prev) => ({
+											...prev,
+											details: next,
+										}));
 									}}
 									className="w-full border border-gray-border/60 rounded-sm px-3 py-2 text-sm text-ink focus:outline-none focus:border-flag transition-colors"
-									placeholder="Valor (ex: Português)" />
+									placeholder="Valor (ex: Português)"
+								/>
 							</div>
-							<button type="button" onClick={() => {
-								setForm((prev) => ({ ...prev, details: prev.details.filter((_, j) => j !== i) }));
-							}}
-								className="mt-0.5 w-7 h-7 bg-red-100 hover:bg-red-200 text-red-600 rounded-full flex items-center justify-center text-sm shrink-0 transition-colors">
+							<button
+								type="button"
+								onClick={() => {
+									setForm((prev) => ({
+										...prev,
+										details: prev.details.filter(
+											(_, j) => j !== i,
+										),
+									}));
+								}}
+								className="mt-0.5 w-7 h-7 bg-red-100 hover:bg-red-200 text-red-600 rounded-full flex items-center justify-center text-sm shrink-0 transition-colors"
+							>
 								&times;
 							</button>
 						</div>
 					))}
-					<button type="button" onClick={() => {
-						setForm((prev) => ({ ...prev, details: [...prev.details, { label: '', value: '' }] }));
-					}}
-						className="text-xs label-caps text-flag hover:text-flag-dark transition-colors">
+					<button
+						type="button"
+						onClick={() => {
+							setForm((prev) => ({
+								...prev,
+								details: [
+									...prev.details,
+									{ label: '', value: '' },
+								],
+							}));
+						}}
+						className="text-xs label-caps text-flag hover:text-flag-dark transition-colors"
+					>
 						+ Adicionar detalhe
 					</button>
 				</div>
 
 				<div className="bg-white border border-gray-border/60 rounded-lg p-5 space-y-4">
-					<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">Imagem de Capa</h2>
+					<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">
+						Imagem de Capa
+					</h2>
 					{coverUrl && (
 						<div className="relative aspect-video rounded overflow-hidden bg-gray-border/30">
-							<img src={coverUrl} alt="Capa" className="w-full h-full object-cover" />
+							<img
+								src={coverUrl}
+								alt="Capa"
+								className="w-full h-full object-cover"
+							/>
 						</div>
 					)}
 					{isEditing && (
 						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">Upload de imagem</label>
-							<input type="file" accept="image/*" onChange={handleCoverUpload} disabled={uploadingCover}
-								className="w-full text-sm text-ink file:mr-3 file:py-1.5 file:px-3 file:rounded-sm file:border-0 file:bg-flag file:text-white file:text-xs file:label-caps file:cursor-pointer hover:file:bg-flag-dark transition-colors" />
-							{uploadingCover && <p className="text-xs text-ink-mute mt-1">A enviar...</p>}
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Upload de imagem
+							</label>
+							<input
+								type="file"
+								accept="image/*"
+								onChange={handleCoverUpload}
+								disabled={uploadingCover}
+								className="w-full text-sm text-ink file:mr-3 file:py-1.5 file:px-3 file:rounded-sm file:border-0 file:bg-flag file:text-white file:text-xs file:label-caps file:cursor-pointer hover:file:bg-flag-dark transition-colors"
+							/>
+							{uploadingCover && (
+								<p className="text-xs text-ink-mute mt-1">
+									A enviar...
+								</p>
+							)}
 						</div>
 					)}
 					{!isEditing && (
-						<p className="text-xs text-ink-mute">Guarde o evento primeiro para poder fazer upload de imagens.</p>
+						<p className="text-xs text-ink-mute">
+							Guarde o evento primeiro para poder fazer upload de
+							imagens.
+						</p>
 					)}
 				</div>
 
 				{isEditing && (
 					<div className="bg-white border border-gray-border/60 rounded-lg p-5 space-y-4">
-						<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">Galeria de Imagens</h2>
+						<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">
+							Galeria de Imagens
+						</h2>
 
 						{galleryUrls.length > 0 && (
 							<div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
 								{galleryUrls.map((url, i) => (
-									<div key={i} className="relative aspect-video rounded overflow-hidden bg-gray-border/30 group">
-										<img src={url} alt={`Galeria ${i + 1}`} className="w-full h-full object-cover" />
-										<button type="button" onClick={() => handleGalleryDelete(i)}
-											className="absolute top-1 right-1 w-6 h-6 bg-red-600/80 hover:bg-red-600 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+									<div
+										key={i}
+										className="relative aspect-video rounded overflow-hidden bg-gray-border/30 group"
+									>
+										<img
+											src={url}
+											alt={`Galeria ${i + 1}`}
+											className="w-full h-full object-cover"
+										/>
+										<button
+											type="button"
+											onClick={() =>
+												handleGalleryDelete(i)
+											}
+											className="absolute top-1 right-1 w-6 h-6 bg-red-600/80 hover:bg-red-600 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+										>
 											&times;
 										</button>
 									</div>
@@ -451,28 +675,53 @@ export function AdminEventForm() {
 						)}
 
 						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">Adicionar imagem</label>
-							<input type="file" accept="image/*" onChange={handleGalleryUpload} disabled={uploadingGallery}
-								className="w-full text-sm text-ink file:mr-3 file:py-1.5 file:px-3 file:rounded-sm file:border-0 file:bg-flag file:text-white file:text-xs file:label-caps file:cursor-pointer hover:file:bg-flag-dark transition-colors" />
-							{uploadingGallery && <p className="text-xs text-ink-mute mt-1">A enviar...</p>}
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Adicionar imagem
+							</label>
+							<input
+								type="file"
+								accept="image/*"
+								onChange={handleGalleryUpload}
+								disabled={uploadingGallery}
+								className="w-full text-sm text-ink file:mr-3 file:py-1.5 file:px-3 file:rounded-sm file:border-0 file:bg-flag file:text-white file:text-xs file:label-caps file:cursor-pointer hover:file:bg-flag-dark transition-colors"
+							/>
+							{uploadingGallery && (
+								<p className="text-xs text-ink-mute mt-1">
+									A enviar...
+								</p>
+							)}
 						</div>
 					</div>
 				)}
 
 				{isEditing && (
 					<div className="bg-white border border-gray-border/60 rounded-lg p-5 space-y-4">
-						<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">Documentos</h2>
+						<h2 className="label-caps text-ink-mute text-xs uppercase tracking-wider">
+							Documentos
+						</h2>
 
 						{documents.length > 0 && (
 							<ul className="space-y-2">
 								{documents.map((doc, i) => (
-									<li key={i} className="flex items-center justify-between bg-gray-border-soft rounded-sm px-3 py-2 text-sm">
-										<a href={doc.url} target="_blank" rel="noopener noreferrer"
-											className="text-flag hover:text-flag-dark underline truncate">
+									<li
+										key={i}
+										className="flex items-center justify-between bg-gray-border-soft rounded-sm px-3 py-2 text-sm"
+									>
+										<a
+											href={doc.url}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="text-flag hover:text-flag-dark underline truncate"
+										>
 											{doc.name}
 										</a>
-										<button type="button" onClick={() => handleDocumentDelete(i)}
-											className="ml-2 w-6 h-6 bg-red-100 hover:bg-red-200 text-red-600 rounded-full flex items-center justify-center text-xs shrink-0 transition-colors">
+										<button
+											type="button"
+											onClick={() =>
+												handleDocumentDelete(i)
+											}
+											className="ml-2 w-6 h-6 bg-red-100 hover:bg-red-200 text-red-600 rounded-full flex items-center justify-center text-xs shrink-0 transition-colors"
+										>
 											&times;
 										</button>
 									</li>
@@ -481,21 +730,40 @@ export function AdminEventForm() {
 						)}
 
 						<div>
-							<label className="label-caps text-ink-mute text-xs block mb-1">Adicionar documento</label>
-							<input type="file" onChange={handleDocumentUpload} disabled={uploadingDoc}
-								className="w-full text-sm text-ink file:mr-3 file:py-1.5 file:px-3 file:rounded-sm file:border-0 file:bg-flag file:text-white file:text-xs file:label-caps file:cursor-pointer hover:file:bg-flag-dark transition-colors" />
-							{uploadingDoc && <p className="text-xs text-ink-mute mt-1">A enviar...</p>}
+							<label className="label-caps text-ink-mute text-xs block mb-1">
+								Adicionar documento
+							</label>
+							<input
+								type="file"
+								onChange={handleDocumentUpload}
+								disabled={uploadingDoc}
+								className="w-full text-sm text-ink file:mr-3 file:py-1.5 file:px-3 file:rounded-sm file:border-0 file:bg-flag file:text-white file:text-xs file:label-caps file:cursor-pointer hover:file:bg-flag-dark transition-colors"
+							/>
+							{uploadingDoc && (
+								<p className="text-xs text-ink-mute mt-1">
+									A enviar...
+								</p>
+							)}
 						</div>
 					</div>
 				)}
 
 				<div className="flex items-center gap-3 pt-2">
-					<button type="submit" disabled={saving}
-						className="px-6 py-2.5 bg-flag hover:bg-flag-dark disabled:opacity-50 text-white label-caps text-sm rounded-sm transition-colors">
-						{saving ? 'A guardar...' : isEditing ? 'Guardar alterações' : 'Criar evento'}
+					<button
+						type="submit"
+						disabled={saving}
+						className="px-6 py-2.5 bg-flag hover:bg-flag-dark disabled:opacity-50 text-white label-caps text-sm rounded-sm transition-colors"
+					>
+						{saving
+							? 'A guardar...'
+							: isEditing
+								? 'Guardar alterações'
+								: 'Criar evento'}
 					</button>
-					<Link to="/ot/eventos"
-						className="px-6 py-2.5 bg-white border border-gray-border/60 hover:bg-gray-border-soft text-ink label-caps text-sm rounded-sm transition-colors">
+					<Link
+						to="/ot/eventos"
+						className="px-6 py-2.5 bg-white border border-gray-border/60 hover:bg-gray-border-soft text-ink label-caps text-sm rounded-sm transition-colors"
+					>
 						Cancelar
 					</Link>
 				</div>

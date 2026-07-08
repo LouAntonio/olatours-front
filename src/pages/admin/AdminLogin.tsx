@@ -18,9 +18,16 @@ export function AdminLogin() {
 		setError('');
 		setLoading(true);
 		try {
-			const { data } = await axios.post<ApiResponse<AuthResponse>>('/api/auth/login', { email, password });
+			const { data } = await axios.post<ApiResponse<AuthResponse>>(
+				'/api/auth/login',
+				{ email, password },
+			);
 			if (data.success) {
-				login(data.data.user, data.data.accessToken, data.data.refreshToken);
+				login(
+					data.data.user,
+					data.data.accessToken,
+					data.data.refreshToken,
+				);
 				navigate('/ot');
 			}
 		} catch (err: unknown) {
@@ -39,12 +46,17 @@ export function AdminLogin() {
 			<div className="w-full max-w-sm">
 				<div className="text-center mb-8">
 					<div className="flex justify-center mb-4">
-						<Logo size="md" className="[filter:brightness(0)_invert(1)]" />
+						<Logo
+							size="md"
+							className="[filter:brightness(0)_invert(1)]"
+						/>
 					</div>
 					<h1 className="font-display text-3xl font-black uppercase text-white tracking-tight">
 						Painel Admin
 					</h1>
-					<p className="mt-2 text-white/50 text-sm">Ola Tours · Administração</p>
+					<p className="mt-2 text-white/50 text-sm">
+						Ola Tours · Administração
+					</p>
 				</div>
 
 				<form onSubmit={handleSubmit} className="space-y-4">
@@ -55,7 +67,10 @@ export function AdminLogin() {
 					)}
 
 					<div>
-						<label htmlFor="email" className="label-caps text-white/60 text-xs block mb-1.5">
+						<label
+							htmlFor="email"
+							className="label-caps text-white/60 text-xs block mb-1.5"
+						>
 							Email
 						</label>
 						<input
@@ -70,7 +85,10 @@ export function AdminLogin() {
 					</div>
 
 					<div>
-						<label htmlFor="password" className="label-caps text-white/60 text-xs block mb-1.5">
+						<label
+							htmlFor="password"
+							className="label-caps text-white/60 text-xs block mb-1.5"
+						>
 							Palavra-passe
 						</label>
 						<input

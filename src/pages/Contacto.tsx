@@ -108,7 +108,9 @@ export function Contacto() {
 			if (!json.success) throw new Error(json.message);
 			setSubmitted(true);
 		} catch (err) {
-			alert(err instanceof Error ? err.message : 'Erro ao enviar mensagem');
+			alert(
+				err instanceof Error ? err.message : 'Erro ao enviar mensagem',
+			);
 		} finally {
 			setSending(false);
 		}
@@ -522,7 +524,9 @@ export function Contacto() {
 												disabled={sending}
 												className="w-full sm:w-auto"
 											>
-												{sending ? 'A enviar...' : 'Enviar mensagem'}
+												{sending
+													? 'A enviar...'
+													: 'Enviar mensagem'}
 											</Button>
 										</form>
 									)}
