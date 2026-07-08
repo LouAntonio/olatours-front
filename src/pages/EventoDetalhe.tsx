@@ -311,6 +311,65 @@ export function EventoDetalhe() {
 				</section>
 			)}
 
+			{evento.documents && evento.documents.length > 0 && (
+				<section className="relative bg-cream-50 py-20 sm:py-28 overflow-hidden">
+					<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
+						<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
+							<div className="col-span-12 lg:col-span-5">
+								<span className="accent-bar-flag block mb-4" />
+								<h2 className="font-display font-black uppercase leading-[0.86] tracking-tight text-[clamp(2.5rem,6.5vw,5rem)]">
+									Documentos<span className="text-flag">.</span>
+								</h2>
+							</div>
+							<div className="col-span-12 lg:col-span-6 lg:col-start-7 flex items-end">
+								<p className="text-xl sm:text-2xl leading-relaxed text-ink-soft border-l-2 border-flag pl-5">
+									Ficheiros disponíveis para consulta e
+									download.
+								</p>
+							</div>
+						</div>
+
+						<motion.div
+							initial="hidden"
+							whileInView="show"
+							viewport={{ once: true, margin: '-80px' }}
+							variants={container}
+							className="grid grid-cols-12 gap-5 sm:gap-6"
+						>
+							{evento.documents.map((doc) => (
+								<motion.div
+									key={doc.url}
+									variants={item}
+									className="col-span-12 sm:col-span-6 lg:col-span-4"
+								>
+									<a
+										href={doc.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="relative flex items-center gap-4 border border-gray-border/60 rounded-lg p-5 transition-all duration-500 card-elevated bg-white hover:border-flag/40 group"
+									>
+										<span className="flex items-center justify-center w-10 h-10 rounded bg-flag/10 shrink-0 group-hover:bg-flag/20 transition-colors">
+											<svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-flag" aria-hidden="true">
+												<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+												<polyline points="13 2 13 9 20 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+											</svg>
+										</span>
+										<span className="flex-1 min-w-0">
+											<span className="block text-sm font-semibold text-ink truncate">
+												{doc.name}
+											</span>
+											<span className="text-xs text-ink-mute">
+												{doc.size ? `${(doc.size / 1024).toFixed(0)} KB` : ''} — Abrir
+											</span>
+										</span>
+									</a>
+								</motion.div>
+							))}
+						</motion.div>
+					</div>
+				</section>
+			)}
+
 			{evento.photos && evento.photos.length > 1 && (
 				<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
 					<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">

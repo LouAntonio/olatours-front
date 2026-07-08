@@ -1,12 +1,17 @@
 import type { ApiEvent, Accent, EventType } from '../types/api';
 import type { Evento, EventPhoto, EventDetail, EventDocument } from '../data/events';
 
-const PROXY_PREFIX = '/uploads';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL ?? '';
+
+export function uploadUrl(path: string): string {
+	if (!path) return '';
+	if (path.startsWith('http')) return path;
+	const cleaned = path.replace(/^uploads\//, '');
+	return `${BACKEND_URL}/uploads/${cleaned.replace(/\\/g, '/')}`;
+}
 
 function mapCoverUrl(url: string | null): string {
-	if (!url) return '';
-	if (url.startsWith('http')) return url;
-	return `${PROXY_PREFIX}/${url.replace(/\\/g, '/')}`;
+	return uploadUrl(url ?? '');
 }
 
 const typeAccentMap: Record<EventType, Accent> = {
@@ -58,7 +63,7 @@ function mapPhotos(event: ApiEvent): EventPhoto[] | undefined {
 
 function mapDocuments(event: ApiEvent): EventDocument[] | undefined {
 	if (!event.documents || !Array.isArray(event.documents)) return undefined;
-	return event.documents.map((d) => ({ url: d.url, name: d.name, size: d.size }));
+	return event.documents.map((d) => ({ url: uploadUrl(d.url), name: d.name, size: d.size }));
 }
 
 function mapDetails(event: ApiEvent): EventDetail[] | undefined {

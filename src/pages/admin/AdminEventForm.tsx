@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { useEventBySlug, createEvent, updateEvent, uploadCover, uploadGalleryImage, deleteGalleryImage, uploadDocument, deleteDocument } from '../../hooks/useEvents.ts';
+import { uploadUrl } from '../../lib/mappers.ts';
 import type { EventType, EventStatus } from '../../types/api.ts';
 import type { EventDocument } from '../../data/events.ts';
 
@@ -166,8 +167,7 @@ export function AdminEventForm() {
 		setUploadingCover(true);
 		try {
 			const result = await uploadCover(existingEvent.id, file);
-			const mappedUrl = result.url.startsWith('http') ? result.url : `/uploads/${result.url.replace(/\\/g, '/')}`;
-			setCoverUrl(mappedUrl);
+			setCoverUrl(uploadUrl(result.url));
 			queryClient.invalidateQueries({ queryKey: ['event'] });
 		} catch {
 			alert('Erro ao enviar imagem');
@@ -182,8 +182,7 @@ export function AdminEventForm() {
 		setUploadingGallery(true);
 		try {
 			const result = await uploadGalleryImage(existingEvent.id, file);
-			const mappedUrl = result.url.startsWith('http') ? result.url : `/uploads/${result.url.replace(/\\/g, '/')}`;
-			setGalleryUrls((prev) => [...prev, mappedUrl]);
+			setGalleryUrls((prev) => [...prev, uploadUrl(result.url)]);
 			queryClient.invalidateQueries({ queryKey: ['event'] });
 		} catch {
 			alert('Erro ao enviar imagem');
@@ -209,8 +208,7 @@ export function AdminEventForm() {
 		setUploadingDoc(true);
 		try {
 			const result = await uploadDocument(existingEvent.id, file);
-			const mappedUrl = result.url.startsWith('http') ? result.url : `/uploads/${result.url.replace(/\\/g, '/')}`;
-			setDocuments((prev) => [...prev, { url: mappedUrl, name: result.name, size: result.size }]);
+			setDocuments((prev) => [...prev, { url: uploadUrl(result.url), name: result.name, size: result.size }]);
 			queryClient.invalidateQueries({ queryKey: ['event'] });
 		} catch {
 			alert('Erro ao enviar documento');
