@@ -1,13 +1,11 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { motion } from 'motion/react';
 import { Button } from '../components/Button';
 import { motion as m, stagger } from '../styles/tokens';
-import { fetchEventos } from '../data/events';
+import { useEvents } from '../hooks/useEvents';
 import type { Evento } from '../data/events';
-
-// ─── Helpers ────────────────────────────────────────────────────────────
 
 const MONTH_ORDER: Record<string, number> = {
 	JAN: 1,
@@ -100,8 +98,6 @@ function groupByMonth(events: Evento[]): MonthGroup[] {
 	return sorted;
 }
 
-// ─── Motion variants ────────────────────────────────────────────────────
-
 const container = {
 	hidden: {},
 	show: { transition: { staggerChildren: stagger.tight } },
@@ -121,8 +117,6 @@ const accentMap: Record<string, { css: string; rgb: string }> = {
 	sky: { css: 'var(--color-sky)', rgb: '20, 121, 193' },
 	navy: { css: 'var(--color-navy)', rgb: '26, 43, 74' },
 };
-
-// ─── Sub-components ────────────────────────────────────────────────────
 
 type CardProps = { event: Evento; accent: { css: string; rgb: string } };
 
@@ -153,14 +147,12 @@ function FeaturedCard({ event, accent }: CardProps) {
 						/>
 					)}
 
-					{/* Date badge */}
 					<div className="absolute top-4 left-4 z-10">
 						<span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm bg-white/10 backdrop-blur-sm text-white/80 border border-white/15 label-caps text-[10px]">
 							{event.date}
 						</span>
 					</div>
 
-					{/* Accent corner */}
 					<div className="absolute top-0 right-0 z-10">
 						<div
 							className="w-16 h-px"
@@ -232,7 +224,6 @@ function CompactCard({ event, accent }: CardProps) {
 		>
 			<Link to={`/agenda/${event.id}`} className="block h-full">
 				<div className="relative h-full rounded-lg overflow-hidden border border-gray-border/60 bg-white transition-all duration-500 card-elevated">
-					{/* Thumbnail */}
 					<div className="relative aspect-[16/9] overflow-hidden">
 						{hasPhoto ? (
 							<>
@@ -251,7 +242,6 @@ function CompactCard({ event, accent }: CardProps) {
 								}}
 							/>
 						)}
-						{/* Date badge overlay */}
 						<div className="absolute bottom-2 left-2">
 							<span className="inline-flex items-center px-2 py-0.5 rounded-sm bg-white/90 backdrop-blur-sm text-ink label-caps text-[10px]">
 								{event.date}
@@ -259,7 +249,6 @@ function CompactCard({ event, accent }: CardProps) {
 						</div>
 					</div>
 
-					{/* Content */}
 					<div className="p-4 sm:p-5">
 						<div className="flex items-center gap-2 mb-2">
 							<span
@@ -313,8 +302,6 @@ function CompactCard({ event, accent }: CardProps) {
 	);
 }
 
-// ─── Skeleton ───────────────────────────────────────────────────────────
-
 function SkeletonFeatured() {
 	return (
 		<div className="col-span-12 lg:col-span-6 animate-pulse">
@@ -345,26 +332,15 @@ function SkeletonCompact() {
 	);
 }
 
-// ─── Page ───────────────────────────────────────────────────────────────
-
 export function Agenda() {
 	useDocumentTitle('Agenda');
 
-	const [events, setEvents] = useState<Evento[]>([]);
-	const [loading, setLoading] = useState(true);
-
-	useEffect(() => {
-		fetchEventos().then((data) => {
-			setEvents(data);
-			setLoading(false);
-		});
-	}, []);
+	const { data: events = [], isLoading } = useEvents();
 
 	const monthGroups = useMemo(() => groupByMonth(events), [events]);
 
 	return (
 		<>
-			{/* ===== HERO ===== */}
 			<section className="relative bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden grain">
 				<div className="pointer-events-none absolute top-0 right-0 w-48 h-48 sm:w-80 sm:h-80 border-r border-t border-white/[0.04] rounded-tr-[100px] corner-pulse" />
 
@@ -419,7 +395,6 @@ export function Agenda() {
 				</div>
 			</section>
 
-			{/* ===== EVENTS TIMELINE ===== */}
 			<section className="relative bg-cream-50 py-20 sm:py-28">
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
 					<div className="grid grid-cols-12 gap-6 mb-14 sm:mb-20">
@@ -439,7 +414,7 @@ export function Agenda() {
 						</div>
 					</div>
 
-					{loading ? (
+					{isLoading ? (
 						<div className="grid grid-cols-12 gap-5 sm:gap-6">
 							<SkeletonFeatured />
 							<SkeletonFeatured />
@@ -451,7 +426,6 @@ export function Agenda() {
 						<div className="space-y-12 sm:space-y-16">
 							{monthGroups.map((group) => (
 								<div key={group.sortKey}>
-									{/* Month header */}
 									<div className="sticky top-16 sm:top-[72px] z-10 bg-cream-50/90 backdrop-blur-md -mx-5 sm:-mx-8 px-5 sm:px-8 py-3.5 sm:py-4 border-b border-gray-border/40 mb-6 sm:mb-8">
 										<div className="flex items-center gap-4">
 											<span className="accent-bar-flag shrink-0" />
@@ -468,7 +442,6 @@ export function Agenda() {
 										</div>
 									</div>
 
-									{/* Events grid */}
 									<motion.div
 										initial="hidden"
 										whileInView="show"
@@ -504,7 +477,6 @@ export function Agenda() {
 				</div>
 			</section>
 
-			{/* ===== CTA ===== */}
 			<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8 text-center">
 					<span className="accent-bar-flag block mx-auto mb-4" />

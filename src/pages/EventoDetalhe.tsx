@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { motion } from 'motion/react';
 import { motion as m, stagger } from '../styles/tokens';
-import { fetchEventoById } from '../data/events';
-import type { Evento } from '../data/events';
+import { useEvent } from '../hooks/useEvents';
 
 const container = {
 	hidden: {},
@@ -50,19 +48,15 @@ function SkeletonHero() {
 
 export function EventoDetalhe() {
 	const { id } = useParams<{ id: string }>();
-	const [evento, setEvento] = useState<Evento | undefined | null>(undefined);
-
-	useEffect(() => {
-		fetchEventoById(Number(id)).then(setEvento);
-	}, [id]);
+	const { data: evento, isLoading, isError } = useEvent(id ?? '');
 
 	useDocumentTitle(evento ? evento.title : 'Evento');
 
-	if (evento === undefined) {
+	if (isLoading) {
 		return <SkeletonHero />;
 	}
 
-	if (evento === null) {
+	if (isError || !evento) {
 		return (
 			<section className="bg-navy min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16">
 				<div className="mx-auto max-w-[1200px] px-5 sm:px-8 text-center">
@@ -88,7 +82,6 @@ export function EventoDetalhe() {
 
 	return (
 		<>
-			{/* ===== HERO ===== */}
 			<section className="relative min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden">
 				{heroImg ? (
 					<div
@@ -202,7 +195,6 @@ export function EventoDetalhe() {
 				</div>
 			</section>
 
-			{/* ===== DESCRIPTION ===== */}
 			{evento.fullDescription && (
 				<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
 					<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
@@ -266,7 +258,6 @@ export function EventoDetalhe() {
 				</section>
 			)}
 
-			{/* ===== DETAILS ===== */}
 			{evento.details && evento.details.length > 0 && (
 				<section className="relative bg-cream-50 py-20 sm:py-28 overflow-hidden">
 					<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
@@ -320,7 +311,6 @@ export function EventoDetalhe() {
 				</section>
 			)}
 
-			{/* ===== GALLERY ===== */}
 			{evento.photos && evento.photos.length > 1 && (
 				<section className="relative bg-white py-20 sm:py-28 overflow-hidden">
 					<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
