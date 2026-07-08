@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { motion } from 'motion/react';
 import { motion as m, stagger } from '../styles/tokens';
-import { useEvent } from '../hooks/useEvents';
+import { useEventBySlug } from '../hooks/useEvents';
 
 const container = {
 	hidden: {},
@@ -47,8 +47,8 @@ function SkeletonHero() {
 }
 
 export function EventoDetalhe() {
-	const { id } = useParams<{ id: string }>();
-	const { data: evento, isLoading, isError } = useEvent(id ?? '');
+	const { slug } = useParams<{ slug: string }>();
+	const { data: evento, isLoading, isError } = useEventBySlug(slug ?? '');
 
 	useDocumentTitle(evento ? evento.title : 'Evento');
 

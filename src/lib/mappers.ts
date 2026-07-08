@@ -64,6 +64,7 @@ function mapDetails(event: ApiEvent): EventDetail[] | undefined {
 export function mapApiEventToEvento(event: ApiEvent): Evento {
 	return {
 		id: event.id,
+		slug: event.slug,
 		title: event.title,
 		subtitle: event.subtitle ?? undefined,
 		description: event.description,

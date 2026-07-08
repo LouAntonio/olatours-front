@@ -13,6 +13,7 @@ export interface EventDetail {
 
 export interface Evento {
 	id: string;
+	slug: string;
 	title: string;
 	subtitle?: string;
 	description: string;

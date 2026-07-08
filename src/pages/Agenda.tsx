@@ -127,7 +127,7 @@ function FeaturedCard({ event, accent }: CardProps) {
 			variants={item}
 			className="col-span-12 lg:col-span-6 relative group"
 		>
-			<Link to={`/agenda/${event.id}`} className="block h-full">
+			<Link to={`/agenda/${event.slug}`} className="block h-full">
 				<div className="relative rounded-lg overflow-hidden min-h-[400px] sm:min-h-[460px] flex flex-col justify-end">
 					{hasPhoto ? (
 						<>
@@ -222,7 +222,7 @@ function CompactCard({ event, accent }: CardProps) {
 			variants={item}
 			className="col-span-12 sm:col-span-6 lg:col-span-4 relative group"
 		>
-			<Link to={`/agenda/${event.id}`} className="block h-full">
+			<Link to={`/agenda/${event.slug}`} className="block h-full">
 				<div className="relative h-full rounded-lg overflow-hidden border border-gray-border/60 bg-white transition-all duration-500 card-elevated">
 					<div className="relative aspect-[16/9] overflow-hidden">
 						{hasPhoto ? (

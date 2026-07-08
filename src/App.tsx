@@ -37,7 +37,7 @@ function App() {
 					<Route index element={<AdminDashboard />} />
 					<Route path="eventos" element={<AdminEvents />} />
 					<Route path="eventos/novo" element={<AdminEventForm />} />
-					<Route path="eventos/:id/editar" element={<AdminEventForm />} />
+					<Route path="eventos/:slug/editar" element={<AdminEventForm />} />
 					<Route path="usuarios" element={<AdminUsers />} />
 					<Route path="perfil" element={<AdminProfile />} />
 				</Route>
@@ -51,7 +51,7 @@ function App() {
 									<Route path="/" element={<Home />} />
 									<Route path="/sobre" element={<Sobre />} />
 									<Route path="/agenda" element={<Agenda />} />
-									<Route path="/agenda/:id" element={<EventoDetalhe />} />
+									<Route path="/agenda/:slug" element={<EventoDetalhe />} />
 									<Route path="/servicos" element={<Servicos />} />
 									<Route path="/produtos" element={<Produtos />} />
 									<Route path="/contacto" element={<Contacto />} />

@@ -97,7 +97,7 @@ export function AdminEvents() {
 										<td className="px-4 py-3.5 text-right">
 											<div className="flex items-center justify-end gap-2">
 												<Link
-													to={`/ot/eventos/${event.id}/editar`}
+													to={`/ot/eventos/${event.slug}/editar`}
 													className="label-caps text-[10px] text-sky hover:text-sky-dark transition-colors"
 												>
 													Editar

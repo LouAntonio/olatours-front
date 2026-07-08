@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { useEvent, createEvent, updateEvent, uploadCover, uploadGalleryImage, deleteGalleryImage } from '../../hooks/useEvents.ts';
+import { useEventBySlug, createEvent, updateEvent, uploadCover, uploadGalleryImage, deleteGalleryImage } from '../../hooks/useEvents.ts';
 import type { EventType, EventStatus } from '../../types/api.ts';
 
 const EVENT_TYPES: { value: EventType; label: string }[] = [
@@ -65,32 +65,32 @@ const EMPTY_FORM: FormState = {
 };
 
 export function AdminEventForm() {
-	const { id } = useParams<{ id: string }>();
+	const { slug } = useParams<{ slug: string }>();
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
-	const isEditing = !!id;
+	const isEditing = !!slug;
 
-	const { data: existingEvent, isLoading: loadingEvent } = useEvent(id ?? '');
+	const { data: existingEvent, isLoading: loadingEvent } = useEventBySlug(slug ?? '');
 	const [saving, setSaving] = useState(false);
 	const [error, setError] = useState('');
 
 	const [form, setForm] = useState<FormState>(EMPTY_FORM);
-	const [loadedId, setLoadedId] = useState<string | null>(null);
+	const [loadedSlug, setLoadedSlug] = useState<string | null>(null);
 
 	const [uploadingCover, setUploadingCover] = useState(false);
 	const [uploadingGallery, setUploadingGallery] = useState(false);
 	const [coverUrl, setCoverUrl] = useState<string | null>(null);
 	const [galleryUrls, setGalleryUrls] = useState<string[]>([]);
 
-	if (isEditing && existingEvent && loadedId !== id) {
-		setLoadedId(id ?? null);
+	if (isEditing && existingEvent && loadedSlug !== slug) {
+		setLoadedSlug(slug ?? null);
 		const cover = existingEvent.photos?.[0]?.src ?? null;
 		const gallery = existingEvent.photos?.slice(1).map((p) => p.src) ?? [];
 		setCoverUrl(cover);
 		setGalleryUrls(gallery);
 		setForm({
 			title: existingEvent.title,
-			slug: existingEvent.id,
+			slug: existingEvent.slug,
 			subtitle: existingEvent.subtitle ?? '',
 			description: existingEvent.description,
 			fullDescription: existingEvent.fullDescription ?? '',
@@ -139,10 +139,10 @@ export function AdminEventForm() {
 			};
 
 			if (isEditing) {
-				await updateEvent(id!, payload);
+				await updateEvent(existingEvent!.id, payload);
 			} else {
 				const created = await createEvent(payload);
-				navigate(`/ot/eventos/${created.id}/editar`, { replace: true });
+				navigate(`/ot/eventos/${created.slug}/editar`, { replace: true });
 				return;
 			}
 
@@ -158,14 +158,14 @@ export function AdminEventForm() {
 
 	async function handleCoverUpload(e: React.ChangeEvent<HTMLInputElement>) {
 		const file = e.target.files?.[0];
-		if (!file || !isEditing) return;
+		if (!file || !isEditing || !existingEvent) return;
 		setUploadingCover(true);
 		try {
-			const result = await uploadCover(id!, file);
+			const result = await uploadCover(existingEvent.id, file);
 			const mappedUrl = result.url.startsWith('http') ? result.url : `/uploads/${result.url.replace(/\\/g, '/')}`;
 			setCoverUrl(mappedUrl);
 			setForm((prev) => ({ ...prev, coverImage: result.url }));
-			queryClient.invalidateQueries({ queryKey: ['event', id] });
+			queryClient.invalidateQueries({ queryKey: ['event'] });
 		} catch {
 			alert('Erro ao enviar imagem');
 		} finally {
@@ -175,13 +175,13 @@ export function AdminEventForm() {
 
 	async function handleGalleryUpload(e: React.ChangeEvent<HTMLInputElement>) {
 		const file = e.target.files?.[0];
-		if (!file || !isEditing) return;
+		if (!file || !isEditing || !existingEvent) return;
 		setUploadingGallery(true);
 		try {
-			const result = await uploadGalleryImage(id!, file);
+			const result = await uploadGalleryImage(existingEvent.id, file);
 			const mappedUrl = result.url.startsWith('http') ? result.url : `/uploads/${result.url.replace(/\\/g, '/')}`;
 			setGalleryUrls((prev) => [...prev, mappedUrl]);
-			queryClient.invalidateQueries({ queryKey: ['event', id] });
+			queryClient.invalidateQueries({ queryKey: ['event'] });
 		} catch {
 			alert('Erro ao enviar imagem');
 		} finally {
@@ -190,11 +190,11 @@ export function AdminEventForm() {
 	}
 
 	async function handleGalleryDelete(index: number) {
-		if (!isEditing) return;
+		if (!isEditing || !existingEvent) return;
 		try {
-			await deleteGalleryImage(id!, index);
+			await deleteGalleryImage(existingEvent.id, index);
 			setGalleryUrls((prev) => prev.filter((_, i) => i !== index));
-			queryClient.invalidateQueries({ queryKey: ['event', id] });
+			queryClient.invalidateQueries({ queryKey: ['event'] });
 		} catch {
 			alert('Erro ao remover imagem');
 		}
