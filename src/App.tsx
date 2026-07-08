@@ -17,6 +17,8 @@ import { AdminLayout } from './pages/admin/AdminLayout';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { AdminEvents } from './pages/admin/AdminEvents';
 import { AdminEventForm } from './pages/admin/AdminEventForm';
+import { AdminUsers } from './pages/admin/AdminUsers';
+import { AdminProfile } from './pages/admin/AdminProfile';
 import './App.css';
 
 function App() {
@@ -30,18 +32,14 @@ function App() {
 	return (
 		<div className="app-shell">
 			<Routes>
-				<Route
-					path="/ot/login"
-					element={<AdminLogin />}
-				/>
-				<Route
-					path="/ot"
-					element={<AdminLayout />}
-				>
+				<Route path="/ot/login" element={<AdminLogin />} />
+				<Route path="/ot" element={<AdminLayout />}>
 					<Route index element={<AdminDashboard />} />
 					<Route path="eventos" element={<AdminEvents />} />
 					<Route path="eventos/novo" element={<AdminEventForm />} />
 					<Route path="eventos/:id/editar" element={<AdminEventForm />} />
+					<Route path="usuarios" element={<AdminUsers />} />
+					<Route path="perfil" element={<AdminProfile />} />
 				</Route>
 				<Route
 					path="*"

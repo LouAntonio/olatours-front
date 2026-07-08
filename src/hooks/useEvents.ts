@@ -23,8 +23,8 @@ async function fetchEventBySlug(slug: string): Promise<Evento | null> {
 
 async function fetchAdminEvents(page = 1, limit = 100): Promise<{ events: Evento[]; total: number }> {
 	const { data } = await api.get<ApiResponse<ApiEvent[]> & { pagination: { total: number } }>(
-		'/admin/events',
-		{ params: { page, limit } },
+		'/events',
+		{ params: { page, limit, all: 'true' } },
 	);
 	return { events: mapApiEventsToEventos(data.data), total: data.pagination.total };
 }
@@ -75,5 +75,28 @@ export async function updateEvent(id: string, input: Record<string, unknown>) {
 
 export async function deleteEvent(id: string) {
 	const { data } = await api.delete<ApiResponse<null>>(`/events/${id}`);
+	return data;
+}
+
+export async function uploadCover(id: string, file: File) {
+	const formData = new FormData();
+	formData.append('file', file);
+	const { data } = await api.post<ApiResponse<{ url: string }>>(`/upload/events/${id}/cover`, formData, {
+		headers: { 'Content-Type': 'multipart/form-data' },
+	});
+	return data.data;
+}
+
+export async function uploadGalleryImage(id: string, file: File) {
+	const formData = new FormData();
+	formData.append('file', file);
+	const { data } = await api.post<ApiResponse<{ url: string }>>(`/upload/events/${id}/gallery`, formData, {
+		headers: { 'Content-Type': 'multipart/form-data' },
+	});
+	return data.data;
+}
+
+export async function deleteGalleryImage(id: string, index: number) {
+	const { data } = await api.delete<ApiResponse<null>>(`/upload/events/${id}/gallery/${index}`);
 	return data;
 }

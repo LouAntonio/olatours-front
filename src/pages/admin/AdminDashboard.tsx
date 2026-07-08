@@ -1,12 +1,15 @@
 import { useAuthStore } from '../../stores/auth.ts';
 import { useAdminEvents } from '../../hooks/useEvents.ts';
+import { useUsers } from '../../hooks/useUsers.ts';
 
 export function AdminDashboard() {
 	const user = useAuthStore((s) => s.user);
-	const { data, isLoading } = useAdminEvents(1, 100);
+	const { data: eventsData, isLoading: loadingEvents } = useAdminEvents(1, 100);
+	const { data: users } = useUsers();
 
-	const total = data?.total ?? 0;
-	const published = data?.events.filter((e) => e.featured !== undefined).length ?? 0;
+	const total = eventsData?.total ?? 0;
+	const published = eventsData?.events.filter((e) => e.featured !== undefined).length ?? 0;
+	const adminCount = users?.length ?? 1;
 
 	return (
 		<div>
@@ -19,7 +22,7 @@ export function AdminDashboard() {
 				</p>
 			</div>
 
-			{isLoading ? (
+			{loadingEvents ? (
 				<div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
 					{[1, 2, 3].map((i) => (
 						<div key={i} className="bg-white border border-gray-border/60 rounded-lg p-6 animate-pulse">
@@ -40,7 +43,7 @@ export function AdminDashboard() {
 					</div>
 					<div className="bg-white border border-gray-border/60 rounded-lg p-6 card-elevated">
 						<p className="label-caps text-ink-mute text-xs mb-1">Administradores</p>
-						<p className="font-display text-4xl font-black text-sky">1</p>
+						<p className="font-display text-4xl font-black text-sky">{adminCount}</p>
 					</div>
 				</div>
 			)}
@@ -49,7 +52,7 @@ export function AdminDashboard() {
 				<h2 className="font-display text-xl font-black uppercase text-ink tracking-tight mb-4">
 					Últimos Eventos
 				</h2>
-				{isLoading ? (
+				{loadingEvents ? (
 					<div className="space-y-3">
 						{[1, 2, 3].map((i) => (
 							<div key={i} className="bg-white border border-gray-border/60 rounded-lg p-4 animate-pulse">
@@ -57,11 +60,10 @@ export function AdminDashboard() {
 							</div>
 						))}
 					</div>
-				) : data && data.events.length > 0 ? (
+				) : eventsData && eventsData.events.length > 0 ? (
 					<div className="space-y-2">
-						{data.events.slice(0, 5).map((event) => (
-							<div
-								key={event.id}
+						{eventsData.events.slice(0, 5).map((event) => (
+							<div key={event.id}
 								className="bg-white border border-gray-border/60 rounded-lg px-4 py-3 flex items-center justify-between"
 							>
 								<div className="min-w-0 flex-1">
