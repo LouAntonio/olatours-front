@@ -77,13 +77,7 @@ export function MercadoDaComida() {
 				<div className="relative mx-auto max-w-[1200px] px-5 sm:px-8 w-full">
 					<div className="grid grid-cols-12 gap-6 items-center">
 						<div className="col-span-12 lg:col-span-7">
-							<div className="flex items-center gap-3 mb-6">
-								<img
-									src="/mercadodacomida/logo.png"
-									alt="OlaTours"
-									className="h-8 sm:h-10 w-auto object-contain brightness-0 invert opacity-80"
-								/>
-								<span className="h-px w-8 bg-flag/50" />
+							<div className="mb-6">
 								<span className="label-caps text-flag tracking-[0.18em]">
 									TRANSPORTE
 								</span>
@@ -118,17 +112,11 @@ export function MercadoDaComida() {
 						</div>
 
 						<div className="col-span-12 lg:col-span-5 flex justify-center lg:justify-end pt-8 lg:pt-0">
-							<div className="relative w-full max-w-md aspect-[4/3]">
-								<div className="absolute inset-0 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden">
-									<img
-										src="/mercadodacomida/Autocarro.png"
-										alt="Autocarro OlaTours"
-										className="w-full h-full object-cover opacity-60 mix-blend-luminosity"
-									/>
-									<div className="absolute inset-0 bg-gradient-to-t from-navy-dark/80 via-transparent to-navy-dark/20" />
-								</div>
-								<div className="absolute -bottom-3 -right-3 w-full h-full rounded-2xl border border-flag/30 -z-10" />
-							</div>
+							<img
+								src="/mercadodacomida/logo.png"
+								alt="OlaTours"
+								className="w-full max-w-sm h-auto object-contain opacity-80 brightness-0 invert"
+							/>
 						</div>
 					</div>
 				</div>
@@ -605,40 +593,6 @@ export function MercadoDaComida() {
 										condições acima descritos.
 									</span>
 								</label>
-
-								<div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-6 pt-6 border-t border-gray-border/60">
-									<div>
-										<label
-											htmlFor={`${formId}-assinatura`}
-											className="label-caps text-ink-mute block mb-1.5"
-										>
-											Assinatura do Inscrito
-										</label>
-										<input
-											id={`${formId}-assinatura`}
-											name="assinatura"
-											type="text"
-											required
-											className="w-full px-4 py-3 border border-gray-border rounded-sm bg-white text-ink placeholder:text-ink-mute/50 focus:outline-none focus:border-flag focus:ring-1 focus:ring-flag/30 transition-all"
-											placeholder="Nome completo (vale como assinatura)"
-										/>
-									</div>
-									<div>
-										<label
-											htmlFor={`${formId}-data`}
-											className="label-caps text-ink-mute block mb-1.5"
-										>
-											Data
-										</label>
-										<input
-											id={`${formId}-data`}
-											name="data_inscricao"
-											type="date"
-											required
-											className="w-full px-4 py-3 border border-gray-border rounded-sm bg-white text-ink focus:outline-none focus:border-flag focus:ring-1 focus:ring-flag/30 transition-all"
-										/>
-									</div>
-								</div>
 							</motion.fieldset>
 
 							{/* SUBMIT */}
