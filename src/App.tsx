@@ -13,6 +13,7 @@ import { Produtos } from './pages/Produtos';
 import { Contacto } from './pages/Contacto';
 import { Carreiras } from './pages/Carreiras';
 import { MercadoDaComida } from './pages/MercadoDaComida';
+import { NotFound } from './pages/NotFound';
 import { AdminLogin } from './pages/admin/AdminLogin';
 import { AdminLayout } from './pages/admin/AdminLayout';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
@@ -82,6 +83,7 @@ function App() {
 										path="/mercado-da-comida"
 										element={<MercadoDaComida />}
 									/>
+									<Route path="*" element={<NotFound />} />
 								</Routes>
 							</main>
 							<Footer />
