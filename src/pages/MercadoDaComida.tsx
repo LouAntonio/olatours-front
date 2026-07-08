@@ -29,13 +29,6 @@ const heroStats = [
 	{ label: 'serviço', value: 'para visitantes do evento' },
 ] as const;
 
-const benefits = [
-	'Transporte dedicado para o Mercado da Comida',
-	'Reserva simples com pagamento a bordo ou por transferência',
-	'Pontos de recolha em zonas estratégicas de Luanda',
-	'Confirmação rápida para garantir o seu lugar',
-] as const;
-
 const container = {
 	hidden: {},
 	show: { transition: { staggerChildren: stagger.wide } },
@@ -154,94 +147,39 @@ export function MercadoDaComida() {
 									alt="Autocarro OlaTours"
 									className="w-full max-w-[540px] drop-shadow-[0_28px_40px_rgba(74,38,17,0.22)]"
 								/>
-								<div className="mt-4 flex w-full items-center justify-between gap-4 rounded-[24px] border border-[#4a2611]/18 bg-[#fff0a8]/75 px-5 py-4 shadow-[0_18px_40px_-24px_rgba(74,38,17,0.35)] backdrop-blur-sm">
-									<img src="/mercadodacomida/logo.png" alt="OlaTours" className="h-12 w-auto object-contain" />
-									<div className="text-right">
-										<p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
-											Saiba onde embarcar
-										</p>
-										<p className="font-display text-lg font-black uppercase leading-none text-[#4a2611]">
-											Pontos de recolha
-										</p>
-									</div>
-								</div>
+								<img src="/mercadodacomida/logo.png" alt="OlaTours" className="mt-4 h-24 w-auto object-contain self-start" />
 							</div>
 						</motion.div>
 					</motion.div>
-
-					<motion.div
-						id="detalhes"
-						initial="hidden"
-						whileInView="show"
-						viewport={{ once: true, margin: '-80px' }}
-						variants={container}
-						className="mt-14 grid gap-4 lg:grid-cols-4"
-					>
-						{benefits.map((benefit, index) => (
-							<motion.div
-								key={benefit}
-								variants={item}
-								className="rounded-[24px] border border-[#4a2611]/15 bg-[rgba(255,248,209,0.85)] px-5 py-5 shadow-[0_14px_30px_-24px_rgba(74,38,17,0.42)] backdrop-blur-sm"
-							>
-								<p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a4a22]">
-									0{index + 1}
-								</p>
-								<p className="mt-2 text-base font-medium leading-relaxed text-[#4a2611]">
-									{benefit}
-								</p>
-							</motion.div>
-						))}
-					</motion.div>
-				</div>
-			</section>
-
-			<section className="relative bg-[#4a2611] py-16 text-[#fff4c2]">
-				<div className="pointer-events-none absolute inset-0 opacity-[0.05] bg-[radial-gradient(circle_at_20%_20%,white,transparent_30%),radial-gradient(circle_at_80%_0%,#ffb25f,transparent_24%)]" />
-				<div className="relative mx-auto grid max-w-[1280px] gap-8 px-5 sm:px-8 lg:grid-cols-12 lg:items-end">
-					<div className="lg:col-span-7">
-						<p className="font-display text-[clamp(2rem,5vw,4.2rem)] font-black uppercase leading-[0.88] tracking-[-0.04em] text-white">
-							Sabores que contam histórias.
-						</p>
-						<p className="mt-4 max-w-2xl text-base leading-relaxed text-[#f6deab] sm:text-lg">
-							Viagens que criam memórias. Com a Ola Tours, cada destino é uma experiência para degustar.
-						</p>
-					</div>
-					<div className="lg:col-span-5 lg:text-right">
-						<div className="inline-flex rounded-full border border-white/15 bg-white/6 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#f6deab]">
-							Inscrições abertas durante o evento
-						</div>
-					</div>
 				</div>
 			</section>
 
 			<section id="inscricao" className="relative bg-[#fff1ad] py-16 sm:py-20">
 				<div className="relative mx-auto max-w-[1280px] px-5 sm:px-8">
-					<div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
-						<div className="lg:col-span-5">
-							<p className="font-display text-[clamp(2.2rem,5vw,4.6rem)] font-black uppercase leading-[0.88] tracking-[-0.04em] text-[#4a2611]">
-								Formulário de inscrição.
-							</p>
-							<p className="mt-4 max-w-xl text-base leading-relaxed text-[#5d3014] sm:text-lg">
-								Preencha os dados para reservar o seu cartão de transporte. Se escolher pagamento por transferência, anexe o comprovativo em PDF.
-							</p>
+					<div className="mx-auto max-w-3xl text-center">
+						<p className="font-display text-[clamp(2.2rem,5vw,4.6rem)] font-black uppercase leading-[0.88] tracking-[-0.04em] text-[#4a2611]">
+							Formulário de inscrição.
+						</p>
+						<p className="mt-4 text-base leading-relaxed text-[#5d3014] sm:text-lg">
+							Preencha os dados para reservar o seu cartão de transporte. Se escolher pagamento por transferência, anexe o comprovativo em PDF.
+						</p>
 
-							<div className="mt-8 space-y-4 rounded-[28px] border border-[#4a2611]/15 bg-white/45 p-5 shadow-[0_18px_40px_-26px_rgba(74,38,17,0.32)] backdrop-blur-sm">
-								{pickupPoints.slice(0, 4).map((point) => (
-									<div key={point} className="flex items-center justify-between gap-4 border-b border-[#4a2611]/10 pb-3 last:border-b-0 last:pb-0">
-										<p className="text-sm font-medium text-[#4a2611]">{point}</p>
-										<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a4a22]">Recolha</span>
-									</div>
-								))}
-							</div>
+						<div className="mt-8 mx-auto max-w-lg space-y-4 rounded-[28px] border border-[#4a2611]/15 bg-white/45 p-5 shadow-[0_18px_40px_-26px_rgba(74,38,17,0.32)] backdrop-blur-sm text-left">
+							{pickupPoints.slice(0, 4).map((point) => (
+								<div key={point} className="flex items-center justify-between gap-4 border-b border-[#4a2611]/10 pb-3 last:border-b-0 last:pb-0">
+									<p className="text-sm font-medium text-[#4a2611]">{point}</p>
+									<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a4a22]">Recolha</span>
+								</div>
+							))}
 						</div>
 
-						<div className="lg:col-span-7">
+						<div className="mt-10 mx-auto max-w-3xl">
 							{submitted ? (
 								<motion.div
 									initial={{ opacity: 0, y: 20 }}
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ duration: m.duration.slow, ease: m.ease.out }}
-									className="flex min-h-[520px] flex-col justify-center rounded-[32px] border border-[#4a2611]/15 bg-white/70 p-8 text-center shadow-[0_22px_50px_-30px_rgba(74,38,17,0.42)] backdrop-blur-sm"
+									className="flex min-h-[320px] flex-col justify-center rounded-[32px] border border-[#4a2611]/15 bg-white/70 p-8 text-center shadow-[0_22px_50px_-30px_rgba(74,38,17,0.42)] backdrop-blur-sm"
 								>
 									<div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#b5482a]/10 text-[#b5482a]">
 										<svg viewBox="0 0 24 24" fill="none" className="h-8 w-8" aria-hidden="true">
