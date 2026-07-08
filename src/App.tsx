@@ -12,6 +12,7 @@ import { Servicos } from './pages/Servicos';
 import { Produtos } from './pages/Produtos';
 import { Contacto } from './pages/Contacto';
 import { Carreiras } from './pages/Carreiras';
+import { MercadoDaComida } from './pages/MercadoDaComida';
 import { AdminLogin } from './pages/admin/AdminLogin';
 import { AdminLayout } from './pages/admin/AdminLayout';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
@@ -37,7 +38,10 @@ function App() {
 					<Route index element={<AdminDashboard />} />
 					<Route path="eventos" element={<AdminEvents />} />
 					<Route path="eventos/novo" element={<AdminEventForm />} />
-					<Route path="eventos/:slug/editar" element={<AdminEventForm />} />
+					<Route
+						path="eventos/:slug/editar"
+						element={<AdminEventForm />}
+					/>
 					<Route path="usuarios" element={<AdminUsers />} />
 					<Route path="perfil" element={<AdminProfile />} />
 				</Route>
@@ -50,12 +54,34 @@ function App() {
 								<Routes>
 									<Route path="/" element={<Home />} />
 									<Route path="/sobre" element={<Sobre />} />
-									<Route path="/agenda" element={<Agenda />} />
-									<Route path="/agenda/:slug" element={<EventoDetalhe />} />
-									<Route path="/servicos" element={<Servicos />} />
-									<Route path="/produtos" element={<Produtos />} />
-									<Route path="/contacto" element={<Contacto />} />
-									<Route path="/carreiras" element={<Carreiras />} />
+									<Route
+										path="/agenda"
+										element={<Agenda />}
+									/>
+									<Route
+										path="/agenda/:slug"
+										element={<EventoDetalhe />}
+									/>
+									<Route
+										path="/servicos"
+										element={<Servicos />}
+									/>
+									<Route
+										path="/produtos"
+										element={<Produtos />}
+									/>
+									<Route
+										path="/contacto"
+										element={<Contacto />}
+									/>
+									<Route
+										path="/carreiras"
+										element={<Carreiras />}
+									/>
+									<Route
+										path="/mercado-da-comida"
+										element={<MercadoDaComida />}
+									/>
 								</Routes>
 							</main>
 							<Footer />
