@@ -64,7 +64,7 @@ export function MercadoDaComida() {
 			{/* ===== HERO ===== */}
 			<section className="relative min-h-dvh flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden bg-gradient-to-br from-navy via-navy-dark to-ink">
 				<div
-					className="pointer-events-none absolute inset-0 opacity-[0.07] bg-cover bg-center scale-110"
+					className="pointer-events-none absolute inset-0 opacity-[0.07] bg-contain bg-center bg-no-repeat"
 					style={{
 						backgroundImage:
 							"url('/mercadodacomida/Autocarro.png')",
@@ -115,7 +115,7 @@ export function MercadoDaComida() {
 							<img
 								src="/mercadodacomida/logo.png"
 								alt="OlaTours"
-								className="w-full max-w-sm h-auto object-contain opacity-80 brightness-0 invert"
+								className="w-full max-w-sm h-auto object-contain opacity-90"
 							/>
 						</div>
 					</div>
