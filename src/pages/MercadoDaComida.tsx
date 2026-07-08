@@ -20,7 +20,6 @@ const terms = [
 	'A inscrição só é válida após confirmação do pagamento.',
 	'O cartão de transporte é pessoal e intransmissível.',
 	'Os horários de recolha serão comunicados após a inscrição.',
-	'Em caso de desistência, consulte a política de reembolso da OlaTours.',
 	'O passageiro deve apresentar-se no ponto de recolha com 15 minutos de antecedência.',
 ] as const;
 
@@ -45,7 +44,11 @@ export function MercadoDaComida() {
 	const [sending, setSending] = useState(false);
 	const [acceptedTerms, setAcceptedTerms] = useState(false);
 	const [receiptFile, setReceiptFile] = useState<File | null>(null);
+	const [selectedDays, setSelectedDays] = useState<string[]>([]);
+	const [paymentMethod, setPaymentMethod] = useState<'onboarding' | 'paid' | null>(null);
 	const formId = useId();
+
+	const totalValue = selectedDays.length * 3000;
 
 	async function handleSubmit(e: FormEvent) {
 		e.preventDefault();
@@ -106,7 +109,7 @@ export function MercadoDaComida() {
 							<div className="mt-8 flex flex-wrap gap-3">
 								{[
 									'IDA E VOLTA',
-									'3.500 KZ / DIA',
+									'3.000 KZ / DIA',
 									'QUINTA–DOMINGO',
 								].map((tag) => (
 									<span
@@ -175,7 +178,7 @@ export function MercadoDaComida() {
 						{[
 							{
 								label: 'Valor do cartão',
-								value: '3.500 Kz',
+								value: '3.000 Kz',
 								hint: 'por dia, ida e volta / pessoa',
 								icon: (
 									<svg
@@ -229,8 +232,8 @@ export function MercadoDaComida() {
 							},
 							{
 								label: 'Pagamento',
-								value: 'Multicaixa / Numerário',
-								hint: 'transferência bancária ou no acto do levantamento',
+								value: 'À escolha do passageiro',
+								hint: 'pagamento a bordo ou transferência bancária',
 								icon: (
 									<svg
 										viewBox="0 0 24 24"
@@ -401,6 +404,14 @@ export function MercadoDaComida() {
 												type="checkbox"
 												name="dias"
 												value={day}
+												checked={selectedDays.includes(day)}
+												onChange={(e) => {
+													if (e.target.checked) {
+														setSelectedDays((prev) => [...prev, day]);
+													} else {
+														setSelectedDays((prev) => prev.filter((d) => d !== day));
+													}
+												}}
 												className="appearance-none w-4 h-4 border-2 border-gray-border rounded-sm checked:border-flag checked:bg-flag shrink-0 mt-0.5 transition-all"
 											/>
 											<span className="text-sm sm:text-base text-ink font-medium group-hover:text-flag transition-colors">
@@ -409,6 +420,11 @@ export function MercadoDaComida() {
 										</label>
 									))}
 								</div>
+								{selectedDays.length > 0 && (
+									<p className="mt-5 text-base sm:text-lg font-display font-black text-flag text-right">
+										Total: {totalValue.toLocaleString('pt-PT')} Kz ({selectedDays.length} {selectedDays.length === 1 ? 'dia' : 'dias'} × 3.000 Kz)
+									</p>
+								)}
 							</motion.fieldset>
 
 							{/* PERSONAL DATA */}
@@ -561,6 +577,116 @@ export function MercadoDaComida() {
 								/>
 							</motion.div>
 
+							{/* PAYMENT METHOD */}
+							<motion.fieldset
+								variants={item}
+								className="border border-gray-border/60 rounded-lg p-6 sm:p-8 mb-6"
+							>
+								<legend className="font-display text-xl sm:text-2xl font-black text-flag uppercase leading-tight px-2">
+									Método de Pagamento
+								</legend>
+								<p className="label-caps text-ink-mute mb-5 mt-2">
+									Selecione como pretende pagar:
+								</p>
+								<div className="space-y-3">
+									<label className="flex items-center gap-3 px-4 py-3 border border-gray-border/60 rounded-sm cursor-pointer hover:border-flag/40 hover:bg-flag/[0.02] transition-all group">
+										<input
+											type="radio"
+											name="metodo_pagamento"
+											value="onboarding"
+											required
+											checked={paymentMethod === 'onboarding'}
+											onChange={() => setPaymentMethod('onboarding')}
+											className="appearance-none w-4 h-4 border-2 border-gray-border rounded-full checked:border-flag checked:bg-flag checked:shadow-[inset_0_0_0_2px_white] transition-all shrink-0 mt-0.5"
+										/>
+										<div>
+											<span className="text-sm sm:text-base text-ink font-medium group-hover:text-flag transition-colors">
+												Pagamento a bordo
+											</span>
+											<p className="text-xs text-ink-mute mt-0.5">
+												Pague no embarque, em dinheiro ou multicaixa
+											</p>
+										</div>
+									</label>
+									<label className="flex items-center gap-3 px-4 py-3 border border-gray-border/60 rounded-sm cursor-pointer hover:border-flag/40 hover:bg-flag/[0.02] transition-all group">
+										<input
+											type="radio"
+											name="metodo_pagamento"
+											value="paid"
+											required
+											checked={paymentMethod === 'paid'}
+											onChange={() => setPaymentMethod('paid')}
+											className="appearance-none w-4 h-4 border-2 border-gray-border rounded-full checked:border-flag checked:bg-flag checked:shadow-[inset_0_0_0_2px_white] transition-all shrink-0 mt-0.5"
+										/>
+										<div>
+											<span className="text-sm sm:text-base text-ink font-medium group-hover:text-flag transition-colors">
+												Já efetuei o pagamento
+											</span>
+											<p className="text-xs text-ink-mute mt-0.5">
+												Transferência bancária — anexe o comprovativo
+											</p>
+										</div>
+									</label>
+								</div>
+
+								{paymentMethod === 'paid' && (
+									<div className="mt-6 pt-6 border-t border-gray-border/60 space-y-5">
+										{selectedDays.length > 0 && (
+											<p className="text-base sm:text-lg font-display font-black text-flag">
+												Total a pagar: {totalValue.toLocaleString('pt-PT')} Kz ({selectedDays.length} {selectedDays.length === 1 ? 'dia' : 'dias'} × 3.000 Kz/dia)
+											</p>
+										)}
+										<div className="bg-cream-50 border border-gray-border/60 rounded-lg p-4 sm:p-5">
+											<p className="label-caps text-ink-mute mb-2">
+												DADOS PARA TRANSFERÊNCIA
+											</p>
+											<p className="text-sm sm:text-base font-semibold text-ink">
+												OLA TOURS PREST SERVICO COMER GERAL LDA
+											</p>
+											<p className="text-sm text-ink-soft mt-1">
+												Conta: <span className="font-mono font-bold text-ink">17145600210001</span>
+											</p>
+											<p className="text-sm text-ink-soft">
+												IBAN: <span className="font-mono font-bold text-ink">AO06004000007145600210189</span>
+											</p>
+										</div>
+										<div>
+											<p className="label-caps text-ink-mute mb-3">
+												Comprovativo de pagamento (opcional)
+											</p>
+											<p className="text-xs text-ink-mute mb-3">
+												Apenas PDF. Máx: 5 MB.
+											</p>
+											<label className="flex items-center gap-3 px-4 py-3 border border-gray-border/60 rounded-sm cursor-pointer hover:border-flag/40 hover:bg-flag/[0.02] transition-all group">
+												<input
+													type="file"
+													name="comprovativo"
+													accept=".pdf"
+													onChange={(e) =>
+														setReceiptFile(e.target.files?.[0] ?? null)
+													}
+													className="hidden"
+												/>
+												<svg
+													viewBox="0 0 24 24"
+													fill="none"
+													className="h-5 w-5 text-flag shrink-0"
+													aria-hidden="true"
+												>
+													<path
+														d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v5h5v11H6z"
+														fill="currentColor"
+													/>
+												</svg>
+												<span className="text-sm sm:text-base text-ink font-medium group-hover:text-flag transition-colors">
+													{receiptFile ? receiptFile.name : 'Selecionar ficheiro'}
+												</span>
+											</label>
+										</div>
+									</div>
+								)}
+							</motion.fieldset>
+
 							{/* TERMS */}
 							<motion.fieldset
 								variants={item}
@@ -602,44 +728,6 @@ export function MercadoDaComida() {
 									</span>
 								</label>
 							</motion.fieldset>
-
-							{/* COMPROVATIVO */}
-							<motion.div
-								variants={item}
-								className="border border-gray-border/60 rounded-lg p-6 sm:p-8 mb-6"
-							>
-								<p className="font-display text-xl sm:text-2xl font-black text-flag uppercase leading-tight mb-5">
-									Comprovativo de pagamento
-								</p>
-								<p className="label-caps text-ink-mute mb-4">
-									Faça o upload do comprovativo de pagamento (opcional). Formatos: PDF. Máx: 5 MB.
-								</p>
-								<label className="flex items-center gap-3 px-4 py-3 border border-gray-border/60 rounded-sm cursor-pointer hover:border-flag/40 hover:bg-flag/[0.02] transition-all group">
-									<input
-										type="file"
-										name="comprovativo"
-										accept=".pdf"
-										onChange={(e) =>
-											setReceiptFile(e.target.files?.[0] ?? null)
-										}
-										className="hidden"
-									/>
-									<svg
-										viewBox="0 0 24 24"
-										fill="none"
-										className="h-5 w-5 text-flag shrink-0"
-										aria-hidden="true"
-									>
-										<path
-											d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM6 20V4h7v5h5v11H6z"
-											fill="currentColor"
-										/>
-									</svg>
-									<span className="text-sm sm:text-base text-ink font-medium group-hover:text-flag transition-colors">
-										{receiptFile ? receiptFile.name : 'Selecionar ficheiro'}
-									</span>
-								</label>
-							</motion.div>
 
 							{/* SUBMIT */}
 							<motion.div
