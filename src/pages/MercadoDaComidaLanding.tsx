@@ -438,13 +438,6 @@ export function MercadoDaComidaLanding() {
 															SERVICO COMER GERAL
 															LDA
 														</p>
-														<p className="mt-3 text-sm text-[#5d3014]">
-															Conta:{' '}
-															<span className="font-mono font-semibold break-all text-[#4a2611]">
-																&nbsp;171 456
-																002 100 01
-															</span>
-														</p>
 														<p className="text-sm text-[#5d3014]">
 															IBAN:{' '}
 															<span className="font-mono font-semibold break-all text-[#4a2611]">
