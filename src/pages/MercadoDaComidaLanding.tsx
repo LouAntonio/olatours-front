@@ -441,13 +441,14 @@ export function MercadoDaComidaLanding() {
 														<p className="mt-3 text-sm text-[#5d3014]">
 															Conta:{' '}
 															<span className="font-mono font-semibold text-[#4a2611]">
-																17145600210001
+																&nbsp;171 456
+																002 100 01
 															</span>
 														</p>
 														<p className="text-sm text-[#5d3014]">
 															IBAN:{' '}
 															<span className="font-mono font-semibold text-[#4a2611]">
-																AO06004000007145600210189
+																&nbsp;AO06.0040.0000.7145.6002.1018.9
 															</span>
 														</p>
 													</div>
