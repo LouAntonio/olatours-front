@@ -129,7 +129,7 @@ export function MercadoDaComidaLanding() {
 									<img
 										src="/mercadodacomida/logo.png"
 										alt="OlaTours"
-										className="h-36 w-auto object-contain lg:h-48"
+										className="h-36 w-auto object-contain lg:h-75"
 									/>
 								</div>
 							</motion.div>
