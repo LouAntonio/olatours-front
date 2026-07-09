@@ -82,9 +82,9 @@ export function MercadoDaComidaLanding() {
 
 	return (
 		<div>
-			<div className="min-h-dvh bg-[#f5c300] text-[#4a2611] overflow-hidden">
-				<section className="relative isolate overflow-hidden">
-					<div className="relative mx-auto flex h-dvh max-w-[1280px] flex-col items-center justify-center px-5 pb-10 pt-5 sm:px-8 sm:pb-12 sm:pt-8">
+			<div className="min-h-dvh bg-[#f5c300] text-[#4a2611]">
+				<section className="relative isolate">
+					<div className="relative mx-auto flex min-h-dvh max-w-[1280px] flex-col items-center justify-center px-5 pb-10 pt-5 sm:px-8 sm:pb-12 sm:pt-8">
 						<motion.div
 							initial="hidden"
 							animate="show"
@@ -120,7 +120,7 @@ export function MercadoDaComidaLanding() {
 							</motion.div>
 
 							<motion.div variants={item}>
-								<div className="relative mx-auto flex w-full max-w-[960px] flex-col items-center gap-6 lg:flex-row lg:items-center lg:justify-center">
+								<div className="relative mx-auto flex w-full max-w-[960px] flex-col items-center md:gap-6 lg:flex-row lg:items-center lg:justify-center">
 									<img
 										src="/mercadodacomida/Autocarro.png"
 										alt="Autocarro OlaTours"
@@ -129,7 +129,7 @@ export function MercadoDaComidaLanding() {
 									<img
 										src="/mercadodacomida/logo.png"
 										alt="OlaTours"
-										className="h-36 w-auto object-contain lg:h-75"
+										className="h-50 w-auto object-contain sm:h-65 lg:h-75"
 									/>
 								</div>
 							</motion.div>
@@ -138,7 +138,7 @@ export function MercadoDaComidaLanding() {
 				</section>
 			</div>
 			<div className="bg-transparent pb-16 sm:pb-20">
-				<div className="mx-auto max-w-[80vw] -mt-32 rounded-[32px] border border-[#4a2611]/10 bg-[#fff1ad] px-6 pb-16 shadow-[0_32px_80px_-32px_rgba(0,0,0,0.32)] sm:px-10 sm:pb-20">
+				<div className="mx-auto max-w-[92vw] -mt-20 rounded-[32px] border border-[#4a2611]/10 bg-[#fff1ad] px-4 pb-16 shadow-[0_32px_80px_-32px_rgba(0,0,0,0.32)] sm:max-w-[80vw] sm:-mt-32 sm:px-6 sm:pb-20 lg:px-10">
 					<motion.div
 						id="detalhes"
 						initial="hidden"
@@ -147,12 +147,12 @@ export function MercadoDaComidaLanding() {
 						variants={container}
 						className="pt-10 sm:pt-14"
 					>
-						<div className="grid gap-4 lg:grid-cols-4">
+						<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 							{benefits.map((benefit, index) => (
 								<motion.div
 									key={benefit}
 									variants={item}
-									className="rounded-[24px] border border-[#4a2611]/15 bg-[rgba(255,248,209,0.85)] px-5 py-5 shadow-[0_14px_30px_-24px_rgba(74,38,17,0.42)] backdrop-blur-sm"
+									className="rounded-[24px] border border-[#4a2611]/15 bg-[rgba(255,248,209,0.85)] px-4 py-4 shadow-[0_14px_30px_-24px_rgba(74,38,17,0.42)] backdrop-blur-sm sm:px-5 sm:py-5"
 								>
 									<p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a4a22]">
 										0{index + 1}
@@ -225,7 +225,7 @@ export function MercadoDaComidaLanding() {
 											}}
 											variants={container}
 											onSubmit={handleSubmit}
-											className="rounded-[32px] border border-[#4a2611]/15 bg-white/70 p-5 shadow-[0_22px_50px_-30px_rgba(74,38,17,0.42)] backdrop-blur-sm sm:p-8"
+											className="rounded-[32px] border border-[#4a2611]/15 bg-white/70 p-4 shadow-[0_22px_50px_-30px_rgba(74,38,17,0.42)] backdrop-blur-sm sm:p-5 lg:p-8"
 										>
 											<motion.fieldset
 												variants={item}
@@ -318,7 +318,7 @@ export function MercadoDaComidaLanding() {
 													))}
 												</div>
 												{selectedDays.length > 0 && (
-													<p className="text-right font-display text-lg font-black uppercase tracking-tight text-[#b5482a]">
+													<p className="text-left font-display text-lg font-black uppercase tracking-tight text-[#b5482a] sm:text-right">
 														Total:{' '}
 														{totalValue.toLocaleString(
 															'pt-PT',
@@ -402,7 +402,7 @@ export function MercadoDaComidaLanding() {
 												variants={item}
 												className="mt-7 grid gap-5"
 											>
-												<div className="rounded-[28px] border border-[#4a2611]/12 bg-white/80 p-5">
+												<div className="overflow-hidden rounded-[28px] border border-[#4a2611]/12 bg-white/80 p-4 sm:p-5">
 													<p className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
 														Observações
 													</p>
@@ -415,13 +415,13 @@ export function MercadoDaComidaLanding() {
 													/>
 												</div>
 
-												<div className="rounded-[28px] border border-[#4a2611]/12 bg-white/80 p-5">
+												<div className="overflow-hidden rounded-[28px] border border-[#4a2611]/12 bg-white/80 p-4 sm:p-5">
 													<p className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
 														Dados para transferência
 													</p>
 													{selectedDays.length >
 														0 && (
-														<p className="mt-3 font-display text-lg font-black uppercase tracking-tight text-[#b5482a]">
+														<p className="mt-3 text-left font-display text-lg font-black uppercase tracking-tight text-[#b5482a] sm:text-right">
 															Total a pagar:{' '}
 															{totalValue.toLocaleString(
 																'pt-PT',
@@ -440,19 +440,19 @@ export function MercadoDaComidaLanding() {
 														</p>
 														<p className="mt-3 text-sm text-[#5d3014]">
 															Conta:{' '}
-															<span className="font-mono font-semibold text-[#4a2611]">
+															<span className="font-mono font-semibold break-all text-[#4a2611]">
 																&nbsp;171 456
 																002 100 01
 															</span>
 														</p>
 														<p className="text-sm text-[#5d3014]">
 															IBAN:{' '}
-															<span className="font-mono font-semibold text-[#4a2611]">
+															<span className="font-mono font-semibold break-all text-[#4a2611]">
 																&nbsp;AO06.0040.0000.7145.6002.1018.9
 															</span>
 														</p>
 													</div>
-													<label className="mt-4 flex cursor-pointer items-center gap-3 rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fffef0]">
+													<label className="mt-4 flex min-w-0 cursor-pointer items-center gap-3 rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fffef0]">
 														<input
 															type="file"
 															name="comprovativo"
@@ -480,7 +480,7 @@ export function MercadoDaComidaLanding() {
 																/>
 															</svg>
 														</span>
-														<span className="text-sm font-medium text-[#4a2611]">
+														<span className="truncate max-w-[180px] text-sm font-medium text-[#4a2611] sm:max-w-[300px]">
 															{receiptFile
 																? receiptFile.name
 																: 'Selecionar comprovativo (PDF)'}
@@ -491,7 +491,7 @@ export function MercadoDaComidaLanding() {
 													</p>
 												</div>
 
-												<div className="rounded-[28px] border border-[#4a2611]/12 bg-white/80 p-5">
+												<div className="overflow-hidden rounded-[28px] border border-[#4a2611]/12 bg-white/80 p-4 sm:p-5">
 													<p className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
 														Termos e condições
 													</p>
@@ -500,7 +500,7 @@ export function MercadoDaComidaLanding() {
 															(term, index) => (
 																<div
 																	key={term}
-																	className="flex items-start gap-3 rounded-2xl border border-[#4a2611]/10 bg-[#fffaf0] px-4 py-3"
+																	className="flex min-w-0 items-start gap-3 rounded-2xl border border-[#4a2611]/10 bg-[#fffaf0] px-4 py-3"
 																>
 																	<span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#b5482a]/10 text-[10px] font-bold text-[#b5482a]">
 																		{index +
@@ -513,7 +513,7 @@ export function MercadoDaComidaLanding() {
 															),
 														)}
 													</div>
-													<label className="mt-5 flex cursor-pointer items-start gap-3 rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]">
+													<label className="mt-5 flex min-w-0 cursor-pointer items-start gap-3 rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]">
 														<input
 															type="checkbox"
 															required
