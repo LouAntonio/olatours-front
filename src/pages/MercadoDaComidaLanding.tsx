@@ -52,14 +52,47 @@ export function MercadoDaComidaLanding() {
 	const [acceptedTerms, setAcceptedTerms] = useState(false);
 	const [receiptFile, setReceiptFile] = useState<File | null>(null);
 	const [selectedDays, setSelectedDays] = useState<string[]>([]);
+	const [numPessoas, setNumPessoas] = useState('1');
+	const [outroNumero, setOutroNumero] = useState(2);
+	const [acompanhantes, setAcompanhantes] = useState<string[]>([]);
+	const [temMenores, setTemMenores] = useState('nao');
+	const [idadesMenores, setIdadesMenores] = useState<number[]>([]);
 	const formId = useId();
 
 	const totalValue = selectedDays.length * 3000;
+	const totalPessoas =
+		numPessoas === 'outro' ? outroNumero : Number(numPessoas);
+
+	function handleNumPessoasChange(value: string) {
+		setNumPessoas(value);
+		const total = value === 'outro' ? outroNumero : Number(value);
+		const needed = Math.max(0, total - 1);
+		setAcompanhantes((prev) => {
+			if (prev.length === needed) return prev;
+			if (prev.length < needed)
+				return [...prev, ...Array(needed - prev.length).fill('')];
+			return prev.slice(0, needed);
+		});
+	}
+
+	function handleOutroNumeroChange(value: number) {
+		const clamped = Math.max(2, value);
+		setOutroNumero(clamped);
+		const needed = clamped - 1;
+		setAcompanhantes((prev) => {
+			if (prev.length === needed) return prev;
+			if (prev.length < needed)
+				return [...prev, ...Array(needed - prev.length).fill('')];
+			return prev.slice(0, needed);
+		});
+	}
 
 	async function handleSubmit(e: FormEvent) {
 		e.preventDefault();
 		const form = e.target as HTMLFormElement;
 		const data = new FormData(form);
+		const total = totalPessoas;
+		data.set('num_pessoas', String(total));
 		setSending(true);
 		try {
 			const res = await fetch('/api/mercado-da-comida', {
@@ -232,6 +265,433 @@ export function MercadoDaComidaLanding() {
 												className="space-y-4"
 											>
 												<legend className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
+													Dados do inscrito
+												</legend>
+												<div className="grid gap-5">
+													<div className="grid gap-5 sm:grid-cols-2">
+														<label className="grid gap-1.5">
+															<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+																Nome completo
+															</span>
+															<input
+																id={`${formId}-nome`}
+																name="nome_completo"
+																type="text"
+																required
+																placeholder="O seu nome completo"
+																className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+															/>
+														</label>
+														<label className="grid gap-1.5">
+															<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+																Nº do Bilhete de
+																Identidade
+															</span>
+															<input
+																id={`${formId}-bi`}
+																name="bi"
+																type="text"
+																required
+																placeholder="000000000 LA000"
+																className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+															/>
+														</label>
+													</div>
+													<div className="grid gap-5 sm:grid-cols-2">
+														<label className="grid gap-1.5">
+															<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+																Telefone /
+																WhatsApp
+															</span>
+															<input
+																id={`${formId}-telefone`}
+																name="telefone"
+																type="tel"
+																required
+																placeholder="+244 900 000 000"
+																className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+															/>
+														</label>
+														<label className="grid gap-1.5">
+															<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+																Contacto de
+																emergência
+															</span>
+															<input
+																id={`${formId}-emergencia`}
+																name="contacto_emergencia"
+																type="tel"
+																required
+																placeholder="+244 900 000 000"
+																className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+															/>
+														</label>
+													</div>
+												</div>
+											</motion.fieldset>
+
+											<motion.fieldset
+												variants={item}
+												className="mt-7 space-y-4"
+											>
+												<legend className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
+													Quantas pessoas vão aderir?
+												</legend>
+												<div className="grid gap-3 sm:grid-cols-2">
+													{['1', '2', '3', '4'].map(
+														(n) => (
+															<label
+																key={n}
+																className="flex cursor-pointer items-center gap-3 rounded-2xl border border-[#4a2611]/12 bg-white/80 px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]"
+															>
+																<input
+																	type="radio"
+																	name="num_pessoas"
+																	value={n}
+																	checked={
+																		numPessoas ===
+																		n
+																	}
+																	onChange={() =>
+																		handleNumPessoasChange(
+																			n,
+																		)
+																	}
+																	className="h-4 w-4 shrink-0 appearance-none rounded-full border-2 border-[#a68a5e] checked:border-[#b5482a] checked:bg-[#b5482a] checked:shadow-[inset_0_0_0_2px_white]"
+																/>
+																<span className="text-sm font-medium text-[#4a2611]">
+																	{n === '1'
+																		? 'Uma'
+																		: n ===
+																			  '2'
+																			? 'Duas'
+																			: n ===
+																				  '3'
+																				? 'Três'
+																				: 'Quatro'}
+																</span>
+															</label>
+														),
+													)}
+													<label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-[#4a2611]/12 bg-white/80 px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]">
+														<input
+															type="radio"
+															name="num_pessoas"
+															value="outro"
+															checked={
+																numPessoas ===
+																'outro'
+															}
+															onChange={() =>
+																handleNumPessoasChange(
+																	'outro',
+																)
+															}
+															className="h-4 w-4 shrink-0 appearance-none rounded-full border-2 border-[#a68a5e] checked:border-[#b5482a] checked:bg-[#b5482a] checked:shadow-[inset_0_0_0_2px_white]"
+														/>
+														<span className="text-sm font-medium text-[#4a2611]">
+															Outro
+														</span>
+													</label>
+												</div>
+												{numPessoas === 'outro' && (
+													<label className="grid gap-1.5">
+														<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+															Quantas pessoas?
+														</span>
+														<input
+															type="number"
+															min={2}
+															value={outroNumero}
+															onChange={(e) =>
+																handleOutroNumeroChange(
+																	Number(
+																		e.target
+																			.value,
+																	),
+																)
+															}
+															className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+														/>
+													</label>
+												)}
+											</motion.fieldset>
+
+											{totalPessoas > 1 && (
+												<motion.fieldset
+													initial={{
+														opacity: 0,
+														y: 20,
+													}}
+													animate={{
+														opacity: 1,
+														y: 0,
+													}}
+													transition={{
+														duration:
+															m.duration.slow,
+														ease: m.ease.out,
+													}}
+													className="mt-7 space-y-4"
+												>
+													<legend className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
+														Acompanhantes
+													</legend>
+													<p className="text-sm leading-relaxed text-[#5d3014]">
+														Nome completo das
+														pessoas que o(a) vão
+														acompanhar?
+													</p>
+													<div className="grid gap-4">
+														{Array.from(
+															{
+																length: Math.max(
+																	0,
+																	totalPessoas -
+																		1,
+																),
+															},
+															(_, i) => (
+																<label
+																	key={i}
+																	className="grid gap-1.5"
+																>
+																	<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+																		{i + 1}ª
+																		pessoa
+																	</span>
+																	<input
+																		type="text"
+																		name="acompanhantes"
+																		required
+																		value={
+																			acompanhantes[
+																				i
+																			] ||
+																			''
+																		}
+																		onChange={(
+																			e,
+																		) => {
+																			const novo =
+																				[
+																					...acompanhantes,
+																				];
+																			novo[
+																				i
+																			] =
+																				e.target.value;
+																			setAcompanhantes(
+																				novo,
+																			);
+																		}}
+																		placeholder="Nome completo"
+																		className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+																	/>
+																</label>
+															),
+														)}
+													</div>
+												</motion.fieldset>
+											)}
+
+											{totalPessoas > 1 && (
+												<motion.fieldset
+													initial={{
+														opacity: 0,
+														y: 20,
+													}}
+													animate={{
+														opacity: 1,
+														y: 0,
+													}}
+													transition={{
+														duration:
+															m.duration.slow,
+														ease: m.ease.out,
+													}}
+													className="mt-7 space-y-4"
+												>
+													<legend className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
+														Menores de idade
+													</legend>
+													<p className="text-sm leading-relaxed text-[#5d3014]">
+														Será acompanhado por
+														menores de idade?
+													</p>
+													<div className="grid gap-3 sm:grid-cols-2">
+														<label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-[#4a2611]/12 bg-white/80 px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]">
+															<input
+																type="radio"
+																name="tem_menores"
+																value="sim"
+																checked={
+																	temMenores ===
+																	'sim'
+																}
+																onChange={() =>
+																	setTemMenores(
+																		'sim',
+																	)
+																}
+																className="h-4 w-4 shrink-0 appearance-none rounded-full border-2 border-[#a68a5e] checked:border-[#b5482a] checked:bg-[#b5482a] checked:shadow-[inset_0_0_0_2px_white]"
+															/>
+															<span className="text-sm font-medium text-[#4a2611]">
+																Sim
+															</span>
+														</label>
+														<label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-[#4a2611]/12 bg-white/80 px-4 py-3 transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]">
+															<input
+																type="radio"
+																name="tem_menores"
+																value="nao"
+																checked={
+																	temMenores ===
+																	'nao'
+																}
+																onChange={() => {
+																	setTemMenores(
+																		'nao',
+																	);
+																	setIdadesMenores(
+																		[],
+																	);
+																}}
+																className="h-4 w-4 shrink-0 appearance-none rounded-full border-2 border-[#a68a5e] checked:border-[#b5482a] checked:bg-[#b5482a] checked:shadow-[inset_0_0_0_2px_white]"
+															/>
+															<span className="text-sm font-medium text-[#4a2611]">
+																Não
+															</span>
+														</label>
+													</div>
+													{temMenores === 'sim' && (
+														<div className="space-y-4">
+															<p className="text-sm font-medium text-[#4a2611]">
+																Informe a idade
+																dos menores de
+																idade que irão
+																acompanha-lo(a)
+															</p>
+															{idadesMenores.map(
+																(idade, i) => (
+																	<div
+																		key={i}
+																		className="flex items-center gap-3"
+																	>
+																		<label className="grid flex-1 gap-1.5">
+																			<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
+																				{i +
+																					1}
+
+																				º
+																				menor
+																				—
+																				idade
+																			</span>
+																			<input
+																				type="number"
+																				name="idades_menores"
+																				required
+																				min={
+																					0
+																				}
+																				max={
+																					17
+																				}
+																				value={
+																					idade ||
+																					''
+																				}
+																				onChange={(
+																					e,
+																				) => {
+																					const novo =
+																						[
+																							...idadesMenores,
+																						];
+																					novo[
+																						i
+																					] =
+																						Number(
+																							e
+																								.target
+																								.value,
+																						);
+																					setIdadesMenores(
+																						novo,
+																					);
+																				}}
+																				placeholder="Idade"
+																				className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
+																			/>
+																		</label>
+																		{idadesMenores.length >
+																			1 && (
+																			<button
+																				type="button"
+																				onClick={() => {
+																					const novo =
+																						idadesMenores.filter(
+																							(
+																								_,
+																								j,
+																							) =>
+																								j !==
+																								i,
+																						);
+																					setIdadesMenores(
+																						novo,
+																					);
+																				}}
+																				className="mt-6 inline-flex h-10 w-10 items-center justify-center rounded-full bg-red-100 text-red-600 transition hover:bg-red-200"
+																			>
+																				<svg
+																					viewBox="0 0 24 24"
+																					fill="none"
+																					className="h-5 w-5"
+																					aria-hidden="true"
+																				>
+																					<path
+																						d="M18 6L6 18M6 6l12 12"
+																						stroke="currentColor"
+																						strokeWidth="2.5"
+																						strokeLinecap="round"
+																					/>
+																				</svg>
+																			</button>
+																		)}
+																	</div>
+																),
+															)}
+															{idadesMenores.length <
+																totalPessoas -
+																	1 && (
+																<button
+																	type="button"
+																	onClick={() =>
+																		setIdadesMenores(
+																			[
+																				...idadesMenores,
+																				0,
+																			],
+																		)
+																	}
+																	className="inline-flex items-center gap-2 rounded-2xl border border-[#4a2611]/12 bg-white/80 px-4 py-2 text-sm font-medium text-[#4a2611] transition-colors hover:border-[#b5482a]/40 hover:bg-[#fff8d8]"
+																>
+																	+ Adicionar
+																	menor
+																</button>
+															)}
+														</div>
+													)}
+												</motion.fieldset>
+											)}
+
+											<motion.fieldset
+												variants={item}
+												className="mt-7 space-y-4"
+											>
+												<legend className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
 													Ponto de recolha
 												</legend>
 												<div className="grid gap-3 sm:grid-cols-2">
@@ -326,76 +786,6 @@ export function MercadoDaComidaLanding() {
 														Kz
 													</p>
 												)}
-											</motion.fieldset>
-
-											<motion.fieldset
-												variants={item}
-												className="mt-7 space-y-4"
-											>
-												<legend className="font-display text-2xl font-black uppercase leading-tight text-[#4a2611]">
-													Dados do inscrito
-												</legend>
-												<div className="grid gap-5">
-													<div className="grid gap-5 sm:grid-cols-2">
-														<label className="grid gap-1.5">
-															<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
-																Nome completo
-															</span>
-															<input
-																id={`${formId}-nome`}
-																name="nome_completo"
-																type="text"
-																required
-																placeholder="O seu nome completo"
-																className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
-															/>
-														</label>
-														<label className="grid gap-1.5">
-															<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
-																Nº do Bilhete de
-																Identidade
-															</span>
-															<input
-																id={`${formId}-bi`}
-																name="bi"
-																type="text"
-																required
-																placeholder="000000000 LA000"
-																className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
-															/>
-														</label>
-													</div>
-													<div className="grid gap-5 sm:grid-cols-2">
-														<label className="grid gap-1.5">
-															<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
-																Telefone /
-																WhatsApp
-															</span>
-															<input
-																id={`${formId}-telefone`}
-																name="telefone"
-																type="tel"
-																required
-																placeholder="+244 900 000 000"
-																className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
-															/>
-														</label>
-														<label className="grid gap-1.5">
-															<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7b4a26]">
-																Contacto de
-																emergência
-															</span>
-															<input
-																id={`${formId}-emergencia`}
-																name="contacto_emergencia"
-																type="tel"
-																required
-																placeholder="+244 900 000 000"
-																className="w-full rounded-2xl border border-[#4a2611]/12 bg-white px-4 py-3 text-[#4a2611] outline-none transition focus:border-[#b5482a] focus:ring-2 focus:ring-[#b5482a]/20"
-															/>
-														</label>
-													</div>
-												</div>
 											</motion.fieldset>
 
 											<motion.div
