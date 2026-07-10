@@ -23,13 +23,6 @@ const terms = [
 	'O passageiro deve apresentar-se no ponto de recolha com 15 minutos de antecedência.',
 ] as const;
 
-const benefits = [
-	'Transporte dedicado para o Mercado da Comida',
-	'Reserva simples com pagamento por transferência',
-	'Pontos de recolha em zonas estratégicas de Luanda',
-	'Confirmação rápida para garantir o seu lugar',
-] as const;
-
 const container = {
 	hidden: {},
 	show: { transition: { staggerChildren: stagger.wide } },
@@ -59,9 +52,9 @@ export function MercadoDaComidaLanding() {
 	const [idadesMenores, setIdadesMenores] = useState<number[]>([]);
 	const formId = useId();
 
-	const totalValue = selectedDays.length * 3000;
 	const totalPessoas =
 		numPessoas === 'outro' ? outroNumero : Number(numPessoas);
+	const totalValue = selectedDays.length * 3000 * totalPessoas;
 
 	function handleNumPessoasChange(value: string) {
 		setNumPessoas(value);
@@ -173,26 +166,125 @@ export function MercadoDaComidaLanding() {
 			<div className="bg-transparent pb-16 sm:pb-20">
 				<div className="mx-auto max-w-[92vw] -mt-20 rounded-[32px] border border-[#4a2611]/10 bg-[#fff1ad] px-4 pb-16 shadow-[0_32px_80px_-32px_rgba(0,0,0,0.32)] sm:max-w-[80vw] sm:-mt-32 sm:px-6 sm:pb-20 lg:px-10">
 					<motion.div
-						id="detalhes"
 						initial="hidden"
 						whileInView="show"
 						viewport={{ once: true, margin: '-80px' }}
 						variants={container}
 						className="pt-10 sm:pt-14"
 					>
-						<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-							{benefits.map((benefit, index) => (
+						<div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+							{[
+								{
+									label: 'Valor do cartão',
+									highlight: '3.000 Kz',
+									text: ' — por pessoa, por dia',
+									accent: '#b5482a',
+									icon: (
+										<svg
+											viewBox="0 0 24 24"
+											fill="none"
+											aria-hidden="true"
+											className="h-6 w-6"
+										>
+											<path
+												d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"
+												fill="currentColor"
+											/>
+										</svg>
+									),
+								},
+								{
+									label: 'Funcionamento',
+									highlight: 'Quinta–Domingo',
+									text: ', durante o evento',
+									accent: '#d04a21',
+									icon: (
+										<svg
+											viewBox="0 0 24 24"
+											fill="none"
+											aria-hidden="true"
+											className="h-6 w-6"
+										>
+											<path
+												d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"
+												fill="currentColor"
+											/>
+										</svg>
+									),
+								},
+								{
+									label: 'Validade',
+									highlight: 'Exclusivo evento',
+									text: ', válido nos dias do Mercado da Comida',
+									accent: '#8a4a22',
+									icon: (
+										<svg
+											viewBox="0 0 24 24"
+											fill="none"
+											aria-hidden="true"
+											className="h-6 w-6"
+										>
+											<path
+												d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"
+												fill="currentColor"
+											/>
+										</svg>
+									),
+								},
+								{
+									label: 'Pagamento',
+									highlight: 'Transferência',
+									text: ' — apenas transferência bancária',
+									accent: '#a68a5e',
+									icon: (
+										<svg
+											viewBox="0 0 24 24"
+											fill="none"
+											aria-hidden="true"
+											className="h-6 w-6"
+										>
+											<path
+												d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"
+												fill="currentColor"
+											/>
+										</svg>
+									),
+								},
+							].map((card) => (
 								<motion.div
-									key={benefit}
+									key={card.label}
 									variants={item}
-									className="rounded-[24px] border border-[#4a2611]/15 bg-[rgba(255,248,209,0.85)] px-4 py-4 shadow-[0_14px_30px_-24px_rgba(74,38,17,0.42)] backdrop-blur-sm sm:px-5 sm:py-5"
+									className="group relative overflow-hidden rounded-b-[24px] rounded-t-none border border-t-0 border-[#4a2611]/12 bg-white/80 shadow-[0_14px_30px_-24px_rgba(74,38,17,0.42)] backdrop-blur-sm transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(74,38,17,0.5)] cursor-pointer"
 								>
-									<p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a4a22]">
-										0{index + 1}
-									</p>
-									<p className="mt-2 text-base font-medium leading-relaxed text-[#4a2611]">
-										{benefit}
-									</p>
+									<div
+										className="h-1.5 w-full transition-all group-hover:h-2"
+										style={{ backgroundColor: card.accent }}
+									/>
+									<div className="p-5 sm:p-6">
+										<div className="mb-4 flex items-center justify-between">
+											<span
+												className="flex h-9 w-9 items-center justify-center rounded-xl"
+												style={{
+													color: card.accent,
+													backgroundColor: `${card.accent}12`,
+												}}
+											>
+												{card.icon}
+											</span>
+										</div>
+										<h3 className="font-display text-xl font-black uppercase leading-tight tracking-[-0.02em] text-[#4a2611]">
+											{card.label}
+										</h3>
+										<p className="mt-2 text-sm leading-relaxed text-[#5d3014]">
+											<strong
+												className="font-semibold"
+												style={{ color: card.accent }}
+											>
+												{card.highlight}
+											</strong>
+											{card.text}
+										</p>
+									</div>
 								</motion.div>
 							))}
 						</div>
@@ -783,7 +875,22 @@ export function MercadoDaComidaLanding() {
 														{totalValue.toLocaleString(
 															'pt-PT',
 														)}{' '}
-														Kz
+														Kz{' '}
+														<span className="text-sm font-normal lowercase">
+															(3.000 Kz ×{' '}
+															{
+																selectedDays.length
+															}{' '}
+															{selectedDays.length ===
+															1
+																? 'dia'
+																: 'dias'}{' '}
+															× {totalPessoas}{' '}
+															{totalPessoas === 1
+																? 'pessoa'
+																: 'pessoas'}
+															)
+														</span>
 													</p>
 												)}
 											</motion.fieldset>
@@ -816,7 +923,23 @@ export function MercadoDaComidaLanding() {
 															{totalValue.toLocaleString(
 																'pt-PT',
 															)}{' '}
-															Kz
+															Kz{' '}
+															<span className="text-sm font-normal lowercase">
+																(3.000 Kz ×{' '}
+																{
+																	selectedDays.length
+																}{' '}
+																{selectedDays.length ===
+																1
+																	? 'dia'
+																	: 'dias'}{' '}
+																× {totalPessoas}{' '}
+																{totalPessoas ===
+																1
+																	? 'pessoa'
+																	: 'pessoas'}
+																)
+															</span>
 														</p>
 													)}
 													<div className="mt-4 rounded-[24px] border border-[#4a2611]/12 bg-[#fff8d8] p-4">
